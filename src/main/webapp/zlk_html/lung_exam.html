@@ -1,0 +1,171 @@
+<script type="text/javascript">
+    $("#lung_search").click(function(){
+       // alert("1111111111");
+        $.ajax({
+            type:"post",
+            url:"lung/getLungInfo?numberll="+ $("#ID3").val(),
+            dataType: "html",
+            async:false,
+            success:function(data){
+                alert(data);
+                var pro=null;
+                // pro=JSON.parse(data);
+                pro=eval("("+data+")");
+                $("#pat_name").val(pro.list[0].patname);//赋值
+                alert(pro.list[0].patname);
+                $("#age36").val(pro.list[0].age);
+                $("#sex123").val(pro.list[0].patgender);
+                $("#ID1").val(pro.list[0].patientid);
+                $("#examDoc61").val(pro.list[0].examdoc);
+                $("#imageclass1").val(pro.list[0].imageclass);
+                $("#checkpart1").val(pro.list[0].checkpart);
+                $("#scanmethod1").val(pro.list[0].scanmethod);
+                $("#scanway1").val(pro.list[0].scanway);
+                $("#clinicdiagnosis1").val(pro.list[0].clinicdiagnosis);
+                $("#checkDate1").val(pro.list[0].checkdate);
+                $("#reportDate1").val(pro.list[0].reportdate);
+                // alert("$$$");
+                document.getElementById("imageView").innerHTML=(pro.list[0].imageview);
+                document.getElementById("imageSuggestion").innerHTML=(pro.list[0].imagesuggestion);
+                // alert($("#pat_name").val());    //取值
+                // alert("lalala");
+                 document.getElementById("myimage").src=(pro.base64Url);
+                }
+        });
+        });
+</script>
+<div class="bjui-pageContent">
+    <form action="" id="j_patient_form" name="j_patient_form">
+        <fieldset><legend style="font-family:verdana;font-size:130%;color:orange;">患者检索：</legend>
+            <div class="bjui-row col-4">
+                <label class="row-label">患者姓名：</label>
+                <div class="row-input">
+                    <input type="text" name="patname66" id="patnamell" class="name" size="20">
+                </div>
+                <label class="row-label">性别：</label>
+                <div class="row-input">
+                    <input type="text" name="genderll" id="genderll9" class="clinic_id" size="20">
+                </div>
+                <label class="row-label">年龄：</label>
+                <div class="row-input">
+                    <input type="text" name="age13" id="age13" class="age13" size="20">
+                </div>
+                <label class="row-label">病人ID：</label>
+                <div class="row-input">
+                    <input type="text" name="ID3" id="ID3" class="ID" size="20">
+                </div>
+                <label class="row-label">检查部门：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examDoc6"  size="20">
+                </div>
+                <!--<label class="row-label">病种：</label>-->
+                <!--<div class="row-input">-->
+                <!--<input type="text" name="entity" id="entity3" class="entity" size="20" value="肺癌" readonly="">-->
+                <!--</div>-->
+                <label class="row-label">影像类型：</label>
+                <div class="row-input">
+                    <input type="text" name="imageclass" id="imagelass"  size="20">
+                </div>
+                <label class="row-label">检查部位：</label>
+                <div class="row-input">
+                    <input type="text" name="checkpart" id="checkpart"  size="20">
+                </div>
+                <label class="row-label">平扫方法：</label>
+                <div class="row-input">
+                    <input type="text" name="scanmethod" id="scanmethod"  size="20">
+                </div>
+                <label class="row-label">平扫方式：</label>
+                <div class="row-input">
+                    <input type="text" name="scanway" id="scanway"  size="20">
+                </div>
+                <label class="row-label">临床诊断：</label>
+                <div class="row-input">
+                    <input type="text" name="clinicdiagnosis" id="clinicdiagnosis"  size="20">
+                </div>
+                <label class="row-label">检查日期：</label>
+                <div class="row-input">
+                    <input type="text" name="checkDate" id="checkDate"  size="20">
+                </div>
+                <label class="row-label">报告日期：</label>
+                <div class="row-input">
+                    <input type="text" name="reportDate" id="reportDate"  size="20">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+        <form action="" id="j_patient_form1" name="j_patient_form">
+            <fieldset><legend style="font-family:verdana;font-size:130%;color:orange;">检索结果：</legend>
+                <div class="bjui-row col-4">
+                <label class="row-label">患者姓名：</label>
+                <div class="row-input">
+                    <input id="pat_name" type="text" size="10"  readonly="" />
+                </div>
+                    <label class="row-label">性别：</label>
+                    <div class="row-input">
+                        <input type="text" name="sex" id="sex123" class="lung_id" size="20">
+                    </div>
+                    <label class="row-label">年龄：</label>
+                    <div class="row-input">
+                        <input type="text" name="age1" id="age36" class="age1" size="20">
+                    </div>
+                    <label class="row-label">病人ID：</label>
+                    <div class="row-input">
+                        <input type="text" name="ID" id="ID1" class="ID" size="20">
+                    </div>
+                    <label class="row-label">检查部门：</label>
+                    <div class="row-input" >
+                        <input type="text" name="examDoc6" id="examDoc61"  size="20">
+                    </div>
+                    <!--<label class="row-label">病种：</label>-->
+                    <!--<div class="row-input">-->
+                    <!--<input type="text" name="entity" id="entity3" class="entity" size="20" value="肺癌" readonly="">-->
+                    <!--</div>-->
+                    <label class="row-label">影像类型：</label>
+                    <div class="row-input">
+                        <input type="text" name="imageclass" id="imageclass1"  size="20">
+                    </div>
+                    <label class="row-label">检查部位：</label>
+                    <div class="row-input">
+                        <input type="text" name="checkpart" id="checkpart1"  size="20">
+                    </div>
+                    <label class="row-label">平扫方法：</label>
+                    <div class="row-input">
+                        <input type="text" name="scanmethod" id="scanmethod1"  size="20">
+                    </div>
+                    <label class="row-label">平扫方式：</label>
+                    <div class="row-input">
+                        <input type="text" name="scanway" id="scanway1"  size="20">
+                    </div>
+                    <label class="row-label">临床诊断：</label>
+                    <div class="row-input">
+                        <input type="text" name="clinicdiagnosis" id="clinicdiagnosis1"  size="20">
+                    </div>
+                    <label class="row-label">检查日期：</label>
+                    <div class="row-input">
+                        <input type="text" name="checkDate" id="checkDate1"  size="20">
+                    </div>
+                    <label class="row-label">报告日期：</label>
+                    <div class="row-input">
+                        <input type="text" name="reportDate" id="reportDate1"  size="20">
+                    </div>
+                </div>
+
+                <div style="margin-left:4%; float: left" >
+                    <label class="row-label">影像所见：</label><br/>
+                    <textarea id="imageView" rows="12" cols="65"></textarea><br/>
+                    <label class="row-label">影像诊断：</label><br/>
+                    <textarea id="imageSuggestion" rows="12" cols="65"></textarea>
+                </div>
+                <div style="margin-left:11%;  float:left;margin-top: 26px;">
+                    <img id="myimage"  alt="肺部图片" />
+                </div>
+            </fieldset>
+        </form>
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="reset" class="btn-orange" form="j_patient_form">搜索重置</button></li>
+        <li><button type="button" class="btn-default" id="lung_search">信息查询</button></li>
+    </ul>
+</div>
+

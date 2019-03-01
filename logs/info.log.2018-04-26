@@ -1,0 +1,113 @@
+2018-04-26 10:46:01  [ main:11 ] - [ INFO ]  Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.springmvc.controller.ConvertJSONTest]
+2018-04-26 10:46:01  [ main:23 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 10:46:01  [ main:37 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2ef9b8bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5d624da6, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1e67b872, org.springframework.test.context.transaction.TransactionalTestExecutionListener@60addb54, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3f2a3a5]
+2018-04-26 10:46:01  [ main:55 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5d624da6] to prepare test instance [org.springmvc.controller.ConvertJSONTest@7921b0a2]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: java.lang.IllegalArgumentException: Cannot load an ApplicationContext with a NULL 'contextLoader'. Consider annotating your test class with @ContextConfiguration or @ContextHierarchy.
+	at org.springframework.util.Assert.notNull(Assert.java:112)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:61)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	... 24 more
+2018-04-26 10:46:40  [ main:13 ] - [ INFO ]  Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.springmvc.controller.ConvertJSONTest]
+2018-04-26 10:46:40  [ main:23 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 10:46:40  [ main:35 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2ef9b8bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5d624da6, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1e67b872, org.springframework.test.context.transaction.TransactionalTestExecutionListener@60addb54, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3f2a3a5]
+2018-04-26 10:46:40  [ main:55 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5d624da6] to prepare test instance [org.springmvc.controller.ConvertJSONTest@7921b0a2]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: java.lang.IllegalArgumentException: Cannot load an ApplicationContext with a NULL 'contextLoader'. Consider annotating your test class with @ContextConfiguration or @ContextHierarchy.
+	at org.springframework.util.Assert.notNull(Assert.java:112)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:61)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	... 24 more
+2018-04-26 11:01:45  [ main:56 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 11:01:45  [ main:72 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@51081592, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7f9a81e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@9629756, org.springframework.test.context.transaction.TransactionalTestExecutionListener@62ee68d8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@735b5592]
+2018-04-26 11:01:45  [ main:183 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-26 11:01:45  [ main:501 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:01:45 CST 2018]; root of context hierarchy
+2018-04-26 11:01:45  [ main:767 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-26 11:01:47  [ main:2360 ] - [ INFO ]  Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2018-04-26 11:01:47  [ main:2389 ] - [ INFO ]  SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2018-04-26 11:01:47  [ Thread-0:2402 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:01:45 CST 2018]; root of context hierarchy
+2018-04-26 11:02:23  [ main:42 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 11:02:23  [ main:55 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@51081592, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7f9a81e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@9629756, org.springframework.test.context.transaction.TransactionalTestExecutionListener@62ee68d8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@735b5592]
+2018-04-26 11:02:23  [ main:131 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-26 11:02:23  [ main:313 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:02:23 CST 2018]; root of context hierarchy
+2018-04-26 11:02:23  [ main:398 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-26 11:02:25  [ main:2029 ] - [ INFO ]  Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2018-04-26 11:02:25  [ main:2043 ] - [ INFO ]  SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2018-04-26 11:02:25  [ Thread-0:2055 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:02:23 CST 2018]; root of context hierarchy
+2018-04-26 11:02:55  [ main:40 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 11:02:55  [ main:53 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@51081592, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7f9a81e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@9629756, org.springframework.test.context.transaction.TransactionalTestExecutionListener@62ee68d8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@735b5592]
+2018-04-26 11:02:55  [ main:136 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-26 11:02:55  [ main:313 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:02:55 CST 2018]; root of context hierarchy
+2018-04-26 11:02:55  [ main:406 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-26 11:02:57  [ main:2045 ] - [ INFO ]  Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2018-04-26 11:02:57  [ main:2060 ] - [ INFO ]  SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2018-04-26 11:02:57  [ Thread-0:2074 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:02:55 CST 2018]; root of context hierarchy
+2018-04-26 11:04:02  [ main:40 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 11:04:02  [ main:53 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@51081592, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7f9a81e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@9629756, org.springframework.test.context.transaction.TransactionalTestExecutionListener@62ee68d8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@735b5592]
+2018-04-26 11:04:02  [ main:127 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-26 11:04:03  [ main:315 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:04:03 CST 2018]; root of context hierarchy
+2018-04-26 11:04:03  [ main:419 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-26 11:04:04  [ Thread-0:1926 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@59ec2012: startup date [Thu Apr 26 11:04:03 CST 2018]; root of context hierarchy
+2018-04-26 15:18:51  [ main:48 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 15:18:51  [ main:61 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@396a51ab, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@51081592, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7f9a81e8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@9629756, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@62ee68d8]
+2018-04-26 15:18:51  [ main:137 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-26 15:18:51  [ main:328 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@402a079c: startup date [Thu Apr 26 15:18:51 CST 2018]; root of context hierarchy
+2018-04-26 15:18:51  [ main:417 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-26 15:18:52  [ main:1206 ] - [ ERROR ]  预约日期转换失败： 2018-04-28  预约检查号： CT00001 尝试预约时间： Thu Apr 26 15:18:52 CST 2018
+2018-04-26 15:18:52  [ Thread-0:1820 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@402a079c: startup date [Thu Apr 26 15:18:51 CST 2018]; root of context hierarchy
+2018-04-26 15:22:55  [ main:38 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-26 15:22:55  [ main:52 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@396a51ab, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@51081592, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7f9a81e8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@9629756, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@62ee68d8]
+2018-04-26 15:22:55  [ main:127 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-26 15:22:56  [ main:308 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@402a079c: startup date [Thu Apr 26 15:22:56 CST 2018]; root of context hierarchy
+2018-04-26 15:22:56  [ main:415 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-26 15:22:57  [ Thread-0:2017 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@402a079c: startup date [Thu Apr 26 15:22:56 CST 2018]; root of context hierarchy

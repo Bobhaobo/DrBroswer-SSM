@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.RegisterInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.RegisterInfo" >
+    <id column="checkNum" property="checknum" jdbcType="VARCHAR" />
+    <result column="recordID" property="recordid" jdbcType="VARCHAR" />
+    <result column="regTime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="clinicID" property="clinicid" jdbcType="VARCHAR" />
+    <result column="patientID" property="patientid" jdbcType="VARCHAR" />
+    <result column="bedNo" property="bedno" jdbcType="VARCHAR" />
+    <result column="examItemCode" property="examitemcode" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="deptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="examItemName" property="examitemname" jdbcType="VARCHAR" />
+    <result column="ifUsingFlag" property="ifusingflag" jdbcType="BIT" />
+    <result column="cardNo" property="cardno" jdbcType="VARCHAR" />
+    <result column="jcbw" property="jcbw" jdbcType="VARCHAR" />
+    <result column="sjmd" property="sjmd" jdbcType="VARCHAR" />
+    <result column="sqdbh" property="sqdbh" jdbcType="VARCHAR" />
+    <result column="deptID" property="deptid" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    checkNum, recordID, regTime, clinicID, patientID, bedNo, examItemCode, flag, deptName, 
+    examItemName, ifUsingFlag, cardNo, jcbw, sjmd, sqdbh, deptID, idcard
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from reg_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from reg_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.RegisterInfo" >
+    insert into reg_info (checkNum, recordID, regTime, 
+      clinicID, patientID, bedNo, 
+      examItemCode, flag, deptName, 
+      examItemName, ifUsingFlag, cardNo, 
+      jcbw, sjmd, sqdbh, 
+      deptID, idcard)
+    values (#{checknum,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}, 
+      #{clinicid,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, #{bedno,jdbcType=VARCHAR}, 
+      #{examitemcode,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, 
+      #{examitemname,jdbcType=VARCHAR}, #{ifusingflag,jdbcType=BIT}, #{cardno,jdbcType=VARCHAR}, 
+      #{jcbw,jdbcType=VARCHAR}, #{sjmd,jdbcType=VARCHAR}, #{sqdbh,jdbcType=VARCHAR}, 
+      #{deptid,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.RegisterInfo" >
+    insert into reg_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="checknum != null" >
+        checkNum,
+      </if>
+      <if test="recordid != null" >
+        recordID,
+      </if>
+      <if test="regtime != null" >
+        regTime,
+      </if>
+      <if test="clinicid != null" >
+        clinicID,
+      </if>
+      <if test="patientid != null" >
+        patientID,
+      </if>
+      <if test="bedno != null" >
+        bedNo,
+      </if>
+      <if test="examitemcode != null" >
+        examItemCode,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="deptname != null" >
+        deptName,
+      </if>
+      <if test="examitemname != null" >
+        examItemName,
+      </if>
+      <if test="ifusingflag != null" >
+        ifUsingFlag,
+      </if>
+      <if test="cardno != null" >
+        cardNo,
+      </if>
+      <if test="jcbw != null" >
+        jcbw,
+      </if>
+      <if test="sjmd != null" >
+        sjmd,
+      </if>
+      <if test="sqdbh != null" >
+        sqdbh,
+      </if>
+      <if test="deptid != null" >
+        deptID,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null" >
+        #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clinicid != null" >
+        #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="ifusingflag != null" >
+        #{ifusingflag,jdbcType=BIT},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null" >
+        #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="sjmd != null" >
+        #{sjmd,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdbh != null" >
+        #{sqdbh,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.RegisterInfo" >
+    update reg_info
+    <set >
+      <if test="recordid != null" >
+        recordID = #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        regTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clinicid != null" >
+        clinicID = #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        patientID = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        bedNo = #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        examItemCode = #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        deptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        examItemName = #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="ifusingflag != null" >
+        ifUsingFlag = #{ifusingflag,jdbcType=BIT},
+      </if>
+      <if test="cardno != null" >
+        cardNo = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null" >
+        jcbw = #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="sjmd != null" >
+        sjmd = #{sjmd,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdbh != null" >
+        sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null" >
+        deptID = #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.RegisterInfo" >
+    update reg_info
+    set recordID = #{recordid,jdbcType=VARCHAR},
+      regTime = #{regtime,jdbcType=TIMESTAMP},
+      clinicID = #{clinicid,jdbcType=VARCHAR},
+      patientID = #{patientid,jdbcType=VARCHAR},
+      bedNo = #{bedno,jdbcType=VARCHAR},
+      examItemCode = #{examitemcode,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      deptName = #{deptname,jdbcType=VARCHAR},
+      examItemName = #{examitemname,jdbcType=VARCHAR},
+      ifUsingFlag = #{ifusingflag,jdbcType=BIT},
+      cardNo = #{cardno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      sjmd = #{sjmd,jdbcType=VARCHAR},
+      sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      deptID = #{deptid,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR}
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getCheckNum" resultType="java.lang.String">
+    select max(checkNum)
+    from reg_info
+    where examItemName = #{modality}
+      and checkNum like #{param}
+  </select>
+
+  <select id="getPatientID" resultType="java.lang.String">
+    select max(patientID)
+    from reg_info
+    where examItemName = #{modality}
+      and patientID like #{param}
+  </select>
+
+  <select id="getRecordID" resultType="java.lang.String">
+    select max(recordID)
+    from reg_info
+    where examItemName = #{modality}
+      and recordID like #{param}
+  </select>
+  <select id="getCheckedListByFlag" resultType="org.springmvc.pojo.RegisterInfo">
+    select top ${pageSize} *
+    from reg_info
+    where
+      checkNum not in (
+      select top ${currIndex} checkNum
+      from reg_info
+      where flag = #{flag,jdbcType=VARCHAR}
+      order by regTime
+      )
+      and flag = #{flag,jdbcType=VARCHAR}
+    order by regTime
+  </select>
+  <select id="countCheckListByFlag" resultType="java.lang.Integer">
+    select count(*)
+    from reg_info
+    where flag = #{flag,jdbcType=VARCHAR}
+  </select>
+  <update id="updateRegStatusByChecknum">
+    update reg_info
+    set flag = #{status,jdbcType=VARCHAR}
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateRegStatusAndClinicIdByChecknum">
+    update reg_info
+    set flag = #{status,jdbcType=VARCHAR},clinicID = #{clinicId,jdbcType=VARCHAR}
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByFlagReturnChecknum" resultType="java.lang.String">
+    select checkNum
+    from reg_info
+    where flag = #{flag,jdbcType=VARCHAR}
+  </select>
+</mapper>

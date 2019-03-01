@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Device" >
+    <result column="DevCode" property="devcode" jdbcType="VARCHAR" />
+    <result column="DevName" property="devname" jdbcType="VARCHAR" />
+    <result column="DevDesc" property="devdesc" jdbcType="VARCHAR" />
+    <result column="ExamItemCode" property="examitemcode" jdbcType="VARCHAR" />
+    <result column="IpAddress" property="ipaddress" jdbcType="VARCHAR" />
+    <result column="RoomCode" property="roomcode" jdbcType="VARCHAR" />
+    <result column="ProviderName" property="providername" jdbcType="VARCHAR" />
+    <result column="InputCode" property="inputcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="org.springmvc.pojo.Device" >
+    insert into device_info (DevCode, DevName, DevDesc, 
+      ExamItemCode, IpAddress, RoomCode, 
+      ProviderName, InputCode)
+    values (#{devcode,jdbcType=VARCHAR}, #{devname,jdbcType=VARCHAR}, #{devdesc,jdbcType=VARCHAR}, 
+      #{examitemcode,jdbcType=VARCHAR}, #{ipaddress,jdbcType=VARCHAR}, #{roomcode,jdbcType=VARCHAR}, 
+      #{providername,jdbcType=VARCHAR}, #{inputcode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Device" >
+    insert into device_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="devcode != null" >
+        DevCode,
+      </if>
+      <if test="devname != null" >
+        DevName,
+      </if>
+      <if test="devdesc != null" >
+        DevDesc,
+      </if>
+      <if test="examitemcode != null" >
+        ExamItemCode,
+      </if>
+      <if test="ipaddress != null" >
+        IpAddress,
+      </if>
+      <if test="roomcode != null" >
+        RoomCode,
+      </if>
+      <if test="providername != null" >
+        ProviderName,
+      </if>
+      <if test="inputcode != null" >
+        InputCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="devcode != null" >
+        #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="devname != null" >
+        #{devname,jdbcType=VARCHAR},
+      </if>
+      <if test="devdesc != null" >
+        #{devdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="roomcode != null" >
+        #{roomcode,jdbcType=VARCHAR},
+      </if>
+      <if test="providername != null" >
+        #{providername,jdbcType=VARCHAR},
+      </if>
+      <if test="inputcode != null" >
+        #{inputcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getDeviceByExamItemCode" resultType="org.springmvc.pojo.Device">
+    select *
+    from device_info
+    where ExamItemCode = #{examitemcode}
+  </select>
+</mapper>

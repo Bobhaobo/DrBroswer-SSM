@@ -1,0 +1,62 @@
+2018-05-16 16:37:27  [ main:99 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-05-16 16:37:27  [ main:153 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@735b5592, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@58651fd0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4520ebad, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5419f379, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7dc7cbad]
+2018-05-16 16:37:28  [ main:467 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-05-16 16:37:29  [ main:1847 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@73ad2d6: startup date [Wed May 16 16:37:29 CST 2018]; root of context hierarchy
+2018-05-16 16:37:29  [ main:2152 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-05-16 16:37:30  [ main:3094 ] - [ INFO ]  Loading properties file from class path resource [imagePath.properties]
+2018-05-16 16:37:31  [ Thread-0:4286 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@73ad2d6: startup date [Wed May 16 16:37:29 CST 2018]; root of context hierarchy
+2018-05-17 15:28:03  [ main:139 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-05-17 15:28:03  [ main:192 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@62ee68d8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@735b5592, org.springframework.test.context.support.DirtiesContextTestExecutionListener@58651fd0, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4520ebad, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5419f379]
+2018-05-17 15:28:03  [ main:443 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-05-17 15:28:04  [ main:1232 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@3fee9989: startup date [Thu May 17 15:28:04 CST 2018]; root of context hierarchy
+2018-05-17 15:28:05  [ main:1677 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@735b5592] to prepare test instance [org.springmvc.service.HospitalServiceTest@77caeb3e]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'dicomWorkListInnerMapper' for bean class [org.springmvc.dao_inner.DicomWorkListInnerMapper] conflicts with existing, non-compatible bean definition of same name and class [org.mybatis.spring.mapper.MapperFactoryBean]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:320)
+	at org.mybatis.spring.mapper.ClassPathMapperScanner.checkCandidate(ClassPathMapperScanner.java:223)
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:259)
+	at org.mybatis.spring.mapper.ClassPathMapperScanner.doScan(ClassPathMapperScanner.java:155)
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.scan(ClassPathBeanDefinitionScanner.java:226)
+	at org.mybatis.spring.mapper.MapperScannerConfigurer.postProcessBeanDefinitionRegistry(MapperScannerConfigurer.java:315)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:119)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	... 24 more
+2018-05-17 15:29:55  [ main:67 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-05-17 15:29:55  [ main:81 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@62ee68d8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@735b5592, org.springframework.test.context.support.DirtiesContextTestExecutionListener@58651fd0, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4520ebad, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5419f379]
+2018-05-17 15:29:55  [ main:213 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-05-17 15:29:56  [ main:804 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@3fee9989: startup date [Thu May 17 15:29:56 CST 2018]; root of context hierarchy
+2018-05-17 15:29:56  [ main:1077 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-05-17 15:29:58  [ main:2406 ] - [ INFO ]  Loading properties file from class path resource [imagePath.properties]
+2018-05-17 15:29:59  [ Thread-0:3921 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@3fee9989: startup date [Thu May 17 15:29:56 CST 2018]; root of context hierarchy

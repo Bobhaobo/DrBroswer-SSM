@@ -1,0 +1,12 @@
+[
+  {"name":"检索报告", "children":[
+    {"id":"inner_search", "name":"本地", "target":"navtab", "url":"zlk_html/report_search_j.html"},
+    {"id":"remote_search", "name":"远程", "target":"navtab", "url":"zlk_html/remote_report_search_j.html"},
+    {"id":"remote_sea", "name":"测试", "target":"navtab", "url":"zlk_html/BasePatInfo.html"},
+    {"id":"annotation", "name":"标注", "target":"navtab", "url":"http://192.168.2.153:8080"}
+  ]},
+  {"name":"预约登记", "children":[
+    {"id":"registerinfo", "name":"登记信息", "target":"navtab", "url":"zlk_html/register_info_j.html"},
+    {"id":"arrangedinfo", "name":"已安排信息", "target":"navtab", "url":"zlk_html/arranged_info_j.html"}
+  ]}
+]

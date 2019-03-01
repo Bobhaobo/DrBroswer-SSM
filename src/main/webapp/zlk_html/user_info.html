@@ -1,0 +1,52 @@
+<!--<script type="text/javascript">-->
+    <!--function modify_Operation(value,data) {-->
+        <!--if(data.check_number == "没有数据！"){-->
+            <!--var html = null;-->
+        <!--}else{-->
+            <!--var html = '<button type="button" class="btn-blue" onclick="dialog_report(\''+ data.user_id + '\');">修改</button>';-->
+        <!--}-->
+        <!--return html;-->
+    <!--}-->
+    <!--function dialog_report(id) {-->
+        <!--var timenow = new Date().getTime();-->
+        <!--BJUI.dialog({-->
+            <!--id:'user_modify_info' + timenow,-->
+            <!--width: 1220,-->
+            <!--height: 900,-->
+            <!--url: '#?id=' + id,  //  TODO-->
+            <!--title:'填写报告'-->
+        <!--});-->
+    <!--}-->
+<!--</script>-->
+
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+            height: '100%',
+            gridTitle : '用户信息',
+            showToolbar: false,
+            dataUrl: '/baseInfo/getUserInfo',
+            dataType: 'json',
+            jsonPrefix: 'obj',
+            paging: {pageSize:60},
+            showCheckboxcol: false,
+            linenumberAll: true,
+            contextMenuH:false,
+            filterThead:false,
+            showToolbar: true,
+            toolbarItem: 'add,refresh',
+            editMode: {dialog:{width:'630',height:'330',title:'新增用户信息',mask:'true'}},
+            editUrl: 'zlk_html/add_new_user.html'
+        }">
+        <thead>
+        <tr>
+            <th align="center" data-options="{name:'user_id',align:'center',width:170,menu:false}">用户ID</th>
+            <th align="center" data-options="{name:'user_name',align:'center',width:100,menu:false}">姓名</th>
+            <th align="center" data-options="{name:'user_hos',align:'center',width:120,menu:false}">所属医院</th>
+            <th align="center" data-options="{name:'user_dept',align:'center',width:120,menu:false}">所属科室</th>
+            <th align="center" data-options="{name:'user_auth',align:'center',width:260,menu:false}">权限</th>
+            <th align="center" data-options="{name:'user_reg',align:'center',type:'date',pattern:'yyyy-MM-dd HH:mm',render:function(value){return value?value.substr(0,16):value},width:200,menu:false}">注册日期</th>
+            <!--<th align="center" data-options="{align:'center',width:100,menu:false,render:modify_Operation}">修改信息</th>-->
+        </tr>
+        </thead>
+    </table>
+</div>

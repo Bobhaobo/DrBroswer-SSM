@@ -1,0 +1,25 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '科室信息',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getDeptInfo',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'id',align:'center',width:170,menu:false}">id</th>
+            <th rowspan="2" align="center" data-options="{name:'deptname',align:'center',width:170,menu:false}">科室名称</th>
+            <th rowspan="2" align="center" data-options="{name:'hosid',align:'center',width:170,menu:false}">医疗机构id</th>
+        </tr>
+        </thead>
+    </table>
+</div>

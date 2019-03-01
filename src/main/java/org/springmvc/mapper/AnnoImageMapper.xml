@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AnnoImageMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.AnnoImage" >
+    <id column="sop_instance_uid" property="sopInstanceUid" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="study_instance_uid" property="studyInstanceUid" jdbcType="VARCHAR" />
+    <result column="series_instance_uid" property="seriesInstanceUid" jdbcType="VARCHAR" />
+    <result column="anno_flag" property="annoFlag" jdbcType="VARCHAR" />
+    <result column="image_folder" property="imageFolder" jdbcType="VARCHAR" />
+    <result column="image_filename" property="imageFilename" jdbcType="VARCHAR" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sop_instance_uid, patient_id, study_instance_uid, series_instance_uid, anno_flag, 
+    image_folder, image_filename, image_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anno_image
+    where sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anno_image
+    where sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.AnnoImage" >
+    insert into anno_image (sop_instance_uid, patient_id, study_instance_uid, 
+      series_instance_uid, anno_flag, image_folder, 
+      image_filename, image_path)
+    values (#{sopInstanceUid,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{studyInstanceUid,jdbcType=VARCHAR}, 
+      #{seriesInstanceUid,jdbcType=VARCHAR}, #{annoFlag,jdbcType=VARCHAR}, #{imageFolder,jdbcType=VARCHAR}, 
+      #{imageFilename,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.AnnoImage" >
+    insert into anno_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sopInstanceUid != null" >
+        sop_instance_uid,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="studyInstanceUid != null" >
+        study_instance_uid,
+      </if>
+      <if test="seriesInstanceUid != null" >
+        series_instance_uid,
+      </if>
+      <if test="annoFlag != null" >
+        anno_flag,
+      </if>
+      <if test="imageFolder != null" >
+        image_folder,
+      </if>
+      <if test="imageFilename != null" >
+        image_filename,
+      </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sopInstanceUid != null" >
+        #{sopInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="studyInstanceUid != null" >
+        #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesInstanceUid != null" >
+        #{seriesInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="annoFlag != null" >
+        #{annoFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="imageFolder != null" >
+        #{imageFolder,jdbcType=VARCHAR},
+      </if>
+      <if test="imageFilename != null" >
+        #{imageFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.AnnoImage" >
+    update anno_image
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="studyInstanceUid != null" >
+        study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesInstanceUid != null" >
+        series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="annoFlag != null" >
+        anno_flag = #{annoFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="imageFolder != null" >
+        image_folder = #{imageFolder,jdbcType=VARCHAR},
+      </if>
+      <if test="imageFilename != null" >
+        image_filename = #{imageFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.AnnoImage" >
+    update anno_image
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
+      series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR},
+      anno_flag = #{annoFlag,jdbcType=VARCHAR},
+      image_folder = #{imageFolder,jdbcType=VARCHAR},
+      image_filename = #{imageFilename,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.User" >
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="dept" property="dept" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="auth" property="auth" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="main_page" property="main_page" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    username, password, id, name, dept, type, regtime, auth, main_page
+  </sql>
+
+  <sql id="Base_Column_List1" >
+    username, password, id, name, dept, type, regtime
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from identify
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllUser1" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List1" />
+    from identify
+    where 1=1
+  </select>
+
+  <!--<select id="selectAllAuth" resultType="java.lang.String"  >-->
+    <!--select auth-->
+    <!--from identify-->
+    <!--where 1=1-->
+  <!--</select>-->
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from identify
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.User" >
+    insert into identify (username, password, id, 
+      name, dept, type, regtime, auth, main_page)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}, #{auth,jdbcType=VARCHAR}, #{main_page,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.User" >
+    insert into identify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="dept != null" >
+        dept,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="regtime != null">
+        regtime,
+      </if>
+      <if test="auth != null">
+        auth,
+      </if>
+      <if test="main_page != null">
+        main_page,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null" >
+        #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null">
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auth != null">
+        #{auth,jdbcType=VARCHAR},
+      </if>
+      <if test="main_page != null">
+        #{main_page,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.User" >
+    update identify
+    <set >
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null" >
+        dept = #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null">
+        regtime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auth != null">
+        auth = #{auth,jdbcType=VARCHAR},
+      </if>
+      <if test="main_page != null">
+        #{main_page,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.User" >
+    update identify
+    set password = #{password,jdbcType=VARCHAR},
+      id = #{id,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      dept = #{dept,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=TIMESTAMP},
+      auth = #{auth,jdbcType=VARCHAR},
+      main_page = #{main_page,jdbcType=VARCHAR},
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <select id="queryByUserNameAndPwd" resultType="org.springmvc.pojo.User">
+    select <include refid="Base_Column_List" />
+      from identify
+    where username=#{username} and password=#{password}
+  </select>
+  <select id="queryByUserId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from identify
+    where id = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllUser" resultType="org.springmvc.pojo.User">
+    select *
+    from identify
+    where 1=1;
+  </select>
+</mapper>

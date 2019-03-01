@@ -1,0 +1,300 @@
+<script src="zlk_js/register_info_j.js"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<div class="container bjui-pageContent">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#myTab_1" data-toggle="tab">
+                预约检查
+            </a>
+        </li>
+        <li>
+            <a href="#myTab_2" data-toggle="tab">
+                远程诊断
+            </a>
+        </li>
+        <li>
+            <a href="#myTab_3" data-toggle="tab">
+                本地登记
+            </a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="container tab-content ">
+        <div class="container tab-pane fade in active" id="myTab_1">
+            <form id="register_local" data-toggle="validate" action="register/patient_check_register" method="post">
+                <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                    <hr class="simple" color="#6f5499" />
+                    <label class="row-label">申请医院：</label>
+                    <div class="row-input required">
+                        <select name="check_hos" id="check_hos" data-toggle="selectpicker" data-nextselect="#checkType_local" data-refurl="register/loadCheckItem/{value}" data-width="200">
+                            <option value="0">----请选择----</option>
+                        </select>
+                    </div>
+                    <label class="row-label">所属医院：</label>
+                    <div class="row-input required">
+                        <input name="belong_hos" id="belong_hos" data-width="150" value="" readonly="">
+                        </input>
+                    </div>
+                    <label class="row-label">检查类型：</label>
+                    <div class="row-input required">
+                        <select id="checkType_local" name="check_type" data-toggle="selectpicker" data-nextselect="#sqks" data-refurl="register/loadDeptList" data-width="200">
+                            <option value="0">----请选择----</option>
+                        </select>
+                    </div>
+                    <label class="row-label">预约时间：</label>
+                    <div class="row-input required">
+                        <input type="text" value="" data-toggle="datepicker" placeholder="点击选择日期" name="apply_date" data-pattern="yyyy-MM-dd HH:mm:ss">
+                    </div>
+                    <label class="row-label">申请科室：</label>
+                    <div class="row-input required">
+                        <select id="sqks" name="sqks" data-toggle="selectpicker" data-width="200" data-emptytxt="--请选择--">
+                            <option value="DP0002">----请选择----</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                    <hr class="simple" color="#6f5499" />
+                    <label class="row-label">姓名：</label>
+                    <div class="row-input required">
+                        <input type="text" name="pat_name" class="PatName">
+                    </div>
+                    <label class="row-label">性别：</label>
+                    <div class="row-input required">
+                        <input type="radio" name="pat_gender" data-toggle="icheck" value="男" data-rule="checked" data-label="男&nbsp;&nbsp;&nbsp;">
+                        <input type="radio" name="pat_gender" data-toggle="icheck" value="女" data-label="女">
+                    </div>
+                    <label class="row-label">出生日期：</label>
+                    <div class="row-input required">
+                        <input type="text" value="" data-toggle="datepicker" placeholder="点击选择日期" name="brithday" data-pattern="yyyy-MM-dd HH:mm:ss">
+                    </div>
+                    <label class="row-label">患者类型：</label>
+                    <div class="row-input">
+                        <input type="radio" name="PatType" data-toggle="icheck" value="门诊" data-label="门诊">
+                        <input type="radio" name="PatType" data-toggle="icheck" value="住院" data-label="住院">
+                        <input type="radio" name="PatType" data-toggle="icheck" value="急诊" data-label="急诊">
+                        <input type="radio" name="PatType" data-toggle="icheck" value="其他" data-label="其他">
+                    </div>
+                    <label class="row-label">身份证号：</label>
+                    <div class="row-input required">
+                        <input type="text" name="pat_id_card" class="PatIDCard">
+                    </div>
+                    <label class="row-label">联系方式：</label>
+                    <div class="row-input">
+                        <input type="text" name="pat_phone" class="tel">
+                    </div>
+                    <label class="row-label">住址：</label>
+                    <div class="row-input">
+                        <input type="text" name="pat_address" class="address">
+                    </div>
+                    <label class="row-label">医保号：</label>
+                    <div class="row-input">
+                        <input type="text" name="pat_soicalId" class="societyID">
+                    </div>
+                </div>
+                <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                    <hr class="simple" color="#6f5499" />
+                    <label class="row-label">门诊号：</label>
+                    <div class="row-input">
+                        <input type="text" name="clinicID" class="clinicID">
+                    </div>
+                    <label class="row-label">申请单编号：</label>
+                    <div class="row-input">
+                        <input type="text" name="sqdbh" class="sqdbh">
+                    </div>
+                    <label class="row-label">检查部位：</label>
+                    <div class="row-input">
+                        <input type="text" name="jcbw" class="jcbw">
+                    </div>
+                    <label class="row-label">申请医生：</label>
+                    <div class="row-input">
+                        <input type="text" name="sqys" id="sqys" class="sqys">
+                    </div>
+                    <label class="row-label">病房：</label>
+                    <div class="row-input">
+                        <input type="text" name="bedroom" class="bf">
+                    </div>
+                    <label class="row-label">床位号：</label>
+                    <div class="row-input">
+                        <input type="text" name="bedNo" class="cwh">
+                    </div>
+                    <label class="row-label">送检目的：</label>
+                    <div class="row-input">
+                        <input type="text" name="sjmd" class="sjmd">
+                    </div>
+                    <label class="row-label">卡号：</label>
+                    <div class="row-input">
+                        <input type="text" name="card_num" class="cardno">
+                    </div>
+                    <hr class="simple" color="#6f5499" />
+                </div>
+                <div class="col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4">
+                    <button type="reset" class="btn-orange" form="register_local">重置表单</button></li>
+                    <button type="submit" class="btn-default" data-icon="save">保存</button></li>
+                </div>
+            </form>
+        </div>
+        <div class="container tab-pane fade" id="myTab_2">
+            <form id="register_remote" data-toggle="validate" >
+                <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                    <hr class="simple" color="#6f5499" />
+                    <label class="row-label">已检查类型：</label>
+                    <div class="row-input required">
+                        <select id="checkType_remote" name="CheckType_r" class="modality" data-toggle="selectpicker" data-width="150">
+                            <option value = "DF">默认</option>
+                            <option value = "CT">CT</option>
+                            <option value = "CR">CR</option>
+                            <option value = "DX">DX</option>
+                            <option value = "MR">MR</option>
+                            <option value = "US">US</option>
+                        </select>
+                    </div>
+                    <label class="row-label">远程检查号：</label>
+                    <div class="row-input">
+                        <input id="card_num" type="text" name="card_num_r" class="cardno" readonly>
+                    </div><br/>
+                    <label class="row-label">患者姓名：</label>
+                    <div class="row-input required">
+                        <input type="text" name="PatName_r" class="PatName">
+                    </div>
+                    <label class="row-label">性别：</label>
+                    <div class="row-input required">
+                        <input type="radio" name="PatGender_r" data-toggle="icheck" value="男" data-rule="checked" data-label="男&nbsp;&nbsp;&nbsp;">
+                        <input type="radio" name="PatGender_r" data-toggle="icheck" value="女" data-label="女">
+                    </div>
+                    <label class="row-label">出生日期：</label>
+                    <div class="row-input required">
+                        <input type="text" value="" data-toggle="datepicker" placeholder="点击选择日期" name="birthday_r" data-pattern="yyyy-MM-dd HH:mm:ss">
+                    </div>
+                    <label class="row-label">病人类型：</label>
+                    <div class="row-input">
+                        <input type="radio" name="PatType_r" data-toggle="icheck" value="门诊" data-label="门诊">
+                        <input type="radio" name="PatType_r" data-toggle="icheck" value="住院" data-label="住院">
+                        <input type="radio" name="PatType_r" data-toggle="icheck" value="急诊" data-label="急诊">
+                        <input type="radio" name="PatType_r" data-toggle="icheck" value="其他" data-label="其他">
+                    </div>
+                    <label class="row-label">身份证号：</label>
+                    <div class="row-input">
+                        <input type="text" name="PatIDCard_r" class="PatIDCard">
+                    </div>
+                    <label class="row-label">联系方式：</label>
+                    <div class="row-input">
+                        <input type="text" name="tel_r" class="tel">
+                    </div>
+                    <label class="row-label">住址：</label>
+                    <div class="row-input">
+                        <input type="text" name="address_r" class="address">
+                    </div>
+                    <label class="row-label">医保号：</label>
+                    <div class="row-input">
+                        <input type="text" name="societyID_r" class="societyID">
+                    </div>
+                    <label class="row-label">点击上传：</label>
+                    <div class="row-input">
+                        <a href="#" class="btn btn-default" id="upload">启动上传插件</a>
+                    </div>
+                    <hr class="simple" color="#6f5499" />
+                </div>
+                <div class="col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4">
+                    <button type="reset" class="btn-orange" form="register_remote">重置表单</button></li>
+                    <button type="submit" class="btn-default" data-icon="save" id="remoteDiagReg">保存</button></li>
+                </div>
+            </form>
+        </div>
+        <div class="container tab-pane fade" id="myTab_3">
+        <form id="register_local_part" data-toggle="validate" action="/local/register" method="post">
+        <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <hr class="simple" color="#6f5499" />
+        <label class="row-label">检查类型：</label>
+        <div class="row-input required">
+        <select id="checkType_local_part" name="checkType_localPart" data-toggle="selectpicker" data-nextselect="#checkDevice_local_part" data-refurl="/local/{value}/getCheckDevicesLocal" data-width="200">
+        <option value="0">----请选择----</option>
+        </select>
+        </div>
+        <label class="row-label">检查号：</label>
+        <div class="row-input">
+        <input id="checkNum_local_part" type="text" name="checkNum_localPart" class="cardno" readonly>
+        </div>
+        <label class="row-label">检查设备：</label>
+        <div class="row-input required">
+        <select id="checkDevice_local_part" name="checkDevice_localPart" data-toggle="selectpicker" data-width="200">
+        <option value="0">----请选择----</option>
+        </select>
+        </div><br/>
+        <hr class="simple" color="#6f5499" />
+        <label class="row-label">患者姓名：</label>
+        <div class="row-input required">
+        <input type="text" name="PatName_localPart" class="PatName">
+        </div>
+        <label class="row-label">性别：</label>
+        <div class="row-input required">
+        <input type="radio" name="PatGender_localPart" data-toggle="icheck" value="男" data-rule="checked" data-label="男&nbsp;&nbsp;&nbsp;">
+        <input type="radio" name="PatGender_localPart" data-toggle="icheck" value="女" data-label="女">
+        </div>
+        <label class="row-label">出生日期：</label>
+        <div class="row-input required">
+        <input type="text" value="" data-toggle="datepicker" placeholder="点击选择日期" name="birthday_localPart" data-pattern="yyyy-MM-dd HH:mm:ss">
+        </div>
+        <label class="row-label">患者类型：</label>
+        <div class="row-input required">
+        <input type="radio" name="PatType_localPart" data-toggle="icheck" value="门诊" data-label="门诊">
+        <input type="radio" name="PatType_localPart" data-toggle="icheck" value="住院" data-label="住院">
+        <input type="radio" name="PatType_localPart" data-toggle="icheck" value="急诊" data-label="急诊">
+        <input type="radio" name="PatType_localPart" data-toggle="icheck" value="其他" data-label="其他">
+        </div>
+        <label class="row-label">身份证号：</label>
+        <div class="row-input required">
+        <input type="text" name="PatIDCard_localPart" class="PatIDCard">
+        </div>
+        <label class="row-label">联系方式：</label>
+        <div class="row-input required">
+        <input type="text" name="tel_localPart" class="tel">
+        </div>
+        <label class="row-label">住址：</label>
+        <div class="row-input">
+        <input type="text" name="address_localPart" class="address">
+        </div>
+        <label class="row-label">医保号：</label>
+        <div class="row-input">
+        <input type="text" name="societyID_localPart" class="societyID">
+        </div>
+        <hr class="simple" color="#6f5499" />
+        <label class="row-label">门诊号：</label>
+        <div class="row-input">
+        <input type="text" name="clinicID_localPart" class="clinicID">
+        </div>
+        <label class="row-label">申请单编号：</label>
+        <div class="row-input">
+        <input type="text" name="sqdbh_localPart" class="sqdbh">
+        </div>
+        <label class="row-label">检查部位：</label>
+        <div class="row-input">
+        <input type="text" name="jcbw_localPart" class="jcbw">
+        </div>
+        <label class="row-label">病房：</label>
+        <div class="row-input">
+        <input type="text" name="bedroom_localPart" class="bf">
+        </div>
+        <label class="row-label">床位号：</label>
+        <div class="row-input">
+        <input type="text" name="bedNo_localPart" class="cwh">
+        </div>
+        <label class="row-label">送检目的：</label>
+        <div class="row-input">
+        <input type="text" name="sjmd_localPart" class="sjmd">
+        </div>
+        <label class="row-label">卡号：</label>
+        <div class="row-input">
+        <input type="text" name="card_num_localPart" class="cardno">
+        </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4">
+        <button type="reset" class="btn-orange" form="register_local_part">重置表单</button></li>
+        <button type="submit" class="btn-default" data-icon="save" >保存</button></li>
+        </div>
+        </form>
+        </div>
+    </div>
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+    </ul>
+</div>

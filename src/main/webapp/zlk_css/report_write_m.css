@@ -1,0 +1,124 @@
+.writeReport{
+    position: relative;
+    width: 800px;
+    height: 817px;
+    float: left;
+}
+.template{
+    position: relative;
+    width: 360px;
+    height: 817px;
+    float: left;
+    margin-left:1%;
+}
+.reportHead {
+    position: relative;
+    height: 5%;
+}
+.icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    float:left;
+    margin-left:30%;
+}
+.icon img{
+    width: 40px;
+    heigth: 40px;
+}
+.hostitle {
+    position: relative;
+    float:left;
+    margin-left: 10%;
+}
+.hostitle span{
+    font-size: 25px;
+}
+.patientInfo{
+    height: 12%;
+}
+.patientInfo .row_1 {
+    height: 50px;
+    margin-bottom: 10px;
+}
+.patientInfo .row_2 {
+    height: 30px;
+    margin-bottom: 5px;
+}
+.patientInfo .row_3 {
+    height: 30px;
+    margin-bottom: 5px;
+}
+.patName{
+    margin-left:13%;
+    float:left;
+    width: 65px;
+}
+.patGender {
+    margin-left:7%;
+    float:left;
+    width: 65px;
+}
+.patAge{
+    margin-left:7%;
+    float:left;
+    width: 65px;
+}
+.patCheckNum{
+    margin-left:7%;
+    float:left;
+    width: 65px;
+}
+.keshi {
+    margin-left:7%;
+    float:left;
+    width: 65px;
+}
+.zhuyuanhao {
+    margin-left:13%;
+    float:left;
+    width: 65px;
+}
+.chuanghao{
+    margin-left:7%;
+    float: left;
+    width: 65px;
+}
+.jcbw{
+    margin-left:7%;
+    float:left;
+    width: 140px;
+}
+.yinoryangxing{
+    margin-left:7%;
+    float:left;
+    width: 65px;
+}
+.demo {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 330px;
+}
+.template_text{
+    width: 360px;
+
+}
+.template #examDesc_text {
+    height:250px;
+    width: 348px;
+}
+.template #examDiagnosis_text {
+    height:150px;
+    width: 348px;
+
+}
+#examDesc_text_p{
+    height:230px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+#examDiagnosis_text_p{
+    height:130px;
+    overflow: scroll;
+    overflow-x: hidden;
+}

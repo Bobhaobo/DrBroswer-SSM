@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.HisInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.HisInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="patientID" property="patientid" jdbcType="VARCHAR" />
+    <result column="reportDate" property="reportdate" jdbcType="TIMESTAMP" />
+    <result column="modality" property="modality" jdbcType="VARCHAR" />
+    <result column="reportPath" property="reportpath" jdbcType="VARCHAR" />
+    <result column="checkNum" property="checknum" jdbcType="VARCHAR" />
+    <result column="csh" property="csh" jdbcType="VARCHAR" />
+    <result column="cardno" property="cardno" jdbcType="VARCHAR" />
+    <result column="sqdbh" property="sqdbh" jdbcType="VARCHAR" />
+    <result column="patType" property="pattype" jdbcType="VARCHAR" />
+    <result column="clinicID" property="clinicid" jdbcType="VARCHAR" />
+    <result column="sqks" property="sqks" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="patname" property="patname" jdbcType="VARCHAR" />
+    <result column="hosId" property="hosId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, patientID, reportDate, modality, reportPath, checkNum, csh, cardno, sqdbh, patType, 
+    clinicID, sqks, idcard, patname, hosId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from his_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.HisInfo" >
+    insert into his_info (id, patientID, reportDate, 
+      modality, reportPath, checkNum, 
+      csh, cardno, sqdbh, 
+      patType, clinicID, sqks, 
+      idcard, patname, hosId)
+    values (#{id,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, #{reportdate,jdbcType=TIMESTAMP}, 
+      #{modality,jdbcType=VARCHAR}, #{reportpath,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, 
+      #{csh,jdbcType=VARCHAR}, #{cardno,jdbcType=VARCHAR}, #{sqdbh,jdbcType=VARCHAR}, 
+      #{pattype,jdbcType=VARCHAR}, #{clinicid,jdbcType=VARCHAR}, #{sqks,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{patname,jdbcType=VARCHAR}, #{hosId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.HisInfo" >
+    insert into his_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="patientid != null" >
+        patientID,
+      </if>
+      <if test="reportdate != null" >
+        reportDate,
+      </if>
+      <if test="modality != null" >
+        modality,
+      </if>
+      <if test="reportpath != null" >
+        reportPath,
+      </if>
+      <if test="checknum != null" >
+        checkNum,
+      </if>
+      <if test="csh != null" >
+        csh,
+      </if>
+      <if test="cardno != null" >
+        cardno,
+      </if>
+      <if test="sqdbh != null" >
+        sqdbh,
+      </if>
+      <if test="pattype != null" >
+        patType,
+      </if>
+      <if test="clinicid != null" >
+        clinicID,
+      </if>
+      <if test="sqks != null" >
+        sqks,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="patname != null" >
+        patname,
+      </if>
+      <if test="hosId != null" >
+        hosId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportdate != null" >
+        #{reportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modality != null" >
+        #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="reportpath != null" >
+        #{reportpath,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="csh != null" >
+        #{csh,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdbh != null" >
+        #{sqdbh,jdbcType=VARCHAR},
+      </if>
+      <if test="pattype != null" >
+        #{pattype,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicid != null" >
+        #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqks != null" >
+        #{sqks,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null">
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="hosId != null">
+        #{hosId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.HisInfo" >
+    update his_info
+    <set >
+      <if test="patientid != null" >
+        patientID = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportdate != null" >
+        reportDate = #{reportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modality != null" >
+        modality = #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="reportpath != null" >
+        reportPath = #{reportpath,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        checkNum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="csh != null" >
+        csh = #{csh,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        cardno = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdbh != null" >
+        sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      </if>
+      <if test="pattype != null" >
+        patType = #{pattype,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicid != null" >
+        clinicID = #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqks != null" >
+        sqks = #{sqks,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null">
+        patname = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="hosId != null">
+        hosId = #{hosId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.HisInfo" >
+    update his_info
+    set patientID = #{patientid,jdbcType=VARCHAR},
+      reportDate = #{reportdate,jdbcType=TIMESTAMP},
+      modality = #{modality,jdbcType=VARCHAR},
+      reportPath = #{reportpath,jdbcType=VARCHAR},
+      checkNum = #{checknum,jdbcType=VARCHAR},
+      csh = #{csh,jdbcType=VARCHAR},
+      cardno = #{cardno,jdbcType=VARCHAR},
+      sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      patType = #{pattype,jdbcType=VARCHAR},
+      clinicID = #{clinicid,jdbcType=VARCHAR},
+      sqks = #{sqks,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      patname = #{patname,jdbcType=VARCHAR},
+      hosId = #{hosId,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateHisInfoDateByPatid">
+    update his_info
+    set reportDate = #{date,jdbcType=TIMESTAMP},
+        reportPath = #{imagepath,jdbcType=VARCHAR}
+    where patientID = #{patid,jdbcType=VARCHAR}
+  </update>
+  <select id="countReportToday" resultType="java.lang.Integer">
+    select count(*)
+    from his_info
+    where reportDate
+      between #{datestart,jdbcType=TIMESTAMP}
+        and #{dateend,jdbcType=TIMESTAMP}
+        and hosId=#{hosId,jdbcType=VARCHAR}
+  </select>
+  <select id="getTodayReportListByPagination" resultType="org.springmvc.pojo.HisInfo">
+    select top ${pageSize} *
+    from his_info
+    where
+      id not in (
+        select top ${currIndex} id
+        from his_info
+        where reportDate between #{datestart,jdbcType=TIMESTAMP} and #{dateend,jdbcType=TIMESTAMP} and hosId=#{hosId,jdbcType=VARCHAR}
+        order by reportDate
+      )
+      and reportDate between #{datestart,jdbcType=TIMESTAMP} and #{dateend,jdbcType=TIMESTAMP} and hosId=#{hosId,jdbcType=VARCHAR}
+    order by reportDate desc
+  </select>
+
+  <select id="selectByCheckNum" resultType="org.springmvc.pojo.HisInfo">
+    select *
+    from his_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getReportListByCondition" resultType="org.springmvc.pojo.HisInfo">
+    select top ${pageSize} *
+    from his_info
+    where
+      id not in (
+        select top ${currIndex} id
+        from his_info
+        where ${condition}
+        order by reportDate
+      )
+      and ${condition}
+    order by reportDate desc
+  </select>
+</mapper>

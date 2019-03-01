@@ -1,0 +1,10 @@
+2018-04-17 15:27:51  [ main:1682 ] - [ ERROR ]  login error info：Could not find result map org.springmvc.pojo.User
+login user: D00001
+2018-04-17 15:33:34  [ main:2223 ] - [ ERROR ]  login error info：
+### Error querying database.  Cause: com.microsoft.sqlserver.jdbc.SQLServerException: 列名 'dept' 无效。
+### The error may exist in file [F:\IdeaProjects\DrBroswer\target\classes\org\springmvc\mapper\UserMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: select       username, password, id, name, dept, type           from identify     where username=? and password=?
+### Cause: com.microsoft.sqlserver.jdbc.SQLServerException: 列名 'dept' 无效。
+; bad SQL grammar []; nested exception is com.microsoft.sqlserver.jdbc.SQLServerException: 列名 'dept' 无效。>>>>>>login user: D00001

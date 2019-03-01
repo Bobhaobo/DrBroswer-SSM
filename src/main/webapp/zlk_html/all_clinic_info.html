@@ -1,0 +1,115 @@
+<script type="text/javascript">
+    function checkReport_Operation(value,data) {
+        if(data.idcard == "没有数据！"){
+            var html = null;
+        }else{
+            var html = '<button type="button" class="btn-blue" onclick="dialog_report(\''+ data.idcard +'\');">临床详情</button>';
+        }
+        return html;
+    }
+    function dialog_report(idcard) {
+        var timenow = new Date().getTime();
+         alert(idcard);
+        BJUI.dialog({
+            id:'arrangedDetail_time'+timenow,
+            width: 830,
+            height: 700,
+            url: 'zlk_html/clinic.jsp?idCard=' + idcard ,
+            title:'临床详情'
+        });
+    }
+
+
+    $("#clinic_search").click(function(){
+        alert("lalala111");
+        BJUI.navtab({
+            id:'search1',
+            url:'zlk_html/clinic_search.jsp?idcard=' + $("#numberll").val(),
+                // + '&patname=' + $("#patnamell").val()
+                // + '&patgender=' + $("#genderll").val(),
+            title:'报告列表'
+        });
+    });
+</script>
+
+<div class="bjui-pageContent">
+    <form action="" id="j_patient_form" name="j_patient_form">
+        <fieldset><legend style="font-family:verdana;font-size:130%;color:orange;">患者检索：</legend>
+            <div class="bjui-row col-4">
+                <label class="row-label">患者姓名：</label>
+                <div class="row-input">
+                    <input type="text" name="patnamell" id="patnamell" class="name" size="20">
+                </div>
+                <label class="row-label">性别：</label>
+                <div class="row-input">
+                    <input type="text" name="genderll" id="genderll" class="clinic_id" size="20">
+                </div>
+                <label class="row-label">年龄：</label>
+                <div class="row-input">
+                    <input type="text" name="age1" id="age1" class="age1" size="20">
+                </div>
+                <label class="row-label">病人ID：</label>
+                <div class="row-input">
+                    <input type="text" name="ID" id="ID" class="ID" size="20">
+                </div>
+                <label class="row-label">身份证号：</label>
+                <div class="row-input">
+                    <input type="text" name="numberll" id="numberll" class="number" size="20">
+                </div>
+                <label class="row-label">病种：</label>
+                <div class="row-input">
+                    <select name="entity" id="entity" class="entity" data-toggle="selectpicker" data-width="150">
+                        <option value = "">全部</option>
+                        <option value = "肺">肺</option>
+                        <option value = "肝">肝</option>
+                        <option value = "乳腺">乳腺</option>
+                    </select>
+                </div>
+                <label class="row-label">临床医生：</label>
+                <div class="row-input">
+                    <select name="clinic_doc" id="clinic_doc" class="clinic_doc" data-toggle="selectpicker" data-width="150">
+                        <option value = "">全部</option>
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                    </select>
+                </div>
+                <label class="row-label">就诊时间：</label>
+                <div class="row-input">
+                    <input type="text" value="" class="date" data-toggle="datepicker" placeholder="点击选择日期" name="date" id="date" size="20">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '临床信息',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getClinicInfo',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh'
+    }">
+        <thead>
+        <th rowspan="2" align="center" data-options="{name:'idcard',align:'center',width:170,menu:false}">身份证号</th>
+        <th rowspan="2" align="center" data-options="{name:'patname',align:'center',width:170,menu:false}">姓名</th>
+        <th rowspan="2" align="center" data-options="{name:'patgender',align:'center',width:170,menu:false}">性别</th>
+        <th rowspan="2" align="center" data-options="{name:'age',align:'center',width:170,menu:false}">年龄</th>
+        <th rowspan="2" align="center" data-options="{name:'entity',align:'center',width:170,menu:false}">病种</th>
+        <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation}">查看详情</th>
+        </thead>
+    </table>
+
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="reset" class="btn-orange" form="j_patient_form">搜索重置</button></li>
+        <li><button type="button" class="btn-default" id="clinic_search">信息查询</button></li>
+    </ul>
+</div>

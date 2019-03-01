@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <!-- twitter bootstrap CSS stylesheet - included to make things pretty, not needed or used by cornerstone -->
+    <link href="../test_script/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../test_script/css/cornerstone.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../test_script/css/Site.css" type="text/css" />
+	<link rel="stylesheet" href="../test_script/css/Toolbar.css" type="text/css" />
+	<link rel="stylesheet" href="../test_script/css/Icons.css" type="text/css" />
+	<link rel="stylesheet" href="../test_script/css/jquery-ui-1.10.4.custom.min.css" type="text/css"/>
+
+	<script src="../test_script/js/jquery-1.11.3.min.js"></script>
+	<script src="../test_script/js/jquery-ui-1.10.4.custom.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<!-- Create a header toolbar -->
+	<div id="tollHead" class="toolbar headerToolbarDiv">
+		<button id="saveAnnotations" class="btn btn-default" title="保存标注">
+			<span class="icon saveXMLIcon"></span>
+			<div style="">保存标注</div>
+		</button>
+		<!--<button id="panZoom" class="btn btn-defalut" title="移动">
+			<span class="icon panZoomIcon"></span>
+		</button>-->
+		<button id="actualSize" class="btn btn-default" title="初始尺寸">
+			<span class="icon actualSizeIcon"></span>
+			<div style="">初始尺寸</div>
+		</button>
+		<!--button id ="magnifyGlass"class="btn btn-defalut interactiveModesBtns" title="放大镜" value="1">
+		   <span class="icon magnifyGlassIcon"></span>
+		</button-->
+		<button id="zoomInImage" class="btn btn-default" title="放大">
+			<span class="icon zoomInIcon"></span>
+			<div style="">放大</div>
+		</button>
+		<button id="zoomOutImage" class="btn btn-default" title="缩小">
+			<span class="icon zoomOutIcon"></span>
+			<div style="">缩小</div>
+		</button>
+		<button id="rotateCounterClockwise" class="btn btn-default" title="左旋转">
+			<span class="icon rotateCounterClockwiseIcon"></span>
+			<div style="">左旋转</div>
+		</button>
+		<button id="rotateClockwise" class="btn btn-default" title="右旋转">
+			<span class="icon rotateClockwiseIcon"></span>
+			<div style="">右旋转</div>
+		</button>
+		<!--
+		<button id="loadAnnotations" class="btn btn-default" title="Load Annotations">
+		   <span class="icon openAnnotationIcon"></span>
+		</button>
+		<button id="saveAnnotations" class="btn btn-default" title="Save Annotations">
+		   <span class="icon saveXMLIcon"></span>
+		</button>
+
+		<button id="undo" class="btn btn-default" title="撤回">
+		   <span class="icon undoIcon"></span>
+		</button>-->
+		<!--
+		<button id="redo" class="btn btn-default" title="Redo">
+		   <span class="icon redoIcon"></span>
+		</button>-->
+		<button id="deleteAnnotation" class="btn btn-default" title="删除标注">
+			<span class="icon closeIcon"></span>
+			<div style="">删除标注</div>
+		</button>
+		<!--<button class="annotationObjectBtn btn btn-default" title="直线">
+		   <span class="icon lineIcon" ></span>
+		</button-->
+		<button id="rectbtn" class="annotationObjectBtn btn btn-default" title="矩形标注框" data-type="rectangle">
+			<span class="icon rectangleIcon" data-type="rectangle"></span>
+			<div style="">矩形标注框</div>
+		</button>
+		<button id="length" class="annotationObjectBtn btn btn-default" title="长度测量" data-type="ruler">
+			<span class="icon rulerIcon"></span>
+			<div style="">长度测量</div>
+		</button>
+		<button id="angle" class="annotationObjectBtn btn btn-default" title="角度测量" data-type="angle">
+			<span class="icon protractorIcon"></span>
+			<div >角度测量</div>
+		</button>
+		<!---<button class="annotationObjectBtn btn btn-default" title="多边形">
+		   <span class="icon polygonIcon"></span>
+		</button>-->
+	</div>
+    <div class="page-header">
+        
+    </div>
+    <div id="loadProgress" ></div>
+
+   <!-- <input type="checkbox" id="toggleModalityLUT">Apply Modality LUT</input>
+    <input type="checkbox" id="toggleVOILUT">Apply VOI LUT</input>-->
+    <br />
+	<div>
+		窗宽：<input id="windowWidth" type="text"  style="display: inline" size="10">
+		窗位：<input id="windowCenter" type="text"  style="display: inline" size="10">
+		</button>
+		<button id="windowChange" type="button" class="btn-default" style="display: inline;height: 30px;">
+			确定
+		</button>
+	</div>
+	<br />
+    <div  class="row">
+        <div  class="col-md-12 col-xs-12">
+            <div id="imgArea" style="position:relative;color: white;"
+                 oncontextmenu="return false"
+                 class='disable-selection noIbar'
+                 unselectable='on'
+                 onselectstart='return false;'
+                 onmousedown='return false;'>
+                <div id="dicomImage" style=""><!--width:1350px;height:720px;-->
+                </div>
+				<div id="topleft" class="overlay" style="position:absolute;top:0px;left:0px">
+				</div>
+				<div id="topright" class="overlay" style="position:absolute;top:0px;right:0px">
+				</div>
+				<div id="bottomright" class="overlay" style="position:absolute;bottom:0px;right:0px">
+
+				</div>
+				<div id="bottomleft" class="overlay" style="position:absolute;bottom:0px;left:0px">
+				</div>
+				<div id="slider-vertical" class="overlay" style="position:absolute;top:25%;height:50%;right:0px"></div>
+            </div>
+
+        </div>
+        <!--<div class="col-md-6">
+            <span>传输语法: </span><span id="transferSyntax"></span><br>
+            <span>SOP类: </span><span id="sopClass"></span><br>
+            <span>每像素样本数: </span><span id="samplesPerPixel"></span><br>
+            <span>光度解释: </span><span id="photometricInterpretation"></span><br>
+            <span>Number Of Frames: </span><span id="numberOfFrames"></span><br>
+            <span>Planar Configuration: </span><span id="planarConfiguration"></span><br>
+            <span>行: </span><span id="rows"></span><br>
+            <span>列: </span><span id="columns"></span><br>
+            <span>像素间距: </span><span id="pixelSpacing"></span><br>
+            <span>分配的位数: </span><span id="bitsAllocated"></span><br>
+            <span>比特存储: </span><span id="bitsStored"></span><br>
+            <span>High Bit: </span><span id="highBit"></span><br>
+            <span>Pixel Representation: </span><span id="pixelRepresentation"></span><br>
+            <span>窗位: </span><span id="windowCenter"></span><br>
+            <span>窗宽: </span><span id="windowWidth"></span><br>
+            <span>RescaleIntercept: </span><span id="rescaleIntercept"></span><br>
+            <span>RescaleSlope: </span><span id="rescaleSlope"></span><br>
+            <span>Basic Offset Table Entries: </span><span id="basicOffsetTable"></span><br>
+            <span>Fragments: </span><span id="fragments"></span><br>
+            <span>最小存储像素值: </span><span id="minStoredPixelValue"></span><br>
+            <span>最大存储像素值: </span><span id="maxStoredPixelValue"></span><br>
+            <span>总时间: </span><span id="totalTime"></span><br>
+            <span>加载时间: </span><span id="loadTime"></span><br>
+            <span>解码时间: </span><span id="decodeTime"></span><br>
+        </div>-->
+    </div>
+</div>
+</body>
+
+
+<!-- include the cornerstone library -->
+<script src="../test_script/js/cornerstone.min.js"></script>
+<SCRIPT src="../test_script/js/cornerstoneMath.min.js"></SCRIPT>
+<SCRIPT src="../test_script/js/cornerstoneTools.min.js"></SCRIPT>
+
+<!-- include the dicomParser library as the WADO image loader depends on it-->
+<script src="../test_script/js/dicomParser.min.js"></script>
+
+
+<!-- BEGIN Optional Codecs -->
+
+<!-- OpenJPEG based jpeg 2000 codec -->
+<script src="../test_script/js/openJPEG-FixedMemory.js"></script>
+
+<!-- PDF.js based jpeg 2000 codec -->
+<!-- NOTE: do not load the OpenJPEG codec if you use this one -->
+<!--<script src="../../codecs/jpx.min.js"></script>-->
+
+<!-- JPEG-LS codec -->
+<script src="../test_script/js/charLS-FixedMemory-browser.js"></script>
+
+<!-- JPEG Lossless codec -->
+<script src="../test_script/js/jpegLossless.js"></script>
+
+<!-- JPEG Baseline codec -->
+<script src="../test_script/js/jpeg.js"></script>
+
+<!-- Deflate transfer syntax codec -->
+<script src="../test_script/js/pako.min.js"></script>
+
+<!-- END Optional Codecs -->
+
+<!-- include the cornerstoneWADOImageLoader library -->
+<script src="../test_script/js/cornerstoneWADOImageLoader.js"></script>
+
+<!-- uids -->
+<script src="../test_script/js/uids.js"></script>
+
+<!-- Lines ONLY required for this example to run without building the project -->
+<script>window.cornerstoneWADOImageLoader || document.write('<script src="https://unpkg.com/cornerstone-wado-image-loader">\x3C/script>')</script>
+<script src="../test_script/js/initializeWebWorkers.js"></script>
+<!-- 对按钮的操作 -->
+<script src="../test_script/js/toolsbuttonnew.js"></script>
+<!-- 用ajax文件上传 -->
+<script type="text/javascript" src="../test_script/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>

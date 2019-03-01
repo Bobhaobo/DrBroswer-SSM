@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springmvc.dao.RemoteReportMapper">
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.RemoteReport">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="checknum" jdbcType="VARCHAR" property="checknum" />
+    <result column="clinicid" jdbcType="VARCHAR" property="clinicid" />
+    <result column="patname" jdbcType="VARCHAR" property="patname" />
+    <result column="patsex" jdbcType="VARCHAR" property="patsex" />
+    <result column="patage" jdbcType="VARCHAR" property="patage" />
+    <result column="deptname" jdbcType="VARCHAR" property="deptname" />
+    <result column="bedno" jdbcType="VARCHAR" property="bedno" />
+    <result column="jcbw" jdbcType="VARCHAR" property="jcbw" />
+    <result column="reporttime" jdbcType="TIMESTAMP" property="reporttime" />
+    <result column="sfyangxing" jdbcType="VARCHAR" property="sfyangxing" />
+    <result column="modality" jdbcType="VARCHAR" property="modality" />
+    <result column="reportpath" jdbcType="VARCHAR" property="reportpath" />
+    <result column="doccode" jdbcType="VARCHAR" property="doccode" />
+    <result column="examDesc" jdbcType="VARCHAR" property="examdesc" />
+    <result column="juniorhos" jdbcType="VARCHAR" property="juniorhos" />
+    <result column="examDiagnosis" jdbcType="VARCHAR" property="examdiagnosis" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, checknum, clinicid, patname, patsex, patage, deptname, bedno, jcbw, reporttime, 
+    sfyangxing, modality, reportpath, doccode, examDesc, examDiagnosis,juniorhos
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from remote_report
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from remote_report
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.RemoteReport">
+    insert into remote_report (id, checknum, clinicid, 
+      patname, patsex, patage, 
+      deptname, bedno, jcbw, 
+      reporttime, sfyangxing, modality, 
+      reportpath, doccode, examDesc, juniorhos,
+      examDiagnosis)
+    values (#{id,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, #{clinicid,jdbcType=VARCHAR}, 
+      #{patname,jdbcType=VARCHAR}, #{patsex,jdbcType=VARCHAR}, #{patage,jdbcType=VARCHAR}, 
+      #{deptname,jdbcType=VARCHAR}, #{bedno,jdbcType=VARCHAR}, #{jcbw,jdbcType=VARCHAR}, 
+      #{reporttime,jdbcType=TIMESTAMP}, #{sfyangxing,jdbcType=VARCHAR}, #{modality,jdbcType=VARCHAR},
+      #{reportpath,jdbcType=VARCHAR}, #{doccode,jdbcType=VARCHAR}, #{examdesc,jdbcType=VARCHAR},
+      #{juniorhos,jdbcType=VARCHAR},#{examdiagnosis,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.RemoteReport">
+    insert into remote_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="checknum != null">
+        checknum,
+      </if>
+      <if test="clinicid != null">
+        clinicid,
+      </if>
+      <if test="patname != null">
+        patname,
+      </if>
+      <if test="patsex != null">
+        patsex,
+      </if>
+      <if test="patage != null">
+        patage,
+      </if>
+      <if test="deptname != null">
+        deptname,
+      </if>
+      <if test="bedno != null">
+        bedno,
+      </if>
+      <if test="jcbw != null">
+        jcbw,
+      </if>
+      <if test="reporttime != null">
+        reporttime,
+      </if>
+      <if test="sfyangxing != null">
+        sfyangxing,
+      </if>
+      <if test="modality != null">
+        modality,
+      </if>
+      <if test="reportpath != null">
+        reportpath,
+      </if>
+      <if test="doccode != null">
+        doccode,
+      </if>
+      <if test="examdesc != null">
+        examDesc,
+      </if>
+      <if test="juniorhos != null">
+        juniorhos,
+      </if>
+      <if test="examdiagnosis != null">
+        examDiagnosis,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null">
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicid != null">
+        #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null">
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patsex != null">
+        #{patsex,jdbcType=VARCHAR},
+      </if>
+      <if test="patage != null">
+        #{patage,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null">
+        #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null">
+        #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null">
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfyangxing != null">
+        #{sfyangxing,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null">
+        #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="reportpath != null">
+        #{reportpath,jdbcType=VARCHAR},
+      </if>
+      <if test="doccode != null">
+        #{doccode,jdbcType=VARCHAR},
+      </if>
+      <if test="examdesc != null">
+        #{examdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="juniorhos != null">
+        #{juniorhos,jdbcType=VARCHAR},
+      </if>
+      <if test="examdiagnosis != null">
+        #{examdiagnosis,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.RemoteReport">
+    update remote_report
+    <set>
+      <if test="checknum != null">
+        checknum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicid != null">
+        clinicid = #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null">
+        patname = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patsex != null">
+        patsex = #{patsex,jdbcType=VARCHAR},
+      </if>
+      <if test="patage != null">
+        patage = #{patage,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        deptname = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null">
+        bedno = #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null">
+        jcbw = #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null">
+        reporttime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfyangxing != null">
+        sfyangxing = #{sfyangxing,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null">
+        modality = #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="reportpath != null">
+        reportpath = #{reportpath,jdbcType=VARCHAR},
+      </if>
+      <if test="doccode != null">
+        doccode = #{doccode,jdbcType=VARCHAR},
+      </if>
+      <if test="examdesc != null">
+        examDesc = #{examdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="juniorhos != null">
+        juniorhos = #{juniorhos,jdbcType=VARCHAR},
+      </if>
+      <if test="examdiagnosis != null">
+        examDiagnosis = #{examdiagnosis,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.RemoteReport">
+    update remote_report
+    set checknum = #{checknum,jdbcType=VARCHAR},
+      clinicid = #{clinicid,jdbcType=VARCHAR},
+      patname = #{patname,jdbcType=VARCHAR},
+      patsex = #{patsex,jdbcType=VARCHAR},
+      patage = #{patage,jdbcType=VARCHAR},
+      deptname = #{deptname,jdbcType=VARCHAR},
+      bedno = #{bedno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      reporttime = #{reporttime,jdbcType=TIMESTAMP},
+      sfyangxing = #{sfyangxing,jdbcType=VARCHAR},
+      modality = #{modality,jdbcType=VARCHAR},
+      reportpath = #{reportpath,jdbcType=VARCHAR},
+      doccode = #{doccode,jdbcType=VARCHAR},
+      examDesc = #{examdesc,jdbcType=VARCHAR},
+      juniorhos = #{juniorhos,jdbcType=VARCHAR},
+      examDiagnosis = #{examdiagnosis,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectBycheckNum" resultType="org.springmvc.pojo.RemoteReport">
+    select <include refid="Base_Column_List" />
+    from remote_report
+    where checknum = #{checknum,jdbcType=VARCHAR}
+  </select>
+  <select id="getTodayReportListByPagination" resultType="org.springmvc.pojo.RemoteReport">
+    select top ${pageSize} *
+    from remote_report
+    where
+      id not in (
+        select top ${currIndex} id
+        from remote_report
+        where
+          juniorhos = #{hos,jdbcType=VARCHAR}
+          and
+          reporttime between #{dateStart,jdbcType=TIMESTAMP} and #{dateEnd,jdbcType=TIMESTAMP}
+        order by reporttime
+      )
+      and juniorhos = #{hos,jdbcType=VARCHAR}
+      and reporttime between #{dateStart,jdbcType=TIMESTAMP} and #{dateEnd,jdbcType=TIMESTAMP}
+    order by reporttime desc
+  </select>
+  <select id="getReportListByCondition" resultType="org.springmvc.pojo.RemoteReport">
+    select top ${pageSize} *
+    from remote_report
+    where
+      id not in (
+        select top ${currIndex} id
+        from remote_report
+        where ${condition}
+        order by reporttime
+      )
+      and ${condition}
+    order by reporttime desc
+  </select>
+</mapper>

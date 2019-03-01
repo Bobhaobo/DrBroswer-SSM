@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springmvc.dao.ClinicMapper">
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Clinic">
+    <id column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="yiBaoID" jdbcType="VARCHAR" property="yibaoid" />
+    <result column="patName" jdbcType="VARCHAR" property="patname" />
+    <result column="age" jdbcType="NUMERIC" property="age" />
+    <result column="patGender" jdbcType="VARCHAR" property="patgender" />
+    <result column="patBirthDate" jdbcType="TIMESTAMP" property="patbirthdate" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="entity" jdbcType="VARCHAR" property="entity" />
+    <result column="clinicDoc" jdbcType="VARCHAR" property="clinicdoc" />
+    <result column="mainSuit" jdbcType="VARCHAR" property="mainsuit" />
+    <result column="personalHis" jdbcType="VARCHAR" property="personalhis" />
+    <result column="maritalHis" jdbcType="VARCHAR" property="maritalhis" />
+    <result column="familyHis" jdbcType="VARCHAR" property="familyhis" />
+    <result column="pastIllnessHis" jdbcType="VARCHAR" property="pastillnesshis" />
+    <result column="presentIllnessHis" jdbcType="VARCHAR" property="presentillnesshis" />
+    <result column="specialityCheck" jdbcType="VARCHAR" property="specialitycheck" />
+    <result column="tentativeDiagnosis" jdbcType="VARCHAR" property="tentativediagnosis" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    idcard, yiBaoID, patName, age, patGender, patBirthDate, telephone, address, updatetime, entity,clinicDoc,
+    mainSuit, personalHis, maritalHis, familyHis, pastIllnessHis, presentIllnessHis, 
+    specialityCheck, tentativeDiagnosis
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from clinic
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clinic
+    where 1=1
+  </select>
+
+
+  <select id="selectAllInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clinic
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getAccount"  resultType="java.lang.Integer">
+    select count (*)
+    from clinic
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from clinic
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Clinic">
+    insert into clinic (idcard, yiBaoID, patName, 
+      age, patGender, patBirthDate, 
+      telephone, address, updatetime, 
+      mainSuit, personalHis, maritalHis, 
+      familyHis, pastIllnessHis, presentIllnessHis, 
+      specialityCheck, tentativeDiagnosis,
+      entity,
+      clinicDoc)
+    values (#{idcard,jdbcType=VARCHAR}, #{yibaoid,jdbcType=VARCHAR}, #{patname,jdbcType=VARCHAR}, 
+      #{age,jdbcType=NUMERIC}, #{patgender,jdbcType=VARCHAR}, #{patbirthdate,jdbcType=TIMESTAMP}, 
+      #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{mainsuit,jdbcType=VARCHAR}, #{personalhis,jdbcType=VARCHAR}, #{maritalhis,jdbcType=VARCHAR}, 
+      #{familyhis,jdbcType=VARCHAR}, #{pastillnesshis,jdbcType=VARCHAR}, #{presentillnesshis,jdbcType=VARCHAR}, 
+      #{specialitycheck,jdbcType=VARCHAR}, #{tentativediagnosis,jdbcType=VARCHAR},
+      #{entity,jdbcType=VARCHAR}, 
+      #{clinicdoc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Clinic">
+    insert into clinic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="yibaoid != null">
+        yiBaoID,
+      </if>
+      <if test="patname != null">
+        patName,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="patgender != null">
+        patGender,
+      </if>
+      <if test="patbirthdate != null">
+        patBirthDate,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="entity != null">
+        entity,
+      </if>
+      <if test="mainsuit != null">
+        mainSuit,
+      </if>
+      <if test="personalhis != null">
+        personalHis,
+      </if>
+      <if test="maritalhis != null">
+        maritalHis,
+      </if>
+      <if test="familyhis != null">
+        familyHis,
+      </if>
+      <if test="pastillnesshis != null">
+        pastIllnessHis,
+      </if>
+      <if test="presentillnesshis != null">
+        presentIllnessHis,
+      </if>
+      <if test="specialitycheck != null">
+        specialityCheck,
+      </if>
+      <if test="tentativediagnosis != null">
+        tentativeDiagnosis,
+      </if>
+      <if test="clinicdoc != null">
+        clinicDoc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="yibaoid != null">
+        #{yibaoid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null">
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="patgender != null">
+        #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="patbirthdate != null">
+        #{patbirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entity != null">
+        #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="mainsuit != null">
+        #{mainsuit,jdbcType=VARCHAR},
+      </if>
+      <if test="personalhis != null">
+        #{personalhis,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalhis != null">
+        #{maritalhis,jdbcType=VARCHAR},
+      </if>
+      <if test="familyhis != null">
+        #{familyhis,jdbcType=VARCHAR},
+      </if>
+      <if test="pastillnesshis != null">
+        #{pastillnesshis,jdbcType=VARCHAR},
+      </if>
+      <if test="presentillnesshis != null">
+        #{presentillnesshis,jdbcType=VARCHAR},
+      </if>
+      <if test="specialitycheck != null">
+        #{specialitycheck,jdbcType=VARCHAR},
+      </if>
+      <if test="tentativediagnosis != null">
+        #{tentativediagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicdoc != null">
+        #{clinicdoc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Clinic">
+    update clinic
+    <set>
+      <if test="yibaoid != null">
+        yiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null">
+        patName = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="patgender != null">
+        patGender = #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="patbirthdate != null">
+        patBirthDate = #{patbirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entity != null">
+        entity = #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="mainsuit != null">
+        mainSuit = #{mainsuit,jdbcType=VARCHAR},
+      </if>
+      <if test="personalhis != null">
+        personalHis = #{personalhis,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalhis != null">
+        maritalHis = #{maritalhis,jdbcType=VARCHAR},
+      </if>
+      <if test="familyhis != null">
+        familyHis = #{familyhis,jdbcType=VARCHAR},
+      </if>
+      <if test="pastillnesshis != null">
+        pastIllnessHis = #{pastillnesshis,jdbcType=VARCHAR},
+      </if>
+      <if test="presentillnesshis != null">
+        presentIllnessHis = #{presentillnesshis,jdbcType=VARCHAR},
+      </if>
+      <if test="specialitycheck != null">
+        specialityCheck = #{specialitycheck,jdbcType=VARCHAR},
+      </if>
+      <if test="tentativediagnosis != null">
+        tentativeDiagnosis = #{tentativediagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicdoc != null">
+        clinicDoc = #{clinicdoc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Clinic">
+    update clinic
+    set yiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      patName = #{patname,jdbcType=VARCHAR},
+      age = #{age,jdbcType=NUMERIC},
+      patGender = #{patgender,jdbcType=VARCHAR},
+      patBirthDate = #{patbirthdate,jdbcType=TIMESTAMP},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      entity = #{entity,jdbcType=VARCHAR},
+      mainSuit = #{mainsuit,jdbcType=VARCHAR},
+      personalHis = #{personalhis,jdbcType=VARCHAR},
+      maritalHis = #{maritalhis,jdbcType=VARCHAR},
+      familyHis = #{familyhis,jdbcType=VARCHAR},
+      pastIllnessHis = #{pastillnesshis,jdbcType=VARCHAR},
+      presentIllnessHis = #{presentillnesshis,jdbcType=VARCHAR},
+      specialityCheck = #{specialitycheck,jdbcType=VARCHAR},
+      tentativeDiagnosis = #{tentativediagnosis,jdbcType=VARCHAR}
+      clinicDoc = #{clinicdoc,jdbcType=VARCHAR}
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </update>
+</mapper>

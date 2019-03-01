@@ -1,0 +1,41 @@
+[
+  {"name":"基本信息", "children":[
+    {"id":"pat_type", "name":"病人类别", "target":"navtab", "url":"zlk_html/pat_type_list.html"},
+    {"id":"dept_info", "name":"科室信息", "target":"navtab", "url":"#"},
+    {"id":"dept_attr", "name":"科室属性", "target":"navtab", "url":"#"},
+    {"id":"checkRoom_info", "name":"检查室信息", "target":"navtab", "url":"#"},
+    {"id":"device_info", "name":"设备信息", "target":"navtab", "url":"#"},
+    {"id":"user_info", "name":"人员信息", "target":"navtab", "url":"#"},
+    {"id":"user_attr", "name":"人员属性", "target":"navtab", "url":"#"},
+    {"id":"pat_info", "name":"病人信息", "target":"navtab", "url":"#"},
+    {"id":"check_name", "name":"检查名称", "target":"navtab", "url":"#"},
+    {"id":"check_type", "name":"检查类型", "target":"navtab", "url":"#"},
+    {"id":"check_part", "name":"检查部位", "target":"navtab", "url":"#"},
+    {"id":"check_result", "name":"检查结果", "target":"navtab", "url":"#"}
+  ]},
+  {"name":"系统设置", "children":[
+    {"id":"user_group", "name":"用户组", "target":"navtab", "url":"#"},
+    {"id":"user_info", "name":"用户", "target":"navtab", "url":"#"},
+    {"id":"auth_set", "name":"权限设置", "target":"navtab", "url":"#"}
+  ]},
+  {"name":"检索报告", "children":[
+    {"id":"inner_search", "name":"本地", "target":"navtab", "url":"zlk_html/report_search_j.html"},
+    {"id":"remote_search", "name":"远程", "target":"navtab", "url":"zlk_html/remote_report_search_j.html"}
+  ]},
+  {"name":"预约登记", "children":[
+    {"id":"registerinfo", "name":"登记信息", "target":"navtab", "url":"zlk_html/register_info_j.html"},
+    {"id":"arrangedinfo", "name":"已安排信息", "target":"navtab", "url":"zlk_html/arranged_info_j.html"}
+  ]},
+  {"name":"查看预约","children":[
+    {"id":"arrangeOrder", "name":"查看预约", "target":"navtab", "url":"zlk_html/view_reservation_m.html"}
+
+  ]},
+  {"name":"书写报告","children":[
+    {"id":"hadChecked","name":"本地","target":"navtab","url":"zlk_html/report_hadchecked_m.html"},
+    {"id":"remote_wait_report","name":"远程","target":"navtab","url":"zlk_html/remote_wait_report.html"}
+  ]},
+  {"name":"查看报告","children":[
+    {"id":"hadWritted","name":"本地","target":"navtab","url":"zlk_html/report_hadWritted_m.html"},
+    {"id":"remote_writted_report","name":"远程","target":"navtab","url":"zlk_html/remote_writted_report.html"}
+  ]}
+]

@@ -1,0 +1,24 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '检查信息',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getCheckAbout',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th align="center" data-options="{name:'examClassCode',align:'center',width:100,menu:false}">检查类型代号</th>
+            <th align="center" data-options="{name:'examClassName',align:'center',width:100,menu:false}">检查名称</th>
+        </tr>
+        </thead>
+    </table>
+</div>

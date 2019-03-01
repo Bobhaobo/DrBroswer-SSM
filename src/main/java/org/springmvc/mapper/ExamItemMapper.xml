@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.ExamItemMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.ExamItem" >
+    <id column="ExamItemCode" property="examitemcode" jdbcType="VARCHAR" />
+    <result column="ExamItemName" property="examitemname" jdbcType="VARCHAR" />
+    <result column="InputName" property="inputname" jdbcType="VARCHAR" />
+    <result column="CheckNumber" property="checknumber" jdbcType="VARCHAR" />
+    <result column="IsAuto" property="isauto" jdbcType="BIT" />
+    <result column="Prefix" property="prefix" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ExamItemCode, ExamItemName, InputName, CheckNumber, IsAuto, Prefix
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from exam_item
+    where ExamItemCode = #{examitemcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from exam_item
+    where ExamItemCode = #{examitemcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.ExamItem" >
+    insert into exam_item (ExamItemCode, ExamItemName, InputName, 
+      CheckNumber, IsAuto, Prefix
+      )
+    values (#{examitemcode,jdbcType=VARCHAR}, #{examitemname,jdbcType=VARCHAR}, #{inputname,jdbcType=VARCHAR}, 
+      #{checknumber,jdbcType=VARCHAR}, #{isauto,jdbcType=BIT}, #{prefix,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.ExamItem" >
+    insert into exam_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examitemcode != null" >
+        ExamItemCode,
+      </if>
+      <if test="examitemname != null" >
+        ExamItemName,
+      </if>
+      <if test="inputname != null" >
+        InputName,
+      </if>
+      <if test="checknumber != null" >
+        CheckNumber,
+      </if>
+      <if test="isauto != null" >
+        IsAuto,
+      </if>
+      <if test="prefix != null" >
+        Prefix,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examitemcode != null" >
+        #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="inputname != null" >
+        #{inputname,jdbcType=VARCHAR},
+      </if>
+      <if test="checknumber != null" >
+        #{checknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isauto != null" >
+        #{isauto,jdbcType=BIT},
+      </if>
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.ExamItem" >
+    update exam_item
+    <set >
+      <if test="examitemname != null" >
+        ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="inputname != null" >
+        InputName = #{inputname,jdbcType=VARCHAR},
+      </if>
+      <if test="checknumber != null" >
+        CheckNumber = #{checknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isauto != null" >
+        IsAuto = #{isauto,jdbcType=BIT},
+      </if>
+      <if test="prefix != null" >
+        Prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ExamItemCode = #{examitemcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.ExamItem" >
+    update exam_item
+    set ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      InputName = #{inputname,jdbcType=VARCHAR},
+      CheckNumber = #{checknumber,jdbcType=VARCHAR},
+      IsAuto = #{isauto,jdbcType=BIT},
+      Prefix = #{prefix,jdbcType=VARCHAR}
+    where ExamItemCode = #{examitemcode,jdbcType=VARCHAR}
+  </update>
+  <select id="getExamNameByCode" resultType="java.lang.String">
+    select ExamItemName
+    from exam_item
+    where ExamItemCode = #{examitemcode,jdbcType=VARCHAR}
+  </select>
+  <select id="getExamCodeByName" resultType="java.lang.String">
+    select ExamItemCode
+    from exam_item
+    where ExamItemName = #{examitemname,jdbcType=VARCHAR}
+  </select>
+  <select id="getCheckItemForHos" resultType="org.springmvc.pojo.ExamItem">
+    select *
+    from exam_item
+    where 1=1
+  </select>
+</mapper>

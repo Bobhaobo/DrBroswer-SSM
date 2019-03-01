@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>区域远程医疗平台</title>
+	<link href="themes/css/login.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="zlk_js/login.js"></script>
+</head>
+
+<body>
+	<div id="login">
+		<div id="login_header">
+			<h1 class="login_logo">
+				<!--<a href="http://demo.dwzjs.com">-->
+				<img src="themes/default/images/login_logo.png" height="45px"/>
+			</h1>
+			<div class="login_headerContent">
+				<div class="navList">
+					<ul>
+						<li><a href="#">设为首页</a></li>
+						<li><a href="#">反馈</a></li>
+						<li><a href="#">帮助</a></li>
+					</ul>
+				</div>
+				<h2 class="login_title"><img src="themes/default/images/login_title.png" /></h2>
+			</div>
+		</div>
+		<div id="login_content">
+			<div class="error_space">
+				<span id="error_msg" style="color: #CC0000;position: relative; display: none">账户或者密码错误</span>
+			</div>
+			<div class="loginForm">
+				<form method="post" style="padding-left:25px;" id="login_form" onsubmit="return login_info()">
+					<p>
+						<label>用户名：</label>
+						<input type="text" id="username" name="username" size="20" class="login_input" />
+					</p>
+					<p>
+						<label>密码：</label>
+						<input type="password" id="password" name="password" size="20" class="login_input" />
+					</p>
+					<p>
+						<label>验证码：</label>
+						<img id="authcode_img" alt="点击更换" title="点击更换" width="75" height="24" />
+						<input type="text" id="authcode" name="authcode" size="20" class="code" />
+					</p>
+					<div class="login_bar">
+						<input class="sub" type="submit" value="" />
+					</div>
+				</form>
+			</div>
+			<div class="login_banner"><img src="themes/default/images/login_banner.jpg" /></div>
+			<div class="login_main">
+				<ul class="helpList">
+					<li><a href="#">忘记密码怎么办？</a></li>
+					<li><a href="#">为什么登录失败？</a></li>
+					<li><a href="#">下载看图软件</a></li>
+					<li><a href="#">如何安装看图软件？</a></li>
+				</ul>
+				<div class="login_inner">
+					<p>面向分级诊疗，医联体，医共体需求的全院级、区域级、智能云PACS.</p>
+					<p>“软读片”影像诊断必备产品系列，智能影像诊断先端技术产品系列.</p>
+					<p>计算机辅助治疗先端技术产品系列，面向未来的安全精准医疗产品.</p>
+				</div>
+			</div>
+		</div>
+		<div id="login_footer">
+			Copyright &copy; 2018 <a href="http://www5.zzu.edu.cn/zhilikang" target="_blank">知立康信息科技有限公司</a> Inc. All Rights Reserved.
+		</div>
+	</div>
+</body>
+</html>

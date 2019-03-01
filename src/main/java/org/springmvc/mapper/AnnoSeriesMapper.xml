@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AnnoSeriesMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.AnnoSeries" >
+    <id column="series_instance_uid" property="seriesInstanceUid" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="study_instance_uid" property="studyInstanceUid" jdbcType="VARCHAR" />
+    <result column="series_date" property="seriesDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    series_instance_uid, patient_id, study_instance_uid, series_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anno_series
+    where series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anno_series
+    where series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.AnnoSeries" >
+    insert into anno_series (series_instance_uid, patient_id, study_instance_uid, 
+      series_date)
+    values (#{seriesInstanceUid,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{studyInstanceUid,jdbcType=VARCHAR}, 
+      #{seriesDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.AnnoSeries" >
+    insert into anno_series
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seriesInstanceUid != null" >
+        series_instance_uid,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="studyInstanceUid != null" >
+        study_instance_uid,
+      </if>
+      <if test="seriesDate != null" >
+        series_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seriesInstanceUid != null" >
+        #{seriesInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="studyInstanceUid != null" >
+        #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesDate != null" >
+        #{seriesDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.AnnoSeries" >
+    update anno_series
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="studyInstanceUid != null" >
+        study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesDate != null" >
+        series_date = #{seriesDate,jdbcType=DATE},
+      </if>
+    </set>
+    where series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.AnnoSeries" >
+    update anno_series
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
+      series_date = #{seriesDate,jdbcType=DATE}
+    where series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springmvc.dao.RemoteRegisterMapper">
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.RemoteRegister">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="checknum" jdbcType="VARCHAR" property="checknum" />
+    <result column="tagpatientid" jdbcType="VARCHAR" property="tagpatientid" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="remotehos" jdbcType="VARCHAR" property="remotehos" />
+    <result column="regdate" jdbcType="TIMESTAMP" property="regdate" />
+    <result column="pattype" jdbcType="VARCHAR" property="pattype" />
+    <result column="modality" jdbcType="VARCHAR" property="modality" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="studydate" jdbcType="TIMESTAMP" property="studydate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, checknum, tagpatientid, idcard, flag, remotehos, regdate, pattype, modality, remarks,
+    studydate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from remote_register
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from remote_register
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.RemoteRegister">
+    insert into remote_register (id, checknum, tagpatientid,
+      idcard, flag, remotehos, 
+      regdate, pattype, modality, 
+      remarks, studydate)
+    values (#{id,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, #{tagpatientid,jdbcType=VARCHAR},
+      #{idcard,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{remotehos,jdbcType=VARCHAR}, 
+      #{regdate,jdbcType=TIMESTAMP}, #{pattype,jdbcType=VARCHAR}, #{modality,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{studydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.RemoteRegister">
+    insert into remote_register
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="checknum != null">
+        checknum,
+      </if>
+      <if test="tagpatientid != null">
+        tagpatientid,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="remotehos != null">
+        remotehos,
+      </if>
+      <if test="regdate != null">
+        regdate,
+      </if>
+      <if test="pattype != null">
+        pattype,
+      </if>
+      <if test="modality != null">
+        modality,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="studydate != null">
+        studydate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null">
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="tagpatientid != null">
+        #{tagpatientid,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="remotehos != null">
+        #{remotehos,jdbcType=VARCHAR},
+      </if>
+      <if test="regdate != null">
+        #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pattype != null">
+        #{pattype,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null">
+        #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="studydate != null">
+        #{studydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.RemoteRegister">
+    update remote_register
+    set checknum = #{checknum,jdbcType=VARCHAR},
+      tagpatientid = #{tagpatientid,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      remotehos = #{remotehos,jdbcType=VARCHAR},
+      regdate = #{regdate,jdbcType=TIMESTAMP},
+      pattype = #{pattype,jdbcType=VARCHAR},
+      modality = #{modality,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      studydate = #{studydate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.RemoteRegister">
+    update remote_register
+    <set>
+      <if test="checknum != null">
+        checknum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null">
+        tagpatientid = #{tagpatientid,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="remoteHos != null">
+        remotehos = #{remoteHos,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        regdate = #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patType != null">
+        pattype = #{patType,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null">
+        modality = #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getRemoteCheckNum" resultType="java.lang.String">
+    select max(checknum)
+    from remote_register
+    where modality = #{modality,jdbcType=VARCHAR}
+      and checknum like #{param}
+  </select>
+  <select id="getRemoteRegisterPageByFlag" resultType="org.springmvc.pojo.RemoteRegister">
+    select top ${pageSize} *
+    from remote_register
+    where
+      id not in (
+      select top ${currIndex} id
+      from remote_register
+      where flag = #{flag,jdbcType=VARCHAR}
+      order by regdate
+      )
+      and flag = #{flag,jdbcType=VARCHAR}
+    order by regdate desc
+  </select>
+  <select id="selcetByChecknum" resultType="org.springmvc.pojo.RemoteRegister">
+    select *
+    from remote_register
+    where checknum = #{checknum,jdbcType=VARCHAR}
+  </select>
+  <update id="updateFlagByChecknum">
+    update remote_register
+    set flag = #{flag,jdbcType=VARCHAR}
+    where checknum = #{checknum,jdbcType=VARCHAR}
+  </update>
+</mapper>

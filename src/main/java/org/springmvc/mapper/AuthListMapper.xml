@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AuthListMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.AuthList" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="authName" property="authName" jdbcType="VARCHAR" />
+    <result column="authCode" property="authCode" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="pre_menu" property="pre_menu" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="authObject" property="authObject" jdbcType="VARCHAR" />
+    <result column="html_id" property="html_id" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, authName, authCode, remarks, pre_menu,url, authObject, html_id
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  select
+  <include refid="Base_Column_List" />
+  from auth_list
+  where id = #{id,jdbcType=VARCHAR}
+</select>
+
+
+  <select id="selectAllAuthCode"  resultType="java.lang.String" >
+    select authCode
+    from auth_list
+    where 1=1
+  </select>
+
+  <select id="selectNameByAuthCode"  resultType="java.lang.String" >
+    select authName
+    from auth_list
+    where authCode=#{authCode}
+  </select>
+
+  <select id="selectAuthNameByAuthCode1"  resultMap="BaseResultMap" parameterType="java.lang.String">
+       select authName
+       from auth_list
+       where authCode=#{authCode1}
+    </select>
+
+
+  <select id="selectAuthNameByCodeUser"  resultMap="BaseResultMap" parameterType="java.lang.String">
+       select authName
+       from auth_list
+       where authCode=#{authCode}
+    </select>
+
+  <!--<select id="selectNameByAuthCode1"  resultType="java.lang.String" >-->
+    <!--select authName-->
+    <!--from auth_list-->
+    <!--where authCode=#{authCode}-->
+  <!--</select>-->
+
+
+  <select id="selectByauthCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from auth_list
+    where authCode = #{authCode,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from auth_list
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.AuthList" >
+    insert into auth_list (id, authName, authCode,
+      remarks, pre_menu, url, authObject, html_id)
+    values (#{id,jdbcType=VARCHAR}, #{authName,jdbcType=VARCHAR}, #{authCode,jdbcType=VARCHAR},
+      #{remarks,jdbcType=VARCHAR},#{pre_menu,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR}, #{authObject,jdbcType=VARCHAR}, #{html_id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.AuthList" >
+    insert into auth_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authName != null" >
+        authName,
+      </if>
+      <if test="authCode != null" >
+        authCode,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="pre_menu != null" >
+        pre_menu,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="authObject != null" >
+        authObject,
+      </if>
+      <if test="html_id != null" >
+        html_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="authName != null" >
+        #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="pre_menu != null" >
+        #{pre_menu,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="authObject != null" >
+        #{authObject,jdbcType=VARCHAR},
+      </if>
+      <if test="html_id != null" >
+        #{html_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.AuthList" >
+    update auth_list
+    <set >
+      <if test="userId != null" >
+        authName = #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        authCode = #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="pre_menu != null" >
+        remarks = #{pre_menu,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        remarks = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="authObject != null" >
+        #{authObject,jdbcType=VARCHAR},
+      </if>
+      <if test="html_id != null" >
+        #{html_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.AuthList" >
+    update auth_list
+    set authName = #{authName,jdbcType=VARCHAR},
+      authCode = #{authCode,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      pre_menu = #{pre_menu,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      authObject = #{authObject,jdbcType=VARCHAR},
+      html_id = #{html_id,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

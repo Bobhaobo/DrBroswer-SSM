@@ -1,0 +1,110 @@
+<head>
+    <meta charset="utf-8">
+    <script src="zlk_js/info_board_j.js"></script>
+    <style>
+        .main {
+            postion: relative;
+            width: 1195px;
+            height: 640px;
+            overflow: hidden;
+        }
+        .search_report	{
+            margin: 0 0 0 30px;
+            float: left;
+            position: relative;
+            left: 5%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .search_report p {
+            margin: auto;
+            text-align: center;
+        }
+        .search_report img	{
+            margin: 20px 0 0 0;
+        }
+        .remote_diagnosis {
+            margin: 0 0 0 30px;
+            float: left;
+            position: relative;
+            left: 5%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .remote_diagnosis p {
+            margin: auto;
+            text-align: center;
+        }
+        .remote_diagnosis img	{
+            position: relative;
+            left: -7px;
+            margin: 10px 0 0 0;
+        }
+        .register_info {
+            margin: 0 0 0 30px;
+            float: left;
+            position: relative;
+            left: 3%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .register_info p {
+            margin: auto;
+            text-align: center;
+        }
+        .register_info img	{
+            margin: 10px 0 0 18px;
+
+        }
+        .arranged_info {
+            margin: 0 0 0 30px;
+            float: left;
+            position: relative;
+            left: 5%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .arranged_info p {
+            margin: auto;
+            text-align: center;
+        }
+        .arranged_info img	{
+            margin: 10px 0 0 18px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="main" >
+    <div class="report">
+        <fieldset>
+            <legend style="font-family:verdana;font-size:130%;color:orange;">检索报告</legend>
+            <div class="search_report" onclick="search_report();">
+                <p>本地</p>
+                <img src="images/info_board/local_report.png">
+            </div>
+            <div class="remote_diagnosis" onclick="remote_diagnosis();">
+                <p>远程</p>
+                <img src="images/info_board/remote_report.png">
+            </div>
+        </fieldset>
+    </div>
+    <div class="register"><!-- test -->
+        <fieldset>
+            <legend style="font-family:verdana;font-size:130%;color:orange;">预约登记</legend>
+            <div class="register_info" onclick="register_info();">
+                <p>登记信息</p>
+                <img src="images/info_board/register_info.png">
+            </div>
+            <div class="arranged_info" onclick="arranged_info();">
+                <p>已安排信息</p>
+                <img src="images/info_board/arranged_info.png">
+            </div>
+        </fieldset>
+    </div>
+</div>
+</body>

@@ -1,0 +1,25 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '设备信息',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getDeviceInfo',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'id',align:'center',width:170,menu:false}">设备代号</th>
+            <th rowspan="2" align="center" data-options="{name:'deviceName',align:'center',width:170,menu:false}">设备名称</th>
+            <th rowspan="2" align="center" data-options="{name:'deviceDscr',align:'center',width:170,menu:false}">设备描述</th>
+        </tr>
+        </thead>
+    </table>
+</div>

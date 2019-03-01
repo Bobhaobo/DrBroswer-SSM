@@ -1,0 +1,5 @@
+[
+  {"name":"用户管理", "children":[
+    {"id":"arrangeOrder", "name":"用户注册", "target":"navtab", "url":"zlk_html/user_register_s.html"}
+  ]}
+]

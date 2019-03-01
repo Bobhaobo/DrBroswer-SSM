@@ -1,0 +1,175 @@
+<script type="text/javascript" src="zlk_js/add_new_user.js"></script>
+<script type="text/javascript" src="zlk_js/add_new_user1.js"></script>
+<div class="bjui-pageContent">
+    <form action="baseInfo/addNewUser" class="datagrid-edit-form" data-toggle="validate" data-data-type="jsonp" >
+        <div style="width: 45%; float: left;">
+            <div class="bjui-row col-1">
+                <label class="row-label">用户账户</label>
+                <div class="row-input required">
+                    <input type="text" name="user_id" data-rule="required">
+                </div>
+                <label class="row-label">用户密码</label>
+                <div class="row-input required">
+                    <input type="password" name="user_pass" data-rule="required">
+                </div>
+                <label class="row-label">确认密码</label>
+                <div class="row-input required">
+                    <input type="password" name="user_pass_confirm" data-rule="required">
+                </div>
+                <label class="row-label">用户名</label>
+                <div class="row-input required">
+                    <input type="text" name="user_name" data-rule="required">
+                </div>
+                <label class="row-label">所属医院</label>
+                <div class="row-input required">
+                    <select name="user_hos" id="user_hos" data-toggle="selectpicker" data-rule="required" data-nextselect="#user_dept" data-refurl="register/loadApplyDept/{value}" data-emptytxt="-----请选择-----">
+                        <option value="">-----请选择-----</option>
+                    </select>
+                </div>
+                <label class="row-label">所属科室</label>
+                <div class="row-input required">
+                    <select name="user_dept" id="user_dept" data-toggle="selectpicker" data-rule="required" data-emptytxt="-----请选择-----">
+                        <option value="">-----请选择-----</option>
+                    </select>
+                </div>
+                <label class="row-label">用户权限</label>
+                <div class="row-input required">
+                    <select name="user_auth" id="user_auth" data-toggle="selectpicker" data-rule="required" data-width="130" multiple="multiple" >
+                        <option value="" selected="selected">-----请选择-----</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="width: 45%; margin-left: 8%; float: left;">
+            <label class="row-label"></label>
+            <div class="row-input">
+                <input type="checkbox" name="user_auth" id="user_auth_1" value="1" data-toggle="icheck" data-label="注册用户">
+            </div>
+            <label class="row-label"></label>
+            <div class="row-input">
+                <input type="checkbox" name="user_auth" id="user_auth_2" value="1" data-toggle="icheck" data-label="填写报告">
+            </div>
+            <label class="row-label"></label>
+            <div class="row-input">
+                <input type="checkbox" name="user_auth" id="user_auth_3" value="1" data-toggle="icheck" data-label="修改报告">
+            </div>
+            <label class="row-label"></label>
+            <div class="row-input">
+                <input type="checkbox" name="user_auth" id="user_auth_4" value="1" data-toggle="icheck" data-label="修改模板">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="button" class="btn-close" data-icon="close"  >取消</button></li>
+        <li><button type="submit" class="btn-close  btn-default" data-icon="save" >保存</button></li>
+        <!--<li><button type="submit" class="btn-default" data-icon="save" >保存</button></li>-->
+    </ul>
+</div>
+
+
+
+
+
+<!--&lt;!&ndash;<link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />&ndash;&gt;-->
+<!--&lt;!&ndash;<link rel="stylesheet" href="/bootstrap/css/bootstrap-select.min.css">&ndash;&gt;-->
+<!--&lt;!&ndash;<script type="text/javascript" src="/bootstrap/bootstrap.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script type="text/javascript" src="/bootstrap/bootstrap-select.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script type="text/javascript" src="zlk_js/add_new_user.js"></script>&ndash;&gt;-->
+<!--<script src="js/jquery-1.11.3.min.js"></script>-->
+<!--<script src="B-JUI/plugins/bootstrap.js"></script>-->
+<!--&lt;!&ndash;<script src="B-JUI/plugins/bootstrapSelect/bootstrap-select.js"></script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<script type="text/javascript" src="B-JUI/js/jquery-1.11.3.min.js"></script>&ndash;&gt;-->
+<!--<script type="text/javascript">-->
+    <!--$('document').ready(function(){-->
+        <!--//取得学校放入下拉框-->
+        <!--alert("@@@@@@@@@@@@");-->
+        <!--$.ajax({-->
+            <!--type: "post",-->
+            <!--url: "userRegister/loadUserRegHos",-->
+            <!--dataType: "Json",-->
+            <!--success: function (data) {-->
+                <!--alert(data);-->
+                <!--var obj = eval('(' + data + ')');-->
+                <!--for (var i=0;i<obj.length;i++){-->
+                    <!--var value = obj[i].value;-->
+                    <!--var label = obj[i].label;-->
+                    <!--var opt = '<option value="'+value+'"selected>'+label+'</option>';-->
+                    <!--$('#user_hos').append(opt);-->
+                <!--}-->
+            <!--},-->
+            <!--error: function (XMLHttpRequest, textStatus, errorThrown) {-->
+                <!--alert("ajax取学校信息出错-"+errorThrown);-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+<!--<div class="bjui-pageContent">-->
+    <!--<form action="baseInfo/addNewUser" class="datagrid-edit-form" data-toggle="validate" data-data-type="jsonp">-->
+        <!--<div style="width: 45%; float: left;">-->
+            <!--<div class="bjui-row col-1">-->
+                <!--<label class="row-label">用户账户</label>-->
+                <!--<div class="row-input required">-->
+                    <!--<input type="text" name="user_id" data-rule="required">-->
+                <!--</div>-->
+                <!--<label class="row-label">用户密码</label>-->
+                <!--<div class="row-input required">-->
+                    <!--<input type="password" name="user_pass" data-rule="required">-->
+                <!--</div>-->
+                <!--<label class="row-label">确认密码</label>-->
+                <!--<div class="row-input required">-->
+                    <!--<input type="password" name="user_pass_confirm" data-rule="required">-->
+                <!--</div>-->
+                <!--<label class="row-label">用户名</label>-->
+                <!--<div class="row-input required">-->
+                    <!--<input type="text" name="user_name" data-rule="required">-->
+                <!--</div>-->
+                <!--<label class="row-label">所属医院</label>-->
+                <!--<div class="row-input required">-->
+                    <!--<select name="user_hos" id="user_hos" data-toggle="selectpicker" data-rule="required" data-nextselect="#user_dept" data-refurl="register/loadApplyDept/{value}" data-emptytxt="-&#45;&#45;&#45;&#45;请选择-&#45;&#45;&#45;&#45;">-->
+                    <!--&lt;!&ndash;<select class="selectpicker" data-live-search="true">&ndash;&gt;-->
+                        <!--<option value="">-&#45;&#45;&#45;&#45;请选择-&#45;&#45;&#45;&#45;</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+
+                <!--<label class="row-label">所属科室</label>-->
+                <!--<div class="row-input required">-->
+                    <!--<select name="user_dept" id="user_dept" data-toggle="selectpicker" data-rule="required" data-emptytxt="-&#45;&#45;&#45;&#45;请选择-&#45;&#45;&#45;&#45;">-->
+                        <!--<option value="">-&#45;&#45;&#45;&#45;请选择-&#45;&#45;&#45;&#45;</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div style="width: 45%; margin-left: 8%; float: left;">-->
+            <!--<label class="row-label"></label>-->
+            <!--<div class="row-input">-->
+                <!--<input type="checkbox" name="user_auth" id="user_auth_1" value="1" data-toggle="icheck" data-label="注册用户">-->
+            <!--</div>-->
+            <!--<label class="row-label"></label>-->
+            <!--<div class="row-input">-->
+                <!--<input type="checkbox" name="user_auth" id="user_auth_2" value="1" data-toggle="icheck" data-label="填写报告">-->
+            <!--</div>-->
+            <!--<label class="row-label"></label>-->
+            <!--<div class="row-input">-->
+                <!--<input type="checkbox" name="user_auth" id="user_auth_3" value="1" data-toggle="icheck" data-label="修改报告">-->
+            <!--</div>-->
+            <!--<label class="row-label"></label>-->
+            <!--<div class="row-input">-->
+                <!--<input type="checkbox" name="user_auth" id="user_auth_4" value="1" data-toggle="icheck" data-label="修改模板">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+    <!--&lt;!&ndash;<script>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;&ndash;&gt;-->
+    <!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+<!--</div>-->
+<!--<div class="bjui-pageFooter">-->
+    <!--<ul>-->
+        <!--<li><button type="button" class="btn-close" data-icon="close">取消</button></li>-->
+        <!--<li><button type="submit" class="btn-default" data-icon="save">保存</button></li>-->
+    <!--</ul>-->
+<!--</div>-->

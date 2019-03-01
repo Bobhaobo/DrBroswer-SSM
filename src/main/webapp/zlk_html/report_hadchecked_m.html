@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    function checkReport_Operation(value,data) {
+        if(data.check_number == "没有数据！"){
+            var html = null;
+        }else{
+            var html = '<button type="button" class="btn-blue" onclick="dialog_report(\''+ data.checkNum + '\',\'' + data.patName + '\',\'' +data.patGender
+                + '\',\'' + data.patient_Age + '\',\'' + data.imagePath + '\',\'' + data.hosName+'\');">填写报告</button>';
+        }
+        return html;
+    }
+    function viewReport_Operation(value,data) {
+        if(data.check_number == "没有数据！"){
+            var html = null;
+        }else{
+            var html = '<a href="DrViewerBoot://' + data.imagePath + '">查看图像</button>';
+        }
+        return html;
+    }
+    function dialog_report(checkNum, patName, patGender, patAge, imagePath, hosName) {
+        var timenow = new Date().getTime();
+        BJUI.dialog({
+            id:'writeReport'+timenow,
+            width: 1220,
+            height: 900,
+            url: 'zlk_html/report_write_m.jsp?checknum=' + checkNum + "&patName=" + patName + "&patGender=" + patGender
+                + "&patAge=" + patAge + "&imagePath=" + imagePath + "&hosName=" + hosName,
+            title:'填写报告'
+        });
+    }
+</script>
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '患者信息',
+        showToolbar: false,
+        dataUrl: 'report/getHadCheckedList',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'checkNum',align:'center',width:170,menu:false}">检查号</th>
+            <th colspan="3" align="center">患者信息</th>
+            <th colspan="2" align="center">检查信息</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation}">查看详情</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:viewReport_Operation}">图像</th>
+        </tr>
+        <tr>
+            <th align="center" data-options="{name:'patName',align:'center',width:100,menu:false}">姓名</th>
+            <th align="center" data-options="{name:'patGender',align:'center',width:70,menu:false}">性别</th>
+            <th align="center" data-options="{name:'patient_Age',align:'center',width:50,menu:false}">年龄</th>
+            <th align="center" data-options="{name:'examItemName',align:'center',width:180,menu:false}">检查类型</th>
+            <th align="center" data-options="{name:'checkDate',align:'center',type:'date',pattern:'yyyy-MM-dd',render:function(value){return value?value.substr(0,10):value},width:200,menu:false}">检查日期</th>
+        </tr>
+        </thead>
+    </table>
+</div>

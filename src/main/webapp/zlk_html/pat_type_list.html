@@ -1,0 +1,24 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '患者来源',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getPatTypeInfo',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th align="center" data-options="{name:'id',align:'center',width:100,menu:false}">来源代码</th>
+            <th align="center" data-options="{name:'name',align:'center',width:70,menu:false}">来源名称</th>
+        </tr>
+        </thead>
+    </table>
+</div>

@@ -1,0 +1,131 @@
+<head>
+    <meta charset="utf-8">
+    <script src="zlk_js/info_board_m.js"></script>
+    <style>
+        .main {
+            postion: relative;
+            width: 1195px;
+            height: 700px;
+            overflow: hidden;
+        }
+        .checkOrder {
+            float: left;
+            position: relative;
+            left: 3%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .checkOrder p {
+            margin: auto;
+            text-align: center;
+        }
+        .checkOrder img	{
+            margin: 10px 0 0 0;
+        }
+
+        .local_waitforReport {
+            float: left;
+            position: relative;
+            left: 3%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .local_waitforReport p {
+            margin: auto;
+            text-align: center;
+        }
+        .local_waitforReport img	{
+            margin: 10px 0 0 0;
+        }
+        .remote_waitforReport {
+            float: left;
+            position: relative;
+            left: 3%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .remote_waitforReport p {
+            margin: auto;
+            text-align: center;
+        }
+        .remote_waitforReport img	{
+            margin: 10px 0 0 18px;
+
+        }
+        .local_hadwritedReport {
+            margin:0 0 0 40px;
+            float: left;
+            position: relative;
+            left: 3%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .local_hadwritedReport p {
+            margin: auto;
+            text-align: center;
+        }
+        .local_hadwritedReport img	{
+            margin: 10px 0 0 -15px;
+
+        }
+        .remote_hadwritedReport {
+            margin:0 0 0 40px;
+            float: left;
+            position: relative;
+            left: 3%;
+            width: 130px;
+            height: 170px;
+            cursor: pointer;
+        }
+        .remote_hadwritedReport p {
+            margin: auto;
+            text-align: center;
+        }
+        .remote_hadwritedReport img	{
+            margin: 10px 0 0 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="main" >
+    <div class="order">
+        <fieldset>
+            <legend style="font-family:verdana;font-size:130%;color:orange;">预约</legend>
+            <div class="checkOrder" onclick="openOrder();">
+                <p>查看预约</p>
+                <img src="images/info_board/check_order.png">
+            </div>
+        </fieldset>
+    </div>
+    <div class="report">
+        <fieldset>
+            <legend style="font-family:verdana;font-size:130%;color:orange;">书写报告</legend>
+            <div class="local_waitforReport" onclick="local_waitforReport();">
+                <p>本地</p>
+                <img src="images/info_board/daixiebg.png">
+            </div>
+            <div class="remote_waitforReport" onclick="remote_waitforReport();">
+                <p>远程</p>
+                <img src="images/info_board/ultrasound_report.png">
+            </div>
+        </fieldset>
+    </div>
+    <div class="had_report">
+        <fieldset>
+            <legend style="font-family:verdana;font-size:130%;color:orange;">查看报告</legend>
+            <div class="local_hadwritedReport" onclick="local_hadwritedReport();">
+                <p>本地</p>
+                <img src="images/info_board/yixiebg.png">
+            </div>
+            <div class="remote_hadwritedReport" onclick="remote_hadwritedReport();">
+                <p>远程</p>
+                <img src="images/info_board/ultrasound_had_report.png">
+            </div>
+        </fieldset>
+    </div>
+</div>
+</body>

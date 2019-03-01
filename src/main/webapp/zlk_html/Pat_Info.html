@@ -1,0 +1,34 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '患者信息',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getPatInfo',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+        <!--editMode: {dialog:{width:'630',height:'330',title:'新增用户信息',mask:'true'}},-->
+        <!--editUrl: 'zlk_html/add_new_user.html'-->
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'idcard',align:'center',width:170,menu:false}">身份证号</th>
+            <th rowspan="2" align="center" data-options="{name:'patname',align:'center',width:170,menu:false}">姓名</th>
+            <th rowspan="2" align="center" data-options="{name:'patgender',align:'center',width:170,menu:false}">性别</th>
+            <th rowspan="2" align="center" data-options="{name:'patbrithdate',align:'center',width:170,menu:false}">出生日期</th>
+            <th rowspan="2" align="center" data-options="{name:'address',align:'center',width:170,menu:false}">家庭住址</th>
+            <th rowspan="2" align="center" data-options="{name:'yibaoid',align:'center',width:170,menu:false}">医保号</th>
+            <th rowspan="2" align="center" data-options="{name:'telephone',align:'center',width:170,menu:false}">联系电话</th>
+            <th rowspan="2" align="center" data-options="{name:'age',align:'center',width:170,menu:false}">年龄</th>
+            <th rowspan="2" align="center" data-options="{name:'regtime',align:'center',width:170,menu:false}">登记时间</th>
+            <th rowspan="2" align="center" data-options="{name:'updatetime',align:'center',width:170,menu:false}">更新时间</th>
+        </tr>
+        </thead>
+    </table>
+</div>

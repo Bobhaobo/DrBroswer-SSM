@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.PatientMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Patient" >
+    <id column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="patName" property="patname" jdbcType="VARCHAR" />
+    <result column="patNamePy" property="patnamepy" jdbcType="VARCHAR" />
+    <result column="patGender" property="patgender" jdbcType="VARCHAR" />
+    <result column="patBrithDate" property="patbrithdate" jdbcType="TIMESTAMP" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="yiBaoID" property="yibaoid" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="NUMERIC" />
+    <result column="ageType" property="agetype" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    idcard, patName, patNamePy, patGender, patBrithDate, address, yiBaoID, telephone, 
+    age, ageType, regtime, updatetime
+  </sql>
+
+  <select id="selectAll" resultType="org.springmvc.pojo.Patient" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pat_list
+    where 1=1
+  </select>
+
+
+  <select id="selectCount" resultType="java.lang.Integer" >
+    select count(*)
+    from pat_list
+  </select>
+
+  <select id="selectByPrimaryKey" resultType="org.springmvc.pojo.Patient" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pat_list
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectByPrimaryKey1" resultType="org.springmvc.pojo.Patient" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pat_list
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pat_list
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Patient" >
+    insert into pat_list (idcard, patName, patNamePy, 
+      patGender, patBrithDate, address, 
+      yiBaoID, telephone, age, 
+      ageType, regtime, updatetime)
+    values (#{idcard,jdbcType=VARCHAR}, #{patname,jdbcType=VARCHAR}, #{patnamepy,jdbcType=VARCHAR}, 
+      #{patgender,jdbcType=VARCHAR}, #{patbrithdate,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, 
+      #{yibaoid,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{age,jdbcType=NUMERIC}, 
+      #{agetype,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Patient" >
+    insert into pat_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="patname != null" >
+        patName,
+      </if>
+      <if test="patnamepy != null" >
+        patNamePy,
+      </if>
+      <if test="patgender != null" >
+        patGender,
+      </if>
+      <if test="patbrithdate != null" >
+        patBrithDate,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="yibaoid != null" >
+        yiBaoID,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="agetype != null" >
+        ageType,
+      </if>
+      <if test="regtime != null">
+        regtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null" >
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patnamepy != null" >
+        #{patnamepy,jdbcType=VARCHAR},
+      </if>
+      <if test="patgender != null" >
+        #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="patbrithdate != null" >
+        #{patbrithdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="yibaoid != null" >
+        #{yibaoid,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="agetype != null" >
+        #{agetype,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null">
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Patient" >
+    update pat_list
+    <set >
+      <if test="patname != null" >
+        patName = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patnamepy != null" >
+        patNamePy = #{patnamepy,jdbcType=VARCHAR},
+      </if>
+      <if test="patgender != null" >
+        patGender = #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="patbrithdate != null" >
+        patBrithDate = #{patbrithdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="yibaoid != null" >
+        yiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="agetype != null" >
+        ageType = #{agetype,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null">
+        regtime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Patient" >
+    update pat_list
+    set patName = #{patname,jdbcType=VARCHAR},
+      patNamePy = #{patnamepy,jdbcType=VARCHAR},
+      patGender = #{patgender,jdbcType=VARCHAR},
+      patBrithDate = #{patbrithdate,jdbcType=TIMESTAMP},
+      address = #{address,jdbcType=VARCHAR},
+      yiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      age = #{age,jdbcType=NUMERIC},
+      ageType = #{agetype,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </update>
+</mapper>

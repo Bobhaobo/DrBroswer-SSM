@@ -1,0 +1,75 @@
+#content {
+   /* Overwrite #content bottom in site.css , for footer toolbar */
+   bottom: 42px;
+}
+
+#mainContainer {
+   max-width: 100%;
+   max-height: 100%;
+}
+
+.headerToolbarDiv {
+   overflow: auto !important;
+   white-space: nowrap;
+}
+
+
+/* <!-- lt.Annotations.JavaScript Styles --> */
+
+.nav-tabs {
+   overflow-x: auto;
+   overflow-y: hidden;
+   list-style-type: none !important;
+   margin: 0 !important;
+   padding: 0 !important;
+   display: -webkit-box;
+   display: -ms-flexbox;
+}
+
+   .nav-tabs > li {
+      float: none !important;
+      display: table-cell !important;
+   }
+
+      .nav-tabs > li > a {
+         display: block !important;
+      }
+
+.tab-pane {
+   top: 3px;
+   overflow: auto;
+   white-space: nowrap;
+}
+
+button {
+   color: #4D5F82 !important;
+}
+
+   button:disabled {
+      opacity: 0.25 !important;
+   }
+
+a {
+   color: #4D5F82 !important;
+}
+
+.collapse-expand {
+   border: none;
+   text-align: center;
+   background-repeat: no-repeat;
+   background-position-y: center;
+   background-color: transparent;
+   width: 100%;
+   border: 1px solid;
+   border-radius: 0px;
+   border-color: silver;
+   padding: inherit;
+}
+
+.toggleToExpand {
+   background-image: url(../../../Resources/Images/Icons/Expand.png);
+}
+
+.toggleToCollapse {
+   background-image: url(../../../Resources/Images/Icons/Collapse.png);
+}

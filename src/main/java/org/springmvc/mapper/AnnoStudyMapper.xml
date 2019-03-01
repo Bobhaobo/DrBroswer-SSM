@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AnnoStudyMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.AnnoStudy" >
+    <id column="study_instance_uid" property="studyInstanceUid" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="modality" property="modality" jdbcType="VARCHAR" />
+    <result column="study_date" property="studyDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    study_instance_uid, patient_id, modality, study_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anno_study
+    where study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anno_study
+    where study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.AnnoStudy" >
+    insert into anno_study (study_instance_uid, patient_id, modality, 
+      study_date)
+    values (#{studyInstanceUid,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{modality,jdbcType=VARCHAR}, 
+      #{studyDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.AnnoStudy" >
+    insert into anno_study
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studyInstanceUid != null" >
+        study_instance_uid,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="modality != null" >
+        modality,
+      </if>
+      <if test="studyDate != null" >
+        study_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studyInstanceUid != null" >
+        #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null" >
+        #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="studyDate != null" >
+        #{studyDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.AnnoStudy" >
+    update anno_study
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null" >
+        modality = #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="studyDate != null" >
+        study_date = #{studyDate,jdbcType=DATE},
+      </if>
+    </set>
+    where study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.AnnoStudy" >
+    update anno_study
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      modality = #{modality,jdbcType=VARCHAR},
+      study_date = #{studyDate,jdbcType=DATE}
+    where study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR}
+  </update>
+</mapper>

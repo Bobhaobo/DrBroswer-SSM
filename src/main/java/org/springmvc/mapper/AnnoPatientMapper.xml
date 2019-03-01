@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AnnoPatientMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.AnnoPatient" >
+    <id column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="patient_name" property="patientName" jdbcType="VARCHAR" />
+    <result column="patient_birth" property="patientBirth" jdbcType="DATE" />
+    <result column="patient_sex" property="patientSex" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    patient_id, patient_name, patient_birth, patient_sex
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anno_patient
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anno_patient
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.AnnoPatient" >
+    insert into anno_patient (patient_id, patient_name, patient_birth, 
+      patient_sex)
+    values (#{patientId,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, #{patientBirth,jdbcType=DATE}, 
+      #{patientSex,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.AnnoPatient" >
+    insert into anno_patient
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="patientName != null" >
+        patient_name,
+      </if>
+      <if test="patientBirth != null" >
+        patient_birth,
+      </if>
+      <if test="patientSex != null" >
+        patient_sex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientName != null" >
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientBirth != null" >
+        #{patientBirth,jdbcType=DATE},
+      </if>
+      <if test="patientSex != null" >
+        #{patientSex,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.AnnoPatient" >
+    update anno_patient
+    <set >
+      <if test="patientName != null" >
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientBirth != null" >
+        patient_birth = #{patientBirth,jdbcType=DATE},
+      </if>
+      <if test="patientSex != null" >
+        patient_sex = #{patientSex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.AnnoPatient" >
+    update anno_patient
+    set patient_name = #{patientName,jdbcType=VARCHAR},
+      patient_birth = #{patientBirth,jdbcType=DATE},
+      patient_sex = #{patientSex,jdbcType=VARCHAR}
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </update>
+</mapper>

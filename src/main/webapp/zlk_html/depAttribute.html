@@ -1,0 +1,24 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '科室属性',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getDepAttribute',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'id',align:'center',width:170,menu:false}">属性代码</th>
+            <th rowspan="2" align="center" data-options="{name:'name',align:'center',width:170,menu:false}">属性名称</th>
+        </tr>
+        </thead>
+    </table>
+</div>

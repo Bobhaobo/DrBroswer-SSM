@@ -1,0 +1,134 @@
+<head>
+    <meta charset="utf-8">
+    <style>
+        .mf-background {
+            background: url("images/info_board/400072433_banner_meitu_1.jpg") no-repeat fixed center;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+    <script>
+        $(function(){
+            $.ajax({
+                type:"post",
+                url:"userAuth/getUserAuthCode",
+                dataType: "html",
+                async:false,
+                success:function(data){
+                     // alert(data);
+                    var obj=eval("("+data+")");
+                    document.getElementById("hide").value=obj;
+                    var auth=document.getElementById("hide").value;
+                    // alert(auth);
+                }
+            });
+        });
+        function open_register() {
+            var auth=document.getElementById("hide").value;
+            // alert(auth);
+            var strs=auth.split(",");
+            for(var i=0;i<strs.length;i++)
+            {
+                var j=strs[i];
+                // alert(j);
+                if(j==18)
+                {
+                    // alert("####");
+                    break;
+                }else{
+                    // alert("$$$");
+                    if(i==strs.length-1){
+                        if(j!=18)
+                            // alert("^^^");
+                        return;
+                    }else{
+                        // alert("%%%");
+                        continue;
+                    }
+                }
+            }
+            BJUI.navtab({
+                id:'registerinfo',
+                url:'zlk_html/register_info_j.html',
+                title:'登记信息'
+            })
+        };
+        function open_report() {
+            var auth=document.getElementById("hide").value;
+            // alert(auth);
+            var strs=auth.split(",");
+            for(var i=0;i<strs.length;i++)
+            {
+                var j=strs[i];
+                // alert(j);
+                if(j==21)
+                {
+                    // alert("####");
+                    break;
+                }else{
+                    // alert("$$$");
+                    if(i==strs.length-1){
+                        if(j!=21)
+                            // alert("^^^");
+                        return;
+                    }else{
+                        // alert("%%%");
+                        continue;
+                    }
+                }
+            }
+            BJUI.navtab({
+                id:'inner_search',
+                url:'zlk_html/report_search_j.html',
+                title:'本地检索'
+            })
+        };
+        function open_wait_write() {
+            var auth=document.getElementById("hide").value;
+            // alert(auth);
+            var strs=auth.split(",");
+            for(var i=0;i<strs.length;i++)
+            {
+                var j=strs[i];
+                // alert(j);
+                if(j==17)
+                {
+                    // alert("####");
+                    break;
+                }else{
+                    // alert("$$$");
+                    if(i==strs.length-1){
+                        if(j!=17)
+                            // alert("^^^");
+                            return;
+                    }else{
+                        // alert("%%%");
+                    continue;
+                    }
+                }
+            }
+            BJUI.navtab({
+                id:'hadChecked',
+                url:'zlk_html/report_hadchecked_m.html',
+                title:'本地书写'
+            })
+        };
+    </script>
+</head>
+<body>
+    <div class="mf-background" >
+        <div class="register_" style="padding-left: 150px;">
+            <img src="images/info_board/main_board.png" style="height:800px;" usemap="#url_map">
+            <map name="url_map">
+                <area shape="rect" coords="433,40,610,195" alt="登记" onclick="open_register()" style="cursor: pointer;">
+                <area shape="rect" coords="222,620,399,774" alt="诊断" onclick="open_wait_write()" style="cursor: pointer;">
+                <area shape="rect" coords="643,622,817,774" alt="报告" onclick="open_report()" style="cursor: pointer;">
+            </map>
+            <input type="hidden" id="hide" name="hide" size="20" class="code" />
+        </div>
+    </div>
+</body>

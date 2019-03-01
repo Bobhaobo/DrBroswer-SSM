@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.ExamMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Exam" >
+    <id column="exam_class_code" property="examClassCode" jdbcType="VARCHAR" />
+    <result column="exam_class_name" property="examClassName" jdbcType="VARCHAR" />
+    <result column="people_system_code" property="peopleSystemCode" jdbcType="VARCHAR" />
+    <result column="exam_part_code" property="examPartCode" jdbcType="VARCHAR" />
+    <result column="exam_item_code" property="examItemCode" jdbcType="VARCHAR" />
+    <result column="patient_source_code" property="patientSourceCode" jdbcType="TINYINT" />
+    <result column="consume_num" property="consumeNum" jdbcType="TINYINT" />
+    <result column="input_code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="exam_item_cost" property="examItemCost" jdbcType="NUMERIC" />
+    <result column="consume_code" property="consumeCode" jdbcType="INTEGER" />
+    <result column="exam_class_way" property="examClassWay" jdbcType="VARCHAR" />
+    <result column="expose_time" property="exposeTime" jdbcType="INTEGER" />
+    <result column="other_consume" property="otherConsume" jdbcType="VARCHAR" />
+    <result column="room_code" property="roomCode" jdbcType="VARCHAR" />
+    <result column="asc_code" property="ascCode" jdbcType="VARCHAR" />
+    <result column="OtherPay" property="otherpay" jdbcType="NUMERIC" />
+    <result column="asc_code1" property="ascCode1" jdbcType="VARCHAR" />
+    <result column="asc_code2" property="ascCode2" jdbcType="VARCHAR" />
+    <result column="asc_code3" property="ascCode3" jdbcType="VARCHAR" />
+    <result column="asc_code4" property="ascCode4" jdbcType="VARCHAR" />
+    <result column="exam_item_cost1" property="examItemCost1" jdbcType="NUMERIC" />
+    <result column="exam_item_cost2" property="examItemCost2" jdbcType="NUMERIC" />
+    <result column="exam_item_cost3" property="examItemCost3" jdbcType="NUMERIC" />
+    <result column="exam_item_cost4" property="examItemCost4" jdbcType="NUMERIC" />
+    <result column="exam_item_cost5" property="examItemCost5" jdbcType="NUMERIC" />
+    <result column="exam_item_cost6" property="examItemCost6" jdbcType="NUMERIC" />
+    <result column="exam_item_cost7" property="examItemCost7" jdbcType="NUMERIC" />
+    <result column="exam_item_cost8" property="examItemCost8" jdbcType="NUMERIC" />
+    <result column="exam_item_cost9" property="examItemCost9" jdbcType="NUMERIC" />
+    <result column="OtherPay1" property="otherpay1" jdbcType="NUMERIC" />
+    <result column="OtherPay2" property="otherpay2" jdbcType="NUMERIC" />
+    <result column="OtherPay3" property="otherpay3" jdbcType="NUMERIC" />
+    <result column="OtherPay4" property="otherpay4" jdbcType="NUMERIC" />
+    <result column="OtherPay5" property="otherpay5" jdbcType="NUMERIC" />
+    <result column="OtherPay6" property="otherpay6" jdbcType="NUMERIC" />
+    <result column="OtherPay7" property="otherpay7" jdbcType="NUMERIC" />
+    <result column="OtherPay8" property="otherpay8" jdbcType="NUMERIC" />
+    <result column="OtherPay9" property="otherpay9" jdbcType="NUMERIC" />
+    <result column="examGroupCode" property="examgroupcode" jdbcType="VARCHAR" />
+    <result column="examgroupName" property="examgroupname" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    exam_class_code, exam_class_name, people_system_code, exam_part_code, exam_item_code,
+    patient_source_code, consume_num, input_code, exam_item_cost, consume_code, exam_class_way,
+    expose_time, other_consume, room_code, asc_code, OtherPay, asc_code1, asc_code2,
+    asc_code3, asc_code4, exam_item_cost1, exam_item_cost2, exam_item_cost3, exam_item_cost4,
+    exam_item_cost5, exam_item_cost6, exam_item_cost7, exam_item_cost8, exam_item_cost9,
+    OtherPay1, OtherPay2, OtherPay3, OtherPay4, OtherPay5, OtherPay6, OtherPay7, OtherPay8,
+    OtherPay9, examGroupCode, examgroupName
+  </sql>
+
+
+  <sql id="Base_Column_List1" >
+    exam_class_code, exam_class_name
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List1" />
+    from exam_class_dict
+    where 1=1
+  </select>
+
+
+  <select id="selectCount" resultType="java.lang.Integer">
+       select count(*) from  exam_class_dict
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from exam_class_dict
+    where exam_class_code = #{examClassCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from exam_class_dict
+    where exam_class_code = #{examClassCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Exam" >
+    insert into exam_class_dict (exam_class_code, exam_class_name, people_system_code,
+      exam_part_code, exam_item_code, patient_source_code,
+      consume_num, input_code, exam_item_cost,
+      consume_code, exam_class_way, expose_time,
+      other_consume, room_code, asc_code,
+      OtherPay, asc_code1, asc_code2,
+      asc_code3, asc_code4, exam_item_cost1,
+      exam_item_cost2, exam_item_cost3, exam_item_cost4,
+      exam_item_cost5, exam_item_cost6, exam_item_cost7,
+      exam_item_cost8, exam_item_cost9, OtherPay1,
+      OtherPay2, OtherPay3, OtherPay4,
+      OtherPay5, OtherPay6, OtherPay7,
+      OtherPay8, OtherPay9, examGroupCode,
+      examgroupName)
+    values (#{examClassCode,jdbcType=VARCHAR}, #{examClassName,jdbcType=VARCHAR}, #{peopleSystemCode,jdbcType=VARCHAR},
+      #{examPartCode,jdbcType=VARCHAR}, #{examItemCode,jdbcType=VARCHAR}, #{patientSourceCode,jdbcType=TINYINT},
+      #{consumeNum,jdbcType=TINYINT}, #{inputCode,jdbcType=VARCHAR}, #{examItemCost,jdbcType=NUMERIC},
+      #{consumeCode,jdbcType=INTEGER}, #{examClassWay,jdbcType=VARCHAR}, #{exposeTime,jdbcType=INTEGER},
+      #{otherConsume,jdbcType=VARCHAR}, #{roomCode,jdbcType=VARCHAR}, #{ascCode,jdbcType=VARCHAR},
+      #{otherpay,jdbcType=NUMERIC}, #{ascCode1,jdbcType=VARCHAR}, #{ascCode2,jdbcType=VARCHAR},
+      #{ascCode3,jdbcType=VARCHAR}, #{ascCode4,jdbcType=VARCHAR}, #{examItemCost1,jdbcType=NUMERIC},
+      #{examItemCost2,jdbcType=NUMERIC}, #{examItemCost3,jdbcType=NUMERIC}, #{examItemCost4,jdbcType=NUMERIC},
+      #{examItemCost5,jdbcType=NUMERIC}, #{examItemCost6,jdbcType=NUMERIC}, #{examItemCost7,jdbcType=NUMERIC},
+      #{examItemCost8,jdbcType=NUMERIC}, #{examItemCost9,jdbcType=NUMERIC}, #{otherpay1,jdbcType=NUMERIC},
+      #{otherpay2,jdbcType=NUMERIC}, #{otherpay3,jdbcType=NUMERIC}, #{otherpay4,jdbcType=NUMERIC},
+      #{otherpay5,jdbcType=NUMERIC}, #{otherpay6,jdbcType=NUMERIC}, #{otherpay7,jdbcType=NUMERIC},
+      #{otherpay8,jdbcType=NUMERIC}, #{otherpay9,jdbcType=NUMERIC}, #{examgroupcode,jdbcType=VARCHAR},
+      #{examgroupname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Exam" >
+    insert into exam_class_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examClassCode != null" >
+        exam_class_code,
+      </if>
+      <if test="examClassName != null" >
+        exam_class_name,
+      </if>
+      <if test="peopleSystemCode != null" >
+        people_system_code,
+      </if>
+      <if test="examPartCode != null" >
+        exam_part_code,
+      </if>
+      <if test="examItemCode != null" >
+        exam_item_code,
+      </if>
+      <if test="patientSourceCode != null" >
+        patient_source_code,
+      </if>
+      <if test="consumeNum != null" >
+        consume_num,
+      </if>
+      <if test="inputCode != null" >
+        input_code,
+      </if>
+      <if test="examItemCost != null" >
+        exam_item_cost,
+      </if>
+      <if test="consumeCode != null" >
+        consume_code,
+      </if>
+      <if test="examClassWay != null" >
+        exam_class_way,
+      </if>
+      <if test="exposeTime != null" >
+        expose_time,
+      </if>
+      <if test="otherConsume != null" >
+        other_consume,
+      </if>
+      <if test="roomCode != null" >
+        room_code,
+      </if>
+      <if test="ascCode != null" >
+        asc_code,
+      </if>
+      <if test="otherpay != null" >
+        OtherPay,
+      </if>
+      <if test="ascCode1 != null" >
+        asc_code1,
+      </if>
+      <if test="ascCode2 != null" >
+        asc_code2,
+      </if>
+      <if test="ascCode3 != null" >
+        asc_code3,
+      </if>
+      <if test="ascCode4 != null" >
+        asc_code4,
+      </if>
+      <if test="examItemCost1 != null" >
+        exam_item_cost1,
+      </if>
+      <if test="examItemCost2 != null" >
+        exam_item_cost2,
+      </if>
+      <if test="examItemCost3 != null" >
+        exam_item_cost3,
+      </if>
+      <if test="examItemCost4 != null" >
+        exam_item_cost4,
+      </if>
+      <if test="examItemCost5 != null" >
+        exam_item_cost5,
+      </if>
+      <if test="examItemCost6 != null" >
+        exam_item_cost6,
+      </if>
+      <if test="examItemCost7 != null" >
+        exam_item_cost7,
+      </if>
+      <if test="examItemCost8 != null" >
+        exam_item_cost8,
+      </if>
+      <if test="examItemCost9 != null" >
+        exam_item_cost9,
+      </if>
+      <if test="otherpay1 != null" >
+        OtherPay1,
+      </if>
+      <if test="otherpay2 != null" >
+        OtherPay2,
+      </if>
+      <if test="otherpay3 != null" >
+        OtherPay3,
+      </if>
+      <if test="otherpay4 != null" >
+        OtherPay4,
+      </if>
+      <if test="otherpay5 != null" >
+        OtherPay5,
+      </if>
+      <if test="otherpay6 != null" >
+        OtherPay6,
+      </if>
+      <if test="otherpay7 != null" >
+        OtherPay7,
+      </if>
+      <if test="otherpay8 != null" >
+        OtherPay8,
+      </if>
+      <if test="otherpay9 != null" >
+        OtherPay9,
+      </if>
+      <if test="examgroupcode != null" >
+        examGroupCode,
+      </if>
+      <if test="examgroupname != null" >
+        examgroupName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examClassCode != null" >
+        #{examClassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examClassName != null" >
+        #{examClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleSystemCode != null" >
+        #{peopleSystemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examPartCode != null" >
+        #{examPartCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCode != null" >
+        #{examItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSourceCode != null" >
+        #{patientSourceCode,jdbcType=TINYINT},
+      </if>
+      <if test="consumeNum != null" >
+        #{consumeNum,jdbcType=TINYINT},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCost != null" >
+        #{examItemCost,jdbcType=NUMERIC},
+      </if>
+      <if test="consumeCode != null" >
+        #{consumeCode,jdbcType=INTEGER},
+      </if>
+      <if test="examClassWay != null" >
+        #{examClassWay,jdbcType=VARCHAR},
+      </if>
+      <if test="exposeTime != null" >
+        #{exposeTime,jdbcType=INTEGER},
+      </if>
+      <if test="otherConsume != null" >
+        #{otherConsume,jdbcType=VARCHAR},
+      </if>
+      <if test="roomCode != null" >
+        #{roomCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode != null" >
+        #{ascCode,jdbcType=VARCHAR},
+      </if>
+      <if test="otherpay != null" >
+        #{otherpay,jdbcType=NUMERIC},
+      </if>
+      <if test="ascCode1 != null" >
+        #{ascCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode2 != null" >
+        #{ascCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode3 != null" >
+        #{ascCode3,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode4 != null" >
+        #{ascCode4,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCost1 != null" >
+        #{examItemCost1,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost2 != null" >
+        #{examItemCost2,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost3 != null" >
+        #{examItemCost3,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost4 != null" >
+        #{examItemCost4,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost5 != null" >
+        #{examItemCost5,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost6 != null" >
+        #{examItemCost6,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost7 != null" >
+        #{examItemCost7,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost8 != null" >
+        #{examItemCost8,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost9 != null" >
+        #{examItemCost9,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay1 != null" >
+        #{otherpay1,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay2 != null" >
+        #{otherpay2,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay3 != null" >
+        #{otherpay3,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay4 != null" >
+        #{otherpay4,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay5 != null" >
+        #{otherpay5,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay6 != null" >
+        #{otherpay6,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay7 != null" >
+        #{otherpay7,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay8 != null" >
+        #{otherpay8,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay9 != null" >
+        #{otherpay9,jdbcType=NUMERIC},
+      </if>
+      <if test="examgroupcode != null" >
+        #{examgroupcode,jdbcType=VARCHAR},
+      </if>
+      <if test="examgroupname != null" >
+        #{examgroupname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Exam" >
+    update exam_class_dict
+    <set >
+      <if test="examClassName != null" >
+        exam_class_name = #{examClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleSystemCode != null" >
+        people_system_code = #{peopleSystemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examPartCode != null" >
+        exam_part_code = #{examPartCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCode != null" >
+        exam_item_code = #{examItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSourceCode != null" >
+        patient_source_code = #{patientSourceCode,jdbcType=TINYINT},
+      </if>
+      <if test="consumeNum != null" >
+        consume_num = #{consumeNum,jdbcType=TINYINT},
+      </if>
+      <if test="inputCode != null" >
+        input_code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCost != null" >
+        exam_item_cost = #{examItemCost,jdbcType=NUMERIC},
+      </if>
+      <if test="consumeCode != null" >
+        consume_code = #{consumeCode,jdbcType=INTEGER},
+      </if>
+      <if test="examClassWay != null" >
+        exam_class_way = #{examClassWay,jdbcType=VARCHAR},
+      </if>
+      <if test="exposeTime != null" >
+        expose_time = #{exposeTime,jdbcType=INTEGER},
+      </if>
+      <if test="otherConsume != null" >
+        other_consume = #{otherConsume,jdbcType=VARCHAR},
+      </if>
+      <if test="roomCode != null" >
+        room_code = #{roomCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode != null" >
+        asc_code = #{ascCode,jdbcType=VARCHAR},
+      </if>
+      <if test="otherpay != null" >
+        OtherPay = #{otherpay,jdbcType=NUMERIC},
+      </if>
+      <if test="ascCode1 != null" >
+        asc_code1 = #{ascCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode2 != null" >
+        asc_code2 = #{ascCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode3 != null" >
+        asc_code3 = #{ascCode3,jdbcType=VARCHAR},
+      </if>
+      <if test="ascCode4 != null" >
+        asc_code4 = #{ascCode4,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCost1 != null" >
+        exam_item_cost1 = #{examItemCost1,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost2 != null" >
+        exam_item_cost2 = #{examItemCost2,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost3 != null" >
+        exam_item_cost3 = #{examItemCost3,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost4 != null" >
+        exam_item_cost4 = #{examItemCost4,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost5 != null" >
+        exam_item_cost5 = #{examItemCost5,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost6 != null" >
+        exam_item_cost6 = #{examItemCost6,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost7 != null" >
+        exam_item_cost7 = #{examItemCost7,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost8 != null" >
+        exam_item_cost8 = #{examItemCost8,jdbcType=NUMERIC},
+      </if>
+      <if test="examItemCost9 != null" >
+        exam_item_cost9 = #{examItemCost9,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay1 != null" >
+        OtherPay1 = #{otherpay1,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay2 != null" >
+        OtherPay2 = #{otherpay2,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay3 != null" >
+        OtherPay3 = #{otherpay3,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay4 != null" >
+        OtherPay4 = #{otherpay4,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay5 != null" >
+        OtherPay5 = #{otherpay5,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay6 != null" >
+        OtherPay6 = #{otherpay6,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay7 != null" >
+        OtherPay7 = #{otherpay7,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay8 != null" >
+        OtherPay8 = #{otherpay8,jdbcType=NUMERIC},
+      </if>
+      <if test="otherpay9 != null" >
+        OtherPay9 = #{otherpay9,jdbcType=NUMERIC},
+      </if>
+      <if test="examgroupcode != null" >
+        examGroupCode = #{examgroupcode,jdbcType=VARCHAR},
+      </if>
+      <if test="examgroupname != null" >
+        examgroupName = #{examgroupname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where exam_class_code = #{examClassCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Exam" >
+    update exam_class_dict
+    set exam_class_name = #{examClassName,jdbcType=VARCHAR},
+      people_system_code = #{peopleSystemCode,jdbcType=VARCHAR},
+      exam_part_code = #{examPartCode,jdbcType=VARCHAR},
+      exam_item_code = #{examItemCode,jdbcType=VARCHAR},
+      patient_source_code = #{patientSourceCode,jdbcType=TINYINT},
+      consume_num = #{consumeNum,jdbcType=TINYINT},
+      input_code = #{inputCode,jdbcType=VARCHAR},
+      exam_item_cost = #{examItemCost,jdbcType=NUMERIC},
+      consume_code = #{consumeCode,jdbcType=INTEGER},
+      exam_class_way = #{examClassWay,jdbcType=VARCHAR},
+      expose_time = #{exposeTime,jdbcType=INTEGER},
+      other_consume = #{otherConsume,jdbcType=VARCHAR},
+      room_code = #{roomCode,jdbcType=VARCHAR},
+      asc_code = #{ascCode,jdbcType=VARCHAR},
+      OtherPay = #{otherpay,jdbcType=NUMERIC},
+      asc_code1 = #{ascCode1,jdbcType=VARCHAR},
+      asc_code2 = #{ascCode2,jdbcType=VARCHAR},
+      asc_code3 = #{ascCode3,jdbcType=VARCHAR},
+      asc_code4 = #{ascCode4,jdbcType=VARCHAR},
+      exam_item_cost1 = #{examItemCost1,jdbcType=NUMERIC},
+      exam_item_cost2 = #{examItemCost2,jdbcType=NUMERIC},
+      exam_item_cost3 = #{examItemCost3,jdbcType=NUMERIC},
+      exam_item_cost4 = #{examItemCost4,jdbcType=NUMERIC},
+      exam_item_cost5 = #{examItemCost5,jdbcType=NUMERIC},
+      exam_item_cost6 = #{examItemCost6,jdbcType=NUMERIC},
+      exam_item_cost7 = #{examItemCost7,jdbcType=NUMERIC},
+      exam_item_cost8 = #{examItemCost8,jdbcType=NUMERIC},
+      exam_item_cost9 = #{examItemCost9,jdbcType=NUMERIC},
+      OtherPay1 = #{otherpay1,jdbcType=NUMERIC},
+      OtherPay2 = #{otherpay2,jdbcType=NUMERIC},
+      OtherPay3 = #{otherpay3,jdbcType=NUMERIC},
+      OtherPay4 = #{otherpay4,jdbcType=NUMERIC},
+      OtherPay5 = #{otherpay5,jdbcType=NUMERIC},
+      OtherPay6 = #{otherpay6,jdbcType=NUMERIC},
+      OtherPay7 = #{otherpay7,jdbcType=NUMERIC},
+      OtherPay8 = #{otherpay8,jdbcType=NUMERIC},
+      OtherPay9 = #{otherpay9,jdbcType=NUMERIC},
+      examGroupCode = #{examgroupcode,jdbcType=VARCHAR},
+      examgroupName = #{examgroupname,jdbcType=VARCHAR}
+    where exam_class_code = #{examClassCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

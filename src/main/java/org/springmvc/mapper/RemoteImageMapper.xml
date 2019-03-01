@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.RemoteImageMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.RemoteImage" >
+    <id column="AccessionN" property="accessionn" jdbcType="VARCHAR" />
+    <result column="PatientID" property="patientid" jdbcType="VARCHAR" />
+    <result column="StartDate" property="startdate" jdbcType="CHAR" />
+    <result column="OrderSource" property="ordersource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AccessionN, PatientID, StartDate, OrderSource
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from remote_image
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from remote_image
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.RemoteImage" >
+    insert into remote_image (AccessionN, PatientID, StartDate, 
+      OrderSource)
+    values (#{accessionn,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, #{startdate,jdbcType=CHAR}, 
+      #{ordersource,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.RemoteImage" >
+    insert into remote_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accessionn != null" >
+        AccessionN,
+      </if>
+      <if test="patientid != null" >
+        PatientID,
+      </if>
+      <if test="startdate != null" >
+        StartDate,
+      </if>
+      <if test="ordersource != null" >
+        OrderSource,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accessionn != null" >
+        #{accessionn,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=CHAR},
+      </if>
+      <if test="ordersource != null" >
+        #{ordersource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.RemoteImage" >
+    update remote_image
+    <set >
+      <if test="patientid != null" >
+        PatientID = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        StartDate = #{startdate,jdbcType=CHAR},
+      </if>
+      <if test="ordersource != null" >
+        OrderSource = #{ordersource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.RemoteImage" >
+    update remote_image
+    set PatientID = #{patientid,jdbcType=VARCHAR},
+      StartDate = #{startdate,jdbcType=CHAR},
+      OrderSource = #{ordersource,jdbcType=VARCHAR}
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </update>
+</mapper>

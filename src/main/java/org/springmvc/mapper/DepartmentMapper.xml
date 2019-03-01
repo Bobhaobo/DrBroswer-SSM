@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Department" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="deptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="hosID" property="hosid" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, deptName, hosID, remarks
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from dept_list
+    where 1=1
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer"  >
+    select count(*)
+    from dept_list
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dept_list
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dept_list
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Department" >
+    insert into dept_list (id, deptName, hosID, 
+      remarks)
+    values (#{id,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, #{hosid,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Department" >
+    insert into dept_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deptname != null" >
+        deptName,
+      </if>
+      <if test="hosid != null" >
+        hosID,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="hosid != null" >
+        #{hosid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Department" >
+    update dept_list
+    <set >
+      <if test="deptname != null" >
+        deptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="hosid != null" >
+        hosID = #{hosid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Department" >
+    update dept_list
+    set deptName = #{deptname,jdbcType=VARCHAR},
+      hosID = #{hosid,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getHosIdbyDeptid" resultType="java.lang.String">
+    select hosid
+    from dept_list
+    where id=#{id,jdbcType=VARCHAR}
+  </select>
+  <select id="getDeptNamebyDeptid" resultType="java.lang.String">
+    select deptName
+    from dept_list
+    where id=#{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByHosid" resultType="org.springmvc.pojo.Department">
+    select *
+    from dept_list
+    where hosID = #{hosid,jdbcType=VARCHAR}
+  </select>
+</mapper>

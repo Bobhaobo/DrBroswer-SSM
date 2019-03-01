@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.HospitalMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Hospital" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="hosName" property="hosName" jdbcType="VARCHAR" />
+    <result column="hosLevel" property="hosLevel" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="hosCode" property="hosCode" jdbcType="VARCHAR" />
+    <result column="hosAddress" property="hosAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hosName, hosLevel, remarks,hosCode,hosAddress
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hos_list
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectCount" resultType="java.lang.Integer" >
+    select count(*)
+    from hos_list
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from hos_list
+    where 1=1
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hos_list
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Hospital" >
+    insert into hos_list (id, hosName, hosLevel, 
+      remarks)
+    values (#{id,jdbcType=VARCHAR}, #{hosname,jdbcType=VARCHAR}, #{hoslevel,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Hospital" >
+    insert into hos_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hosname != null" >
+        hosName,
+      </if>
+      <if test="hoslevel != null" >
+        hosLevel,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="hosname != null" >
+        #{hosname,jdbcType=VARCHAR},
+      </if>
+      <if test="hoslevel != null" >
+        #{hoslevel,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Hospital" >
+    update hos_list
+    <set >
+      <if test="hosname != null" >
+        hosName = #{hosname,jdbcType=VARCHAR},
+      </if>
+      <if test="hoslevel != null" >
+        hosLevel = #{hoslevel,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Hospital" >
+    update hos_list
+    set hosName = #{hosname,jdbcType=VARCHAR},
+      hosLevel = #{hoslevel,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getHosLevelbyHosid" resultType="java.lang.String">
+    select hoslevel
+    from hos_list
+    where id=#{id,jdbcType=VARCHAR}
+  </select>
+  <select id="getHosNameByHosId" resultType="java.lang.String">
+    select hosName
+    from hos_list
+    where id = #{id}
+  </select>
+  <select id="selectAllHosId" resultType="java.lang.String">
+    select id
+    from hos_list
+    where 1=1
+  </select>
+</mapper>

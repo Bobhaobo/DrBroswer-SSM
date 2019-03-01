@@ -1,0 +1,27 @@
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '医疗机构',
+        showToolbar: false,
+        dataUrl: 'baseInfo/getHosInfo',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'id',align:'center',width:170,menu:false}">id</th>
+            <th rowspan="2" align="center" data-options="{name:'hosName',align:'center',width:170,menu:false}">医疗机构名称</th>
+            <th rowspan="2" align="center" data-options="{name:'hosLevel',align:'center',width:170,menu:false}">医疗机构等级</th>
+            <th rowspan="2" align="center" data-options="{name:'hosCode',align:'center',width:170,menu:false}">医疗机构代号</th>
+            <th rowspan="2" align="center" data-options="{name:'hosAddress',align:'center',width:170,menu:false}">医疗机构地址</th>
+        </tr>
+        </thead>
+    </table>
+</div>

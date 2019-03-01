@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.ReportMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Report" >
+    <id column="ReportCode" property="reportcode" jdbcType="VARCHAR" />
+    <result column="RecordID" property="recordid" jdbcType="VARCHAR" />
+    <result column="CheckNum" property="checknum" jdbcType="VARCHAR" />
+    <result column="ClinicID" property="clinicid" jdbcType="VARCHAR" />
+    <result column="PatientID" property="patientid" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="BedNo" property="bedno" jdbcType="VARCHAR" />
+    <result column="ReportTime" property="reporttime" jdbcType="TIMESTAMP" />
+    <result column="Flag" property="flag" jdbcType="VARCHAR" />
+    <result column="ExamDesc" property="examdesc" jdbcType="VARCHAR" />
+    <result column="ExamDiagnosis" property="examdiagnosis" jdbcType="VARCHAR" />
+    <result column="DocCode" property="doccode" jdbcType="VARCHAR" />
+    <result column="ExamItemCode" property="examitemcode" jdbcType="VARCHAR" />
+    <result column="ExamItemName" property="examitemname" jdbcType="VARCHAR" />
+    <result column="PatTypeCode" property="pattypecode" jdbcType="INTEGER" />
+    <result column="DeptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="DeptID" property="deptid" jdbcType="VARCHAR" />
+    <result column="IfUsingFlag" property="ifusingflag" jdbcType="BIT" />
+    <result column="report_image_path" property="reportImagePath" jdbcType="VARCHAR" />
+    <result column="cardno" property="cardno" jdbcType="VARCHAR" />
+    <result column="jcbw" property="jcbw" jdbcType="VARCHAR" />
+    <result column="sfyangxing" property="sfyangxing" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ReportCode, RecordID, CheckNum, ClinicID, PatientID, idcard, BedNo, ReportTime, Flag, 
+    ExamDesc, ExamDiagnosis, DocCode, ExamItemCode, ExamItemName, PatTypeCode, DeptName, 
+    DeptID, IfUsingFlag, report_image_path, cardno, jcbw, sfyangxing
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where ReportCode = #{reportcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from report
+    where ReportCode = #{reportcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Report" >
+    insert into report (ReportCode, RecordID, CheckNum, 
+      ClinicID, PatientID, idcard, 
+      BedNo, ReportTime, Flag, 
+      ExamDesc, ExamDiagnosis, DocCode, 
+      ExamItemCode, ExamItemName, PatTypeCode, 
+      DeptName, DeptID, IfUsingFlag, 
+      report_image_path, cardno, jcbw, 
+      sfyangxing)
+    values (#{reportcode,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, 
+      #{clinicid,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{bedno,jdbcType=VARCHAR}, #{reporttime,jdbcType=TIMESTAMP}, #{flag,jdbcType=VARCHAR}, 
+      #{examdesc,jdbcType=VARCHAR}, #{examdiagnosis,jdbcType=VARCHAR}, #{doccode,jdbcType=VARCHAR}, 
+      #{examitemcode,jdbcType=VARCHAR}, #{examitemname,jdbcType=VARCHAR}, #{pattypecode,jdbcType=INTEGER}, 
+      #{deptname,jdbcType=VARCHAR}, #{deptid,jdbcType=VARCHAR}, #{ifusingflag,jdbcType=BIT}, 
+      #{reportImagePath,jdbcType=VARCHAR}, #{cardno,jdbcType=VARCHAR}, #{jcbw,jdbcType=VARCHAR}, 
+      #{sfyangxing,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Report" >
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportcode != null" >
+        ReportCode,
+      </if>
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="checknum != null" >
+        CheckNum,
+      </if>
+      <if test="clinicid != null" >
+        ClinicID,
+      </if>
+      <if test="patientid != null" >
+        PatientID,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="bedno != null" >
+        BedNo,
+      </if>
+      <if test="reporttime != null" >
+        ReportTime,
+      </if>
+      <if test="flag != null" >
+        Flag,
+      </if>
+      <if test="examdesc != null" >
+        ExamDesc,
+      </if>
+      <if test="examdiagnosis != null" >
+        ExamDiagnosis,
+      </if>
+      <if test="doccode != null" >
+        DocCode,
+      </if>
+      <if test="examitemcode != null" >
+        ExamItemCode,
+      </if>
+      <if test="examitemname != null" >
+        ExamItemName,
+      </if>
+      <if test="pattypecode != null" >
+        PatTypeCode,
+      </if>
+      <if test="deptname != null" >
+        DeptName,
+      </if>
+      <if test="deptid != null" >
+        DeptID,
+      </if>
+      <if test="ifusingflag != null" >
+        IfUsingFlag,
+      </if>
+      <if test="reportImagePath != null" >
+        report_image_path,
+      </if>
+      <if test="cardno != null" >
+        cardno,
+      </if>
+      <if test="jcbw != null" >
+        jcbw,
+      </if>
+      <if test="sfyangxing != null" >
+        sfyangxing,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportcode != null" >
+        #{reportcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null" >
+        #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicid != null" >
+        #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="examdesc != null" >
+        #{examdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="examdiagnosis != null" >
+        #{examdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="doccode != null" >
+        #{doccode,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="pattypecode != null" >
+        #{pattypecode,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="ifusingflag != null" >
+        #{ifusingflag,jdbcType=BIT},
+      </if>
+      <if test="reportImagePath != null" >
+        #{reportImagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null" >
+        #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyangxing != null" >
+        #{sfyangxing,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Report" >
+    update report
+    <set >
+      <if test="recordid != null" >
+        RecordID = #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        CheckNum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicid != null" >
+        ClinicID = #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        PatientID = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        BedNo = #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        ReportTime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        Flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="examdesc != null" >
+        ExamDesc = #{examdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="examdiagnosis != null" >
+        ExamDiagnosis = #{examdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="doccode != null" >
+        DocCode = #{doccode,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        ExamItemCode = #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="pattypecode != null" >
+        PatTypeCode = #{pattypecode,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        DeptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null" >
+        DeptID = #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="ifusingflag != null" >
+        IfUsingFlag = #{ifusingflag,jdbcType=BIT},
+      </if>
+      <if test="reportImagePath != null" >
+        report_image_path = #{reportImagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        cardno = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null" >
+        jcbw = #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyangxing != null" >
+        sfyangxing = #{sfyangxing,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ReportCode = #{reportcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Report" >
+    update report
+    set RecordID = #{recordid,jdbcType=VARCHAR},
+      CheckNum = #{checknum,jdbcType=VARCHAR},
+      ClinicID = #{clinicid,jdbcType=VARCHAR},
+      PatientID = #{patientid,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      BedNo = #{bedno,jdbcType=VARCHAR},
+      ReportTime = #{reporttime,jdbcType=TIMESTAMP},
+      Flag = #{flag,jdbcType=VARCHAR},
+      ExamDesc = #{examdesc,jdbcType=VARCHAR},
+      ExamDiagnosis = #{examdiagnosis,jdbcType=VARCHAR},
+      DocCode = #{doccode,jdbcType=VARCHAR},
+      ExamItemCode = #{examitemcode,jdbcType=VARCHAR},
+      ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      PatTypeCode = #{pattypecode,jdbcType=INTEGER},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      DeptID = #{deptid,jdbcType=VARCHAR},
+      IfUsingFlag = #{ifusingflag,jdbcType=BIT},
+      report_image_path = #{reportImagePath,jdbcType=VARCHAR},
+      cardno = #{cardno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      sfyangxing = #{sfyangxing,jdbcType=VARCHAR}
+    where ReportCode = #{reportcode,jdbcType=VARCHAR}
+  </update>
+  <select id="getReportCode" resultType="java.lang.String">
+    select max(ReportCode)
+    from report
+    where ReportCode like #{param}
+  </select>
+
+  <select id="selectByCheckNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List" />
+    from report
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+</mapper>

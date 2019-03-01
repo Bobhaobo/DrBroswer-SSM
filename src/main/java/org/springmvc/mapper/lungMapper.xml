@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.lungMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.lung" >
+    <id column="patientid" property="patientid" jdbcType="VARCHAR" />
+    <result column="patName" property="patname" jdbcType="VARCHAR" />
+    <result column="patGender" property="patgender" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="NUMERIC" />
+    <result column="examDoc" property="examdoc" jdbcType="VARCHAR" />
+    <result column="imageClass" property="imageclass" jdbcType="VARCHAR" />
+    <result column="checkPart" property="checkpart" jdbcType="VARCHAR" />
+    <result column="scanMethod" property="scanmethod" jdbcType="VARCHAR" />
+    <result column="scanWay" property="scanway" jdbcType="VARCHAR" />
+    <result column="clinicdiagnosis" property="clinicdiagnosis" jdbcType="VARCHAR" />
+    <result column="checkDate" property="checkdate" jdbcType="TIMESTAMP" />
+    <result column="reportDate" property="reportdate" jdbcType="TIMESTAMP" />
+    <result column="imageView" property="imageview" jdbcType="VARCHAR" />
+    <result column="imageSuggestion" property="imagesuggestion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    patientid, patName, patGender, age, examDoc, imageClass, checkPart, scanMethod, scanWay, 
+    clinicdiagnosis, checkDate, reportDate, imageView, imageSuggestion
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lung_check
+    where patientid = #{patientid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLungbyPatid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lung_check
+    where patientid = #{patientid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from lung_check
+    where patientid = #{patientid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.lung" >
+    insert into lung_check (patientid, patName, patGender, 
+      age, examDoc, imageClass, 
+      checkPart, scanMethod, scanWay, 
+      clinicdiagnosis, checkDate, reportDate, 
+      imageView, imageSuggestion)
+    values (#{patientid,jdbcType=VARCHAR}, #{patname,jdbcType=VARCHAR}, #{patgender,jdbcType=VARCHAR}, 
+      #{age,jdbcType=NUMERIC}, #{examdoc,jdbcType=VARCHAR}, #{imageclass,jdbcType=VARCHAR}, 
+      #{checkpart,jdbcType=VARCHAR}, #{scanmethod,jdbcType=VARCHAR}, #{scanway,jdbcType=VARCHAR}, 
+      #{clinicdiagnosis,jdbcType=VARCHAR}, #{checkdate,jdbcType=TIMESTAMP}, #{reportdate,jdbcType=TIMESTAMP}, 
+      #{imageview,jdbcType=VARCHAR}, #{imagesuggestion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.lung" >
+    insert into lung_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientid != null" >
+        patientid,
+      </if>
+      <if test="patname != null" >
+        patName,
+      </if>
+      <if test="patgender != null" >
+        patGender,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="examdoc != null" >
+        examDoc,
+      </if>
+      <if test="imageclass != null" >
+        imageClass,
+      </if>
+      <if test="checkpart != null" >
+        checkPart,
+      </if>
+      <if test="scanmethod != null" >
+        scanMethod,
+      </if>
+      <if test="scanway != null" >
+        scanWay,
+      </if>
+      <if test="clinicdiagnosis != null" >
+        clinicdiagnosis,
+      </if>
+      <if test="checkdate != null" >
+        checkDate,
+      </if>
+      <if test="reportdate != null" >
+        reportDate,
+      </if>
+      <if test="imageview != null" >
+        imageView,
+      </if>
+      <if test="imagesuggestion != null" >
+        imageSuggestion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null" >
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patgender != null" >
+        #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="examdoc != null" >
+        #{examdoc,jdbcType=VARCHAR},
+      </if>
+      <if test="imageclass != null" >
+        #{imageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="checkpart != null" >
+        #{checkpart,jdbcType=VARCHAR},
+      </if>
+      <if test="scanmethod != null" >
+        #{scanmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="scanway != null" >
+        #{scanway,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicdiagnosis != null" >
+        #{clinicdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdate != null" >
+        #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportdate != null" >
+        #{reportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageview != null" >
+        #{imageview,jdbcType=VARCHAR},
+      </if>
+      <if test="imagesuggestion != null" >
+        #{imagesuggestion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.lung" >
+    update lung_check
+    <set >
+      <if test="patname != null" >
+        patName = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patgender != null" >
+        patGender = #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="examdoc != null" >
+        examDoc = #{examdoc,jdbcType=VARCHAR},
+      </if>
+      <if test="imageclass != null" >
+        imageClass = #{imageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="checkpart != null" >
+        checkPart = #{checkpart,jdbcType=VARCHAR},
+      </if>
+      <if test="scanmethod != null" >
+        scanMethod = #{scanmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="scanway != null" >
+        scanWay = #{scanway,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicdiagnosis != null" >
+        clinicdiagnosis = #{clinicdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdate != null" >
+        checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportdate != null" >
+        reportDate = #{reportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageview != null" >
+        imageView = #{imageview,jdbcType=VARCHAR},
+      </if>
+      <if test="imagesuggestion != null" >
+        imageSuggestion = #{imagesuggestion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where patientid = #{patientid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.lung" >
+    update lung_check
+    set patName = #{patname,jdbcType=VARCHAR},
+      patGender = #{patgender,jdbcType=VARCHAR},
+      age = #{age,jdbcType=NUMERIC},
+      examDoc = #{examdoc,jdbcType=VARCHAR},
+      imageClass = #{imageclass,jdbcType=VARCHAR},
+      checkPart = #{checkpart,jdbcType=VARCHAR},
+      scanMethod = #{scanmethod,jdbcType=VARCHAR},
+      scanWay = #{scanway,jdbcType=VARCHAR},
+      clinicdiagnosis = #{clinicdiagnosis,jdbcType=VARCHAR},
+      checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      reportDate = #{reportdate,jdbcType=TIMESTAMP},
+      imageView = #{imageview,jdbcType=VARCHAR},
+      imageSuggestion = #{imagesuggestion,jdbcType=VARCHAR}
+    where patientid = #{patientid,jdbcType=VARCHAR}
+  </update>
+</mapper>

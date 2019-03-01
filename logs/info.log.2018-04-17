@@ -1,0 +1,31 @@
+2018-04-17 15:27:49  [ main:150 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-17 15:27:49  [ main:182 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5034c75a, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@396a51ab, org.springframework.test.context.support.DirtiesContextTestExecutionListener@51081592, org.springframework.test.context.transaction.TransactionalTestExecutionListener@7f9a81e8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@9629756]
+2018-04-17 15:27:49  [ main:329 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-17 15:27:50  [ main:753 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@2f686d1f: startup date [Tue Apr 17 15:27:50 CST 2018]; root of context hierarchy
+2018-04-17 15:27:50  [ main:965 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-17 15:27:51  [ main:1682 ] - [ ERROR ]  login error info：Could not find result map org.springmvc.pojo.User
+login user: D00001
+2018-04-17 15:27:51  [ Thread-0:1692 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@2f686d1f: startup date [Tue Apr 17 15:27:50 CST 2018]; root of context hierarchy
+2018-04-17 15:33:31  [ main:40 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-17 15:33:31  [ main:60 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@50c87b21, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5f375618, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1810399e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@32d992b2, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@215be6bb]
+2018-04-17 15:33:32  [ main:170 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-17 15:33:32  [ main:400 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@3abbfa04: startup date [Tue Apr 17 15:33:32 CST 2018]; root of context hierarchy
+2018-04-17 15:33:32  [ main:550 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-17 15:33:34  [ main:2183 ] - [ INFO ]  Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2018-04-17 15:33:34  [ main:2214 ] - [ INFO ]  SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2018-04-17 15:33:34  [ main:2223 ] - [ ERROR ]  login error info：
+### Error querying database.  Cause: com.microsoft.sqlserver.jdbc.SQLServerException: 列名 'dept' 无效。
+### The error may exist in file [F:\IdeaProjects\DrBroswer\target\classes\org\springmvc\mapper\UserMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: select       username, password, id, name, dept, type           from identify     where username=? and password=?
+### Cause: com.microsoft.sqlserver.jdbc.SQLServerException: 列名 'dept' 无效。
+; bad SQL grammar []; nested exception is com.microsoft.sqlserver.jdbc.SQLServerException: 列名 'dept' 无效。>>>>>>login user: D00001
+2018-04-17 15:33:34  [ Thread-0:2233 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@3abbfa04: startup date [Tue Apr 17 15:33:32 CST 2018]; root of context hierarchy
+2018-04-17 15:36:34  [ main:47 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-04-17 15:36:34  [ main:57 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@50c87b21, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5f375618, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1810399e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@32d992b2, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@215be6bb]
+2018-04-17 15:36:34  [ main:157 ] - [ INFO ]  Loading XML bean definitions from class path resource [Spring-MyBatis.xml]
+2018-04-17 15:36:34  [ main:343 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@3abbfa04: startup date [Tue Apr 17 15:36:34 CST 2018]; root of context hierarchy
+2018-04-17 15:36:35  [ main:541 ] - [ INFO ]  Loading properties file from class path resource [jdbc.properties]
+2018-04-17 15:36:36  [ main:1782 ] - [ INFO ]  user:D00001login this system
+2018-04-17 15:36:36  [ Thread-0:1782 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@3abbfa04: startup date [Tue Apr 17 15:36:34 CST 2018]; root of context hierarchy

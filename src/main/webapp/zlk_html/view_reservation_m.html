@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    function OrderList_Operation(value,data) {
+        if(data.check_number == "没有数据！"){
+            var html = null;
+        }else{
+            var html = '<button type="button" class="btn-blue" onclick="dialog_report(\''+data.check_number+'\');">安排检查</button>';
+        }
+        return html;
+    }
+    function dialog_report(check_number) {
+        BJUI.dialog({
+            id:'arrangehtml_check_number-'+check_number,
+            width: 830,
+            height: 700,
+            url: 'zlk_html/arrange_reservation_m.jsp?checknum=' + check_number,
+            title:'安排检查'
+        });
+    }
+</script>
+<div class="bjui-pageContent">
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '预约信息',
+        showToolbar: false,
+        dataUrl: 'arrange/loadReservation',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'check_number',align:'center',width:170,menu:false}">检查号</th>
+            <th colspan="3" align="center">患者信息</th>
+            <th colspan="3" align="center">预约信息</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:130,menu:false,render:OrderList_Operation}">安排检查时间</th>
+        </tr>
+        <tr>
+            <th align="center" data-options="{name:'patient_Name',align:'center',width:120,menu:false}">姓名</th>
+            <th align="center" data-options="{name:'patient_Sex',align:'center',width:80,menu:false}">性别</th>
+            <th align="center" data-options="{name:'patient_Age',align:'center',width:80,menu:false}">年龄</th>
+            <th align="center" data-options="{name:'orderSource',align:'center',width:180,menu:false}">申请医院</th>
+            <th align="center" data-options="{name:'register_Date',align:'center',type:'date',pattern:'yyyy-MM-dd HH:mm',render:function(value){return value?value.substr(0,16):value},width:200,menu:false}">登记时间</th>
+            <th align="center" data-options="{name:'order_Date',align:'center',type:'date',pattern:'yyyy-MM-dd HH:mm',render:function(value){return value?value.substr(0,16):value},width:200,menu:false}">预约时间</th>
+        </tr>
+        </thead>
+    </table>
+</div>

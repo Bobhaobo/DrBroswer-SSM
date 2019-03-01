@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AnnoInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.AnnoInfo" >
+    <id column="anno_id" property="annoId" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="study_instance_uid" property="studyInstanceUid" jdbcType="VARCHAR" />
+    <result column="series_instance_uid" property="seriesInstanceUid" jdbcType="VARCHAR" />
+    <result column="sop_instance_uid" property="sopInstanceUid" jdbcType="VARCHAR" />
+    <result column="x1_left" property="x1Left" jdbcType="DOUBLE" />
+    <result column="y1_left" property="y1Left" jdbcType="DOUBLE" />
+    <result column="x2_right" property="x2Right" jdbcType="DOUBLE" />
+    <result column="y2_right" property="y2Right" jdbcType="DOUBLE" />
+    <result column="ueser_id" property="ueserId" jdbcType="NCHAR" />
+    <result column="volume" property="volume" jdbcType="DOUBLE" />
+    <result column="diameter" property="diameter" jdbcType="DOUBLE" />
+    <result column="form" property="form" jdbcType="NCHAR" />
+    <result column="part" property="part" jdbcType="NCHAR" />
+    <result column="density" property="density" jdbcType="NCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    anno_id, patient_id, study_instance_uid, series_instance_uid, sop_instance_uid, x1_left, 
+    y1_left, x2_right, y2_right, ueser_id, volume, diameter, form, part, density
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anno_anno_info
+    where anno_id = #{annoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anno_anno_info
+    where anno_id = #{annoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.AnnoInfo" >
+    insert into anno_anno_info (anno_id, patient_id, study_instance_uid, 
+      series_instance_uid, sop_instance_uid, x1_left, 
+      y1_left, x2_right, y2_right, 
+      ueser_id, volume, diameter, 
+      form, part, density)
+    values (#{annoId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{studyInstanceUid,jdbcType=VARCHAR}, 
+      #{seriesInstanceUid,jdbcType=VARCHAR}, #{sopInstanceUid,jdbcType=VARCHAR}, #{x1Left,jdbcType=DOUBLE}, 
+      #{y1Left,jdbcType=DOUBLE}, #{x2Right,jdbcType=DOUBLE}, #{y2Right,jdbcType=DOUBLE}, 
+      #{ueserId,jdbcType=NCHAR}, #{volume,jdbcType=DOUBLE}, #{diameter,jdbcType=DOUBLE}, 
+      #{form,jdbcType=NCHAR}, #{part,jdbcType=NCHAR}, #{density,jdbcType=NCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.AnnoInfo" >
+    insert into anno_anno_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="annoId != null" >
+        anno_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="studyInstanceUid != null" >
+        study_instance_uid,
+      </if>
+      <if test="seriesInstanceUid != null" >
+        series_instance_uid,
+      </if>
+      <if test="sopInstanceUid != null" >
+        sop_instance_uid,
+      </if>
+      <if test="x1Left != null" >
+        x1_left,
+      </if>
+      <if test="y1Left != null" >
+        y1_left,
+      </if>
+      <if test="x2Right != null" >
+        x2_right,
+      </if>
+      <if test="y2Right != null" >
+        y2_right,
+      </if>
+      <if test="ueserId != null" >
+        ueser_id,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="diameter != null" >
+        diameter,
+      </if>
+      <if test="form != null" >
+        form,
+      </if>
+      <if test="part != null" >
+        part,
+      </if>
+      <if test="density != null" >
+        density,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="annoId != null" >
+        #{annoId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="studyInstanceUid != null" >
+        #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesInstanceUid != null" >
+        #{seriesInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="sopInstanceUid != null" >
+        #{sopInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="x1Left != null" >
+        #{x1Left,jdbcType=DOUBLE},
+      </if>
+      <if test="y1Left != null" >
+        #{y1Left,jdbcType=DOUBLE},
+      </if>
+      <if test="x2Right != null" >
+        #{x2Right,jdbcType=DOUBLE},
+      </if>
+      <if test="y2Right != null" >
+        #{y2Right,jdbcType=DOUBLE},
+      </if>
+      <if test="ueserId != null" >
+        #{ueserId,jdbcType=NCHAR},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="diameter != null" >
+        #{diameter,jdbcType=DOUBLE},
+      </if>
+      <if test="form != null" >
+        #{form,jdbcType=NCHAR},
+      </if>
+      <if test="part != null" >
+        #{part,jdbcType=NCHAR},
+      </if>
+      <if test="density != null" >
+        #{density,jdbcType=NCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.AnnoInfo" >
+    update anno_anno_info
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="studyInstanceUid != null" >
+        study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesInstanceUid != null" >
+        series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="sopInstanceUid != null" >
+        sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR},
+      </if>
+      <if test="x1Left != null" >
+        x1_left = #{x1Left,jdbcType=DOUBLE},
+      </if>
+      <if test="y1Left != null" >
+        y1_left = #{y1Left,jdbcType=DOUBLE},
+      </if>
+      <if test="x2Right != null" >
+        x2_right = #{x2Right,jdbcType=DOUBLE},
+      </if>
+      <if test="y2Right != null" >
+        y2_right = #{y2Right,jdbcType=DOUBLE},
+      </if>
+      <if test="ueserId != null" >
+        ueser_id = #{ueserId,jdbcType=NCHAR},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="diameter != null" >
+        diameter = #{diameter,jdbcType=DOUBLE},
+      </if>
+      <if test="form != null" >
+        form = #{form,jdbcType=NCHAR},
+      </if>
+      <if test="part != null" >
+        part = #{part,jdbcType=NCHAR},
+      </if>
+      <if test="density != null" >
+        density = #{density,jdbcType=NCHAR},
+      </if>
+    </set>
+    where anno_id = #{annoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.AnnoInfo" >
+    update anno_anno_info
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
+      series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR},
+      sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR},
+      x1_left = #{x1Left,jdbcType=DOUBLE},
+      y1_left = #{y1Left,jdbcType=DOUBLE},
+      x2_right = #{x2Right,jdbcType=DOUBLE},
+      y2_right = #{y2Right,jdbcType=DOUBLE},
+      ueser_id = #{ueserId,jdbcType=NCHAR},
+      volume = #{volume,jdbcType=DOUBLE},
+      diameter = #{diameter,jdbcType=DOUBLE},
+      form = #{form,jdbcType=NCHAR},
+      part = #{part,jdbcType=NCHAR},
+      density = #{density,jdbcType=NCHAR}
+    where anno_id = #{annoId,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteAnnoInfoBySOPUid" parameterType="java.lang.String">
+        delete from anno_anno_info
+        where sop_instance_uid = #{sopUid , jdbcType = VARCHAR}
+    </delete>
+
+  <select id="getAnnoId" resultType="java.lang.String">
+    select max(anno_id)
+    from anno_anno_info
+    where anno_id like #{param}
+  </select>
+</mapper>

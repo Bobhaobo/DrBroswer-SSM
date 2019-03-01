@@ -1,0 +1,14 @@
+[
+  {"name":"查看预约","children":[
+    {"id":"arrangeOrder", "name":"查看预约", "target":"navtab", "url":"zlk_html/view_reservation_m.html"}
+
+  ]},
+  {"name":"书写报告","children":[
+    {"id":"hadChecked","name":"本地","target":"navtab","url":"zlk_html/report_hadchecked_m.html"},
+    {"id":"remote_wait_report","name":"远程","target":"navtab","url":"zlk_html/remote_wait_report.html"}
+  ]},
+  {"name":"查看报告","children":[
+    {"id":"hadWritted","name":"本地","target":"navtab","url":"zlk_html/report_hadWritted_m.html"},
+    {"id":"remote_writted_report","name":"远程","target":"navtab","url":"zlk_html/remote_writted_report.html"}
+  ]}
+]

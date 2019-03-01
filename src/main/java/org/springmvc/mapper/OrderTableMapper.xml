@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.OrderTableMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.OrderTable" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="checkNum" property="checknum" jdbcType="VARCHAR" />
+    <result column="arrangeStatus" property="arrangestatus" jdbcType="VARCHAR" />
+    <result column="adddate" property="adddate" jdbcType="TIMESTAMP" />
+    <result column="orderdate" property="orderdate" jdbcType="TIMESTAMP" />
+    <result column="orderSource" property="ordersource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, checkNum, arrangeStatus, adddate, orderdate, orderSource
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_tab
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order_tab
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.OrderTable" >
+    insert into order_tab (id, checkNum, arrangeStatus, 
+      adddate, orderdate, orderSource
+      )
+    values (#{id,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, #{arrangestatus,jdbcType=VARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{orderdate,jdbcType=TIMESTAMP}, #{ordersource,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.OrderTable" >
+    insert into order_tab
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="checknum != null" >
+        checkNum,
+      </if>
+      <if test="arrangestatus != null" >
+        arrangeStatus,
+      </if>
+      <if test="adddate != null" >
+        adddate,
+      </if>
+      <if test="orderdate != null" >
+        orderdate,
+      </if>
+      <if test="ordersource != null" >
+        orderSource,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangestatus != null" >
+        #{arrangestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersource != null" >
+        #{ordersource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.OrderTable" >
+    update order_tab
+    <set >
+      <if test="checknum != null" >
+        checkNum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangestatus != null" >
+        arrangeStatus = #{arrangestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderdate != null" >
+        orderdate = #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersource != null" >
+        orderSource = #{ordersource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.OrderTable" >
+    update order_tab
+    set checkNum = #{checknum,jdbcType=VARCHAR},
+      arrangeStatus = #{arrangestatus,jdbcType=VARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      orderdate = #{orderdate,jdbcType=TIMESTAMP},
+      orderSource = #{ordersource,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getOrderTableByStatus" resultType="org.springmvc.pojo.OrderTable">
+    select top ${pageSize} *
+    from order_tab
+    where
+      id not in (
+      select top ${currIndex} id
+      from order_tab
+      where arrangeStatus = #{arrangestatus,jdbcType=VARCHAR}
+      order by adddate
+      )
+      and arrangeStatus = #{arrangestatus,jdbcType=VARCHAR}
+    order by adddate desc
+  </select>
+  <select id="getOrderTableCountByStatus" resultType="java.lang.Integer">
+    select count(*)
+    from order_tab
+    where arrangeStatus = #{arrangestatus,jdbcType=VARCHAR}
+  </select>
+  <select id="getOrderTableByCheckNum" resultType="org.springmvc.pojo.OrderTable">
+    select *
+    from order_tab
+    where checkNum = #{checkNum,jdbcType=VARCHAR}
+  </select>
+  <update id="updateOrderStatus">
+    update order_tab
+    set arrangeStatus = #{status,jdbcType=VARCHAR}, orderdate = #{date,jdbcType=TIMESTAMP}
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+  <select id="getOrderTableByStatusAndHosid" resultType="org.springmvc.pojo.OrderTable">
+    select top ${pageSize} *
+    from order_tab
+    where
+      id not in (
+      select top ${currIndex} id
+      from order_tab
+      where arrangeStatus = #{arrangestatus,jdbcType=VARCHAR}
+        and orderSource = #{hosid,jdbcType=VARCHAR}
+      order by adddate
+      )
+      and arrangeStatus = #{arrangestatus,jdbcType=VARCHAR}
+      and orderSource = #{hosid,jdbcType=VARCHAR}
+    order by adddate desc
+  </select>
+</mapper>

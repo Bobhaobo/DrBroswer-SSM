@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.TemplateMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Template" >
+    <id column="template_id" property="templateId" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="template_level" property="templateLevel" jdbcType="INTEGER" />
+    <result column="examItemName" property="examitemname" jdbcType="VARCHAR" />
+    <result column="template_code" property="templateCode" jdbcType="VARCHAR" />
+    <result column="examMethod" property="exammethod" jdbcType="NVARCHAR" />
+    <result column="examDesc" property="examdesc" jdbcType="NVARCHAR" />
+    <result column="examDiagnosis" property="examdiagnosis" jdbcType="NVARCHAR" />
+    <result column="root_id" property="rootId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    template_id, parent_id, title, template_level, examItemName, template_code, examMethod, 
+    examDesc, examDiagnosis, root_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from template
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from template
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Template" >
+    insert into template (template_id, parent_id, title, 
+      template_level, examItemName, template_code, 
+      examMethod, examDesc, examDiagnosis, 
+      root_id)
+    values (#{templateId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{templateLevel,jdbcType=INTEGER}, #{examitemname,jdbcType=VARCHAR}, #{templateCode,jdbcType=VARCHAR}, 
+      #{exammethod,jdbcType=NVARCHAR}, #{examdesc,jdbcType=NVARCHAR}, #{examdiagnosis,jdbcType=NVARCHAR}, 
+      #{rootId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Template" >
+    insert into template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="templateLevel != null" >
+        template_level,
+      </if>
+      <if test="examitemname != null" >
+        examItemName,
+      </if>
+      <if test="templateCode != null" >
+        template_code,
+      </if>
+      <if test="exammethod != null" >
+        examMethod,
+      </if>
+      <if test="examdesc != null" >
+        examDesc,
+      </if>
+      <if test="examdiagnosis != null" >
+        examDiagnosis,
+      </if>
+      <if test="rootId != null" >
+        root_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="templateLevel != null" >
+        #{templateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="examitemname != null" >
+        #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="templateCode != null" >
+        #{templateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="exammethod != null" >
+        #{exammethod,jdbcType=NVARCHAR},
+      </if>
+      <if test="examdesc != null" >
+        #{examdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="examdiagnosis != null" >
+        #{examdiagnosis,jdbcType=NVARCHAR},
+      </if>
+      <if test="rootId != null" >
+        #{rootId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Template" >
+    update template
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="templateLevel != null" >
+        template_level = #{templateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="examitemname != null" >
+        examItemName = #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="templateCode != null" >
+        template_code = #{templateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="exammethod != null" >
+        examMethod = #{exammethod,jdbcType=NVARCHAR},
+      </if>
+      <if test="examdesc != null" >
+        examDesc = #{examdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="examdiagnosis != null" >
+        examDiagnosis = #{examdiagnosis,jdbcType=NVARCHAR},
+      </if>
+      <if test="rootId != null" >
+        root_id = #{rootId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Template" >
+    update template
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      template_level = #{templateLevel,jdbcType=INTEGER},
+      examItemName = #{examitemname,jdbcType=VARCHAR},
+      template_code = #{templateCode,jdbcType=VARCHAR},
+      examMethod = #{exammethod,jdbcType=NVARCHAR},
+      examDesc = #{examdesc,jdbcType=NVARCHAR},
+      examDiagnosis = #{examdiagnosis,jdbcType=NVARCHAR},
+      root_id = #{rootId,jdbcType=VARCHAR}
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </update>
+  <select id="loadLevelItem" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from template
+    where template_level = #{i,jdbcType=INTEGER}
+  </select>
+  <select id="findByParentId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from template
+    where parent_id = #{root_id,jdbcType=VARCHAR}
+  </select>
+</mapper>
