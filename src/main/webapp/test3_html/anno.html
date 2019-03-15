@@ -12,6 +12,7 @@
 
 	<script src="../test_script/js/jquery-1.11.3.min.js"></script>
 	<script src="../test_script/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script src="../test_script/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -81,6 +82,14 @@
 			<span class="icon protractorIcon"></span>
 			<div >角度测量</div>
 		</button>
+
+		<button id="layout" class="annotationObjectBtn btn btn-default" title="序列布局">
+			<span class="icon magnifyGlassIcon"></span>
+			<div>序列布局</div>
+		</button>
+		<button id="loadTools" class="annotationObjectBtn btn btn-default" title="序列布局" style="display: none">
+
+		</button>
 		<!---<button class="annotationObjectBtn btn btn-default" title="多边形">
 		   <span class="icon polygonIcon"></span>
 		</button>-->
@@ -88,21 +97,20 @@
     <div class="page-header">
         
     </div>
-    <div id="loadProgress" ></div>
 
    <!-- <input type="checkbox" id="toggleModalityLUT">Apply Modality LUT</input>
     <input type="checkbox" id="toggleVOILUT">Apply VOI LUT</input>-->
-    <br />
-	<div>
+
+	<!--<div>
 		窗宽：<input id="windowWidth" type="text"  style="display: inline" size="10">
 		窗位：<input id="windowCenter" type="text"  style="display: inline" size="10">
 		</button>
 		<button id="windowChange" type="button" class="btn-default" style="display: inline;height: 30px;">
 			确定
 		</button>
-	</div>
+	</div>-->
 	<br />
-    <div  class="row">
+    <!--<div  class="row">
         <div  class="col-md-12 col-xs-12">
             <div id="imgArea" style="position:relative;color: white;"
                  oncontextmenu="return false"
@@ -110,7 +118,7 @@
                  unselectable='on'
                  onselectstart='return false;'
                  onmousedown='return false;'>
-                <div id="dicomImage" style=""><!--width:1350px;height:720px;-->
+                <div id="dicomImage" style="">&lt;!&ndash;width:1350px;height:720px;&ndash;&gt;
                 </div>
 				<div id="topleft" class="overlay" style="position:absolute;top:0px;left:0px">
 				</div>
@@ -125,37 +133,60 @@
             </div>
 
         </div>
-        <!--<div class="col-md-6">
-            <span>传输语法: </span><span id="transferSyntax"></span><br>
-            <span>SOP类: </span><span id="sopClass"></span><br>
-            <span>每像素样本数: </span><span id="samplesPerPixel"></span><br>
-            <span>光度解释: </span><span id="photometricInterpretation"></span><br>
-            <span>Number Of Frames: </span><span id="numberOfFrames"></span><br>
-            <span>Planar Configuration: </span><span id="planarConfiguration"></span><br>
-            <span>行: </span><span id="rows"></span><br>
-            <span>列: </span><span id="columns"></span><br>
-            <span>像素间距: </span><span id="pixelSpacing"></span><br>
-            <span>分配的位数: </span><span id="bitsAllocated"></span><br>
-            <span>比特存储: </span><span id="bitsStored"></span><br>
-            <span>High Bit: </span><span id="highBit"></span><br>
-            <span>Pixel Representation: </span><span id="pixelRepresentation"></span><br>
-            <span>窗位: </span><span id="windowCenter"></span><br>
-            <span>窗宽: </span><span id="windowWidth"></span><br>
-            <span>RescaleIntercept: </span><span id="rescaleIntercept"></span><br>
-            <span>RescaleSlope: </span><span id="rescaleSlope"></span><br>
-            <span>Basic Offset Table Entries: </span><span id="basicOffsetTable"></span><br>
-            <span>Fragments: </span><span id="fragments"></span><br>
-            <span>最小存储像素值: </span><span id="minStoredPixelValue"></span><br>
-            <span>最大存储像素值: </span><span id="maxStoredPixelValue"></span><br>
-            <span>总时间: </span><span id="totalTime"></span><br>
-            <span>加载时间: </span><span id="loadTime"></span><br>
-            <span>解码时间: </span><span id="decodeTime"></span><br>
-        </div>-->
-    </div>
+    </div>-->
+	<div  id="viewerContent" class="row" style="background-color:#000000;overflow: hidden">
+		<div id="imageViewerDiv" class="col-md-12 col-xs-12" style="overflow: hidden">
+			<!--<div id="imgArea" style="position:relative;color: white;"
+				 oncontextmenu="return false"
+				 class='disable-selection noIbar'
+				 unselectable='on'
+				 onselectstart='return false;'
+				 onmousedown='return false;'>
+				<div id="dicomImage" style="">
+				</div>
+				<div id="topleft" class="overlay" style="position:absolute;top:0px;left:0px">
+				</div>
+				<div id="topright" class="overlay" style="position:absolute;top:0px;right:0px">
+				</div>
+				<div id="bottomright" class="overlay" style="position:absolute;bottom:0px;right:0px">
+
+				</div>
+				<div id="bottomleft" class="overlay" style="position:absolute;bottom:0px;left:0px">
+				</div>
+				<div id="slider-vertical" class="overlay" style="position:absolute;top:25%;height:50%;right:0px"></div>
+			</div>-->
+
+		</div>
+	</div>
 </div>
 </body>
 
+<!-- 改变布局的弹框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">改变序列布局</h4>
+			</div>
+			<div class="modal-body">
 
+				<div class="form-group">
+					<label for="txt_rows">行数:</label>
+					<input type="text" name="txt_rows" class="form-control" id="txt_rows" placeholder="行数" value="1">
+				</div>
+				<div class="form-group">
+					<label for="txt_columns">列数:</label>
+					<input type="text" name="txt_columns" class="form-control" id="txt_columns" placeholder="列数" value="1">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="height:30px; "><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+				<button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal" style="height:30px; "><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>确定</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- include the cornerstone library -->
 <script src="../test_script/js/cornerstone.min.js"></script>
 <SCRIPT src="../test_script/js/cornerstoneMath.min.js"></SCRIPT>
@@ -198,7 +229,7 @@
 <script>window.cornerstoneWADOImageLoader || document.write('<script src="https://unpkg.com/cornerstone-wado-image-loader">\x3C/script>')</script>
 <script src="../test_script/js/initializeWebWorkers.js"></script>
 <!-- 对按钮的操作 -->
-<script src="../test_script/js/toolsbuttonnew1.js"></script>
+<script src="../test_script/js/toolsbuttonnew.js"></script>
 <!-- 用ajax文件上传 -->
 <script type="text/javascript" src="../test_script/js/ajaxfileupload.js"></script>
 <script type="text/javascript">

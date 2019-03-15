@@ -1,6 +1,7 @@
 package org.springmvc.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +48,16 @@ public class AnnoController {
        String path = "http://localhost:8080/2.dcm";
        String path1 = "http://localhost:8080/3.dcm";
       List<String> list= new ArrayList<String>();
-      list.add(path);
-      list.add(path1);
-      return JSON.toJSONString(list);
+      List<List<String>> listList = new ArrayList<List<String>>();
+//      list.add(path);
+//      list.add(path1);
+      for (int i=2;i<31;i++) {
+          list.add("http://localhost:8080/down/" + i + ".dcm");
+      }
+
+      listList.add(list);
+      listList.add(list);
+      return JSON.toJSONString(listList, SerializerFeature.DisableCircularReferenceDetect);
     }
 
     //发送文件

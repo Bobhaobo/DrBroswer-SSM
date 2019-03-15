@@ -46,3 +46,11 @@ button {
    border: #E8E8E8 !important;
    color: #4D5F82 !important;
 }
+
+
+.viewportContainer.active{
+   border: 1px solid #00a4d9;
+}
+.viewportContainer{
+   border: 1px solid #3c5d80;
+}
