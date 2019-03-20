@@ -115,15 +115,26 @@ cornerstoneWADOImageLoader.configure({
     },
     useWebWorkers: true,
 });
+//类似于加载tool的函数
+function loadMeasureTools(element) {
+    cornerstoneTools.rectangleRoi.deactivate(element,1);
+    cornerstoneTools.probe.deactivate(element, 1);
+    cornerstoneTools.pan.activate(element, 4); // 2是滚轮
+    cornerstoneTools.zoom.activate(element, 2); // 通过右键放大缩小
+    cornerstoneTools.eraser.deactivate(element,1);
+    cornerstoneTools.length.deactivate(element,1);
+    cornerstoneTools.angle.deactivate(element,1);
+}
 
 //加载几个序列的函数
 function  loadSeriesImage(stacks,divArray) {
+    loaded = false;
     for (let s = 0; s < stacks.length; s++) {
         const element = stacks[s].element;
         const stack = stacks[s].stack;
 
         cornerstone.enable(element);
-        cornerstone.loadImage(stack.imageIds[stack.currentImageIdIndex]).then(function(image) {
+        cornerstone.loadAndCacheImage(stack.imageIds[stack.currentImageIdIndex]).then(function(image) {
             // display this image
             cornerstone.displayImage(element, image);
 
@@ -131,9 +142,16 @@ function  loadSeriesImage(stacks,divArray) {
             cornerstoneTools.mouseWheelInput.enable(element);
 
             // set the stack as tool state
+
             cornerstoneTools.addStackStateManager(element, ['stack']);
             cornerstoneTools.addToolState(element, 'stack', stack);
-
+            //前后左右的标示
+            //cornerstoneTools.orientationMarkers.enable(element);
+            //这个是加测量线
+            //cornerstoneTools.scaleOverlayTool.enable(element);
+            //cornerstoneTools.pan.activate(element, 4); // 2是滚轮
+            //cornerstoneTools.zoom.activate(element, 2); // 通过右键放大缩小
+            loadMeasureTools(element)
             // Enable all tools we want to use with this element
             //cornerstoneTools.stackScroll.activate(element, 1);
             cornerstoneTools.stackScrollWheel.activate(element);
@@ -180,6 +198,7 @@ function  loadSeriesImage(stacks,divArray) {
         element.addEventListener('cornerstonenewimage',onNewImage);
 
     }
+    loaded = true;
 }
 
 //放大倍数设置
@@ -283,8 +302,6 @@ var length = document.getElementById("length");
 var angle = document.getElementById("angle");
 //获取序列布局的按钮
 var layout = document.getElementById("layout");
-//测试
-var loadTools = document.getElementById("loadTools");
 /*
 //对调窗宽窗位的按钮的操作
 document.getElementById("windowChange").onclick = function () {
@@ -464,14 +481,6 @@ layout.onclick = function () {
         $('#myModal').modal();
 }
 
-loadTools.onclick = function () {
-    //activate("angle");
-    disableAllTools();
-    /*for (let s = 0; s < webStacks.length; s++) {
-        const element = webStacks[s].element;
-        cornerstoneTools.angle.activate(element,1);
-    }*/
-}
 //获取所有图像的图像元素保存
 
 
@@ -485,12 +494,9 @@ btn_submit.onclick = function(){
     webStacks = getStacks(imageIdlist);
 
     loadSeriesImage(webStacks,document.getElementById('imageViewerDiv').children);
-   imageAreaSize();
-    window.onload = function(){
-
-    }
-    loadTools.click();
+    imageAreaSize();
 }
+
 //对序列分框的函数
 function layoutSeries(rows,columns) {
     var viewerContent = document.getElementById("viewerContent");
@@ -532,6 +538,19 @@ function layoutSeries(rows,columns) {
                 '</div>'*/;
 
             parEle.appendChild(oDiv);
+            $(oDiv).on('click mousewheel DOMMouseScroll',function () {
+                $(this).siblings('div').removeClass('active');
+               $(this).addClass('active');
+            });
+            $(oDiv).dblclick(function () {
+                $(this).css('height',100*rows+'%');
+                $(this).css('width','100%');
+                $(this).siblings('div').toggle(0,function () {
+                   //$(this).css('height',100/rows+'%');
+                   //$(this).css('width',100/columns+'%');
+               });
+            });
+
             //oDiv.getElementsByTagName('div')[0].style.height='100%';
         }
     }
@@ -543,6 +562,7 @@ layoutSeries(1,1);
 var webStacks = getStacks(imageIdlist);
 
 loadSeriesImage(webStacks,document.getElementById('imageViewerDiv').children);
+
 /**
  *
  * @param imageList 从后台传过来的影像路径的集合
@@ -569,6 +589,7 @@ function getStacks(imageList) {
 }
 
 
+
 /*cornerstone.events.addEventListener('cornerstoneimageloadprogress', function(event) {
     const eventData = event.detail;
     const loadProgress = document.getElementById('loadProgress');
@@ -593,7 +614,7 @@ function imageAreaSize() {
 
     var imageViewerDiv = document.getElementById('imageViewerDiv');
     var Cweight = document.documentElement.clientWidth*1;
-    var Cheight = document.documentElement.clientHeight*0.88;
+    var Cheight = document.documentElement.clientHeight*0.91;
     //imageViewerDiv.style.width = Cweight+'px';
     //imageViewerDiv.style.height = Cheight+'px';
     var h =  $("#txt_rows").val();
@@ -603,16 +624,19 @@ function imageAreaSize() {
     var imageDivNum = imageViewerDiv.children.length;
     for (var i=0;i<imageDivNum;i++){
         //alert( imageViewerDiv.getElementsByTagName('div')[i].getElementsByTagName('div')[0].clientWidth);
-        imageViewerDiv.children[i].style.height = Cheight/h+'px';
-        imageViewerDiv.children[i].style.weight = Cweight/l+'px';
+        // imageViewerDiv.children[i].style.height = Cheight/h+'px';
+        // imageViewerDiv.children[i].style.weight = Cweight/l+'px';
+        imageViewerDiv.children[i].style.height = 100/h+'%';
+        imageViewerDiv.children[i].style.weight = 100/l+'%';
+
         imageViewerDiv.children[i].children[0].style.height = Cheight/h+'px';
         imageViewerDiv.children[i].children[0].style.weight = Cweight/l+'px';
         if( imageViewerDiv.children[i].children[0].children[0]){
 
-            imageViewerDiv.children[i].children[0].children[0].height = (Cheight/h);
-            imageViewerDiv.children[i].children[0].children[0].weight = (Cweight/l-10);
-            imageViewerDiv.children[i].children[0].children[0].style.height = (Cheight/h)+'px';
-            imageViewerDiv.children[i].children[0].children[0].style.weight = (Cweight/l-10)+'px';
+            imageViewerDiv.children[i].children[0].children[0].height = (Cheight/h-10);
+            imageViewerDiv.children[i].children[0].children[0].weight = (Cweight/l);
+            imageViewerDiv.children[i].children[0].children[0].style.height = (Cheight/h-10)+'px';
+            imageViewerDiv.children[i].children[0].children[0].style.weight = (Cweight/l)+'px';
         }
     }
 }
