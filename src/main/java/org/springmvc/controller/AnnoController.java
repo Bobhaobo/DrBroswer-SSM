@@ -52,9 +52,8 @@ public class AnnoController {
 //      list.add(path);
 //      list.add(path1);
       for (int i=2;i<31;i++) {
-          list.add("http://localhost:8080/down/" + i + ".dcm");
+          list.add("http://10.168.1.137:8080/down/" + i + ".dcm");
       }
-
       listList.add(list);
       listList.add(list);
       return JSON.toJSONString(listList, SerializerFeature.DisableCircularReferenceDetect);

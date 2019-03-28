@@ -15,13 +15,12 @@ $.ajax({
     },
     success: function (data) {
         imageIdlist = data;
-
         /*imageIdlist = data[0].map(function (item) {
             return 'wadouri:'+item;
         })*/
     },
     error: function(){
-
+            alert("加载图像失败");
     }
 });
 //判断是否加载
@@ -490,11 +489,13 @@ btn_submit.onclick = function(){
     var h =  $("#txt_rows").val();
     var l =	 $("#txt_columns").val();
     layoutSeries(h,l);
+    $("#temp_rows").val(h);
 
+    $("#temp_columns").val(l);
     webStacks = getStacks(imageIdlist);
 
     loadSeriesImage(webStacks,document.getElementById('imageViewerDiv').children);
-    imageAreaSize();
+    imageAreaSize(h,l);
 }
 
 //对序列分框的函数
@@ -520,6 +521,8 @@ function layoutSeries(rows,columns) {
             oDiv.style.boxSizing = "border-box";
             oDiv.style.position="relative";
             oDiv.style.color="white";
+            oDiv.onselectstart= function(){return false;};
+            oDiv.oncontextmenu = function(){return false;};
             oDiv.innerHTML=/*'<div  style="position:relative;color: white;"' +
                 ' oncontextmenu="return false"\n' +
                 ' class=\'disable-selection noIbar\'\n' +
@@ -536,20 +539,56 @@ function layoutSeries(rows,columns) {
                 '</div>' + '<div  class="overlay bottomleft" style="position:absolute;bottom:0px;left:0px">' +
                 '</div>' + '<div  class="overlay " style="position:absolute;top:25%;height:50%;right:0px"></div>' /*+
                 '</div>'*/;
-
+            var isDbClick = false;
             parEle.appendChild(oDiv);
             $(oDiv).on('click mousewheel DOMMouseScroll',function () {
                 $(this).siblings('div').removeClass('active');
                $(this).addClass('active');
             });
             $(oDiv).dblclick(function () {
-                $(this).css('height',100*rows+'%');
-                $(this).css('width','100%');
-                $(this).siblings('div').toggle(0,function () {
-                   //$(this).css('height',100/rows+'%');
-                   //$(this).css('width',100/columns+'%');
-               });
+                if(!isDbClick){
+                    $(this).siblings('div').hide();
+                    //$(this).css('height','100%');
+                    //$(this).css('width','100%');
+                    var vieDiv = $(this).get(0);
+                    vieDiv.style.height = '100%';
+                    vieDiv.style.width = '100%';
+                    $("#temp_rows").val(1);
+                    $("#temp_columns").val(1);
+                    imageAreaSize(1,1);
+                    for (let s = 0; s < webStacks.length; s++) {
+                        const element = webStacks[s].element;
+                        cornerstone.resize(element);
+                        cornerstone.reset(element);
+                    }
+
+                    isDbClick = true;
+                }
+                else {
+                    $(this).siblings('div').show();
+                    var h =  $("#txt_rows").val();
+                    var l =	 $("#txt_columns").val();
+                    $("#temp_rows").val(h);
+                    $("#temp_columns").val(l);
+                    // $(this).css('height',100/h+'%');
+                    // $(this).css('weight',100/l+'%');
+                    var vieDiv = $(this).get(0);
+                    vieDiv.style.height = 100/h+'%';
+                    vieDiv.style.width = 100/l+'%';
+
+
+                    imageAreaSize(h,l);
+
+                    for (let s = 0; s < webStacks.length; s++) {
+                        const element = webStacks[s].element;
+                        cornerstone.resize(element);
+                        cornerstone.reset(element);
+                    }
+
+                    isDbClick = false;
+                }
             });
+
 
             //oDiv.getElementsByTagName('div')[0].style.height='100%';
         }
@@ -610,43 +649,46 @@ function getStacks(imageList) {
     //$( "#slider-vertical" ).height = (document.documentElement.clientHeight)*0.50+"px";
 }*/
 //总体自适应大小
-function imageAreaSize() {
+function imageAreaSize(row,colume) {
 
     var imageViewerDiv = document.getElementById('imageViewerDiv');
     var Cweight = document.documentElement.clientWidth*1;
     var Cheight = document.documentElement.clientHeight*0.91;
     //imageViewerDiv.style.width = Cweight+'px';
     //imageViewerDiv.style.height = Cheight+'px';
-    var h =  $("#txt_rows").val();
-    var l =	 $("#txt_columns").val();
+    // var h =  $("#txt_rows").val();
+    // var l =	 $("#txt_columns").val();
 
     //获取显示影像div的个数
     var imageDivNum = imageViewerDiv.children.length;
     for (var i=0;i<imageDivNum;i++){
         //alert( imageViewerDiv.getElementsByTagName('div')[i].getElementsByTagName('div')[0].clientWidth);
-        // imageViewerDiv.children[i].style.height = Cheight/h+'px';
-        // imageViewerDiv.children[i].style.weight = Cweight/l+'px';
-        imageViewerDiv.children[i].style.height = 100/h+'%';
-        imageViewerDiv.children[i].style.weight = 100/l+'%';
-
-        imageViewerDiv.children[i].children[0].style.height = Cheight/h+'px';
-        imageViewerDiv.children[i].children[0].style.weight = Cweight/l+'px';
+      /*  imageViewerDiv.children[i].style.height = Cheight/row+'px';
+        imageViewerDiv.children[i].style.weight = Cweight/colume+'px';*/
+        imageViewerDiv.children[i].style.height = 100/row+'%';
+        imageViewerDiv.children[i].style.weight = 100/colume+'%';
+        imageViewerDiv.children[i].children[0].style.height = Cheight/row+'px';
+        imageViewerDiv.children[i].children[0].style.weight = Cweight/colume+'px';
         if( imageViewerDiv.children[i].children[0].children[0]){
 
-            imageViewerDiv.children[i].children[0].children[0].height = (Cheight/h-10);
-            imageViewerDiv.children[i].children[0].children[0].weight = (Cweight/l);
-            imageViewerDiv.children[i].children[0].children[0].style.height = (Cheight/h-10)+'px';
-            imageViewerDiv.children[i].children[0].children[0].style.weight = (Cweight/l)+'px';
+            imageViewerDiv.children[i].children[0].children[0].height = (Cheight/row-10);
+            imageViewerDiv.children[i].children[0].children[0].weight = (Cweight/colume);
+            imageViewerDiv.children[i].children[0].children[0].style.height = (Cheight/row-10)+'px';
+            imageViewerDiv.children[i].children[0].children[0].style.weight = (Cweight/colume)+'px';
         }
     }
 }
-imageAreaSize();
+
+imageAreaSize(1,1);
 $(window).resize(function(){
     //imageSize();
-    imageAreaSize();
+    var h =  $("#temp_rows").val();
+    var l =	 $("#temp_columns").val();
+    imageAreaSize(h,l);
     //cornerstone.resize(element);
     for (let s = 0; s < webStacks.length; s++) {
         const element = webStacks[s].element;
         cornerstone.resize(element);
+        cornerstone.reset(element);
     }
 });
