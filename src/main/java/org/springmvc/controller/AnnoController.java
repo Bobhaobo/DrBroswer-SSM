@@ -12,6 +12,7 @@ import org.springmvc.dto.ResultVO;
 import org.springmvc.dto.UploadFileVO;
 import org.springmvc.service.*;
 import org.springmvc.tool.PrimaryKeyGenerator;
+import org.springmvc.tool.ReadDcmImageTool;
 import org.springmvc.tool.XMLGenerator;
 
 import javax.annotation.Resource;
@@ -41,22 +42,25 @@ public class AnnoController {
     private XMLGenerator xmlGenerator;
     @Resource
     private PrimaryKeyGenerator primaryKeyGenerator;
+    @Autowired
+    private ReadDcmImageTool readDcmImageTool;
     //发送文件
     @RequestMapping(value = "/sendDcm1" , method = RequestMethod.POST)
     @ResponseBody
     public String sendDcm1(HttpServletRequest request,HttpServletResponse response) throws Exception {
-       String path = "http://localhost:8080/2.dcm";
-       String path1 = "http://localhost:8080/3.dcm";
-      List<String> list= new ArrayList<String>();
+
       List<List<String>> listList = new ArrayList<List<String>>();
-//      list.add(path);
-//      list.add(path1);
-      for (int i=2;i<31;i++) {
-          list.add("http://10.168.1.137:8080/down/" + i + ".dcm");
+      List<List<String>> listImageName = readDcmImageTool.getImageSeriesList("D:/dcmtest/DJ20170701B0018");
+
+      for (int i=0;i<listImageName.size();i++){
+          List<String> list = new ArrayList<String>();
+          for(int j=0;j<listImageName.get(i).size();j++){
+            list.add("http://10.168.1.137:8080/down/DJ20170701B0018/"+listImageName.get(i).get(j) );
+          }
+          listList.add(list);
       }
-      listList.add(list);
-      listList.add(list);
-      return JSON.toJSONString(listList, SerializerFeature.DisableCircularReferenceDetect);
+      return JSON.toJSONString(listList);
+      //return JSON.toJSONString(listList, SerializerFeature.DisableCircularReferenceDetect);
     }
 
     //发送文件

@@ -200,6 +200,11 @@ function  loadSeriesImage(stacks,divArray) {
     loaded = true;
 }
 
+//显示序列缩略图
+
+
+
+
 //放大倍数设置
 var config = {
     // invert: true,
@@ -624,9 +629,7 @@ function getStacks(imageList) {
     }
     return stacks;
 
-
 }
-
 
 
 /*cornerstone.events.addEventListener('cornerstoneimageloadprogress', function(event) {
@@ -648,6 +651,72 @@ function getStacks(imageList) {
     element.getElementsByTagName("canvas")[0].style.width = (document.documentElement.clientWidth)*0.75+"px";
     //$( "#slider-vertical" ).height = (document.documentElement.clientHeight)*0.50+"px";
 }*/
+imageSeriesThumbnail(imageIdlist);
+//缩略图的加载
+function imageSeriesThumbnail(imageList) {
+
+    layoutSeriesThumbnail(imageList);
+    var stacks = getSeriesStacks(imageList);
+    loadSeriesThumbnail(stacks);
+
+}
+//获取缩略图的
+
+function getSeriesStacks(imageList) {
+    //序列的长度
+    var seriesL = imageList.length;
+    //alert(parEleL);
+    var stacks = new Array();
+    for (var i=0; i<seriesL;i++){
+        //变形过之后的图片路径数组
+        var imageIdlistChange= imageList[i].map(function (item) {
+            return 'wadouri:'+item;
+        });
+        var childDiv = document.getElementById('studyThumbnail');
+        stacks.push({element:childDiv.children[i],stack:{currentImageIdIndex:0,imageIds:imageIdlistChange[0]}});
+    }
+    return stacks;
+
+}
+
+//显示缩略图
+
+function  loadSeriesThumbnail(stacks) {
+    loaded = false;
+        for (let s = 0; s < stacks.length; s++) {
+            const element = stacks[s].element;
+            const stack = stacks[s].stack;
+
+            cornerstone.enable(element);
+            cornerstone.loadAndCacheImage(stack.imageIds).then(function(image) {
+                // display this image
+                cornerstone.displayImage(element, image);
+
+            });
+    }
+}
+
+//生成缩略图个数
+function layoutSeriesThumbnail(imageList) {
+    var thumbnail = document.getElementById("studyThumbnail");
+    //序列的长度
+    var seriesL = imageList.length;
+    for(var i=0;i<seriesL;i++){
+        var element = document.createElement('div');
+        element.className="viewportContainer";
+        element.style.borderStyle="solid";
+        element.style.borderWidth="1px";
+        element.style.boxSizing = "border-box";
+        element.style.position="relative";
+        thumbnail.appendChild(element);
+        $(element).dblclick(function () {
+            var index = $("#studyThumbnail div").index(this);
+
+            alert(index)
+        });
+    }
+}
+
 //总体自适应大小
 function imageAreaSize(row,colume) {
 
@@ -670,7 +739,6 @@ function imageAreaSize(row,colume) {
         imageViewerDiv.children[i].children[0].style.height = Cheight/row+'px';
         imageViewerDiv.children[i].children[0].style.weight = Cweight/colume+'px';
         if( imageViewerDiv.children[i].children[0].children[0]){
-
             imageViewerDiv.children[i].children[0].children[0].height = (Cheight/row-10);
             imageViewerDiv.children[i].children[0].children[0].weight = (Cweight/colume);
             imageViewerDiv.children[i].children[0].children[0].style.height = (Cheight/row-10)+'px';

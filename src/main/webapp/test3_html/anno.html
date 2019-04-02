@@ -14,147 +14,128 @@
 	<script src="../test_script/js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script src="../test_script/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color:#000000;">
-<div class="container" >
-	<!-- Create a header toolbar -->
-	<div id="tollHead" class="toolbar headerToolbarDiv">
-		<button id="saveAnnotations" class="btn btn-default" title="保存标注">
-			<span class="icon saveXMLIcon"></span>
-			<div style="">保存标注</div>
-		</button>
-		<!--<button id="panZoom" class="btn btn-defalut" title="移动">
-			<span class="icon panZoomIcon"></span>
-		</button>-->
-		<button id="actualSize" class="btn btn-default" title="初始尺寸">
-			<span class="icon actualSizeIcon"></span>
-			<div style="">初始尺寸</div>
-		</button>
-		<!--button id ="magnifyGlass"class="btn btn-defalut interactiveModesBtns" title="放大镜" value="1">
-		   <span class="icon magnifyGlassIcon"></span>
-		</button-->
-		<button id="zoomInImage" class="btn btn-default" title="放大">
-			<span class="icon zoomInIcon"></span>
-			<div style="">放大</div>
-		</button>
-		<button id="zoomOutImage" class="btn btn-default" title="缩小">
-			<span class="icon zoomOutIcon"></span>
-			<div style="">缩小</div>
-		</button>
-		<button id="rotateCounterClockwise" class="btn btn-default" title="左旋转">
-			<span class="icon rotateCounterClockwiseIcon"></span>
-			<div style="">左旋转</div>
-		</button>
-		<button id="rotateClockwise" class="btn btn-default" title="右旋转">
-			<span class="icon rotateClockwiseIcon"></span>
-			<div style="">右旋转</div>
-		</button>
-		<!--
-		<button id="loadAnnotations" class="btn btn-default" title="Load Annotations">
-		   <span class="icon openAnnotationIcon"></span>
-		</button>
-		<button id="saveAnnotations" class="btn btn-default" title="Save Annotations">
-		   <span class="icon saveXMLIcon"></span>
-		</button>
+<body style="background-color:#000000;overflow: hidden">
+<div id="tollHead" class="toolbar headerToolbarDiv">
+	<button id="saveAnnotations" class="btn btn-default" title="保存标注">
+		<span class="icon saveXMLIcon"></span>
+		<div style="">保存标注</div>
+	</button>
+	<!--<button id="panZoom" class="btn btn-defalut" title="移动">
+        <span class="icon panZoomIcon"></span>
+    </button>-->
+	<button id="actualSize" class="btn btn-default" title="初始尺寸">
+		<span class="icon actualSizeIcon"></span>
+		<div style="">初始尺寸</div>
+	</button>
+	<!--button id ="magnifyGlass"class="btn btn-defalut interactiveModesBtns" title="放大镜" value="1">
+       <span class="icon magnifyGlassIcon"></span>
+    </button-->
+	<button id="zoomInImage" class="btn btn-default" title="放大">
+		<span class="icon zoomInIcon"></span>
+		<div style="">放大</div>
+	</button>
+	<button id="zoomOutImage" class="btn btn-default" title="缩小">
+		<span class="icon zoomOutIcon"></span>
+		<div style="">缩小</div>
+	</button>
+	<button id="rotateCounterClockwise" class="btn btn-default" title="左旋转">
+		<span class="icon rotateCounterClockwiseIcon"></span>
+		<div style="">左旋转</div>
+	</button>
+	<button id="rotateClockwise" class="btn btn-default" title="右旋转">
+		<span class="icon rotateClockwiseIcon"></span>
+		<div style="">右旋转</div>
+	</button>
+	<!--
+    <button id="loadAnnotations" class="btn btn-default" title="Load Annotations">
+       <span class="icon openAnnotationIcon"></span>
+    </button>
+    <button id="saveAnnotations" class="btn btn-default" title="Save Annotations">
+       <span class="icon saveXMLIcon"></span>
+    </button>
 
-		<button id="undo" class="btn btn-default" title="撤回">
-		   <span class="icon undoIcon"></span>
-		</button>-->
-		<!--
-		<button id="redo" class="btn btn-default" title="Redo">
-		   <span class="icon redoIcon"></span>
-		</button>-->
-		<button id="deleteAnnotation" class="btn btn-default" title="删除标注">
-			<span class="icon closeIcon"></span>
-			<div style="">删除标注</div>
-		</button>
-		<!--<button class="annotationObjectBtn btn btn-default" title="直线">
-		   <span class="icon lineIcon" ></span>
-		</button-->
-		<button id="rectbtn" class="annotationObjectBtn btn btn-default" title="矩形标注框" data-type="rectangle">
-			<span class="icon rectangleIcon" data-type="rectangle"></span>
-			<div style="">矩形标注框</div>
-		</button>
-		<button id="length" class="annotationObjectBtn btn btn-default" title="长度测量" data-type="ruler">
-			<span class="icon rulerIcon"></span>
-			<div style="">长度测量</div>
-		</button>
-		<button id="angle" class="annotationObjectBtn btn btn-default" title="角度测量" data-type="angle">
-			<span class="icon protractorIcon"></span>
-			<div >角度测量</div>
-		</button>
+    <button id="undo" class="btn btn-default" title="撤回">
+       <span class="icon undoIcon"></span>
+    </button>-->
+	<!--
+    <button id="redo" class="btn btn-default" title="Redo">
+       <span class="icon redoIcon"></span>
+    </button>-->
+	<button id="deleteAnnotation" class="btn btn-default" title="删除标注">
+		<span class="icon closeIcon"></span>
+		<div style="">删除标注</div>
+	</button>
+	<!--<button class="annotationObjectBtn btn btn-default" title="直线">
+       <span class="icon lineIcon" ></span>
+    </button-->
+	<button id="rectbtn" class="annotationObjectBtn btn btn-default" title="矩形标注框" data-type="rectangle">
+		<span class="icon rectangleIcon" data-type="rectangle"></span>
+		<div style="">矩形标注框</div>
+	</button>
+	<button id="length" class="annotationObjectBtn btn btn-default" title="长度测量" data-type="ruler">
+		<span class="icon rulerIcon"></span>
+		<div style="">长度测量</div>
+	</button>
+	<button id="angle" class="annotationObjectBtn btn btn-default" title="角度测量" data-type="angle">
+		<span class="icon protractorIcon"></span>
+		<div >角度测量</div>
+	</button>
 
-		<button id="layout" class="annotationObjectBtn btn btn-default" title="序列布局">
-			<span class="icon magnifyGlassIcon"></span>
-			<div>序列布局</div>
-		</button>
-		<!---<button class="annotationObjectBtn btn btn-default" title="多边形">
-		   <span class="icon polygonIcon"></span>
-		</button>-->
+	<button id="layout" class="annotationObjectBtn btn btn-default" title="序列布局">
+		<span class="icon magnifyGlassIcon"></span>
+		<div>序列布局</div>
+	</button>
+	<!---<button class="annotationObjectBtn btn btn-default" title="多边形">
+       <span class="icon polygonIcon"></span>
+    </button>-->
+</div>
+
+<div class="container-fluid">
+<!-- Create a header toolbar -->
+
+	<div class="page-header">
+
 	</div>
-    <div class="page-header">
-        
-    </div>
-
-   <!-- <input type="checkbox" id="toggleModalityLUT">Apply Modality LUT</input>
-    <input type="checkbox" id="toggleVOILUT">Apply VOI LUT</input>-->
-
-	<!--<div>
-		窗宽：<input id="windowWidth" type="text"  style="display: inline" size="10">
-		窗位：<input id="windowCenter" type="text"  style="display: inline" size="10">
-		</button>
-		<button id="windowChange" type="button" class="btn-default" style="display: inline;height: 30px;">
-			确定
-		</button>
-	</div>-->
-    <!--<div  class="row">
-        <div  class="col-md-12 col-xs-12">
-            <div id="imgArea" style="position:relative;color: white;"
-                 oncontextmenu="return false"
-                 class='disable-selection noIbar'
-                 unselectable='on'
-                 onselectstart='return false;'
-                 onmousedown='return false;'>
-                <div id="dicomImage" style="">&lt;!&ndash;width:1350px;height:720px;&ndash;&gt;
-                </div>
-				<div id="topleft" class="overlay" style="position:absolute;top:0px;left:0px">
-				</div>
-				<div id="topright" class="overlay" style="position:absolute;top:0px;right:0px">
-				</div>
-				<div id="bottomright" class="overlay" style="position:absolute;bottom:0px;right:0px">
+	<div class="row">
+		<div class="col-md-2 col-xs-2" style="overflow-y:auto;height:100vh;">
+			<div id="viewerSeries">
+				<div id="studyThumbnail" >
 
 				</div>
-				<div id="bottomleft" class="overlay" style="position:absolute;bottom:0px;left:0px">
-				</div>
-				<div id="slider-vertical" class="overlay" style="position:absolute;top:25%;height:50%;right:0px"></div>
-            </div>
+			</div>
+		</div>
+		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+			<div  id="viewerContent" class="row" style="background-color:#000000;overflow: hidden">
+				<div id="imageViewerDiv" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="overflow: hidden">
+					<!--<div id="imgArea" style="position:relative;color: white;"
+                         oncontextmenu="return false"
+                         class='disable-selection noIbar'
+                         unselectable='on'
+                         onselectstart='return false;'
+                         onmousedown='return false;'>
+                        <div id="dicomImage" style="">
+                        </div>
+                        <div id="topleft" class="overlay" style="position:absolute;top:0px;left:0px">
+                        </div>
+                        <div id="topright" class="overlay" style="position:absolute;top:0px;right:0px">
+                        </div>
+                        <div id="bottomright" class="overlay" style="position:absolute;bottom:0px;right:0px">
 
-        </div>
-    </div>-->
-	<div  id="viewerContent" class="row" style="background-color:#000000;overflow: hidden">
-		<div id="imageViewerDiv" class="col-md-12 col-xs-12" style="overflow: hidden">
-			<!--<div id="imgArea" style="position:relative;color: white;"
-				 oncontextmenu="return false"
-				 class='disable-selection noIbar'
-				 unselectable='on'
-				 onselectstart='return false;'
-				 onmousedown='return false;'>
-				<div id="dicomImage" style="">
-				</div>
-				<div id="topleft" class="overlay" style="position:absolute;top:0px;left:0px">
-				</div>
-				<div id="topright" class="overlay" style="position:absolute;top:0px;right:0px">
-				</div>
-				<div id="bottomright" class="overlay" style="position:absolute;bottom:0px;right:0px">
+                        </div>
+                        <div id="bottomleft" class="overlay" style="position:absolute;bottom:0px;left:0px">
+                        </div>
+                        <div id="slider-vertical" class="overlay" style="position:absolute;top:25%;height:50%;right:0px"></div>
+                    </div>-->
 
 				</div>
-				<div id="bottomleft" class="overlay" style="position:absolute;bottom:0px;left:0px">
-				</div>
-				<div id="slider-vertical" class="overlay" style="position:absolute;top:25%;height:50%;right:0px"></div>
-			</div>-->
-
+			</div>
 		</div>
 	</div>
+
+
+
 </div>
+
 </body>
 
 <!-- 改变布局的弹框 -->
