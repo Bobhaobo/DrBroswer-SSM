@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.TemporaryReportMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.TemporaryReport" >
+    <id column="id" property="id" jdbcType="NVARCHAR" />
+    <result column="remote_report_id" property="remoteReportId" jdbcType="VARCHAR" />
+    <result column="checknum" property="checknum" jdbcType="VARCHAR" />
+    <result column="report_image_path" property="reportImagePath" jdbcType="VARCHAR" />
+    <result column="writeDocCode" property="writedoccode" jdbcType="VARCHAR" />
+    <result column="writeDocName" property="writedocname" jdbcType="VARCHAR" />
+    <result column="writeupdatetime" property="writeupdatetime" jdbcType="TIMESTAMP" />
+    <result column="verifyDocName" property="verifydocname" jdbcType="VARCHAR" />
+    <result column="verifyDocCode" property="verifydoccode" jdbcType="VARCHAR" />
+    <result column="verifyupdatetime" property="verifyupdatetime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, remote_report_id, checknum, report_image_path, writeDocCode, writeDocName, writeupdatetime, 
+    verifyDocName, verifyDocCode, verifyupdatetime, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from temporary_report
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <!--<select id="selectBycheckNum" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from temporary_report-->
+    <!--where checknum = #{checknum,jdbcType=NVARCHAR}-->
+  <!--</select>-->
+
+
+  <select id="selectBycheckNum" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from temporary_report
+        where writeupdatetime=(select max(writeupdatetime) from temporary_report where
+    checknum=#{checknum,jdbcType=VARCHAR} ) and checknum=#{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectListBycheckNum" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from temporary_report
+    where checknum=#{checknum,jdbcType=VARCHAR} Order By writeupdatetime ASC
+  </select>
+
+
+  <select id="selectCountBycheckNum" resultType="java.lang.Integer">
+    select count (*)
+    from temporary_report
+    where checknum=#{checknum,jdbcType=NVARCHAR}
+  </select>
+
+
+
+  <select id="selectTemporaryReportByRemoteReportId" resultType="org.springmvc.pojo.TemporaryReport" >
+    select
+    <include refid="Base_Column_List" />
+    from temporary_report
+    where remote_report_id = #{remote_report_id,jdbcType=NVARCHAR}
+  </select>
+
+
+
+  <select id="selectIdByRemoteReportId" resultType="java.lang.String" >
+    select id
+    from temporary_report
+    where remote_report_id = #{remote_report_id,jdbcType=NVARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from temporary_report
+    where id = #{id,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.TemporaryReport" >
+    insert into temporary_report (id, remote_report_id, checknum, 
+      report_image_path, writeDocCode, writeDocName, 
+      writeupdatetime, verifyDocName, verifyDocCode, 
+      verifyupdatetime, remark)
+    values (#{id,jdbcType=NVARCHAR}, #{remoteReportId,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, 
+      #{reportImagePath,jdbcType=VARCHAR}, #{writedoccode,jdbcType=VARCHAR}, #{writedocname,jdbcType=VARCHAR}, 
+      #{writeupdatetime,jdbcType=TIMESTAMP}, #{verifydocname,jdbcType=VARCHAR}, #{verifydoccode,jdbcType=VARCHAR}, 
+      #{verifyupdatetime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.TemporaryReport" >
+    insert into temporary_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="remoteReportId != null" >
+        remote_report_id,
+      </if>
+      <if test="checknum != null" >
+        checknum,
+      </if>
+      <if test="reportImagePath != null" >
+        report_image_path,
+      </if>
+      <if test="writedoccode != null" >
+        writeDocCode,
+      </if>
+      <if test="writedocname != null" >
+        writeDocName,
+      </if>
+      <if test="writeupdatetime != null" >
+        writeupdatetime,
+      </if>
+      <if test="verifydocname != null" >
+        verifyDocName,
+      </if>
+      <if test="verifydoccode != null" >
+        verifyDocCode,
+      </if>
+      <if test="verifyupdatetime != null" >
+        verifyupdatetime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NVARCHAR},
+      </if>
+      <if test="remoteReportId != null" >
+        #{remoteReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="reportImagePath != null" >
+        #{reportImagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="writedoccode != null" >
+        #{writedoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="writedocname != null" >
+        #{writedocname,jdbcType=VARCHAR},
+      </if>
+      <if test="writeupdatetime != null" >
+        #{writeupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifydocname != null" >
+        #{verifydocname,jdbcType=VARCHAR},
+      </if>
+      <if test="verifydoccode != null" >
+        #{verifydoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyupdatetime != null" >
+        #{verifyupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.TemporaryReport" >
+    update temporary_report
+    <set >
+      <if test="remoteReportId != null" >
+        remote_report_id = #{remoteReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        checknum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="reportImagePath != null" >
+        report_image_path = #{reportImagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="writedoccode != null" >
+        writeDocCode = #{writedoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="writedocname != null" >
+        writeDocName = #{writedocname,jdbcType=VARCHAR},
+      </if>
+      <if test="writeupdatetime != null" >
+        writeupdatetime = #{writeupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifydocname != null" >
+        verifyDocName = #{verifydocname,jdbcType=VARCHAR},
+      </if>
+      <if test="verifydoccode != null" >
+        verifyDocCode = #{verifydoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyupdatetime != null" >
+        verifyupdatetime = #{verifyupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.TemporaryReport" >
+    update temporary_report
+    set remote_report_id = #{remoteReportId,jdbcType=VARCHAR},
+      checknum = #{checknum,jdbcType=VARCHAR},
+      report_image_path = #{reportImagePath,jdbcType=VARCHAR},
+      writeDocCode = #{writedoccode,jdbcType=VARCHAR},
+      writeDocName = #{writedocname,jdbcType=VARCHAR},
+      writeupdatetime = #{writeupdatetime,jdbcType=TIMESTAMP},
+      verifyDocName = #{verifydocname,jdbcType=VARCHAR},
+      verifyDocCode = #{verifydoccode,jdbcType=VARCHAR},
+      verifyupdatetime = #{verifyupdatetime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=NVARCHAR}
+  </update>
+
+
+  <update id="updateIfHadVerified" parameterType="org.springmvc.pojo.TemporaryReport" >
+    update temporary_report
+    set
+      verifyDocName = #{verifydocname,jdbcType=VARCHAR},
+      verifyDocCode = #{verifydoccode,jdbcType=VARCHAR},
+      verifyupdatetime = #{verifyupdatetime,jdbcType=TIMESTAMP}
+    where remote_report_id = #{remoteReportId,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao_junior.DicomWorkListJuniorMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo_junior.DicomWorkListJunior" >
+    <id column="AccessionN" property="accessionn" jdbcType="VARCHAR" />
+    <result column="PatientID" property="patientid" jdbcType="VARCHAR" />
+    <result column="PatientNam" property="patientnam" jdbcType="VARCHAR" />
+    <result column="PatientBir" property="patientbir" jdbcType="CHAR" />
+    <result column="PatientSex" property="patientsex" jdbcType="VARCHAR" />
+    <result column="MedicalAle" property="medicalale" jdbcType="VARCHAR" />
+    <result column="ContrastAl" property="contrastal" jdbcType="VARCHAR" />
+    <result column="StudyInsta" property="studyinsta" jdbcType="VARCHAR" />
+    <result column="ReqPhysici" property="reqphysici" jdbcType="VARCHAR" />
+    <result column="ReqProcDes" property="reqprocdes" jdbcType="VARCHAR" />
+    <result column="Modality" property="modality" jdbcType="VARCHAR" />
+    <result column="ReqContras" property="reqcontras" jdbcType="VARCHAR" />
+    <result column="ScheduledA" property="scheduleda" jdbcType="VARCHAR" />
+    <result column="StartDate" property="startdate" jdbcType="CHAR" />
+    <result column="StartTime" property="starttime" jdbcType="VARCHAR" />
+    <result column="PerfPhysic" property="perfphysic" jdbcType="VARCHAR" />
+    <result column="SchedPSDes" property="schedpsdes" jdbcType="VARCHAR" />
+    <result column="SchedPSID" property="schedpsid" jdbcType="VARCHAR" />
+    <result column="SchedStati" property="schedstati" jdbcType="VARCHAR" />
+    <result column="SchedPSLoc" property="schedpsloc" jdbcType="VARCHAR" />
+    <result column="PreMedicat" property="premedicat" jdbcType="VARCHAR" />
+    <result column="SchedPSCom" property="schedpscom" jdbcType="VARCHAR" />
+    <result column="ReqProcID" property="reqprocid" jdbcType="VARCHAR" />
+    <result column="ReqProcPri" property="reqprocpri" jdbcType="VARCHAR" />
+    <result column="StudyID" property="studyid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AccessionN, PatientID, PatientNam, PatientBir, PatientSex, MedicalAle, ContrastAl, 
+    StudyInsta, ReqPhysici, ReqProcDes, Modality, ReqContras, ScheduledA, StartDate, 
+    StartTime, PerfPhysic, SchedPSDes, SchedPSID, SchedStati, SchedPSLoc, PreMedicat, 
+    SchedPSCom, ReqProcID, ReqProcPri, StudyID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dicom_worklist
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectByAccessionN" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  <include refid="Base_Column_List" />
+    from dicom_worklist
+    where AccessionN = #{c,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectStartDateByPatientId" resultType="java.lang.String" >
+    select StartDate
+    from dicom_worklist
+    where PatientID = #{patientid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dicom_worklist
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo_junior.DicomWorkListJunior" >
+    insert into dicom_worklist (AccessionN, PatientID, PatientNam, 
+      PatientBir, PatientSex, MedicalAle, 
+      ContrastAl, StudyInsta, ReqPhysici, 
+      ReqProcDes, Modality, ReqContras, 
+      ScheduledA, StartDate, StartTime, 
+      PerfPhysic, SchedPSDes, SchedPSID, 
+      SchedStati, SchedPSLoc, PreMedicat, 
+      SchedPSCom, ReqProcID, ReqProcPri, 
+      StudyID)
+    values (#{accessionn,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, #{patientnam,jdbcType=VARCHAR}, 
+      #{patientbir,jdbcType=CHAR}, #{patientsex,jdbcType=VARCHAR}, #{medicalale,jdbcType=VARCHAR}, 
+      #{contrastal,jdbcType=VARCHAR}, #{studyinsta,jdbcType=VARCHAR}, #{reqphysici,jdbcType=VARCHAR}, 
+      #{reqprocdes,jdbcType=VARCHAR}, #{modality,jdbcType=VARCHAR}, #{reqcontras,jdbcType=VARCHAR}, 
+      #{scheduleda,jdbcType=VARCHAR}, #{startdate,jdbcType=CHAR}, #{starttime,jdbcType=VARCHAR}, 
+      #{perfphysic,jdbcType=VARCHAR}, #{schedpsdes,jdbcType=VARCHAR}, #{schedpsid,jdbcType=VARCHAR}, 
+      #{schedstati,jdbcType=VARCHAR}, #{schedpsloc,jdbcType=VARCHAR}, #{premedicat,jdbcType=VARCHAR}, 
+      #{schedpscom,jdbcType=VARCHAR}, #{reqprocid,jdbcType=VARCHAR}, #{reqprocpri,jdbcType=VARCHAR}, 
+      #{studyid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo_junior.DicomWorkListJunior" >
+    insert into dicom_worklist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accessionn != null" >
+        AccessionN,
+      </if>
+      <if test="patientid != null" >
+        PatientID,
+      </if>
+      <if test="patientnam != null" >
+        PatientNam,
+      </if>
+      <if test="patientbir != null" >
+        PatientBir,
+      </if>
+      <if test="patientsex != null" >
+        PatientSex,
+      </if>
+      <if test="medicalale != null" >
+        MedicalAle,
+      </if>
+      <if test="contrastal != null" >
+        ContrastAl,
+      </if>
+      <if test="studyinsta != null" >
+        StudyInsta,
+      </if>
+      <if test="reqphysici != null" >
+        ReqPhysici,
+      </if>
+      <if test="reqprocdes != null" >
+        ReqProcDes,
+      </if>
+      <if test="modality != null" >
+        Modality,
+      </if>
+      <if test="reqcontras != null" >
+        ReqContras,
+      </if>
+      <if test="scheduleda != null" >
+        ScheduledA,
+      </if>
+      <if test="startdate != null" >
+        StartDate,
+      </if>
+      <if test="starttime != null" >
+        StartTime,
+      </if>
+      <if test="perfphysic != null" >
+        PerfPhysic,
+      </if>
+      <if test="schedpsdes != null" >
+        SchedPSDes,
+      </if>
+      <if test="schedpsid != null" >
+        SchedPSID,
+      </if>
+      <if test="schedstati != null" >
+        SchedStati,
+      </if>
+      <if test="schedpsloc != null" >
+        SchedPSLoc,
+      </if>
+      <if test="premedicat != null" >
+        PreMedicat,
+      </if>
+      <if test="schedpscom != null" >
+        SchedPSCom,
+      </if>
+      <if test="reqprocid != null" >
+        ReqProcID,
+      </if>
+      <if test="reqprocpri != null" >
+        ReqProcPri,
+      </if>
+      <if test="studyid != null" >
+        StudyID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accessionn != null" >
+        #{accessionn,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientnam != null" >
+        #{patientnam,jdbcType=VARCHAR},
+      </if>
+      <if test="patientbir != null" >
+        #{patientbir,jdbcType=CHAR},
+      </if>
+      <if test="patientsex != null" >
+        #{patientsex,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalale != null" >
+        #{medicalale,jdbcType=VARCHAR},
+      </if>
+      <if test="contrastal != null" >
+        #{contrastal,jdbcType=VARCHAR},
+      </if>
+      <if test="studyinsta != null" >
+        #{studyinsta,jdbcType=VARCHAR},
+      </if>
+      <if test="reqphysici != null" >
+        #{reqphysici,jdbcType=VARCHAR},
+      </if>
+      <if test="reqprocdes != null" >
+        #{reqprocdes,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null" >
+        #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="reqcontras != null" >
+        #{reqcontras,jdbcType=VARCHAR},
+      </if>
+      <if test="scheduleda != null" >
+        #{scheduleda,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=CHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="perfphysic != null" >
+        #{perfphysic,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpsdes != null" >
+        #{schedpsdes,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpsid != null" >
+        #{schedpsid,jdbcType=VARCHAR},
+      </if>
+      <if test="schedstati != null" >
+        #{schedstati,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpsloc != null" >
+        #{schedpsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="premedicat != null" >
+        #{premedicat,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpscom != null" >
+        #{schedpscom,jdbcType=VARCHAR},
+      </if>
+      <if test="reqprocid != null" >
+        #{reqprocid,jdbcType=VARCHAR},
+      </if>
+      <if test="reqprocpri != null" >
+        #{reqprocpri,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo_junior.DicomWorkListJunior" >
+    update dicom_worklist
+    <set >
+      <if test="patientid != null" >
+        PatientID = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientnam != null" >
+        PatientNam = #{patientnam,jdbcType=VARCHAR},
+      </if>
+      <if test="patientbir != null" >
+        PatientBir = #{patientbir,jdbcType=CHAR},
+      </if>
+      <if test="patientsex != null" >
+        PatientSex = #{patientsex,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalale != null" >
+        MedicalAle = #{medicalale,jdbcType=VARCHAR},
+      </if>
+      <if test="contrastal != null" >
+        ContrastAl = #{contrastal,jdbcType=VARCHAR},
+      </if>
+      <if test="studyinsta != null" >
+        StudyInsta = #{studyinsta,jdbcType=VARCHAR},
+      </if>
+      <if test="reqphysici != null" >
+        ReqPhysici = #{reqphysici,jdbcType=VARCHAR},
+      </if>
+      <if test="reqprocdes != null" >
+        ReqProcDes = #{reqprocdes,jdbcType=VARCHAR},
+      </if>
+      <if test="modality != null" >
+        Modality = #{modality,jdbcType=VARCHAR},
+      </if>
+      <if test="reqcontras != null" >
+        ReqContras = #{reqcontras,jdbcType=VARCHAR},
+      </if>
+      <if test="scheduleda != null" >
+        ScheduledA = #{scheduleda,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        StartDate = #{startdate,jdbcType=CHAR},
+      </if>
+      <if test="starttime != null" >
+        StartTime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="perfphysic != null" >
+        PerfPhysic = #{perfphysic,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpsdes != null" >
+        SchedPSDes = #{schedpsdes,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpsid != null" >
+        SchedPSID = #{schedpsid,jdbcType=VARCHAR},
+      </if>
+      <if test="schedstati != null" >
+        SchedStati = #{schedstati,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpsloc != null" >
+        SchedPSLoc = #{schedpsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="premedicat != null" >
+        PreMedicat = #{premedicat,jdbcType=VARCHAR},
+      </if>
+      <if test="schedpscom != null" >
+        SchedPSCom = #{schedpscom,jdbcType=VARCHAR},
+      </if>
+      <if test="reqprocid != null" >
+        ReqProcID = #{reqprocid,jdbcType=VARCHAR},
+      </if>
+      <if test="reqprocpri != null" >
+        ReqProcPri = #{reqprocpri,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        StudyID = #{studyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo_junior.DicomWorkListJunior" >
+    update dicom_worklist
+    set PatientID = #{patientid,jdbcType=VARCHAR},
+      PatientNam = #{patientnam,jdbcType=VARCHAR},
+      PatientBir = #{patientbir,jdbcType=CHAR},
+      PatientSex = #{patientsex,jdbcType=VARCHAR},
+      MedicalAle = #{medicalale,jdbcType=VARCHAR},
+      ContrastAl = #{contrastal,jdbcType=VARCHAR},
+      StudyInsta = #{studyinsta,jdbcType=VARCHAR},
+      ReqPhysici = #{reqphysici,jdbcType=VARCHAR},
+      ReqProcDes = #{reqprocdes,jdbcType=VARCHAR},
+      Modality = #{modality,jdbcType=VARCHAR},
+      ReqContras = #{reqcontras,jdbcType=VARCHAR},
+      ScheduledA = #{scheduleda,jdbcType=VARCHAR},
+      StartDate = #{startdate,jdbcType=CHAR},
+      StartTime = #{starttime,jdbcType=VARCHAR},
+      PerfPhysic = #{perfphysic,jdbcType=VARCHAR},
+      SchedPSDes = #{schedpsdes,jdbcType=VARCHAR},
+      SchedPSID = #{schedpsid,jdbcType=VARCHAR},
+      SchedStati = #{schedstati,jdbcType=VARCHAR},
+      SchedPSLoc = #{schedpsloc,jdbcType=VARCHAR},
+      PreMedicat = #{premedicat,jdbcType=VARCHAR},
+      SchedPSCom = #{schedpscom,jdbcType=VARCHAR},
+      ReqProcID = #{reqprocid,jdbcType=VARCHAR},
+      ReqProcPri = #{reqprocpri,jdbcType=VARCHAR},
+      StudyID = #{studyid,jdbcType=VARCHAR}
+    where AccessionN = #{accessionn,jdbcType=VARCHAR}
+  </update>
+</mapper>

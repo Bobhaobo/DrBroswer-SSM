@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.CompareJuniorMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.CompareJunior" >
+    <id column="id" property="id" jdbcType="NVARCHAR" />
+    <result column="checknum" property="checknum" jdbcType="VARCHAR" />
+    <result column="hosid" property="hosid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, checknum, hosid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from compare_junior
+    where id = #{id,jdbcType=NVARCHAR}
+  </select>
+
+  <select id="selectByCheckNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from compare_junior
+    where checknum = #{checknum,jdbcType=NVARCHAR}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from compare_junior
+    where id = #{id,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.CompareJunior" >
+    insert into compare_junior (id, checknum, hosid
+      )
+    values (#{id,jdbcType=NVARCHAR}, #{checknum,jdbcType=VARCHAR}, #{hosid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.CompareJunior" >
+    insert into compare_junior
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="checknum != null" >
+        checknum,
+      </if>
+      <if test="hosid != null" >
+        hosid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NVARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="hosid != null" >
+        #{hosid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.CompareJunior" >
+    update compare_junior
+    <set >
+      <if test="checknum != null" >
+        checknum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="hosid != null" >
+        hosid = #{hosid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.CompareJunior" >
+    update compare_junior
+    set checknum = #{checknum,jdbcType=VARCHAR},
+      hosid = #{hosid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=NVARCHAR}
+  </update>
+</mapper>

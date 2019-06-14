@@ -1,0 +1,120 @@
+<script type="text/javascript">
+    function lll(){
+        alert("@@@");
+    BJUI.navtab({
+    id:'inner_searchdafM',
+    url:'zlk_html/main_lung_clinic_search.jsp?idCard='+ $("#idcard00").val() +"&patName1s2=" +$("#patname00").val() +"&patientId909=" +$("#patientid00").val()
+        +  "&datetime23=" +$("#datetime00").val() +  "&entity02=" +$("#entity02").val(),
+    title:'临床信息'
+    })
+    }
+    function sss(){
+        alert($("#datetime00").val());
+        BJUI.navtab({
+            id:'inner_searchdaMf',
+            // url:'zlk_html/main_lung_lung_exam.jsp?idCards='+ $("#idcard00").val() +"&patName1s=" +$("#patname00").val(),
+            url:'zlk_html/main_lung_lung_exam_middle.jsp?idCards8='+ $("#idcard00").val() +"&patName1s=" +$("#patname00").val() +"&patientId99=" +$("#patientid00").val()
+            +  "&datetime22=" +$("#datetime00").val() +  "&entity022=" +$("#entity02").val(),
+            title:'检验信息'
+        })
+    }
+    function mmm(){
+        alert($("#datetime00").val());
+        alert($("#patname00").val());
+        BJUI.navtab({
+            id:'inner_searchdaMf',
+            // url:'zlk_html/main_lung_lung_exam.jsp?idCards='+ $("#idcard00").val() +"&patName1s=" +$("#patname00").val(),
+            url:'zlk_html/main_lung_pathology_exam_middle.jsp?idCards08='+ $("#idcard00").val() +"&patNames08=" +$("#patname00").val() +"&patientId08=" +$("#patientid00").val()
+                +  "&datetime08=" +$("#datetime00").val() +  "&entity0222=" +$("#entity02").val(),
+            title:'检验信息'
+        })
+    }
+</script>
+<html>
+<head>
+    <script language="javascript">
+        function change(x,y)
+        {
+            if(x.style.display=="none")  //展开树形的子节点
+            {
+                x.style.display="";
+                y.src="../images/jian.jpg";
+            }
+            else if(x.style.display=="") //收缩树形的子节点
+            {
+                x.style.display="none";
+                y.src="../images/jia.jpg";
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div style="margin:0 3% 0 3%">
+    <form id="register" data-toggle="validate" >
+        <fieldset style="height: 800px">
+            <legend style="font-family:verdana;font-size:130%;color:orange">患者检索：</legend>
+            <div class="bjui-row col-3">
+                <label class="row-label">身份证号：</label>
+                <div class="row-input">
+                    <input type="text"  id="idcard00">
+                </div>
+                <label class="row-label">患者姓名：</label>
+                <div class="row-input">
+                    <input type="text"  id="patname00">
+                </div>
+                <label class="row-label">患者ID：</label>
+                <div class="row-input">
+                    <input type="text"  id="patientid00">
+                </div>
+                <label class="row-label">就诊时间：</label>
+                <div class="row-input">
+                    <input type="text" value="" class="date" data-toggle="datepicker" placeholder="点击选择日期" name="date" id="datetime00" size="20">
+                </div>
+                <label class="row-label">病种名称：</label>
+                <div class="row-input ">
+                    <select name="entity02" id="entity02" data-toggle="selectpicker" data-rule="required" data-width="130" >
+                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                        <option value="肺" >肺</option>
+                        <option value="乳腺" >乳腺</option>
+                        <option value="肝" >肝</option>
+                        <option value="胃" >胃</option>
+                    </select>
+                </div>
+            </div>
+        <!--</fieldset>-->
+        <!--<fieldset>-->
+<table width="50" height="28" border="0"  cellpadding="0" cellspacing="0" onclick="change(tz1,img_tz1)" style="cursor: hand;margin-left: 110px">
+    <tr>
+        <td> <img  name="img_tz1" src="../images/jia.jpg" /></td>
+        <td><input type="button" value="肺部" style="border:0px;text-align:left;background:none"></td>
+    </tr>
+</table>
+<table id="tz1" style="display:none;margin-left: 110px">
+    <tr>
+        <td width="40" height="24" >&nbsp;</td>
+        <td width="114" >
+            <!--<div align="left">临床信息</div></td>-->
+            <input type="button" value="临床信息"  onclick=javascript:lll() style="border:0px;background:none"></td>
+
+    </tr>
+    <tr>
+        <td height="24" >&nbsp;</td>
+        <td height="20" >
+            <!--<div align="left">检查信息</div>-->
+            <input type="button" value="检查信息"  onclick=javascript:sss() style="border:0px;background:none"></td>
+        </td>
+    </tr>
+    <tr>
+        <td width="40" height="24" >&nbsp;</td>
+        <td width="114" >
+            <!--<div align="left">临床信息</div></td>-->
+            <input type="button" value="病理信息"  onclick=javascript:mmm() style="border:0px;background:none"></td>
+
+    </tr>
+</table>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<script type="text/javascript" src="zlk_js/pat_flow.js"></script>
+<div class="bjui-pageContent">
+    <input type="hidden" id="modality1" />
+    <input type="hidden" id="pat_type1" />
+    <form action="" id="j_patient_form" name="j_patient_form">
+        <fieldset><legend style="font-family:verdana;font-size:130%;color:orange;">患者信息检索：</legend>
+            <div class="bjui-row col-4">
+                <label class="row-label">检查类型：</label>
+                <div class="row-input">
+                    <select name="modality" id="modality" class="modality" data-toggle="selectpicker" data-width="150"  onchange="connectModality(this.value)">
+                        <option value = "">全部</option>
+                        <option value = "CT">CT</option>
+                        <option value = "CR">CR</option>
+                        <option value = "DX">DX</option>
+                        <option value = "MR">MR</option>
+                        <option value = "US">US</option>
+                    </select>
+                </div>
+                <label class="row-label">患者类型：</label>
+                <div class="row-input">
+                    <select name="pat_type" id="pat_type"  class="pat_type" data-toggle="selectpicker" data-width="150"  onchange="connectPat_type(this.value)">
+                        <option value = "">全部</option>
+                        <option value = "门诊">门诊</option>
+                        <option value = "住院">住院</option>
+                        <option value = "急诊">急诊</option>
+                        <option value = "其他">其他</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '患者信息',
+        showToolbar: false,
+        dataUrl: 'remote/getAllRemotePat',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:60},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+        <thead>
+        <tr>
+            <th rowspan="2" align="center" data-options="{name:'checknum',align:'center',width:170,menu:false}">检查号</th>
+            <th rowspan="2" align="center" data-options="{name:'name',align:'center',width:170,menu:false}">姓名</th>
+            <th rowspan="2" align="center" data-options="{name:'sex',align:'center',width:170,menu:false}">性别</th>
+            <th rowspan="2" align="center" data-options="{name:'age',align:'center',width:170,menu:false}">年龄</th>
+            <th rowspan="2" align="center" data-options="{name:'pattype',align:'center',width:170,menu:false}">患者来源</th>
+            <th rowspan="2" align="center" data-options="{name:'modality',align:'center',width:170,menu:false}">检查类型</th>
+            <th rowspan="2" align="center" data-options="{name:'remotehos',align:'center',width:170,menu:false}">申请医院</th>
+            <th rowspan="2" align="center" data-options="{name:'flag',align:'center',width:170,menu:false}">当前状态</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:detail}">患者流程</th>
+        </tr>
+        </thead>
+    </table>
+
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="button" class="btn-orange" id="qingkong">搜索重置</button></li>
+        <li><button type="button" class="btn-default" id="report_search_j213">报告查询</button></li>
+    </ul>
+</div>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.AllocateMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Allocate" >
+    <id column="id" property="id" jdbcType="NVARCHAR" />
+    <result column="checknum" property="checknum" jdbcType="VARCHAR" />
+    <result column="allocatedoccode" property="allocatedoccode" jdbcType="VARCHAR" />
+    <result column="allocatetime" property="allocatetime" jdbcType="TIMESTAMP" />
+    <result column="allocateddoccode" property="allocateddoccode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, checknum, allocatedoccode, allocatetime, allocateddoccode, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from allocate
+    where id = #{id,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from allocate
+    where id = #{id,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Allocate" >
+    insert into allocate (id, checknum, allocatedoccode, 
+      allocatetime, allocateddoccode, remark
+      )
+    values (#{id,jdbcType=NVARCHAR}, #{checknum,jdbcType=VARCHAR}, #{allocatedoccode,jdbcType=VARCHAR}, 
+      #{allocatetime,jdbcType=TIMESTAMP}, #{allocateddoccode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Allocate" >
+    insert into allocate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="checknum != null" >
+        checknum,
+      </if>
+      <if test="allocatedoccode != null" >
+        allocatedoccode,
+      </if>
+      <if test="allocatetime != null" >
+        allocatetime,
+      </if>
+      <if test="allocateddoccode != null" >
+        allocateddoccode,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NVARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="allocatedoccode != null" >
+        #{allocatedoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="allocatetime != null" >
+        #{allocatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allocateddoccode != null" >
+        #{allocateddoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Allocate" >
+    update allocate
+    <set >
+      <if test="checknum != null" >
+        checknum = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="allocatedoccode != null" >
+        allocatedoccode = #{allocatedoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="allocatetime != null" >
+        allocatetime = #{allocatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allocateddoccode != null" >
+        allocateddoccode = #{allocateddoccode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Allocate" >
+    update allocate
+    set checknum = #{checknum,jdbcType=VARCHAR},
+      allocatedoccode = #{allocatedoccode,jdbcType=VARCHAR},
+      allocatetime = #{allocatetime,jdbcType=TIMESTAMP},
+      allocateddoccode = #{allocateddoccode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=NVARCHAR}
+  </update>
+</mapper>

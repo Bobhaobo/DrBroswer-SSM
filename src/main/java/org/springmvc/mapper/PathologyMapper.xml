@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao.PathologyMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo.Pathology" >
+    <id column="idcard" property="idcard" jdbcType="NVARCHAR" />
+    <result column="patname" property="patname" jdbcType="NVARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="NUMERIC" />
+    <result column="report_date" property="reportDate" jdbcType="TIMESTAMP" />
+    <result column="send_hospital" property="sendHospital" jdbcType="NVARCHAR" />
+    <result column="send_dept" property="sendDept" jdbcType="NVARCHAR" />
+    <result column="check_doc" property="checkDoc" jdbcType="NVARCHAR" />
+    <result column="specimen_name" property="specimenName" jdbcType="NVARCHAR" />
+    <result column="clinic_diagnosis" property="clinicDiagnosis" jdbcType="NVARCHAR" />
+    <result column="eye_view" property="eyeView" jdbcType="NVARCHAR" />
+    <result column="glass_view" property="glassView" jdbcType="NVARCHAR" />
+    <result column="pathology_diagnosis" property="pathologyDiagnosis" jdbcType="NVARCHAR" />
+    <result column="patientid" property="patientid" jdbcType="NVARCHAR" />
+    <result column="entity" property="entity" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    idcard, patname, sex, age, report_date, send_hospital, send_dept, check_doc, specimen_name, 
+    clinic_diagnosis, eye_view, glass_view, pathology_diagnosis, patientid,entity
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pathology
+    where idcard = #{idcard,jdbcType=NVARCHAR}
+  </select>
+
+  <select id="selectAllInfoByidcard" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pathology
+    where idcard = #{idcard,jdbcType=NVARCHAR}
+  </select>
+
+  <select id="selectAllInfoByEntity" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pathology
+    where entity = #{entity,jdbcType=NVARCHAR}
+  </select>
+
+  <select id="selectAllInfoBypatname" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pathology
+    where patname = #{patname,jdbcType=NVARCHAR}
+  </select>
+
+
+  <select id="selectAllInfoBydate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pathology
+    where convert(char(10),report_date,120) = #{reportDate,jdbcType=NVARCHAR}
+  </select>
+
+
+  <select id="selectAllInfoBypatid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pathology
+    where patientid = #{patientid,jdbcType=NVARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pathology
+    where idcard = #{idcard,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo.Pathology" >
+    insert into pathology (idcard, patname, sex, 
+      age, report_date, send_hospital, 
+      send_dept, check_doc, specimen_name, 
+      clinic_diagnosis, eye_view, glass_view, 
+      pathology_diagnosis, patientid)
+    values (#{idcard,jdbcType=NVARCHAR}, #{patname,jdbcType=NVARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{age,jdbcType=NUMERIC}, #{reportDate,jdbcType=TIMESTAMP}, #{sendHospital,jdbcType=NVARCHAR}, 
+      #{sendDept,jdbcType=NVARCHAR}, #{checkDoc,jdbcType=NVARCHAR}, #{specimenName,jdbcType=NVARCHAR}, 
+      #{clinicDiagnosis,jdbcType=NVARCHAR}, #{eyeView,jdbcType=NVARCHAR}, #{glassView,jdbcType=NVARCHAR}, 
+      #{pathologyDiagnosis,jdbcType=NVARCHAR}, #{patientid,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo.Pathology" >
+    insert into pathology
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="patname != null" >
+        patname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="sendHospital != null" >
+        send_hospital,
+      </if>
+      <if test="sendDept != null" >
+        send_dept,
+      </if>
+      <if test="checkDoc != null" >
+        check_doc,
+      </if>
+      <if test="specimenName != null" >
+        specimen_name,
+      </if>
+      <if test="clinicDiagnosis != null" >
+        clinic_diagnosis,
+      </if>
+      <if test="eyeView != null" >
+        eye_view,
+      </if>
+      <if test="glassView != null" >
+        glass_view,
+      </if>
+      <if test="pathologyDiagnosis != null" >
+        pathology_diagnosis,
+      </if>
+      <if test="patientid != null" >
+        patientid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idcard != null" >
+        #{idcard,jdbcType=NVARCHAR},
+      </if>
+      <if test="patname != null" >
+        #{patname,jdbcType=NVARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendHospital != null" >
+        #{sendHospital,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendDept != null" >
+        #{sendDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkDoc != null" >
+        #{checkDoc,jdbcType=NVARCHAR},
+      </if>
+      <if test="specimenName != null" >
+        #{specimenName,jdbcType=NVARCHAR},
+      </if>
+      <if test="clinicDiagnosis != null" >
+        #{clinicDiagnosis,jdbcType=NVARCHAR},
+      </if>
+      <if test="eyeView != null" >
+        #{eyeView,jdbcType=NVARCHAR},
+      </if>
+      <if test="glassView != null" >
+        #{glassView,jdbcType=NVARCHAR},
+      </if>
+      <if test="pathologyDiagnosis != null" >
+        #{pathologyDiagnosis,jdbcType=NVARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo.Pathology" >
+    update pathology
+    <set >
+      <if test="patname != null" >
+        patname = #{patname,jdbcType=NVARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendHospital != null" >
+        send_hospital = #{sendHospital,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendDept != null" >
+        send_dept = #{sendDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkDoc != null" >
+        check_doc = #{checkDoc,jdbcType=NVARCHAR},
+      </if>
+      <if test="specimenName != null" >
+        specimen_name = #{specimenName,jdbcType=NVARCHAR},
+      </if>
+      <if test="clinicDiagnosis != null" >
+        clinic_diagnosis = #{clinicDiagnosis,jdbcType=NVARCHAR},
+      </if>
+      <if test="eyeView != null" >
+        eye_view = #{eyeView,jdbcType=NVARCHAR},
+      </if>
+      <if test="glassView != null" >
+        glass_view = #{glassView,jdbcType=NVARCHAR},
+      </if>
+      <if test="pathologyDiagnosis != null" >
+        pathology_diagnosis = #{pathologyDiagnosis,jdbcType=NVARCHAR},
+      </if>
+      <if test="patientid != null" >
+        patientid = #{patientid,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where idcard = #{idcard,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo.Pathology" >
+    update pathology
+    set patname = #{patname,jdbcType=NVARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=NUMERIC},
+      report_date = #{reportDate,jdbcType=TIMESTAMP},
+      send_hospital = #{sendHospital,jdbcType=NVARCHAR},
+      send_dept = #{sendDept,jdbcType=NVARCHAR},
+      check_doc = #{checkDoc,jdbcType=NVARCHAR},
+      specimen_name = #{specimenName,jdbcType=NVARCHAR},
+      clinic_diagnosis = #{clinicDiagnosis,jdbcType=NVARCHAR},
+      eye_view = #{eyeView,jdbcType=NVARCHAR},
+      glass_view = #{glassView,jdbcType=NVARCHAR},
+      pathology_diagnosis = #{pathologyDiagnosis,jdbcType=NVARCHAR},
+      patientid = #{patientid,jdbcType=NVARCHAR}
+    where idcard = #{idcard,jdbcType=NVARCHAR}
+  </update>
+</mapper>

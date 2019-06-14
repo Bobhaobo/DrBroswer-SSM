@@ -1,0 +1,183 @@
+<script type="text/javascript">
+    $("#lung_search0").click(function(){
+        // alert("1111111111");
+        $.ajax({
+            type:"post",
+            url:"pathology/getPathologyInfo?idcard022="+ $("#IDcard170").val(),
+            dataType: "html",
+            async:false,
+            success:function(data){
+                alert(data);
+                var pro=null;
+                // pro=JSON.parse(data);
+                pro=eval("("+data+")");
+                // $("#pat_name").val(pro.list[0].patname);//赋值
+                $("#patnamell2").val(pro.pathologydto.patname);
+                alert(pro.pathologydto.patname);
+                $("#age132").val(pro.pathologydto.age);
+                $("#genderll92").val(pro.pathologydto.sex);
+                $("#ID32").val(pro.pathologydto.patientid);
+                $("#IDcard12").val(pro.pathologydto.idcard);
+                $("#examHos66").val(pro.pathologydto.sendHospital);
+                $("#examDept66").val(pro.pathologydto.sendDept);
+                $("#examDoc66").val(pro.pathologydto.checkDoc);
+                $("#specimen").val(pro.pathologydto.specimenName);
+                $("#reportDate2").val(pro.pathologydto.reportDate);
+                $("#entity113").val(pro.pathologydto.entity);
+                // alert("$$$");
+
+                document.getElementById("clinicDiagnosis").innerHTML=(pro.pathologydto.clinicDiagnosis);
+                document.getElementById("eyeView").innerHTML=(pro.pathologydto.eyeView);
+                document.getElementById("glassView").innerHTML=(pro.pathologydto.glassView);
+                document.getElementById("pathologySuggestion").innerHTML=(pro.pathologydto.pathologyDiagnosis);
+                // alert($("#pat_name").val());    //取值
+                // alert("lalala");
+                document.getElementById("myimage11").src=(pro.image);
+            }
+        });
+    });
+</script>
+<div class="bjui-pageContent">
+    <form action="" id="j_patient_form0" name="j_patient_form">
+        <fieldset><legend style="font-family:verdana;font-size:130%;color:orange;">患者检索：</legend>
+            <div class="bjui-row col-4">
+                <label class="row-label">患者姓名：</label>
+                <div class="row-input">
+                    <input type="text" name="patname66" id="patnamell0" class="name" size="20">
+                </div>
+                <label class="row-label">性别：</label>
+                <div class="row-input">
+                    <input type="text" name="genderll" id="genderll90" class="clinic_id" size="20">
+                </div>
+                <label class="row-label">年龄：</label>
+                <div class="row-input">
+                    <input type="text" name="age13" id="age130" class="age13" size="20">
+                </div>
+                <label class="row-label">病人ID：</label>
+                <div class="row-input">
+                    <input type="text" name="ID3" id="ID370" class="ID" size="20">
+                </div>
+                <label class="row-label">身份证号：</label>
+                <div class="row-input">
+                    <input type="text" name="ID3" id="IDcard170" class="ID" size="20">
+                </div>
+                <label class="row-label">病种：</label>
+                <div class="row-input">
+                    <input type="text" name="entity112" id="entity112"  size="20">
+                </div>
+                <label class="row-label">送检医院：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examHos1"  size="20">
+                </div>
+                <label class="row-label">送检部门：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examDept1"  size="20">
+                </div>
+                <label class="row-label">送检医师：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examDoc1"  size="20">
+                </div>
+
+                <!--<label class="row-label">病种：</label>-->
+                <!--<div class="row-input">-->
+                <!--<input type="text" name="entity" id="entity3" class="entity" size="20" value="肺癌" readonly="">-->
+                <!--</div>-->
+                <label class="row-label">标本名称：</label>
+                <div class="row-input">
+                    <input type="text" name="checkpart" id="checkpart1"  size="20">
+                </div>
+                <label class="row-label">报告日期：</label>
+                <div class="row-input">
+                    <input type="text" name="reportDate" id="reportDate0"  size="20">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <form action="" id="j_patient_form1" name="j_patient_form">
+        <fieldset><legend style="font-family:verdana;font-size:130%;color:orange;">检索结果：</legend>
+            <div class="bjui-row col-4">
+                <label class="row-label">患者姓名：</label>
+                <div class="row-input">
+                    <input type="text" name="patname66" id="patnamell2" class="name" size="20">
+                </div>
+                <label class="row-label">性别：</label>
+                <div class="row-input">
+                    <input type="text" name="genderll" id="genderll92" class="clinic_id" size="20">
+                </div>
+                <label class="row-label">年龄：</label>
+                <div class="row-input">
+                    <input type="text" name="age13" id="age132" class="age13" size="20">
+                </div>
+                <label class="row-label">病人ID：</label>
+                <div class="row-input">
+                    <input type="text" name="ID3" id="ID32" class="ID" size="20">
+                </div>
+                <label class="row-label">身份证号：</label>
+                <div class="row-input">
+                    <input type="text" name="ID3" id="IDcard12" class="ID" size="20">
+                </div>
+                <label class="row-label">病种：</label>
+                <div class="row-input">
+                    <input type="text" name="entity113" id="entity113" class="ID" size="20">
+                </div>
+                <label class="row-label">送检医院：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examHos66"  size="20">
+                </div>
+                <label class="row-label">送检部门：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examDept66"  size="20">
+                </div>
+                <label class="row-label">送检医师：</label>
+                <div class="row-input">
+                    <input type="text" name="examDoc6" id="examDoc66"  size="20">
+                </div>
+
+                <!--<label class="row-label">病种：</label>-->
+                <!--<div class="row-input">-->
+                <!--<input type="text" name="entity" id="entity3" class="entity" size="20" value="肺癌" readonly="">-->
+                <!--</div>-->
+                <label class="row-label">标本名称：</label>
+                <div class="row-input">
+                    <input type="text" name="checkpart" id="specimen"  size="20">
+                </div>
+                <label class="row-label">报告日期：</label>
+                <div class="row-input">
+                    <input type="text" name="reportDate" id="reportDate2"  size="20">
+                </div>
+                <!--<label class="row-label">病种：</label>-->
+                <!--<div class="row-input">-->
+                <!--<input type="text" name="entity" id="entity3" class="entity" size="20" value="肺癌" readonly="">-->
+                <!--</div>-->
+            </div>
+            <div style="margin-left:11%;margin-top: 26px; width: 350px;height: 200px">
+                <img id="myimage11"  alt="肺部图片" />
+            </div>
+            <div>
+                <div style="margin-left:4%;float: left;margin-right: 190px">
+                <label >临床诊断：</label><br/>
+                <textarea id="clinicDiagnosis" rows="12" cols="65"></textarea>
+                </div>
+                <div style="float: left">
+                <label >肉眼所见：</label><br/>
+                <textarea id="eyeView" rows="12" cols="65"></textarea><br/>
+                </div><br/>
+                <div style="margin-left:4%;float: left;margin-right: 190px">
+                <label >镜下所见：</label><br/>
+                <textarea id="glassView" rows="12" cols="65"></textarea>
+                </div>
+                <div style="float: left">
+                <label >病理诊断：</label><br/>
+                <textarea id="pathologySuggestion" rows="12" cols="65"></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="reset" class="btn-orange" form="j_patient_form0">搜索重置</button></li>
+        <li><button type="button" class="btn-default" id="lung_search0">信息查询</button></li>
+    </ul>
+</div>
+

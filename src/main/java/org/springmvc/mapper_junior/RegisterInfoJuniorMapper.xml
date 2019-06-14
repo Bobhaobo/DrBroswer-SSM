@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.springmvc.dao_junior.RegisterInfoJuniorMapper" >
+  <resultMap id="BaseResultMap" type="org.springmvc.pojo_junior.RegisterInfoJunior" >
+    <id column="CheckNum" property="checknum" jdbcType="VARCHAR" />
+    <result column="RecordID" property="recordid" jdbcType="VARCHAR" />
+    <result column="RegisterTime" property="registertime" jdbcType="TIMESTAMP" />
+    <result column="OperatorCode" property="operatorcode" jdbcType="VARCHAR" />
+    <result column="PayFlag" property="payflag" jdbcType="BIT" />
+    <result column="PayCount" property="paycount" jdbcType="NUMERIC" />
+    <result column="PatTypeCode" property="pattypecode" jdbcType="INTEGER" />
+    <result column="ClinicID" property="clinicid" jdbcType="VARCHAR" />
+    <result column="PatientID" property="patientid" jdbcType="VARCHAR" />
+    <result column="PatName" property="patname" jdbcType="VARCHAR" />
+    <result column="PatNamePY" property="patnamepy" jdbcType="VARCHAR" />
+    <result column="PatGender" property="patgender" jdbcType="VARCHAR" />
+    <result column="PatBirthdate" property="patbirthdate" jdbcType="TIMESTAMP" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="YiBaoID" property="yibaoid" jdbcType="VARCHAR" />
+    <result column="IdentityID" property="identityid" jdbcType="VARCHAR" />
+    <result column="Telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="PatRoomCode" property="patroomcode" jdbcType="VARCHAR" />
+    <result column="BedNo" property="bedno" jdbcType="VARCHAR" />
+    <result column="ExamItemCode" property="examitemcode" jdbcType="VARCHAR" />
+    <result column="Flag" property="flag" jdbcType="VARCHAR" />
+    <result column="DeptCode" property="deptcode" jdbcType="VARCHAR" />
+    <result column="NewPatient" property="newpatient" jdbcType="BIT" />
+    <result column="Age" property="age" jdbcType="NUMERIC" />
+    <result column="PatRoomName" property="patroomname" jdbcType="VARCHAR" />
+    <result column="DeptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="ExamItemName" property="examitemname" jdbcType="VARCHAR" />
+    <result column="AgeType" property="agetype" jdbcType="VARCHAR" />
+    <result column="PhotoDate" property="photodate" jdbcType="TIMESTAMP" />
+    <result column="MakerCode" property="makercode" jdbcType="VARCHAR" />
+    <result column="MakerName" property="makername" jdbcType="VARCHAR" />
+    <result column="ExamNameCode" property="examnamecode" jdbcType="VARCHAR" />
+    <result column="ExamNameName" property="examnamename" jdbcType="VARCHAR" />
+    <result column="DevCode" property="devcode" jdbcType="VARCHAR" />
+    <result column="DevName" property="devname" jdbcType="VARCHAR" />
+    <result column="IfUsingFlag" property="ifusingflag" jdbcType="BIT" />
+    <result column="IsDicomFlag" property="isdicomflag" jdbcType="VARCHAR" />
+    <result column="cardno" property="cardno" jdbcType="VARCHAR" />
+    <result column="jcbw" property="jcbw" jdbcType="VARCHAR" />
+    <result column="jclb" property="jclb" jdbcType="VARCHAR" />
+    <result column="sjmd" property="sjmd" jdbcType="VARCHAR" />
+    <result column="jcsf" property="jcsf" jdbcType="VARCHAR" />
+    <result column="lczd" property="lczd" jdbcType="VARCHAR" />
+    <result column="sqdbh" property="sqdbh" jdbcType="VARCHAR" />
+    <result column="isRegist" property="isregist" jdbcType="VARCHAR" />
+    <result column="xuhao" property="xuhao" jdbcType="VARCHAR" />
+    <result column="isPrint" property="isprint" jdbcType="VARCHAR" />
+    <result column="StudyID" property="studyid" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="nowOperator" property="nowoperator" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CheckNum, RecordID, RegisterTime, OperatorCode, PayFlag, PayCount, PatTypeCode, ClinicID, 
+    PatientID, PatName, PatNamePY, PatGender, PatBirthdate, Address, YiBaoID, IdentityID, 
+    Telephone, PatRoomCode, BedNo, ExamItemCode, Flag, DeptCode, NewPatient, Age, PatRoomName, 
+    DeptName, ExamItemName, AgeType, PhotoDate, MakerCode, MakerName, ExamNameCode, ExamNameName, 
+    DevCode, DevName, IfUsingFlag, IsDicomFlag, cardno, jcbw, jclb, sjmd, jcsf, lczd, 
+    sqdbh, isRegist, xuhao, isPrint, StudyID, district, nowOperator
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from register_info
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectByFlag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from register_info
+    where Flag = #{flag,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectByRecordId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from register_info
+    where RecordID = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from register_info
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.springmvc.pojo_junior.RegisterInfoJunior" >
+    insert into register_info (CheckNum, RecordID, RegisterTime, 
+      OperatorCode, PayFlag, PayCount, 
+      PatTypeCode, ClinicID, PatientID, 
+      PatName, PatNamePY, PatGender, 
+      PatBirthdate, Address, YiBaoID, 
+      IdentityID, Telephone, PatRoomCode, 
+      BedNo, ExamItemCode, Flag, 
+      DeptCode, NewPatient, Age, 
+      PatRoomName, DeptName, ExamItemName, 
+      AgeType, PhotoDate, MakerCode, 
+      MakerName, ExamNameCode, ExamNameName, 
+      DevCode, DevName, IfUsingFlag, 
+      IsDicomFlag, cardno, jcbw, 
+      jclb, sjmd, jcsf, lczd, 
+      sqdbh, isRegist, xuhao, 
+      isPrint, StudyID, district, 
+      nowOperator)
+    values (#{checknum,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR}, #{registertime,jdbcType=TIMESTAMP}, 
+      #{operatorcode,jdbcType=VARCHAR}, #{payflag,jdbcType=BIT}, #{paycount,jdbcType=NUMERIC}, 
+      #{pattypecode,jdbcType=INTEGER}, #{clinicid,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, 
+      #{patname,jdbcType=VARCHAR}, #{patnamepy,jdbcType=VARCHAR}, #{patgender,jdbcType=VARCHAR}, 
+      #{patbirthdate,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, #{yibaoid,jdbcType=VARCHAR}, 
+      #{identityid,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{patroomcode,jdbcType=VARCHAR}, 
+      #{bedno,jdbcType=VARCHAR}, #{examitemcode,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{deptcode,jdbcType=VARCHAR}, #{newpatient,jdbcType=BIT}, #{age,jdbcType=NUMERIC}, 
+      #{patroomname,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, #{examitemname,jdbcType=VARCHAR}, 
+      #{agetype,jdbcType=VARCHAR}, #{photodate,jdbcType=TIMESTAMP}, #{makercode,jdbcType=VARCHAR}, 
+      #{makername,jdbcType=VARCHAR}, #{examnamecode,jdbcType=VARCHAR}, #{examnamename,jdbcType=VARCHAR}, 
+      #{devcode,jdbcType=VARCHAR}, #{devname,jdbcType=VARCHAR}, #{ifusingflag,jdbcType=BIT}, 
+      #{isdicomflag,jdbcType=VARCHAR}, #{cardno,jdbcType=VARCHAR}, #{jcbw,jdbcType=VARCHAR}, 
+      #{jclb,jdbcType=VARCHAR}, #{sjmd,jdbcType=VARCHAR}, #{jcsf,jdbcType=VARCHAR}, #{lczd,jdbcType=VARCHAR}, 
+      #{sqdbh,jdbcType=VARCHAR}, #{isregist,jdbcType=VARCHAR}, #{xuhao,jdbcType=VARCHAR}, 
+      #{isprint,jdbcType=VARCHAR}, #{studyid,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{nowoperator,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.springmvc.pojo_junior.RegisterInfoJunior" >
+    insert into register_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="checknum != null" >
+        CheckNum,
+      </if>
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="registertime != null" >
+        RegisterTime,
+      </if>
+      <if test="operatorcode != null" >
+        OperatorCode,
+      </if>
+      <if test="payflag != null" >
+        PayFlag,
+      </if>
+      <if test="paycount != null" >
+        PayCount,
+      </if>
+      <if test="pattypecode != null" >
+        PatTypeCode,
+      </if>
+      <if test="clinicid != null" >
+        ClinicID,
+      </if>
+      <if test="patientid != null" >
+        PatientID,
+      </if>
+      <if test="patname != null" >
+        PatName,
+      </if>
+      <if test="patnamepy != null" >
+        PatNamePY,
+      </if>
+      <if test="patgender != null" >
+        PatGender,
+      </if>
+      <if test="patbirthdate != null" >
+        PatBirthdate,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="yibaoid != null" >
+        YiBaoID,
+      </if>
+      <if test="identityid != null" >
+        IdentityID,
+      </if>
+      <if test="telephone != null" >
+        Telephone,
+      </if>
+      <if test="patroomcode != null" >
+        PatRoomCode,
+      </if>
+      <if test="bedno != null" >
+        BedNo,
+      </if>
+      <if test="examitemcode != null" >
+        ExamItemCode,
+      </if>
+      <if test="flag != null" >
+        Flag,
+      </if>
+      <if test="deptcode != null" >
+        DeptCode,
+      </if>
+      <if test="newpatient != null" >
+        NewPatient,
+      </if>
+      <if test="age != null" >
+        Age,
+      </if>
+      <if test="patroomname != null" >
+        PatRoomName,
+      </if>
+      <if test="deptname != null" >
+        DeptName,
+      </if>
+      <if test="examitemname != null" >
+        ExamItemName,
+      </if>
+      <if test="agetype != null" >
+        AgeType,
+      </if>
+      <if test="photodate != null" >
+        PhotoDate,
+      </if>
+      <if test="makercode != null" >
+        MakerCode,
+      </if>
+      <if test="makername != null" >
+        MakerName,
+      </if>
+      <if test="examnamecode != null" >
+        ExamNameCode,
+      </if>
+      <if test="examnamename != null" >
+        ExamNameName,
+      </if>
+      <if test="devcode != null" >
+        DevCode,
+      </if>
+      <if test="devname != null" >
+        DevName,
+      </if>
+      <if test="ifusingflag != null" >
+        IfUsingFlag,
+      </if>
+      <if test="isdicomflag != null" >
+        IsDicomFlag,
+      </if>
+      <if test="cardno != null" >
+        cardno,
+      </if>
+      <if test="jcbw != null" >
+        jcbw,
+      </if>
+      <if test="jclb != null" >
+        jclb,
+      </if>
+      <if test="sjmd != null" >
+        sjmd,
+      </if>
+      <if test="jcsf != null" >
+        jcsf,
+      </if>
+      <if test="lczd != null" >
+        lczd,
+      </if>
+      <if test="sqdbh != null" >
+        sqdbh,
+      </if>
+      <if test="isregist != null" >
+        isRegist,
+      </if>
+      <if test="xuhao != null" >
+        xuhao,
+      </if>
+      <if test="isprint != null" >
+        isPrint,
+      </if>
+      <if test="studyid != null" >
+        StudyID,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="nowoperator != null" >
+        nowOperator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null" >
+        #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorcode != null" >
+        #{operatorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="payflag != null" >
+        #{payflag,jdbcType=BIT},
+      </if>
+      <if test="paycount != null" >
+        #{paycount,jdbcType=NUMERIC},
+      </if>
+      <if test="pattypecode != null" >
+        #{pattypecode,jdbcType=INTEGER},
+      </if>
+      <if test="clinicid != null" >
+        #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null" >
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patnamepy != null" >
+        #{patnamepy,jdbcType=VARCHAR},
+      </if>
+      <if test="patgender != null" >
+        #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="patbirthdate != null" >
+        #{patbirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="yibaoid != null" >
+        #{yibaoid,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null" >
+        #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="patroomcode != null" >
+        #{patroomcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="deptcode != null" >
+        #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="newpatient != null" >
+        #{newpatient,jdbcType=BIT},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="patroomname != null" >
+        #{patroomname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="agetype != null" >
+        #{agetype,jdbcType=VARCHAR},
+      </if>
+      <if test="photodate != null" >
+        #{photodate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makercode != null" >
+        #{makercode,jdbcType=VARCHAR},
+      </if>
+      <if test="makername != null" >
+        #{makername,jdbcType=VARCHAR},
+      </if>
+      <if test="examnamecode != null" >
+        #{examnamecode,jdbcType=VARCHAR},
+      </if>
+      <if test="examnamename != null" >
+        #{examnamename,jdbcType=VARCHAR},
+      </if>
+      <if test="devcode != null" >
+        #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="devname != null" >
+        #{devname,jdbcType=VARCHAR},
+      </if>
+      <if test="ifusingflag != null" >
+        #{ifusingflag,jdbcType=BIT},
+      </if>
+      <if test="isdicomflag != null" >
+        #{isdicomflag,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null" >
+        #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="jclb != null" >
+        #{jclb,jdbcType=VARCHAR},
+      </if>
+      <if test="sjmd != null" >
+        #{sjmd,jdbcType=VARCHAR},
+      </if>
+      <if test="jcsf != null" >
+        #{jcsf,jdbcType=VARCHAR},
+      </if>
+      <if test="lczd != null" >
+        #{lczd,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdbh != null" >
+        #{sqdbh,jdbcType=VARCHAR},
+      </if>
+      <if test="isregist != null" >
+        #{isregist,jdbcType=VARCHAR},
+      </if>
+      <if test="xuhao != null" >
+        #{xuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="isprint != null" >
+        #{isprint,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="nowoperator != null" >
+        #{nowoperator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.springmvc.pojo_junior.RegisterInfoJunior" >
+    update register_info
+    <set >
+      <if test="recordid != null" >
+        RecordID = #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        RegisterTime = #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorcode != null" >
+        OperatorCode = #{operatorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="payflag != null" >
+        PayFlag = #{payflag,jdbcType=BIT},
+      </if>
+      <if test="paycount != null" >
+        PayCount = #{paycount,jdbcType=NUMERIC},
+      </if>
+      <if test="pattypecode != null" >
+        PatTypeCode = #{pattypecode,jdbcType=INTEGER},
+      </if>
+      <if test="clinicid != null" >
+        ClinicID = #{clinicid,jdbcType=VARCHAR},
+      </if>
+      <if test="patientid != null" >
+        PatientID = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null" >
+        PatName = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="patnamepy != null" >
+        PatNamePY = #{patnamepy,jdbcType=VARCHAR},
+      </if>
+      <if test="patgender != null" >
+        PatGender = #{patgender,jdbcType=VARCHAR},
+      </if>
+      <if test="patbirthdate != null" >
+        PatBirthdate = #{patbirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="yibaoid != null" >
+        YiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null" >
+        IdentityID = #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        Telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="patroomcode != null" >
+        PatRoomCode = #{patroomcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bedno != null" >
+        BedNo = #{bedno,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemcode != null" >
+        ExamItemCode = #{examitemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        Flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="deptcode != null" >
+        DeptCode = #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="newpatient != null" >
+        NewPatient = #{newpatient,jdbcType=BIT},
+      </if>
+      <if test="age != null" >
+        Age = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="patroomname != null" >
+        PatRoomName = #{patroomname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        DeptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="examitemname != null" >
+        ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      </if>
+      <if test="agetype != null" >
+        AgeType = #{agetype,jdbcType=VARCHAR},
+      </if>
+      <if test="photodate != null" >
+        PhotoDate = #{photodate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makercode != null" >
+        MakerCode = #{makercode,jdbcType=VARCHAR},
+      </if>
+      <if test="makername != null" >
+        MakerName = #{makername,jdbcType=VARCHAR},
+      </if>
+      <if test="examnamecode != null" >
+        ExamNameCode = #{examnamecode,jdbcType=VARCHAR},
+      </if>
+      <if test="examnamename != null" >
+        ExamNameName = #{examnamename,jdbcType=VARCHAR},
+      </if>
+      <if test="devcode != null" >
+        DevCode = #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="devname != null" >
+        DevName = #{devname,jdbcType=VARCHAR},
+      </if>
+      <if test="ifusingflag != null" >
+        IfUsingFlag = #{ifusingflag,jdbcType=BIT},
+      </if>
+      <if test="isdicomflag != null" >
+        IsDicomFlag = #{isdicomflag,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        cardno = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="jcbw != null" >
+        jcbw = #{jcbw,jdbcType=VARCHAR},
+      </if>
+      <if test="jclb != null" >
+        jclb = #{jclb,jdbcType=VARCHAR},
+      </if>
+      <if test="sjmd != null" >
+        sjmd = #{sjmd,jdbcType=VARCHAR},
+      </if>
+      <if test="jcsf != null" >
+        jcsf = #{jcsf,jdbcType=VARCHAR},
+      </if>
+      <if test="lczd != null" >
+        lczd = #{lczd,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdbh != null" >
+        sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      </if>
+      <if test="isregist != null" >
+        isRegist = #{isregist,jdbcType=VARCHAR},
+      </if>
+      <if test="xuhao != null" >
+        xuhao = #{xuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="isprint != null" >
+        isPrint = #{isprint,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        StudyID = #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="nowoperator != null" >
+        nowOperator = #{nowoperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.springmvc.pojo_junior.RegisterInfoJunior" >
+    update register_info
+    set RecordID = #{recordid,jdbcType=VARCHAR},
+      RegisterTime = #{registertime,jdbcType=TIMESTAMP},
+      OperatorCode = #{operatorcode,jdbcType=VARCHAR},
+      PayFlag = #{payflag,jdbcType=BIT},
+      PayCount = #{paycount,jdbcType=NUMERIC},
+      PatTypeCode = #{pattypecode,jdbcType=INTEGER},
+      ClinicID = #{clinicid,jdbcType=VARCHAR},
+      PatientID = #{patientid,jdbcType=VARCHAR},
+      PatName = #{patname,jdbcType=VARCHAR},
+      PatNamePY = #{patnamepy,jdbcType=VARCHAR},
+      PatGender = #{patgender,jdbcType=VARCHAR},
+      PatBirthdate = #{patbirthdate,jdbcType=TIMESTAMP},
+      Address = #{address,jdbcType=VARCHAR},
+      YiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      IdentityID = #{identityid,jdbcType=VARCHAR},
+      Telephone = #{telephone,jdbcType=VARCHAR},
+      PatRoomCode = #{patroomcode,jdbcType=VARCHAR},
+      BedNo = #{bedno,jdbcType=VARCHAR},
+      ExamItemCode = #{examitemcode,jdbcType=VARCHAR},
+      Flag = #{flag,jdbcType=VARCHAR},
+      DeptCode = #{deptcode,jdbcType=VARCHAR},
+      NewPatient = #{newpatient,jdbcType=BIT},
+      Age = #{age,jdbcType=NUMERIC},
+      PatRoomName = #{patroomname,jdbcType=VARCHAR},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      AgeType = #{agetype,jdbcType=VARCHAR},
+      PhotoDate = #{photodate,jdbcType=TIMESTAMP},
+      MakerCode = #{makercode,jdbcType=VARCHAR},
+      MakerName = #{makername,jdbcType=VARCHAR},
+      ExamNameCode = #{examnamecode,jdbcType=VARCHAR},
+      ExamNameName = #{examnamename,jdbcType=VARCHAR},
+      DevCode = #{devcode,jdbcType=VARCHAR},
+      DevName = #{devname,jdbcType=VARCHAR},
+      IfUsingFlag = #{ifusingflag,jdbcType=BIT},
+      IsDicomFlag = #{isdicomflag,jdbcType=VARCHAR},
+      cardno = #{cardno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      jclb = #{jclb,jdbcType=VARCHAR},
+      sjmd = #{sjmd,jdbcType=VARCHAR},
+      jcsf = #{jcsf,jdbcType=VARCHAR},
+      lczd = #{lczd,jdbcType=VARCHAR},
+      sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      isRegist = #{isregist,jdbcType=VARCHAR},
+      xuhao = #{xuhao,jdbcType=VARCHAR},
+      isPrint = #{isprint,jdbcType=VARCHAR},
+      StudyID = #{studyid,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      nowOperator = #{nowoperator,jdbcType=VARCHAR}
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+</mapper>
