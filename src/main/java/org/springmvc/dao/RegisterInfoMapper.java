@@ -2,6 +2,7 @@ package org.springmvc.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springmvc.pojo.RegisterInfo;
+import org.springmvc.pojo_inner.RegisterInfoInner;
 
 import java.util.List;
 
@@ -34,4 +35,11 @@ public interface RegisterInfoMapper {
 
     List<String> selectByFlagReturnChecknum(String flag);
 
+    int selectCountByCheckNum(String checknum);
+
+    int deleteByCheckNum(String checknum);
+
+    int updateByPrimaryKeyLocal(RegisterInfoInner r);
+
+//    RegisterInfo updateFlagByChecknum(String checknum);
 }

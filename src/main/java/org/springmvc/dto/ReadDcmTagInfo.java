@@ -37,14 +37,25 @@ public class ReadDcmTagInfo {
     //SOP实例UID
     private String sopUID;
     //生成XML文件需要的一个参数
-    private String perPixel;
+    private Integer perPixel;
     //文件所在的文件夹名称
     private String folder;
     //文件名称
     private String fileName;
+    //图像宽
+    private Integer width;
 
+    private Integer height;
 
-    public String getPerPixel() {
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public Integer getPerPixel() {
         return perPixel;
     }
 
@@ -108,6 +119,7 @@ public class ReadDcmTagInfo {
     }
 
     public void getTagInfo(String filePath) throws IOException {
+
         File src = new File(filePath);
         this.setFolder(new File(src.getParent()).getName());
         this.setFileName(src.getName());
@@ -124,8 +136,10 @@ public class ReadDcmTagInfo {
         birth = attr1.getString(Tag.PatientBirthDate,"");
         sex = attr1.getString(Tag.PatientSex,"");
         age = attr1.getString(Tag.PatientAge,"");
-        perPixel = attr1.getString(Tag.SamplesPerPixel,"");
+        perPixel = attr1.getInt(Tag.SamplesPerPixel,1);
         seriesDate = attr1.getString(Tag.SeriesDate,"");
+        width = attr1.getInt(Tag.Columns,1);
+        height = attr1.getInt(Tag.Rows,1);
 
     }
     public Attributes loadDicomObject(File file) throws IOException {
@@ -147,6 +161,7 @@ public class ReadDcmTagInfo {
         System.out.println(readDcmTagInfo.birth);
         System.out.println(readDcmTagInfo.studyDate);
         System.out.println("perpixel:"+readDcmTagInfo.perPixel);
+        System.out.println("width"+readDcmTagInfo.width);
     }
 
 }

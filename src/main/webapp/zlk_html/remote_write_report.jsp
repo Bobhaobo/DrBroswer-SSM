@@ -8,12 +8,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="zlk_js/remote_write_report.js"></script>
-    <link rel="stylesheet" href="jsTree/theme/style.min.css" />
+    <link rel="stylesheet" href="jsTree/theme/style.min.css"/>
     <link rel="stylesheet" href="zlk_css/remote_write_report.css" />
 </head>
 <body>
 <div class="bjui-pageContent">
     <div class="writeReport">
+        <input id="bgCode" type="hidden" value="${param.id}" />
         <div class="reportHead">
             <div class="icon"><img src="images/redcross.png" /></div>
             <div class="hostitle"><span id="hosName">${param.hosName}</span></div>
@@ -31,7 +32,7 @@
                 <div class="zhuyuanhao">住院号：<input id="clinicId" type="text" size="10" /></div>
                 <div class="chuanghao">床号：<input id="bedNo" type="text" size="10" /></div>
                 <div class="jcbw">检查部位：<input id="jcbw" type="text" size="15" /></div>
-                <div class="yinoryangxing">阴/阳性：<select id="sfyangxing" data-toggle="selectpicker" data-width="100"><option value="yin">阴</option><option value="yang">阳</option></select></div>
+                <div class="yinoryangxing">阴/阳性：<select id="sfyangxing" data-toggle="selectpicker" data-width="100"><option value="阴">阴</option><option value="阳">阳</option></select></div>
             </div>
         </div>
         <hr width="750" align="center">
@@ -45,7 +46,7 @@
     <div class="template">
         <fieldset>
             <legend style="font-family:verdana;font-size:105%;color:orange;">报告模板</legend>
-            <div id="evts" class="demo"></div>
+            <div id="evts" class="demo" style="height: 300px"></div>
             <script src="jsTree/js/jstree.min.js"></script>
             <script>
                 $('#evts')
@@ -77,10 +78,12 @@
             </script>
             <hr style="width:350px;align:center;margin: 2px 0px 2px 0px">
             <div class="template_text">
-                <div id="examDesc_text"><span><strong>影像所见：</strong></span><p id="examDesc_text_p"></p></div>
+                <div id="examDesc_text" style="height: 150px;"><span><strong>影像所见：</strong></span><p id="examDesc_text_p"></p></div>
                 <hr style="width:350px;align:center;margin: 2px 0px 2px 0px" width="350">
                 <div id="examDiagnosis_text"><span><strong>印象：</strong></span><p id="examDiagnosis_text_p"></p></div>
                 <hr style="width:350px;align:center;margin: 2px 0px 6px 0px" width="350">
+                <div id="suggestion_text" style="height: 100px;"><span><strong>修改意见：</strong></span><textarea id="suggestion_text_p" style="height: 90px;border:none;width: 350px"></textarea></div>
+                <hr style="width:350px; align:center;margin: 2px 0px 6px 0px" width="350">
                 <a id="imagePath" href="DrViewerBoot://${param.imagePath}">查看图像</a>
                 <button style="position:relative;left:30%" type="button" class="btn-orange" id="qingkong">清空</button>
                 <button style="position:relative;left:30%" type="button" class="btn-green" id="tihuan">替换</button>

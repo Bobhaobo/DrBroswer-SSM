@@ -1,23 +1,21 @@
 package org.springmvc.service.impl;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springmvc.dao.*;
 import org.springmvc.dao_inner.RegisterInfoInnerMapper;
 import org.springmvc.dto.CheckedTab;
+import org.springmvc.dto.VerifiedTab;
 import org.springmvc.dto.WrittedTab;
 import org.springmvc.pojo.*;
 import org.springmvc.pojo_inner.RegisterInfoInner;
 import org.springmvc.service.RegInfoService;
 import org.springmvc.service.UserService;
-import org.springmvc.tool.BirthGenerator;
-import org.springmvc.tool.ChineseConvert;
-import org.springmvc.tool.ImageAndReportPathGenerator;
-import org.springmvc.tool.SeriesNumGenerator;
+import org.springmvc.tool.*;
 
 import javax.annotation.Resource;
+import javax.management.MBeanServer;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -93,16 +91,23 @@ public class RegInfoServiceimpl implements RegInfoService {
                                                    String sjmd, String sqdbh, String patType, String checkDevice,HttpSession httpSession) throws ParseException {
         RegisterInfoInner r = new RegisterInfoInner();
         r.setPatgender(patGender);
+        System.out.println(r);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date pat_birthday = sdf.parse(patBirthdate);
         String[] ageAndType = birthGenerator.getAgeAndType(pat_birthday, new Date());
         r.setPatbirthdate(pat_birthday);
+//        System.out.println(r);
         r.setPatnamepy(chineseConvert.convert(patName));
+//        System.out.println(r);
         r.setPatname(patName);
+//        System.out.println(r);
         ExamItemLocal examItemLocal = examItemLocalMapper.selectByPrimaryKey(ExamItemCode);
         r.setRecordid(seriesNumGenerator.getLocalRecordID(examItemLocal.getExamitemname()));
+//        System.out.println(r);
         r.setPatientid(seriesNumGenerator.getLocalPatientID(examItemLocal.getExamitemname()));
+//        System.out.println(r);
         r.setAddress(address);
+//        System.out.println(r);
         r.setAge(Integer.valueOf(ageAndType[0]));
         r.setAgetype(ageAndType[1]);
         r.setBedno(BedNo);
@@ -124,8 +129,11 @@ public class RegInfoServiceimpl implements RegInfoService {
         r.setYibaoid(YiBaoID);
         r.setPatroomname(PatRoomName);
 
+        System.out.println(r);
+
         DicomWorkList dicomWorkList = new DicomWorkList();
-        dicomWorkList.setAccessionn(seriesNumGenerator.getLocalAccessionN(examItemLocal.getExamitemname()));
+        dicomWorkList.setAccessionn(seriesNumGenerator.getLocalAccessionNLocal(examItemLocal.getExamitemname()));
+        System.out.println(seriesNumGenerator.getLocalAccessionN(examItemLocal.getExamitemname()));
         dicomWorkList.setPatientid(r.getPatientid());
         dicomWorkList.setPatientnam(r.getPatnamepy());
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -135,7 +143,7 @@ public class RegInfoServiceimpl implements RegInfoService {
         }else {
             dicomWorkList.setPatientsex("F");
         }
-        dicomWorkList.setReqprocdes("");
+//        dicomWorkList.setReqprocdes("");
         dicomWorkList.setModality(r.getExamitemname());
         dicomWorkList.setScheduleda(checkDevice);
         dicomWorkList.setStartdate(sf.format(new Date()).substring(0,8));
@@ -143,11 +151,16 @@ public class RegInfoServiceimpl implements RegInfoService {
         dicomWorkList.setSchedpsid(r.getPatientid());
         dicomWorkList.setReqprocid(r.getPatientid());
         dicomWorkList.setStudyid(r.getChecknum());
+        System.out.println(dicomWorkList);
         try{
+            System.out.println();
             registerInfoLocalMapper.insert(r);
+            System.out.println("lalla");
             dicomWorkListLocalMapper.insert(dicomWorkList);
+            System.out.println("alala");
             return r;
         }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
@@ -190,6 +203,29 @@ public class RegInfoServiceimpl implements RegInfoService {
     public RegisterInfo getRegInfoByCheckNum(String checkNum){
         return registerInfoMapper.selectByPrimaryKey(checkNum);
     }
+
+    @Override
+    public RegisterInfoInner getRegInfoByCheckNumLocal(String checkNum){
+        return registerInfoLocalMapper.selectByPrimaryKeyLocal(checkNum);
+    }
+
+    @Override
+    public RegisterInfoInner getRegInfoByCheckNumLocalModify(String checkNum){
+        return registerInfoLocalMapper.selectByPrimaryKeyLocalModify(checkNum);
+    }
+
+//    @Override
+//    public RegisterInfo setFlagByCheckNum(String checknum){
+//        return registerInfoMapper.updateFlagByChecknum(checknum);
+//    }
+
+    @Override
+    public int updateRegisterByRegister(RegisterInfo r){return  registerInfoMapper.updateByPrimaryKey(r);}
+
+
+    @Override
+    public int updateRegisterByRegisterLocal(RegisterInfoInner r){return  registerInfoMapper.updateByPrimaryKeyLocal(r);}
+
     /**
      * @Description: 根据examItemCode返回DeviceList
      * @Author: Shalldid
@@ -270,10 +306,17 @@ public class RegInfoServiceimpl implements RegInfoService {
      **/
     @Override
     public int countCheckListByFlag(String flag){
-
         updateRegInfoFromInner();
         return registerInfoMapper.countCheckListByFlag(flag);
     }
+
+    @Override
+    public int countCheckListByFlagLocal(String flag){
+        updateRegInfoFromInner();
+        return registerInfoLocalMapper.countCheckListByFlag(flag);
+    }
+
+
     /**
      * @Description: 更新reg的flag
      * @Author: Shalldid
@@ -281,9 +324,16 @@ public class RegInfoServiceimpl implements RegInfoService {
      * @Return:
      **/
     @Override
+    public int updateRegStatusByChecknumLocal(String status, String checknum){
+        return registerInfoLocalMapper.updateRegStatusByChecknum(status, checknum);
+    }
+
+    @Override
     public int updateRegStatusByChecknum(String status, String checknum){
         return registerInfoMapper.updateRegStatusByChecknum(status, checknum);
     }
+
+
     /**
      * @Description: 根据flag为"已写报告"加载已检查的登记表
      * @Author: Shalldid
@@ -293,6 +343,7 @@ public class RegInfoServiceimpl implements RegInfoService {
     public List<WrittedTab> getWrittededListByFlag(String flag, int currIndex, int pageSize){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         List<RegisterInfo> l = registerInfoMapper.getCheckedListByFlag(flag, currIndex, pageSize);
+        System.out.println(l);
         List<WrittedTab> l_temp = new ArrayList<WrittedTab>();
         OrderTable o;
         Patient p;
@@ -301,8 +352,13 @@ public class RegInfoServiceimpl implements RegInfoService {
         for(RegisterInfo r : l){
             WrittedTab w = new WrittedTab();
             report = reportMapper.selectByCheckNum(r.getChecknum());
+            System.out.println(report);
             d = dicomWorkListMapper.selectByPatid(r.getPatientid());
+            System.out.println(r.getPatientid());
+            System.out.println(d);
+            System.out.println(r.getChecknum());
             o = orderTableMapper.getOrderTableByCheckNum(r.getChecknum());
+            System.out.println(o);
             w.setBgCode(report.getReportcode());
             w.setCheckNum(r.getChecknum());
             w.setExamItemName(r.getExamitemname());
@@ -313,11 +369,195 @@ public class RegInfoServiceimpl implements RegInfoService {
             w.setRegisterDate(sdf.format(r.getRegtime()));
             w.setReportDate(sdf.format(report.getReporttime()));
             w.setDocName((userService.getUserByUserId(report.getDoccode())).getName());
+            System.out.println("0");
+            System.out.println(r.getPatientid());
+            System.out.println(d.getStartdate());
+            System.out.println(o.getOrdersource());
+            System.out.println(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(), o.getOrdersource()));
             w.setImagePath(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(), o.getOrdersource()));
             l_temp.add(w);
         }
         return l_temp;
     }
+
+    /**
+     * @Description: 根据flag为"已审核报告"加载已检查的登记表
+     * @Author: Shalldid
+     * @Date: Created in 17:32 2018-05-03
+     * @Return:
+     **/
+    public List<VerifiedTab> getVerifiedListByFlag(String flag, int currIndex, int pageSize){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        List<RegisterInfo> l = registerInfoMapper.getCheckedListByFlag(flag, currIndex, pageSize);
+        System.out.println(l);
+        List<VerifiedTab> l_temp = new ArrayList<VerifiedTab>();
+        OrderTable o;
+        Patient p;
+        DicomWorkList d;
+        Report report;
+        for(RegisterInfo r : l){
+            VerifiedTab w = new VerifiedTab();
+            report = reportMapper.selectByCheckNumAdd(r.getChecknum());
+            System.out.println(report);
+            d = dicomWorkListMapper.selectByPatid(r.getPatientid());
+            System.out.println(r.getPatientid());
+            System.out.println(d);
+            System.out.println(r.getChecknum());
+            o = orderTableMapper.getOrderTableByCheckNum(r.getChecknum());
+            System.out.println(o);
+            w.setBgCode(report.getReportcode());
+            w.setCheckNum(r.getChecknum());
+            w.setExamItemName(r.getExamitemname());
+            p = patientMapper.selectByPrimaryKey(r.getIdcard());
+            w.setPatGender(p.getPatgender());
+            w.setPatient_Age(p.getAge() + p.getAgetype());
+            w.setPatName(p.getPatname());
+            w.setRegisterDate(sdf.format(r.getRegtime()));
+            w.setReportDate(sdf.format(report.getReporttime()));
+            w.setDocName((userService.getUserByUserId(report.getDoccode())).getName());
+
+
+            System.out.println(report.getVerifydoccode());
+            System.out.println((userService.getUserByUserId(report.getVerifydoccode())));
+            w.setVerifyDocName((userService.getUserByUserId(report.getVerifydoccode())).getName());
+
+            System.out.println(w.getVerifyDocName());
+
+            try {
+                w.setVerifyDate(sdf.format(report.getVerifydate()));
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+            System.out.println("0");
+            System.out.println(r.getPatientid());
+            System.out.println(d.getStartdate());
+            System.out.println(o.getOrdersource());
+            System.out.println(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(), o.getOrdersource()));
+            w.setImagePath(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(), o.getOrdersource()));
+            l_temp.add(w);
+        }
+        return l_temp;
+    }
+
+    /**
+     * @Description: 根据flag为"已写报告"加载已检查的登记表(本地)
+     * @Author: Shalldid
+     * @Date: Created in 17:32 2018-05-03
+     * @Return:
+     **/
+    public List<WrittedTab> getWrittededListByFlagLocal(String flag, int currIndex, int pageSize,HttpSession httpSession){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        List<RegisterInfoInner> l = registerInfoLocalMapper.getCheckedListByFlag(flag, currIndex, pageSize);
+        System.out.println(l);
+        List<WrittedTab> l_temp = new ArrayList<WrittedTab>();
+//        OrderTable o;
+        Patient p;
+        DicomWorkList d;
+        Report report;
+//        String filepath="F:\\DrBroswer-SSM\\src\\main\\resources\\本地医院名称.ini";
+//        ConfigReader configReader=new ConfigReader(filepath);
+
+
+        User u = (User)httpSession.getAttribute("user");
+
+        for(RegisterInfoInner r : l){
+            WrittedTab w = new WrittedTab();
+            report = reportMapper.selectByCheckNum(r.getChecknum());
+            System.out.println(report);
+            d = dicomWorkListLocalMapper.selectByPatid(r.getPatientid());
+            System.out.println(r.getPatientid());
+            System.out.println(d);
+            System.out.println(r.getChecknum());
+//            o = orderTableMapper.getOrderTableByCheckNum(r.getChecknum());
+//            System.out.println(o);
+            w.setBgCode(report.getReportcode());
+            w.setCheckNum(r.getChecknum());
+            w.setExamItemName(r.getExamitemname());
+            p = patientMapper.selectByPrimaryKey(r.getIdentityid());
+            w.setPatGender(p.getPatgender());
+            w.setPatient_Age(p.getAge() + p.getAgetype());
+            w.setPatName(p.getPatname());
+            w.setRegisterDate(sdf.format(r.getRegistertime()));
+            w.setReportDate(sdf.format(report.getReporttime()));
+            w.setDocName((userService.getUserByUserId(report.getDoccode())).getName());
+            System.out.println("0");
+            System.out.println(r.getPatientid());
+            System.out.println(d.getStartdate());
+//            System.out.println(o.getOrdersource());
+//            System.out.println(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(), "本地医院"));
+            w.setImagePath(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(),  departmentMapper.getHosIdbyDeptid(u.getDept())));
+            l_temp.add(w);
+        }
+        return l_temp;
+    }
+
+
+    /**
+     * @Description: 根据flag为"已审核报告"加载已检查的登记表(本地)
+     * @Author: Shalldid
+     * @Date: Created in 17:32 2018-05-03
+     * @Return:
+     **/
+    public List<VerifiedTab> getVerifiedListByFlagLocal(String flag, int currIndex, int pageSize,HttpSession httpSession){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        List<RegisterInfoInner> l = registerInfoLocalMapper.getCheckedListByFlag(flag, currIndex, pageSize);
+        System.out.println(l);
+        List<VerifiedTab> l_temp = new ArrayList<VerifiedTab>();
+//        OrderTable o;
+        Patient p;
+        DicomWorkList d;
+        Report report;
+//        String filepath="F:\\DrBroswer-SSM\\src\\main\\resources\\本地医院名称.ini";
+//        ConfigReader configReader=new ConfigReader(filepath);
+
+        User u = (User)httpSession.getAttribute("user");
+
+        for(RegisterInfoInner r : l){
+            VerifiedTab w = new VerifiedTab();
+            report = reportMapper.selectByCheckNumAdd(r.getChecknum());
+            System.out.println(report);
+            d = dicomWorkListLocalMapper.selectByPatid(r.getPatientid());
+            System.out.println(r.getPatientid());
+            System.out.println(d);
+            System.out.println(r.getChecknum());
+//            o = orderTableMapper.getOrderTableByCheckNum(r.getChecknum());
+//            System.out.println(o);
+            w.setBgCode(report.getReportcode());
+            w.setCheckNum(r.getChecknum());
+            w.setExamItemName(r.getExamitemname());
+            p = patientMapper.selectByPrimaryKey(r.getIdentityid());
+            w.setPatGender(p.getPatgender());
+            w.setPatient_Age(p.getAge() + p.getAgetype());
+            w.setPatName(p.getPatname());
+            w.setRegisterDate(sdf.format(r.getRegistertime()));
+            w.setReportDate(sdf.format(report.getReporttime()));
+            w.setDocName((userService.getUserByUserId(report.getDoccode())).getName());
+
+            System.out.println("111");
+            System.out.println(report.getVerifydoccode());
+
+            w.setVerifyDocName((userService.getUserByUserId(report.getVerifydoccode())).getName());
+
+            System.out.println(w.getVerifyDocName());
+            w.setVerifyDate(sdf.format(report.getVerifydate()));
+
+            System.out.println("0");
+            System.out.println(r.getPatientid());
+            System.out.println(d.getStartdate());
+//            System.out.println(o.getOrdersource());
+//            System.out.println(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(), "本地医院"));
+            w.setImagePath(imageAndReportPathGenerator.getInnerImagePath(r.getPatientid(), d.getStartdate(),  departmentMapper.getHosIdbyDeptid(u.getDept())));
+            l_temp.add(w);
+        }
+        return l_temp;
+    }
+
+
+
+
+
     /**
      * @Description: 从院内数据库登记表内已检查的记录更新至本地数据库
      * @Author: Shalldid
@@ -340,4 +580,10 @@ public class RegInfoServiceimpl implements RegInfoService {
         //System.out.println("Date: " + new Date() + "； 更新条目数： " + counts);
         return counts;
     }
+
+    @Override
+    public int getCountByCheckNum(String checknum){return registerInfoMapper.selectCountByCheckNum(checknum);}
+
+    @Override
+    public int delete(String checknum){return registerInfoMapper.deleteByCheckNum(checknum);}
 }

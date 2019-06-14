@@ -37,6 +37,36 @@ public class RemoteReport {
 
     private String juniorhos;
 
+    private Date verifieddate;
+
+    private String verifieddoccode;
+
+    private String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Date getVerifieddate() {
+        return verifieddate;
+    }
+
+    public void setVerifieddate(Date verifieddate) {
+        this.verifieddate = verifieddate;
+    }
+
+    public String getVerifieddoccode() {
+        return verifieddoccode;
+    }
+
+    public void setVerifieddoccode(String verifieddoccode) {
+        this.verifieddoccode = verifieddoccode;
+    }
+
     public String getId() {
         return id;
     }
@@ -194,5 +224,76 @@ public class RemoteReport {
     }
 
     public RemoteReport() {
+    }
+
+
+//    public RemoteReport(String id, String checknum, String clinicid, String patname, String patsex, String patage, String deptname, String bedno, String jcbw, Date reporttime, String sfyangxing, String modality, String reportpath, String doccode, String examdesc, String examdiagnosis, String juniorhos, Date verifieddate, String verifieddoccode) {
+//        this.id = id;
+//        this.checknum = checknum;
+//        this.clinicid = clinicid;
+//        this.patname = patname;
+//        this.patsex = patsex;
+//        this.patage = patage;
+//        this.deptname = deptname;
+//        this.bedno = bedno;
+//        this.jcbw = jcbw;
+//        this.reporttime = reporttime;
+//        this.sfyangxing = sfyangxing;
+//        this.modality = modality;
+//        this.reportpath = reportpath;
+//        this.doccode = doccode;
+//        this.examdesc = examdesc;
+//        this.examdiagnosis = examdiagnosis;
+//        this.juniorhos = juniorhos;
+//        this.verifieddate = verifieddate;
+//        this.verifieddoccode = verifieddoccode;
+//    }
+
+    @Override
+    public String toString() {
+        return "RemoteReport{" +
+                "id='" + id + '\'' +
+                ", checknum='" + checknum + '\'' +
+                ", clinicid='" + clinicid + '\'' +
+                ", patname='" + patname + '\'' +
+                ", patsex='" + patsex + '\'' +
+                ", patage='" + patage + '\'' +
+                ", deptname='" + deptname + '\'' +
+                ", bedno='" + bedno + '\'' +
+                ", jcbw='" + jcbw + '\'' +
+                ", reporttime=" + reporttime +
+                ", sfyangxing='" + sfyangxing + '\'' +
+                ", modality='" + modality + '\'' +
+                ", reportpath='" + reportpath + '\'' +
+                ", doccode='" + doccode + '\'' +
+                ", examdesc='" + examdesc + '\'' +
+                ", examdiagnosis='" + examdiagnosis + '\'' +
+                ", juniorhos='" + juniorhos + '\'' +
+                ", verifieddate=" + verifieddate +
+                ", verifieddoccode='" + verifieddoccode + '\'' +
+                '}';
+    }
+
+    public RemoteReport(String id, String checknum, String clinicid, String patname, String patsex, String patage, String deptname, String bedno, String jcbw, Date reporttime, String sfyangxing, String modality, String reportpath, String doccode, String examdesc, String examdiagnosis, String juniorhos, Date verifieddate, String verifieddoccode, String remarks) {
+        this.id = id;
+        this.checknum = checknum;
+        this.clinicid = clinicid;
+        this.patname = patname;
+        this.patsex = patsex;
+        this.patage = patage;
+        this.deptname = deptname;
+        this.bedno = bedno;
+        this.jcbw = jcbw;
+        this.reporttime = reporttime;
+        this.sfyangxing = sfyangxing;
+        this.modality = modality;
+        this.reportpath = reportpath;
+        this.doccode = doccode;
+        this.examdesc = examdesc;
+        this.examdiagnosis = examdiagnosis;
+        this.juniorhos = juniorhos;
+        this.verifieddate = verifieddate;
+        this.verifieddoccode = verifieddoccode;
+        this.remarks = remarks;
     }
 }

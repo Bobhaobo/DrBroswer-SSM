@@ -19,17 +19,59 @@
     <result column="examDesc" jdbcType="VARCHAR" property="examdesc" />
     <result column="juniorhos" jdbcType="VARCHAR" property="juniorhos" />
     <result column="examDiagnosis" jdbcType="VARCHAR" property="examdiagnosis" />
+    <result column="VerifiedDate" jdbcType="TIMESTAMP" property="verifieddate" />
+    <result column="VerifiedDocCode" jdbcType="VARCHAR" property="verifieddoccode" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+
+
   </resultMap>
   <sql id="Base_Column_List">
     id, checknum, clinicid, patname, patsex, patage, deptname, bedno, jcbw, reporttime, 
     sfyangxing, modality, reportpath, doccode, examDesc, examDiagnosis,juniorhos
   </sql>
+
+  <sql id="Base_Column_List_add">
+    id, checknum, clinicid, patname, patsex, patage, deptname, bedno, jcbw, reporttime,
+    sfyangxing, modality, reportpath, doccode, examDesc, examDiagnosis,juniorhos,verifieddate,verifieddoccode
+  </sql>
+
+  <sql id="Base_Column_List_add_second">
+    id, checknum, clinicid, patname, patsex, patage, deptname, bedno, jcbw, reporttime,
+    sfyangxing, modality, reportpath, doccode, examDesc, examDiagnosis,juniorhos,verifieddate,verifieddoccode,remarks
+  </sql>
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from remote_report
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="selectByPrimaryKeyAdd" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List_add" />
+    from remote_report
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKeyAddSecond" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List_add_second" />
+    from remote_report
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from remote_report
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from remote_report
     where id = #{id,jdbcType=VARCHAR}
@@ -48,6 +90,28 @@
       #{reportpath,jdbcType=VARCHAR}, #{doccode,jdbcType=VARCHAR}, #{examdesc,jdbcType=VARCHAR},
       #{juniorhos,jdbcType=VARCHAR},#{examdiagnosis,jdbcType=VARCHAR})
   </insert>
+
+
+  <insert id="insertAdd" parameterType="org.springmvc.pojo.RemoteReport">
+    insert into remote_report (id, checknum, clinicid,
+      patname, patsex, patage,
+      deptname, bedno, jcbw,
+      reporttime, sfyangxing, modality,
+      reportpath, doccode, examDesc, juniorhos,
+      examDiagnosis,verifieddate,verifieddoccode,remarks)
+
+    values (#{id,jdbcType=VARCHAR}, #{checknum,jdbcType=VARCHAR}, #{clinicid,jdbcType=VARCHAR},
+      #{patname,jdbcType=VARCHAR}, #{patsex,jdbcType=VARCHAR}, #{patage,jdbcType=VARCHAR},
+      #{deptname,jdbcType=VARCHAR}, #{bedno,jdbcType=VARCHAR}, #{jcbw,jdbcType=VARCHAR},
+      #{reporttime,jdbcType=TIMESTAMP}, #{sfyangxing,jdbcType=VARCHAR}, #{modality,jdbcType=VARCHAR},
+      #{reportpath,jdbcType=VARCHAR}, #{doccode,jdbcType=VARCHAR}, #{examdesc,jdbcType=VARCHAR},
+      #{juniorhos,jdbcType=VARCHAR},#{examdiagnosis,jdbcType=VARCHAR},  #{verifieddate,jdbcType=TIMESTAMP},
+      #{verifieddoccode,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
   <insert id="insertSelective" parameterType="org.springmvc.pojo.RemoteReport">
     insert into remote_report
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -231,11 +295,67 @@
       examDiagnosis = #{examdiagnosis,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+  <update id="updateRemarkById" parameterType="org.springmvc.pojo.RemoteReport">
+    update remote_report
+    set
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updateById" parameterType="java.lang.String">
+    update remote_report
+    set
+      reporttime = null,
+      reportpath = null,
+      doccode = null,
+      juniorhos =null
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updateByPrimaryKeyAdd" parameterType="org.springmvc.pojo.RemoteReport">
+    update remote_report
+    set checknum = #{checknum,jdbcType=VARCHAR},
+      clinicid = #{clinicid,jdbcType=VARCHAR},
+      patname = #{patname,jdbcType=VARCHAR},
+      patsex = #{patsex,jdbcType=VARCHAR},
+      patage = #{patage,jdbcType=VARCHAR},
+      deptname = #{deptname,jdbcType=VARCHAR},
+      bedno = #{bedno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      reporttime = #{reporttime,jdbcType=TIMESTAMP},
+      sfyangxing = #{sfyangxing,jdbcType=VARCHAR},
+      modality = #{modality,jdbcType=VARCHAR},
+      reportpath = #{reportpath,jdbcType=VARCHAR},
+      doccode = #{doccode,jdbcType=VARCHAR},
+      examDesc = #{examdesc,jdbcType=VARCHAR},
+      juniorhos = #{juniorhos,jdbcType=VARCHAR},
+      examDiagnosis = #{examdiagnosis,jdbcType=VARCHAR},
+    VerifiedDocCode = #{verifieddoccode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+
   <select id="selectBycheckNum" resultType="org.springmvc.pojo.RemoteReport">
     select <include refid="Base_Column_List" />
     from remote_report
     where checknum = #{checknum,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectBycheckNumAdd" resultType="org.springmvc.pojo.RemoteReport">
+    select <include refid="Base_Column_List_add" />
+    from remote_report
+    where checknum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+
   <select id="getTodayReportListByPagination" resultType="org.springmvc.pojo.RemoteReport">
     select top ${pageSize} *
     from remote_report

@@ -1,23 +1,25 @@
 package org.springmvc.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springmvc.dao.AnnoImageMapper;
+import org.springmvc.dto.*;
 import org.springmvc.dto.Dcm2jpgIOStreamOutput;
-import org.springmvc.dto.ReadDcmTagInfo;
-import org.springmvc.dto.ResultVO;
-import org.springmvc.dto.UploadFileVO;
+import org.springmvc.pojo.AnnoImage;
+import org.springmvc.pojo.AnnoSeries;
 import org.springmvc.service.*;
-import org.springmvc.tool.PrimaryKeyGenerator;
-import org.springmvc.tool.ReadDcmImageTool;
-import org.springmvc.tool.XMLGenerator;
+import org.springmvc.tool.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,29 +46,183 @@ public class AnnoController {
     private PrimaryKeyGenerator primaryKeyGenerator;
     @Autowired
     private ReadDcmImageTool readDcmImageTool;
+    @Autowired
+    private AnnoImageMapper annoImageMapper;
+
     //发送文件
-    @RequestMapping(value = "/sendDcm1" , method = RequestMethod.POST)
+    @RequestMapping(value = "/sendDcm1" ,method = RequestMethod.POST)
     @ResponseBody
-    public String sendDcm1(HttpServletRequest request,HttpServletResponse response) throws Exception {
-
-      List<List<String>> listList = new ArrayList<List<String>>();
-      List<List<String>> listImageName = readDcmImageTool.getImageSeriesList("D:/dcmtest/DJ20170701B0018");
-
+    public String sendDcm1(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "url") String imageUrl) throws Exception {
+        ResourceBundle resource = ResourceBundle.getBundle("imgWebPath");//test为属性文件名，放在包com.mmq下，如果是放在src下，直接用test即可
+        List<List<String>> listList = new ArrayList<List<String>>();
+      //List<List<String>> listImageName = readDcmImageTool.getImageSeriesList("D:/dcmtest/DJ20170701B0018");
+      List<List<String>> listImageName = readDcmImageTool.getImageSeriesList(imageUrl);
+        System.out.println(listImageName);
       for (int i=0;i<listImageName.size();i++){
           List<String> list = new ArrayList<String>();
           for(int j=0;j<listImageName.get(i).size();j++){
-            list.add("http://10.168.1.137:8080/down/DJ20170701B0018/"+listImageName.get(i).get(j) );
+            //list.add("http://10.168.1.137:8080/down/DJ20170701B0018/"+listImageName.get(i).get(j) );
+              //list.add("http://10.168.1.137:8080/test/T1855634/1.2.840.113704.1.111.6200.1498892502.1/1.2.840.113704.1.111.6200.1498892508.3/"+listImageName.get(i).get(j) );
+            listImageName.get(i).set(j,listImageName.get(i).get(j).replace(resource.getString("web.innerImagePath"),resource.getString("web.virtualImagePath")));
+
           }
           listList.add(list);
       }
-      return JSON.toJSONString(listList);
+      return JSON.toJSONString(listImageName);
       //return JSON.toJSONString(listList, SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    //下载dcm格式的Zip
+    @RequestMapping(value = "/sendDcmZip",method = RequestMethod.POST)
+    @ResponseBody
+    public void sendDcmZip(HttpServletRequest request, HttpServletResponse response,@RequestParam(value="filename") String filename) throws IOException {
+        /** 下面为下载zip压缩包相关流程 */
+        long start = System.currentTimeMillis();
+        String filePath="";
+        if(filename.contains("http")){
+            ResourceBundle resource = ResourceBundle.getBundle("imgWebPath");//test为属性文件名，放在包com.mmq下，如果是放在src下，直接用test即可
+            filePath = filename.replace(resource.getString("web.virtualImagePath"),resource.getString("web.innerImagePath"));
+        }else {
+            filePath=filename;
+        }
+        /** 1.创建临时文件夹  */
+        File temDir = new File(filePath);
+        System.out.println(filePath);
+        if(!temDir.exists()){
+            temDir.mkdirs();
+        }
+
+
+        /** 3.设置response的header */
+        response.setContentType("application/zip");
+        response.setHeader("Content-Disposition", "attachment; filename="+temDir.getName()+".zip");
+
+        /** 4.调用工具类，下载zip压缩包 */
+        ZipUtils.toZip(temDir.getPath(), response.getOutputStream(),true);
+        long end = System.currentTimeMillis();
+        System.out.println("总用时："+(end-start));
+
+        /** 5.删除临时文件和文件夹 */
+        // 这里我没写递归，直接就这样删除了
+      /*  File[] listFiles = temDir.listFiles();
+        for (int i = 0; i < listFiles.length; i++) {
+            listFiles[i].delete();
+        }
+        temDir.delete();*/
+
+    }
+
+    //下载Jpg格式的Zip
+    @RequestMapping(value = "/sendJpgZip",method = RequestMethod.POST)
+    @ResponseBody
+    public void sendJpgZip(HttpServletRequest request,HttpServletResponse response,@RequestParam(value="filename") String filename) throws IOException {
+        /** 下面为下载zip压缩包相关流程 */
+        String filePath="";
+        ResourceBundle resource = ResourceBundle.getBundle("imgWebPath");//test为属性文件名，放在包com.mmq下，如果是放在src下，直接用test即可
+        if(filename.contains("http")){
+            filePath = filename.replace(resource.getString("web.virtualImagePath"),resource.getString("web.innerImagePath"));
+        }else {
+            filePath=filename;
+        }
+        /** 1.创建临时文件夹  */
+        long start = System.currentTimeMillis();
+        File temDir = new File(filePath);
+        System.out.println(filePath);
+        if(!temDir.exists()){
+            temDir.mkdirs();
+        }
+        //判断是否是单张的
+        if(temDir.isDirectory()){
+            /** .设置response的header */
+            response.setContentType("application/zip");
+            response.setHeader("Content-Disposition", "attachment; filename="+temDir.getName()+".zip");
+
+            /** .调用工具类，下载zip压缩包 */
+            try {
+                ZipUtils.toZip(temDir.getPath(), response.getOutputStream(),true);
+            }
+            finally {
+                /** 5.删除临时文件和文件夹 */
+                // 这里我没写递归，直接就这样删除了
+                CopyDcmFolders copyDcmFolders = new CopyDcmFolders();
+                copyDcmFolders.removeDir(temDir.getParentFile());
+            }
+        }else {
+            try{
+                response.setContentType("application/octet-stream;charset=UTF-8");
+                response.setHeader("Content-disposition", "attachment;filename=" + temDir.getName());
+                byte[] buf = new byte[2048];
+                int len;
+                FileInputStream in = new FileInputStream(temDir);
+                while ((len = in.read(buf)) != -1) {
+                    response.getOutputStream().write(buf, 0, len);
+                }
+                in.close();
+            }catch (IOException e){
+                System.out.println("下载错误");
+            }finally {
+                CopyDcmFolders copyDcmFolders = new CopyDcmFolders();
+                copyDcmFolders.removeDir(temDir.getParentFile());
+            }
+
+        }
+
+    }
+
+    //转换DCM图片的格式为JPG
+    @RequestMapping(value = "/convertFormat",method = RequestMethod.POST)
+    @ResponseBody
+    public String convertFormat(HttpServletRequest request,HttpServletResponse response,@RequestParam(value="filename") String filename) throws IOException {
+        /** 下面为下载zip压缩包相关流程 */
+        String filePath="";
+        ResourceBundle resource = ResourceBundle.getBundle("imgWebPath");//test为属性文件名，放在包com.mmq下，如果是放在src下，直接用test即可
+        if(filename.contains("http")){
+            filePath = filename.replace(resource.getString("web.virtualImagePath"),resource.getString("web.innerImagePath"));
+        }else {
+            filePath=filename;
+        }
+        /** 2.创建临时文件夹  */
+        long start = System.currentTimeMillis();
+        File temDir = new File(resource.getString("web.innerImagePath")+"\\"+UUID.randomUUID());
+        System.out.println(filePath);
+        if(!temDir.exists()){
+            temDir.mkdirs();
+        }
+        /** 2.进行格式转换*/
+        File srcFile = new File(filePath);
+        System.out.println("filePath:"+filePath);
+        CopyDcmFolders copyDcmFolders = new CopyDcmFolders();
+        copyDcmFolders.copyFolder(srcFile,temDir);
+        long end = System.currentTimeMillis();
+        System.out.println("总用时："+(end-start));
+        /** 3.设置response的header */
+        //response.setContentType("application/zip");
+        //response.setHeader("Content-Disposition", "attachment; filename="+temDir.getName()+".zip");
+
+        /** 4.调用工具类，下载zip压缩包 */
+        //ZipUtils.toZip(temDir.getPath(), response.getOutputStream(),true);
+
+        /** 5.删除临时文件和文件夹 */
+        // 这里我没写递归，直接就这样删除了
+      /*  File[] listFiles = temDir.listFiles();
+        for (int i = 0; i < listFiles.length; i++) {
+            listFiles[i].delete();
+        }
+        temDir.delete();*/
+      if(srcFile.isDirectory()){
+          return JSON.toJSONString(new File (temDir,srcFile.getName()).getPath());
+      }else {
+          int index = srcFile.getName().lastIndexOf(".dcm");
+          String imgName = srcFile.getName().substring(0,index);
+          return JSON.toJSONString(new File (temDir,imgName+".jpg").getPath());
+      }
+
     }
 
     //发送文件
     @RequestMapping(value = "/sendDcm" , method = RequestMethod.GET)
     @ResponseBody
-    public void sendDcm(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public void sendDcm(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //获取下载路径
         String filePath1 = "E:\\2.dcm";
         String filePath2 = "E:\\2.dcm";
@@ -100,7 +256,7 @@ public class AnnoController {
     //上传文件
     @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
     @ResponseBody
-    public ResultVO uploadFile(@RequestParam("inputFile")MultipartFile file) throws IOException {
+    public ResultVO uploadFile(@RequestParam("inputFile") MultipartFile file) throws IOException {
         //本地使用，上传位置
         String rootPath = "E:\\upload\\image\\";
         if(!file.isEmpty()) {
@@ -151,11 +307,11 @@ public class AnnoController {
         }
         return null;
     }
-    @RequestMapping(value="/receiveList",method = RequestMethod.POST)
+   /* @RequestMapping(value="/receiveList",method = RequestMethod.POST)
     @ResponseBody
-    public String receiveList(@RequestParam(value = "xy",required = false/*,defaultValue = ""*/) String[] xy ,
-                              @RequestParam(value = "fileSrc") String fileSrc ,HttpServletRequest request ,
-                              @RequestParam(value = "width") String width,@RequestParam(value = "height") String height){
+    public String receiveList1(@RequestParam(value = "xy",required = false*//*,defaultValue = ""*//*) String[] xy ,
+                              @RequestParam(value = "fileSrc") String fileSrc , HttpServletRequest request ,
+                              @RequestParam(value = "width") String width, @RequestParam(value = "height") String height){
         //判断是否为空
         if (xy == null){
             return "0";
@@ -187,7 +343,7 @@ public class AnnoController {
                         readDcmTagInfo.getPatientId(), readDcmTagInfo.getStudyUID(), readDcmTagInfo.getSeriesUID()
                         , readDcmTagInfo.getSopUID(), xOy[i][0], xOy[i][1], xOy[i][2], xOy[i][3]);
             }
-            xmlGenerator.createXml(readDcmTagInfo.getFolder(),readDcmTagInfo.getFileName(),fileSrc,width,height,readDcmTagInfo.getPerPixel(),xOy);
+            //xmlGenerator.createXml(readDcmTagInfo.getFolder(),readDcmTagInfo.getFileName(),fileSrc,width,height,readDcmTagInfo.getPerPixel(),xOy);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e){
@@ -195,7 +351,117 @@ public class AnnoController {
         }
         return "1";
 
+    }*/
+
+    @RequestMapping(value="/receiveList",method = RequestMethod.POST)
+    @ResponseBody
+    public String receiveList(@RequestParam(value = "xy",required = false/*,defaultValue = ""*/) String[] xy ,
+                              @RequestParam(value = "fileSrc") String fileSrc , HttpServletRequest request,
+                              @RequestParam(value = "annoInfo") String seriesAnnoInfo){
+        //判断是否为空
+        if (xy == null){
+            return "0";
+        }
+        ResourceBundle resource = ResourceBundle.getBundle("imgWebPath");
+        String imagePath = fileSrc.substring(0,fileSrc.indexOf(";")).replace("wadouri:"+resource.getString("web.virtualImagePath"),resource.getString("web.innerImagePath"));
+        //获取由前端接收过来的坐标信息
+        int[][] xOy = annoService.getCoordinateInfo(xy);
+        ReadDcmTagInfo readDcmTagInfo = new ReadDcmTagInfo();
+        DateFormat myFormat = new SimpleDateFormat("yyyyMMdd");
+        try {
+            readDcmTagInfo.getTagInfo(imagePath);
+            //向患者信息表中插入信息
+            patientService.insertOrUpdatePatient(readDcmTagInfo.getPatientId(), readDcmTagInfo.getPatName()
+                    ,myFormat.parse(readDcmTagInfo.getBirth()),readDcmTagInfo.getSex());
+            //向检查信息表中插入信息
+            studyService.insertOrUpdateStudy(readDcmTagInfo.getStudyUID(),readDcmTagInfo.getPatientId(),
+                    readDcmTagInfo.getModality(),myFormat.parse(readDcmTagInfo.getStudyDate()));
+            //向序列信息表中插入信息
+            seriesService.insertOrUpdateSeries(readDcmTagInfo.getSeriesUID(),readDcmTagInfo.getPatientId(),
+                    readDcmTagInfo.getStudyUID(),seriesAnnoInfo);
+            //向图像信息表中插入信息
+            imageService.insertOrUpdateImage(readDcmTagInfo.getSopUID(),readDcmTagInfo.getPatientId(),
+                    readDcmTagInfo.getStudyUID(),readDcmTagInfo.getSeriesUID(),"已标注",
+                    readDcmTagInfo.getFolder(),readDcmTagInfo.getFileName(),imagePath);
+            annoService.deleteAnnoInfo(readDcmTagInfo.getSopUID());
+            for (int i=0;i<xOy.length;i++) {
+                annoService.insertAnnoInfo(primaryKeyGenerator.getAnnoIdN(readDcmTagInfo.getModality()),
+                        readDcmTagInfo.getPatientId(), readDcmTagInfo.getStudyUID(), readDcmTagInfo.getSeriesUID()
+                        , readDcmTagInfo.getSopUID(), xOy[i][0], xOy[i][1], xOy[i][2], xOy[i][3],readDcmTagInfo.getWidth(),readDcmTagInfo.getHeight(),readDcmTagInfo.getPerPixel());
+            }
+            return "1";
+            //xmlGenerator.createXml(readDcmTagInfo.getFolder(),readDcmTagInfo.getFileName(),fileSrc,width,height,readDcmTagInfo.getPerPixel(),xOy);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "0";
+
     }
 
+    @RequestMapping(value = "/loadAnno" ,method = RequestMethod.POST)
+    @ResponseBody
+    public String loadAnnoInfo (@RequestParam(value = "fileSrc") String fileSrc ,HttpServletRequest request,HttpServletResponse response){
+        ResourceBundle resource = ResourceBundle.getBundle("imgWebPath");
+        String imagePath = fileSrc.substring(0,fileSrc.indexOf(";")).replace("wadouri:"+resource.getString("web.virtualImagePath"),resource.getString("web.innerImagePath"));
+        ReadDcmTagInfo readDcmTagInfo = new ReadDcmTagInfo();
+        try {
+            readDcmTagInfo.getTagInfo(imagePath);
+
+            //向序列信息表中插入信息
+            AnnoSeries annoSeries = seriesService.getById(readDcmTagInfo.getSeriesUID());
+            if (annoSeries == null){
+                return "0";
+            }
+            else {
+            return JSON.toJSONString(annoSeries.getSeriesAnnoInfo());
+            }
+            //xmlGenerator.createXml(readDcmTagInfo.getFolder(),readDcmTagInfo.getFileName(),fileSrc,width,height,readDcmTagInfo.getPerPixel(),xOy);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "0";
+    }
+
+
+    /**
+     * @Description: 返回已写报告的分页信息
+     * @Author: Shalldid
+     * @Date: Created in 16:02 2018-05-07
+     * @Return:
+     **/
+    @RequestMapping(value = "/getAnnoXML")
+    @ResponseBody
+    public String getAnnoXML(Pagination p, HttpSession httpSession){
+        int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
+        int pageSize  = p.getPageSize();
+        System.out.println("currIndex:"+currIndex+","+"pageSize:"+pageSize);
+        boolean ifFirst = (p.getPageCurrent() == 1);    //如果当前页为1则是第一页
+        int totalRow = annoImageMapper.getCountByAnnoFlag("已标注"); //得到未安排预约的总数量；
+//        int totalRow = regInfoService.countCheckListByFlag("已写报告"); //得到未安排预约的总数量；
+        System.out.println(totalRow);
+        boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;   //当前数据index加上pageSize是否小于等于总数量，若是则为最后一页
+        int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+        try {
+            List<AnnoImage> annoImages = annoImageMapper.selectAllByAnnoFlag("已标注");
+            PaginationResult<AnnoImage> paginationResult = new PaginationResult();
+            paginationResult.setFirstPage(ifFirst);
+            paginationResult.setLastPage(ifLast);
+            paginationResult.setList(annoImages);
+            paginationResult.setPageNumber(p.getPageCurrent());
+            paginationResult.setTotalRow(totalRow);
+            paginationResult.setTotalPage(totalPage);
+            paginationResult.setPageSize(pageSize);
+            System.out.println(JSON.toJSONString(paginationResult));
+            return JSON.toJSONString(paginationResult);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

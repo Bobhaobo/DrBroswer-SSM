@@ -4,12 +4,13 @@
     <ul id="myTab" class="nav nav-tabs">
         <li class="active">
             <a href="#myTab_1" data-toggle="tab">
-                预约检查
+                <!--预约检查-->远程诊断
             </a>
         </li>
         <li>
             <a href="#myTab_2" data-toggle="tab">
-                远程诊断
+                <!--远程诊断-->
+                预约检查
             </a>
         </li>
         <li>
@@ -19,7 +20,7 @@
         </li>
     </ul>
     <div id="myTabContent" class="container tab-content ">
-        <div class="container tab-pane fade in active" id="myTab_1">
+        <div class="container tab-pane fade  " id="myTab_2">
             <form id="register_local" data-toggle="validate" action="register/patient_check_register" method="post">
                 <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
                     <hr class="simple" color="#6f5499" />
@@ -32,7 +33,7 @@
                     <label class="row-label">所属医院：</label>
                     <div class="row-input required">
                         <input name="belong_hos" id="belong_hos" data-width="150" value="" readonly="">
-                        </input>
+                        <!--</input>-->
                     </div>
                     <label class="row-label">检查类型：</label>
                     <div class="row-input required">
@@ -132,7 +133,7 @@
                 </div>
             </form>
         </div>
-        <div class="container tab-pane fade" id="myTab_2">
+        <div class="container tab-pane fade in active" id="myTab_1">
             <form id="register_remote" data-toggle="validate" >
                 <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
                     <hr class="simple" color="#6f5499" />
@@ -157,7 +158,7 @@
                     </div>
                     <label class="row-label">性别：</label>
                     <div class="row-input required">
-                        <input type="radio" name="PatGender_r" data-toggle="icheck" value="男" data-rule="checked" data-label="男&nbsp;&nbsp;&nbsp;">
+                        <input type="radio" name="PatGender_r" data-toggle="icheck" value="男" data-rule="checked" checked="checked" data-label="男&nbsp;&nbsp;&nbsp;">
                         <input type="radio" name="PatGender_r" data-toggle="icheck" value="女" data-label="女">
                     </div>
                     <label class="row-label">出生日期：</label>
@@ -171,8 +172,8 @@
                         <input type="radio" name="PatType_r" data-toggle="icheck" value="急诊" data-label="急诊">
                         <input type="radio" name="PatType_r" data-toggle="icheck" value="其他" data-label="其他">
                     </div>
-                    <label class="row-label">身份证号：</label>
-                    <div class="row-input">
+                    <label class="row-label ">身份证号：</label>
+                    <div class="row-input required">
                         <input type="text" name="PatIDCard_r" class="PatIDCard">
                     </div>
                     <label class="row-label">联系方式：</label>
@@ -187,17 +188,64 @@
                     <div class="row-input">
                         <input type="text" name="societyID_r" class="societyID">
                     </div>
-                    <label class="row-label">点击上传：</label>
-                    <div class="row-input">
-                        <a href="#" class="btn btn-default" id="upload">启动上传插件</a>
-                    </div>
-                    <hr class="simple" color="#6f5499" />
+                    <!--<label class="row-label">点击上传：</label>-->
+                    <!--<div class="row-input">-->
+                        <!--<a href="#" class="btn btn-default" id="upload">启动上传插件</a>-->
+
+                        <!--<a href="#" class="btn btn-default" id="batch">启动批量上传插件</a>-->
+                    <!--</div>-->
+                    <!--<hr class="simple" color="#6f5499" />-->
                 </div>
                 <div class="col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4">
-                    <button type="reset" class="btn-orange" form="register_remote">重置表单</button></li>
-                    <button type="submit" class="btn-default" data-icon="save" id="remoteDiagReg">保存</button></li>
+                    <button type="reset" class="btn-orange" form="register_remote">重置表单</button>
+                    <button type="submit" class="btn-default" data-icon="save" id="remoteDiagReg">保存</button>
+                    <a href="#" class="btn btn-default" id="upload">上传图像</a>
+                    <!--<hr class="simple" color="#6f5499" />-->
+                </div>
+                <div class="bjui-row col-2 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                    <hr class="simple" color="#6f5499" />
+                </div>
+                <div style="float: left;width: 960px;height: 460px">
+                    <table border="1" style="table-layout: fixed ;width: 960px" data-toggle="datagrid" data-options="{
+        height: '100%',
+        gridTitle : '患者信息',
+        showToolbar: false,
+        dataUrl: 'remote/getHadChecked',
+        dataType: 'json',
+        jsonPrefix: 'obj',
+        paging: {pageSize:10},
+        showCheckboxcol: false,
+        linenumberAll: true,
+        contextMenuH:false,
+        filterThead:false,
+        showToolbar: true,
+    	toolbarItem: 'refresh',
+    }">
+                        <thead>
+                        <tr>
+                            <th rowspan="2" align="center" data-options="{name:'checkNum',align:'center',width:170,menu:false}">检查号</th>
+                            <th colspan="3" align="center">患者信息</th>
+                            <th colspan="3" align="center">检查信息</th>
+                            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation3}">选择</th>
+                        </tr>
+                        <tr>
+                            <th align="center" data-options="{name:'patName',align:'center',width:100,menu:false}">姓名</th>
+                            <th align="center" data-options="{name:'patGender',align:'center',width:70,menu:false}">性别</th>
+                            <th align="center" data-options="{name:'patient_Age',align:'center',width:70,menu:false}">年龄</th>
+                            <th align="center" data-options="{name:'examItemName',align:'center',width:80,menu:false}">检查类型</th>
+                            <th align="center" data-options="{name:'hosName',align:'center',width:160,menu:false}">所属医院</th>
+                            <th align="center" data-options="{name:'checkDate',align:'center',type:'date',pattern:'yyyy-MM-dd',render:function(value){return value?value.substr(0,10):value},width:160,menu:false}">检查日期</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4" style="margin-top: 20px;margin-left:400px">
+                    <button  class="btn-orange" id="reset">重置</button>
+                    <button  class="btn-orange" id="all">全选</button>
+                    <a href="#" class="btn btn-default" id="batch">上传图像</a>
                 </div>
             </form>
+
         </div>
         <div class="container tab-pane fade" id="myTab_3">
         <form id="register_local_part" data-toggle="validate" action="/local/register" method="post">

@@ -26,7 +26,9 @@ public interface PatientService {
      * @Return:
      **/
     Patient getPatByIdcard(String idcard);
-    List<Patient> getPatByIdcard1(String idcard);
+//    List<Patient> getPatByIdcard1(String idcard);
     List<Patient> getAll();
     int account();
+
+    List<Patient> getRemoteRegisterAllocate(String name, String sex, String age);
 }

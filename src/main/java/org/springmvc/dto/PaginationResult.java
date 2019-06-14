@@ -107,4 +107,18 @@ public class PaginationResult<T> {
 
     public PaginationResult() {
     }
+
+    @Override
+    public String toString() {
+        return "PaginationResult{" +
+                "lastPage=" + lastPage +
+                ", pageSize=" + pageSize +
+                ", pageNumber=" + pageNumber +
+                ", firstPage=" + firstPage +
+                ", list=" + list +
+                ", totalRow=" + totalRow +
+                ", totalPage=" + totalPage +
+                ", base64Url='" + base64Url + '\'' +
+                '}';
+    }
 }

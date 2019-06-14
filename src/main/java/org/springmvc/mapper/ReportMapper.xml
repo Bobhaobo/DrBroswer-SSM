@@ -24,12 +24,22 @@
     <result column="cardno" property="cardno" jdbcType="VARCHAR" />
     <result column="jcbw" property="jcbw" jdbcType="VARCHAR" />
     <result column="sfyangxing" property="sfyangxing" jdbcType="VARCHAR" />
+    <result column="VerifyDocCode" property="verifydoccode" jdbcType="VARCHAR" />
+    <result column="VerifyDate" property="verifydate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     ReportCode, RecordID, CheckNum, ClinicID, PatientID, idcard, BedNo, ReportTime, Flag, 
     ExamDesc, ExamDiagnosis, DocCode, ExamItemCode, ExamItemName, PatTypeCode, DeptName, 
     DeptID, IfUsingFlag, report_image_path, cardno, jcbw, sfyangxing
   </sql>
+
+  <sql id="Base_Column_List_add" >
+    ReportCode, RecordID, CheckNum, ClinicID, PatientID, idcard, BedNo, ReportTime, Flag,
+    ExamDesc, ExamDiagnosis, DocCode, ExamItemCode, ExamItemName, PatTypeCode, DeptName,
+    DeptID, IfUsingFlag, report_image_path, cardno, jcbw, sfyangxing,VerifyDocCode,VerifyDate
+  </sql>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -291,6 +301,36 @@
       sfyangxing = #{sfyangxing,jdbcType=VARCHAR}
     where ReportCode = #{reportcode,jdbcType=VARCHAR}
   </update>
+
+  <update id="updateByPrimaryKeyAdd" parameterType="org.springmvc.pojo.Report" >
+    update report
+    set RecordID = #{recordid,jdbcType=VARCHAR},
+      CheckNum = #{checknum,jdbcType=VARCHAR},
+      ClinicID = #{clinicid,jdbcType=VARCHAR},
+      PatientID = #{patientid,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      BedNo = #{bedno,jdbcType=VARCHAR},
+      ReportTime = #{reporttime,jdbcType=TIMESTAMP},
+      Flag = #{flag,jdbcType=VARCHAR},
+      ExamDesc = #{examdesc,jdbcType=VARCHAR},
+      ExamDiagnosis = #{examdiagnosis,jdbcType=VARCHAR},
+      DocCode = #{doccode,jdbcType=VARCHAR},
+      ExamItemCode = #{examitemcode,jdbcType=VARCHAR},
+      ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      PatTypeCode = #{pattypecode,jdbcType=INTEGER},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      DeptID = #{deptid,jdbcType=VARCHAR},
+      IfUsingFlag = #{ifusingflag,jdbcType=BIT},
+      report_image_path = #{reportImagePath,jdbcType=VARCHAR},
+      cardno = #{cardno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      sfyangxing = #{sfyangxing,jdbcType=VARCHAR},
+      VerifyDocCode = #{verifydoccode,jdbcType=VARCHAR}
+    where ReportCode = #{reportcode,jdbcType=VARCHAR}
+  </update>
+
+
+
   <select id="getReportCode" resultType="java.lang.String">
     select max(ReportCode)
     from report
@@ -302,4 +342,28 @@
     from report
     where CheckNum = #{checknum,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByCheckNumAdd" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List_add" />
+    from report
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectCountByCheckNum" resultType="java.lang.Integer" >
+    select count (*)
+    from report
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateReportStatusByChecknum">
+    update report
+    set Flag = #{status,jdbcType=VARCHAR}
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteByCheckNum" parameterType="java.lang.String" >
+    delete from report
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </delete>
 </mapper>

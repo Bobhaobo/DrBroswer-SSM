@@ -29,6 +29,7 @@ public class TemplateLoadController {
     @RequestMapping(value = "/loadTemplate", method = RequestMethod.GET)
     @ResponseBody
     public String loadTemplate(){
+        System.out.println(templateService.getTemplateIntro());
         return templateService.getTemplateIntro();
     }
     /**
@@ -40,7 +41,9 @@ public class TemplateLoadController {
     @RequestMapping(value = "/{template_id}/getTemplateDetail", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
     @ResponseBody
     public String loadTemplateDetail(@PathVariable("template_id") String template_id){
+        System.out.println(template_id);
         SimplePropertyPreFilter s = new SimplePropertyPreFilter("examdesc", "examdiagnosis");
+        System.out.println(JSON.toJSONString(templateService.getTemplateDetailById(template_id),s));
         return JSON.toJSONString(templateService.getTemplateDetailById(template_id),s);
     }
 

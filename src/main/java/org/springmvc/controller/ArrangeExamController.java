@@ -65,12 +65,15 @@ public class ArrangeExamController {
         int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
         int pageSize  = p.getPageSize();
         boolean ifFirst = (p.getPageCurrent() == 1);    //如果当前页为1则是第一页
-        int totalRow = orderTableService.getOrderTableCountByStatus("0"); //得到未安排预约的总数量；
+        int totalRow = orderTableService.getOrderTableCountByStatus("0"); //得到未安排预约的总数量，状态0是未安排；
+        System.out.println("0");
         boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;   //当前数据index加上pageSize是否小于等于总数量，若是则为最后一页
         System.out.println(pageSize);
         System.out.println(totalRow);
         int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1); //总页数，先判断总页数%每页数量是否等于0，若为0返回totalRow / pageSize，若不为0返回(totalRow / pageSize) + 1
+        System.out.println(totalPage);
         List<ReservationTab> reservationTabs = orderTableService.getOrderTabByStatusAndPagination(currIndex, pageSize);
+        System.out.println(reservationTabs);
         PaginationResult<ReservationTab> paginationResult = new PaginationResult();
         paginationResult.setFirstPage(ifFirst);
         paginationResult.setLastPage(ifLast);
@@ -206,9 +209,14 @@ public class ArrangeExamController {
         int pageSize  = p.getPageSize();
         boolean ifFirst = (p.getPageCurrent() == 1);
         int totalRow = orderTableService.getOrderTableCountByStatus("1"); //得到已安排预约的总数量；
+        System.out.println(totalRow);
         boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;   //当前数据index加上pageSize是否小于等于总数量，若是则为最后一页
+        System.out.println("123");
         int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1); //总页数，先判断总页数%每页数量是否等于0，若为0返回totalRow / pageSize，若不为0返回(totalRow / pageSize) + 1
+        System.out.println(totalPage);
         List<ArrangedTab> arrangedTabs = orderTableService.getArrangedTabByStatusAndPagination(currIndex, pageSize, userService.getHosIdOfUser(u.getDept()));
+        System.out.println("hxd");
+        System.out.println(arrangedTabs);
         PaginationResult<ArrangedTab> paginationResult = new PaginationResult();
         paginationResult.setFirstPage(ifFirst);
         paginationResult.setLastPage(ifLast);
@@ -217,7 +225,8 @@ public class ArrangeExamController {
         paginationResult.setTotalRow(totalRow);
         paginationResult.setTotalPage(totalPage);
         paginationResult.setPageSize(pageSize);
-        //System.out.println(JSON.toJSONString(paginationResult));
+        System.out.println("lalala");
+        System.out.println(JSON.toJSONString(paginationResult));
         return JSON.toJSONString(paginationResult);
     }
     /**

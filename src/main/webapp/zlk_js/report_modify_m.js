@@ -1,10 +1,13 @@
 $(function(){
+    alert("lalala");
+    alert( $("#bgCode").val());
     $.ajax({
         type:"post",
         url:"report/"+ $("#bgCode").val() +"/modifyReportPatDetail",
         dataType:"html",
         async:false,
         success:function(data){
+            alert(data);
             var pro=null;
             pro = eval("("+data+")");
             $("#hosName").text(pro.hosName);
@@ -38,6 +41,7 @@ $("#modifyReport").click(function(){
         okalert:false,
         loadingmask:true,
         callback: function(data) {
+            alert(data);
             if(data == 1){
                 BJUI.alertmsg('ok', '提交成功！');
             }else{

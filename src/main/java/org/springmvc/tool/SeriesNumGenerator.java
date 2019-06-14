@@ -57,6 +57,24 @@ public class SeriesNumGenerator {
         }
     }
 
+
+    public String getLocalAccessionNLocal(String modality){
+
+        Date systemDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String date = dateFormat.format(systemDate);
+        String param = "R" + modality + date + "___"; //生成规则，检查类型加当前年月日加三位数字
+        String accessionN_temp = dicomWorkListLocalMapper.getAccessionNLocal(modality, param);
+        if(accessionN_temp != null){
+            String tempAccessionNOne = accessionN_temp.substring(0,11);
+            String tempAccessionNTwo = accessionN_temp.substring(11,14);
+            Integer tempInteger = Integer.parseInt(tempAccessionNTwo) + 1;
+            return tempAccessionNOne + String.format("%03d", tempInteger);
+        }else {
+            return "R" + modality + date + "001";
+        }
+    }
+
     /**
      *@Description: 从数据库查询当前worklist表内最大的AccessionN号，若有则在当天的最大号加1，若无则返回检查类型+日期+001
      *@Author: Shalldid

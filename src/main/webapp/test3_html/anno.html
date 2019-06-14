@@ -9,105 +9,173 @@
 	<link rel="stylesheet" href="../test_script/css/Toolbar.css" type="text/css" />
 	<link rel="stylesheet" href="../test_script/css/Icons.css" type="text/css" />
 	<link rel="stylesheet" href="../test_script/css/jquery-ui-1.10.4.custom.min.css" type="text/css"/>
+	<!--  鼠标右键的样式文件 -->
+	<link rel="stylesheet" type="text/css" href="../test_script/css/jquery-menu.css">
+	<!-- 箭头标注的弹框样式 -->
+	<link href="../test_script/css/dialogPolyfill.css" rel="stylesheet">
 
 	<script src="../test_script/js/jquery-1.11.3.min.js"></script>
 	<script src="../test_script/js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script src="../test_script/js/bootstrap.min.js"></script>
+	<!-- 以下两个是鼠标左键的js文件-->
+	<script src="../test_script/js/jquery.hoverintent.js"></script>
+	<script src="../test_script/js/jquery-menu.js"></script>
+	<!-- 关于表单回调的js文件 -->
+	<script src="../test_script/js/jquery.form.js"></script>
 </head>
 <body style="background-color:#000000;overflow: hidden">
+
 <div id="tollHead" class="toolbar headerToolbarDiv">
-	<button id="saveAnnotations" class="btn btn-default" title="保存标注">
-		<span class="icon saveXMLIcon"></span>
-		<div style="">保存标注</div>
-	</button>
 	<!--<button id="panZoom" class="btn btn-defalut" title="移动">
         <span class="icon panZoomIcon"></span>
     </button>-->
-	<button id="actualSize" class="btn btn-default" title="初始尺寸">
-		<span class="icon actualSizeIcon"></span>
-		<div style="">初始尺寸</div>
-	</button>
-	<!--button id ="magnifyGlass"class="btn btn-defalut interactiveModesBtns" title="放大镜" value="1">
-       <span class="icon magnifyGlassIcon"></span>
-    </button-->
-	<button id="zoomInImage" class="btn btn-default" title="放大">
-		<span class="icon zoomInIcon"></span>
-		<div style="">放大</div>
-	</button>
-	<button id="zoomOutImage" class="btn btn-default" title="缩小">
-		<span class="icon zoomOutIcon"></span>
-		<div style="">缩小</div>
-	</button>
-	<button id="rotateCounterClockwise" class="btn btn-default" title="左旋转">
-		<span class="icon rotateCounterClockwiseIcon"></span>
-		<div style="">左旋转</div>
-	</button>
-	<button id="rotateClockwise" class="btn btn-default" title="右旋转">
-		<span class="icon rotateClockwiseIcon"></span>
-		<div style="">右旋转</div>
-	</button>
-	<!--
-    <button id="loadAnnotations" class="btn btn-default" title="Load Annotations">
-       <span class="icon openAnnotationIcon"></span>
-    </button>
-    <button id="saveAnnotations" class="btn btn-default" title="Save Annotations">
-       <span class="icon saveXMLIcon"></span>
-    </button>
+		<button id="actualSize" class="btn btn-default" title="初始尺寸">
+			<span class="icon actualSizeIcon"></span>
+			<div style="">初始尺寸</div>
+		</button>
+		<button id="layout" class="annotationObjectBtn btn btn-default" title="序列布局">
+			<span class="icon magnifyGlassIcon"></span>
+			<div>序列布局</div>
+		</button>
+		<button id="layoutImg" class="annotationObjectBtn btn btn-default" title="图像布局">
+			<span class="icon magnifyGlassIcon"></span>
+			<div>图像布局</div>
+		</button>
+		<!--button id ="magnifyGlass"class="btn btn-defalut interactiveModesBtns" title="放大镜" value="1">
+           <span class="icon magnifyGlassIcon"></span>
+        </button-->
+		<button id="levels" class="btn btn-default" title="窗宽窗位">
+			<span class="icon LevelsIcon"></span>
+			<div style="">窗宽窗位</div>
+		</button>
+		<button id="zoomInImage" class="btn btn-default" title="缩放">
+			<span class="icon zoomIcon"></span>
+			<div style="">缩放</div>
+		</button>
+		<!--<button id="zoomOutImage" class="btn btn-default" title="缩小">
+            <span class="icon zoomOutIcon"></span>
+            <div style="">缩小</div>
+        </button>-->
+		<button id="rotateCounterClockwise" class="btn btn-default" title="左旋转">
+			<span class="icon rotateCounterClockwiseIcon"></span>
+			<div style="">左旋转</div>
+		</button>
+		<button id="rotateClockwise" class="btn btn-default" title="右旋转">
+			<span class="icon rotateClockwiseIcon"></span>
+			<div style="">右旋转</div>
+		</button>
+		<!--
+        <button id="loadAnnotations" class="btn btn-default" title="Load Annotations">
+           <span class="icon openAnnotationIcon"></span>
+        </button>
+        <button id="saveAnnotations" class="btn btn-default" title="Save Annotations">
+           <span class="icon saveXMLIcon"></span>
+        </button>
 
-    <button id="undo" class="btn btn-default" title="撤回">
-       <span class="icon undoIcon"></span>
-    </button>-->
-	<!--
-    <button id="redo" class="btn btn-default" title="Redo">
-       <span class="icon redoIcon"></span>
-    </button>-->
-	<button id="deleteAnnotation" class="btn btn-default" title="删除标注">
-		<span class="icon closeIcon"></span>
-		<div style="">删除标注</div>
-	</button>
-	<!--<button class="annotationObjectBtn btn btn-default" title="直线">
-       <span class="icon lineIcon" ></span>
-    </button-->
-	<button id="rectbtn" class="annotationObjectBtn btn btn-default" title="矩形标注框" data-type="rectangle">
-		<span class="icon rectangleIcon" data-type="rectangle"></span>
-		<div style="">矩形标注框</div>
-	</button>
-	<button id="length" class="annotationObjectBtn btn btn-default" title="长度测量" data-type="ruler">
-		<span class="icon rulerIcon"></span>
-		<div style="">长度测量</div>
-	</button>
-	<button id="angle" class="annotationObjectBtn btn btn-default" title="角度测量" data-type="angle">
-		<span class="icon protractorIcon"></span>
-		<div >角度测量</div>
-	</button>
+        <button id="undo" class="btn btn-default" title="撤回">
+           <span class="icon undoIcon"></span>
+        </button>-->
+		<!--
+        <button id="redo" class="btn btn-default" title="Redo">
+           <span class="icon redoIcon"></span>
+        </button>-->
+		<!--<button class="annotationObjectBtn btn btn-default" title="直线">
+           <span class="icon lineIcon" ></span>
+        </button-->
+		<button id="rectbtn" class="annotationObjectBtn btn btn-default" title="矩形标注框" data-type="rectangle">
+			<span class="icon rectangleIcon" data-type="rectangle"></span>
+			<div style="">矩形标注框</div>
+		</button>
+		<button id="length" class="annotationObjectBtn btn btn-default" title="长度测量" data-type="ruler">
+			<span class="icon rulerIcon"></span>
+			<div style="">长度测量</div>
+		</button>
+		<button id="angle" class="annotationObjectBtn btn btn-default" title="角度测量" data-type="angle">
+			<span class="icon protractorIcon"></span>
+			<div >角度测量</div>
+		</button>
+		<button id="ctr" class="btn btn-default" title="心胸比">
+			<span class="icon ctrIcon"></span>
+			<div style="">心胸比</div>
+		</button>
+		<button id="invert" class="btn btn-default" title="负像">
+			<span class="icon invertIcon"></span>
+			<div style="">负像</div>
+		</button>
+		<button id="hflip" class="btn btn-default" title="左右镜像">
+			<span class="icon hflipIcon"></span>
+			<div style="">左右镜像</div>
+		</button>
+		<button id="vflip" class="btn btn-default" title="上下镜像">
+			<span class="icon vflipIcon"></span>
+			<div style="">上下镜像</div>
+		</button>
+		<button id="arrowAnno" class="btn btn-default" title="文本标注">
+			<span class="icon arrowAnnotateIcon"></span>
+			<div style="">文本标注</div>
+		</button>
+		<button id="play" class="annotationObjectBtn btn btn-default" title="播放" data-type="play">
+			<span id="playSpan" class="icon playIcon"></span>
+			<div id="playDiv" >播放</div>
+		</button>
+		<!--	<button id="stop" class="annotationObjectBtn btn btn-default" title="停止" data-type="stop">
+                <span id ="stopSpan" class="icon stopIcon"></span>
+                <div >停止</div>
+            </button>-->
 
-	<button id="layout" class="annotationObjectBtn btn btn-default" title="序列布局">
-		<span class="icon magnifyGlassIcon"></span>
-		<div>序列布局</div>
-	</button>
-	<!---<button class="annotationObjectBtn btn btn-default" title="多边形">
-       <span class="icon polygonIcon"></span>
-    </button>-->
-	<button id="test" class="annotationObjectBtn btn btn-default" title="测试">
+		<button id="deleteAnnotation" class="btn btn-default" title="删除标注">
+			<span class="icon closeIcon"></span>
+			<div style="">删除标注</div>
+		</button>
+		<!---<button class="annotationObjectBtn btn btn-default" title="多边形">
+           <span class="icon polygonIcon"></span>
+        </button>-->
+		<button id="saveAnnotations" class="btn btn-default" title="保存标注">
+			<span class="icon saveXMLIcon"></span>
+			<div style="">保存标注</div>
+		</button>
+		<button id="loadAnnotations" class="btn btn-default" title="加载标注">
+			<span class="icon loadAnnoIcon"></span>
+			<div style="">加载标注</div>
+		</button>
+
+		<button id="exportImg" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="导出">
+				<span class="icon exportImgIcon"></span>
+				<div style="">导出</div>
+		</button>
+
+
+		<button id="playSpeed" class="btn btn-default" style="display: none">
+			<input id="speedInput" type="text"style="width: 25px" value="15">
+			帧/秒
+			<div style="">帧速率</div>
+		</button>
+
+
+
+
+<!--	<button id="test" class="annotationObjectBtn btn btn-default" title="测试">
 		<span class="icon polygonIcon"></span>
-	</button>
+	</button>-->
+
+
 </div>
+
 
 <div class="container-fluid">
 <!-- Create a header toolbar -->
 
 	<div class="page-header">
-
 	</div>
-	<div class="row">
-		<div class="col-md-2 col-xs-2" style="overflow-y:auto;height:100vh;">
-			<div id="viewerSeries">
-				<div id="studyThumbnail" >
+	<div class="" style="float:left;width:200px;overflow-y:auto;height:100vh;">
+		<div id="viewerSeries">
+			<div id="studyThumbnail" >
 
-				</div>
 			</div>
 		</div>
-		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+	</div>
+	<div id="imageDiv" class="row">
+		<!--<div class="col-lg-10 col-md-10 col-sm-10 col-xs-6">-->
 			<div  id="viewerContent" class="row" style="background-color:#000000;overflow: hidden">
 				<div id="imageViewerDiv" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="overflow: hidden">
 					<!--<div id="imgArea" style="position:relative;color: white;"
@@ -132,7 +200,7 @@
 
 				</div>
 			</div>
-		</div>
+		<!--</div>-->
 	</div>
 
 
@@ -154,14 +222,19 @@
 				<div class="form-group">
 					<label for="txt_rows">行数:</label>
 					<input type="text" name="txt_rows" class="form-control" id="txt_rows" placeholder="行数" value="1">
+					<input type="text" name="txt_rows" class="form-control" id="imgtxt_rows" placeholder="行数" value="1">
 				</div>
 				<div class="form-group">
 					<label for="txt_columns">列数:</label>
 					<input type="text" name="txt_columns" class="form-control" id="txt_columns" placeholder="列数" value="1">
+					<input type="text" name="txt_columns" class="form-control" id="imgtxt_columns" placeholder="列数" value="1">
 				</div>
 				<div style="display: none">
 					<input type="text" id="temp_rows" value="1"/>
 					<input type="text" id="temp_columns" value="1"/>
+
+					<input type="text" id="imgtemp_rows" value="3"/>
+					<input type="text" id="imgtemp_columns" value="3"/>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -171,15 +244,121 @@
 		</div>
 	</div>
 </div>
+
+<!-- 导出图像的弹窗 -->
+<div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="exportModalLabel">导出图片格式</h4>
+			</div>
+			<div class="modal-body">
+				<input name="imageFormat" type="radio" value="dicom" checked="checked"/>Dicom
+				<input name="imageFormat" type="radio" value="jpg"/>jpg
+			</div>
+			<div class="modal-footer">
+				<button id="exportImgSubmit" type="button" class="btn btn-primary" style="height:30px;">确定</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="height:30px;">取消</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 显示Tag信息的弹窗 -->
+<div class="modal fade" id="showTagDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog1" style="width: 80%;" >
+		<div class="modal-content modal-content1" >
+			<div class="modal-header modal-header1">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="">Tag信息</h4>
+			</div>
+			<div class="modal-body modal-body1" id="tagListTable">
+				<table class="table table-striped" >
+					<thead>
+					<tr>
+						<th>Tag</th>
+						<th>说明</th>
+						<th>VR</th>
+						<th>值</th>
+					</tr>
+					</thead>
+					<tbody id="tagTbody">
+
+					</tbody>
+				</table>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 鼠标右键的样式 -->
+<div id="callbackmenu">
+	<ul>
+		<li id="exportCurrentImg"><a href="javascript:void(0);">导出当前图像</a>
+			<ul>
+				<li id="oneImgDcm"><a href="javascript:void(0);" target="_blank">Dicom</a></li>
+				<li id="oneImgJpg"><a href="javascript:void(0);">JPG</a></li>
+			</ul>
+		</li>
+		<li id="exportCurrentSeriesImg"><a href="javascript:void(0);">导出当前序列</a>
+			<ul>
+				<li id="seriesImgDcm"><a href="javascript:void(0);">Dicom</a></li>
+				<li id="seriesImgJpg"><a href="javascript:void(0);">JPG</a></li>
+			</ul>
+		</li>
+		<li id="showTagInform"><a href="javascript:void(0);">显示Tag信息</a>
+
+		</li>
+		<!--<li class="disabled" id="MenuItem2"><a href="#Item2">Menu Item 2</a></li>
+		<li id="MenuItem3"><a href="#Item3">Menu Item 3</a>
+			<ul>
+				<li id="MenuItem3.1"><a href="#Item3.1">Menu Item 3.1</a></li>
+				<li id="MenuItem3.2"><a href="#Item3.2">Menu Item 3.2</a></li>
+				<li id="MenuItem3.3"><a href="#Item3.3">Menu Item 3.3</a>
+					<ul>
+						<li id="MenuItem3.3.1"><a href="#Item3.3.1">Menu Item 3.3.1</a></li>
+						<li id="MenuItem3.3.2"><a href="#Item3.3.2">Menu Item 3.3.2</a></li>
+						<li id="MenuItem3.3.3"><a href="#Item3.3.3">Menu Item 3.3.3</a></li>
+						<li id="MenuItem3.3.4"><a href="#Item3.3.4">Menu Item 3.3.4</a></li>
+					</ul>
+				</li>
+				<li id="MenuItem3.4"><a href="#Item3.4">Menu Item 3.4</a></li>
+			</ul>
+		</li>-->
+	</ul>
+</div>
+
+<!-- 箭头标注的弹框 -->
+<dialog class="annotationDialog">
+	<h5>输入您的注释</h5>
+	<div class="annotationTextInputOptions">
+		<label for="annotationTextInput">新标签</label>
+		<input name="annotationTextInput" class="annotationTextInput" type="text"/>
+	</div>
+	<a class="annotationDialogConfirm btn btn-sm btn-primary" style="height: 30px">OK</a>
+</dialog>
+<dialog class="relabelDialog" oncontextmenu="return false">
+	<h5>输入您的注释</h5>
+	<div class="annotationTextInputOptions">
+		<label for="annotationTextInput">新标签</label>
+		<input name="annotationTextInput" class="annotationTextInput" type="text"/>
+	</div>
+	<div>
+		<a class="relabelRemove btn btn-sm btn-primary" style="height: 30px">移除标签</a>
+		<a class="relabelConfirm btn btn-sm btn-primary" style="height: 30px">OK</a>
+	</div>
+</dialog>
 <!-- include the cornerstone library -->
-<script src="../test_script/js/cornerstone.min.js"></script>
+<script src="../test_script/js/cornerstone.min1.js"></script>
 <SCRIPT src="../test_script/js/cornerstoneMath.min.js"></SCRIPT>
-<SCRIPT src="../test_script/js/cornerstoneTools.min.js"></SCRIPT>
+<SCRIPT src="../test_script/js/cornerstoneTools2.5.0test1.js"></SCRIPT>
+<!--<SCRIPT src="../test_script/js/cornerstoneTools.min.js"></SCRIPT>-->
+
 
 <!-- include the dicomParser library as the WADO image loader depends on it-->
 <script src="../test_script/js/dicomParser.min.js"></script>
 
-
+<!-- include the hammer.js library for touch gestures-->
+<script src="../test_script/js/hammer.min.js"></script>
 <!-- BEGIN Optional Codecs -->
 
 <!-- OpenJPEG based jpeg 2000 codec -->
@@ -198,19 +377,27 @@
 <!-- JPEG Baseline codec -->
 <script src="../test_script/js/jpeg.js"></script>
 
+<!-- 加载动画-->
+<script src="../test_script/js/loadFilesEffect.js"></script>
 <!-- Deflate transfer syntax codec -->
 <script src="../test_script/js/pako.min.js"></script>
 
 <!-- END Optional Codecs -->
+<!-- 显示黑色图片用 -->
+<script src="../test_script/js/exampleTextImageLoader.js"></script>
+<!-- 加载一些tag信息的说明 -->
+<script src="../test_script/js/tagExplain.js"></script>
 
 <!-- include the cornerstoneWADOImageLoader library -->
-<script src="../test_script/js/cornerstoneWADOImageLoader.js"></script>
+
 
 <!-- uids -->
 <script src="../test_script/js/uids.js"></script>
-
+<!--用于箭头标注的弹框-->
+<script src="../test_script/js/dialogPolyfill.js"></script>
 <!-- Lines ONLY required for this example to run without building the project -->
-<script>window.cornerstoneWADOImageLoader || document.write('<script src="https://unpkg.com/cornerstone-wado-image-loader">\x3C/script>')</script>
+<!--<script>window.cornerstoneWADOImageLoader || document.write('<script src="https://unpkg.com/cornerstone-wado-image-loader">\x3C/script>')</script>-->
+<script src="../test_script/js/cornerstoneWADOImageLoader.min.js"></script>
 <script src="../test_script/js/initializeWebWorkers.js"></script>
 <!-- 对按钮的操作 -->
 <script src="../test_script/js/toolsbuttonnew.js"></script>

@@ -26,7 +26,7 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
                 <configuration>
-                    <!--�����ļ���λ��-->
+                    <!--配置文件的位置-->
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
@@ -61,42 +61,41 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- spring�汾�� -->
+        <!-- spring版本号 -->
         <spring.version>4.1.4.RELEASE</spring.version>
-        <!-- mybatis�汾�� -->
+        <!-- mybatis版本号 -->
         <mybatis.version>3.2.8</mybatis.version>
-        <!-- log4j��־�ļ�������汾 -->
+        <!-- log4j日志文件管理包版本 -->
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
-        <!-- jackson���汾 -->
+        <!-- jackson包版本 -->
         <jackson.version>2.5.0</jackson.version>
-        <!-- 文件上传需要的东西 -->
         <commons-fileupload.version>1.3.1</commons-fileupload.version>
         <commons-io.version>2.4</commons-io.version>
     </properties>
 
     <dependencies>
-        <!-- mybatis���İ� -->
+        <!-- mybatis核心包 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-        <!-- mybatis/spring�� -->
+        <!-- mybatis/spring包 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
         </dependency>
 
-        <!-- springMVC���İ� -->
+        <!-- springMVC核心包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- spring���İ� -->
+        <!-- spring核心包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -158,37 +157,35 @@
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
             <version>4.0</version>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>
-
-        <!-- ����Mysql���ݿ�����jar�� -->
+        <!-- 导入Mysql数据库链接jar包 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.30</version>
         </dependency>
 
-        <!-- ����dbcp��jar����������applicationContext.xml���������ݿ� -->
+        <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.2.2</version>
         </dependency>
 
-        <!-- JSTL��ǩ�� -->
+        <!-- JSTL标签类 -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <!-- ��־�ļ������ -->
+        <!-- 日志文件管理包 -->
         <!-- log start -->
-        <!--补全项目依赖-->
-        <!--1:日志 java日志：slf4j,log4j,logback,commom-logging
-            slf4j 是规范/接口
-            日志实现：log4j,logback,commom-logging
-            使用：slf4j + logback
-        -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -202,21 +199,15 @@
             <version>1.7.25</version>
         </dependency>
 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
 
-
-        <!-- ��ʽ�����󣬷��������־ -->
+        <!-- 格式化对象，方便输出日志 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.1.41</version>
+            <version>1.1.42</version>
         </dependency>
 
-        <!-- ӳ��JSON -->
+        <!-- 映入JSON -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -234,7 +225,7 @@
             <version>2.1.0</version>
         </dependency>
 
-        <!-- �ϴ������ -->
+        <!-- 上传组件包 -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -251,7 +242,7 @@
             <version>1.9</version>
         </dependency>
 
-        <!--Spring test�������-->
+        <!--Spring test相关依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -276,7 +267,6 @@
             <artifactId>dcm4che-core</artifactId>
             <version>3.3.8</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.dcm4che/dcm4che-image -->
         <dependency>
             <groupId>org.dcm4che</groupId>
             <artifactId>dcm4che-image</artifactId>
@@ -295,9 +285,7 @@
             <version>3.3.8</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-        <!-- 添加编写XML文件的DOM4J jar包 -->
-        <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
@@ -310,41 +298,24 @@
             <artifactId>jcifs</artifactId>
             <version>1.3.17</version>
         </dependency>
-        <!-- 文件上传所需要的jar包 -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
+
 
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>${commons-fileupload.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 导入json的依赖 -->
-        <!-- jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.6</version>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.11</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.9.6</version>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.11</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.9.0</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>4.1.5.RELEASE</version>
         </dependency>
+
         <!-- 导入对ini文件操作的ini4j库 -->
         <!-- https://mvnrepository.com/artifact/org.ini4j/ini4j -->
         <dependency>
@@ -359,6 +330,24 @@
             <artifactId>guava</artifactId>
             <version>27.0.1-jre</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.aspectj</groupId>-->
+            <!--<artifactId>aspectjrt</artifactId>-->
+            <!--<version>1.9.2</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.projectlombok</groupId>-->
+            <!--<artifactId>lombok</artifactId>-->
+            <!--<version>1.16.18</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.netease.mail.act</groupId>-->
+            <!--<artifactId>MultiDataSource</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

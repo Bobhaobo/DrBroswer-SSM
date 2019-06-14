@@ -31,6 +31,26 @@ public class lung {
 
     private String imagesuggestion;
 
+    private String idcard;
+
+    private String entity;
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
     public String getPatientid() {
         return patientid;
     }
@@ -143,6 +163,29 @@ public class lung {
         this.imagesuggestion = imagesuggestion == null ? null : imagesuggestion.trim();
     }
 
+
+    public lung(String patientid, String patname, String patgender, Integer age, String examdoc, String imageclass, String checkpart, String scanmethod, String scanway, String clinicdiagnosis, Date checkdate, Date reportdate, String imageview, String imagesuggestion, String idcard, String entity) {
+        this.patientid = patientid;
+        this.patname = patname;
+        this.patgender = patgender;
+        this.age = age;
+        this.examdoc = examdoc;
+        this.imageclass = imageclass;
+        this.checkpart = checkpart;
+        this.scanmethod = scanmethod;
+        this.scanway = scanway;
+        this.clinicdiagnosis = clinicdiagnosis;
+        this.checkdate = checkdate;
+        this.reportdate = reportdate;
+        this.imageview = imageview;
+        this.imagesuggestion = imagesuggestion;
+        this.idcard = idcard;
+        this.entity = entity;
+    }
+
+    public lung() {
+    }
+
     @Override
     public String toString() {
         return "lung{" +
@@ -160,6 +203,8 @@ public class lung {
                 ", reportdate=" + reportdate +
                 ", imageview='" + imageview + '\'' +
                 ", imagesuggestion='" + imagesuggestion + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", entity='" + entity + '\'' +
                 '}';
     }
 }

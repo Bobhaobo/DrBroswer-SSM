@@ -333,4 +333,18 @@
     where Modality = #{modality,jdbcType=VARCHAR}
       and AccessionN like #{param}
   </select>
+
+  <select id="getAccessionNLocal" resultType="java.lang.String">
+    select max(AccessionN)
+    from dicom_worklist
+    where Modality = #{modality,jdbcType=VARCHAR}
+      and AccessionN like #{param}
+  </select>
+
+  <select id="selectByPatid" resultType="org.springmvc.pojo.DicomWorkList" >
+    select *
+    from dicom_worklist
+    where PatientID = #{patid,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

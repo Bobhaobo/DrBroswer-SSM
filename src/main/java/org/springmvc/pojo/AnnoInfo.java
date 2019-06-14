@@ -11,19 +11,25 @@ public class AnnoInfo {
 
     private String sopInstanceUid;
 
-    private Float x1Left;
+    private Integer x1Left;
 
-    private Float y1Left;
+    private Integer y1Left;
 
-    private Float x2Right;
+    private Integer x2Right;
 
-    private Float y2Right;
+    private Integer y2Right;
+
+    private Integer width;
+
+    private Integer height;
+
+    private Integer depth;
 
     private String ueserId;
 
-    private Float volume;
+    private Double volume;
 
-    private Float diameter;
+    private Double diameter;
 
     private String form;
 
@@ -71,36 +77,60 @@ public class AnnoInfo {
         this.sopInstanceUid = sopInstanceUid == null ? null : sopInstanceUid.trim();
     }
 
-    public Float getX1Left() {
+    public Integer getX1Left() {
         return x1Left;
     }
 
-    public void setX1Left(Float x1Left) {
+    public void setX1Left(Integer x1Left) {
         this.x1Left = x1Left;
     }
 
-    public Float getY1Left() {
+    public Integer getY1Left() {
         return y1Left;
     }
 
-    public void setY1Left(Float y1Left) {
+    public void setY1Left(Integer y1Left) {
         this.y1Left = y1Left;
     }
 
-    public Float getX2Right() {
+    public Integer getX2Right() {
         return x2Right;
     }
 
-    public void setX2Right(Float x2Right) {
+    public void setX2Right(Integer x2Right) {
         this.x2Right = x2Right;
     }
 
-    public Float getY2Right() {
+    public Integer getY2Right() {
         return y2Right;
     }
 
-    public void setY2Right(Float y2Right) {
+    public void setY2Right(Integer y2Right) {
         this.y2Right = y2Right;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getDepth() {
+        return depth;
+    }
+
+    public void setDepth(Integer depth) {
+        this.depth = depth;
     }
 
     public String getUeserId() {
@@ -111,19 +141,19 @@ public class AnnoInfo {
         this.ueserId = ueserId == null ? null : ueserId.trim();
     }
 
-    public Float getVolume() {
+    public Double getVolume() {
         return volume;
     }
 
-    public void setVolume(Float volume) {
+    public void setVolume(Double volume) {
         this.volume = volume;
     }
 
-    public Float getDiameter() {
+    public Double getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(Float diameter) {
+    public void setDiameter(Double diameter) {
         this.diameter = diameter;
     }
 
@@ -149,26 +179,5 @@ public class AnnoInfo {
 
     public void setDensity(String density) {
         this.density = density == null ? null : density.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "AnnoInfo{" +
-                "annoId='" + annoId + '\'' +
-                ", patientId='" + patientId + '\'' +
-                ", studyInstanceUid='" + studyInstanceUid + '\'' +
-                ", seriesInstanceUid='" + seriesInstanceUid + '\'' +
-                ", sopInstanceUid='" + sopInstanceUid + '\'' +
-                ", x1Left=" + x1Left +
-                ", y1Left=" + y1Left +
-                ", x2Right=" + x2Right +
-                ", y2Right=" + y2Right +
-                ", ueserId='" + ueserId + '\'' +
-                ", volume=" + volume +
-                ", diameter=" + diameter +
-                ", form='" + form + '\'' +
-                ", part='" + part + '\'' +
-                ", density='" + density + '\'' +
-                '}';
     }
 }

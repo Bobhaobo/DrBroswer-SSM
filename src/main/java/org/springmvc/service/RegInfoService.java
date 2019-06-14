@@ -1,6 +1,7 @@
 package org.springmvc.service;
 
 import org.springmvc.dto.CheckedTab;
+import org.springmvc.dto.VerifiedTab;
 import org.springmvc.dto.WrittedTab;
 import org.springmvc.pojo.Device;
 import org.springmvc.pojo.DicomWorkList;
@@ -39,12 +40,21 @@ public interface RegInfoService {
      * @Return:
      **/
     RegisterInfo getRegInfoByCheckNum(String checkNum);
+
+
+    RegisterInfoInner getRegInfoByCheckNumLocal(String checkNum);
     /**
      * @Description: 根据examItemCode返回DeviceList
      * @Author: Shalldid
      * @Date: Created in 9:39 2018-05-03
      * @Return:
      **/
+//    RegisterInfo setFlagByCheckNum(String checknum);
+
+    int updateRegisterByRegister(RegisterInfo r);
+
+    int updateRegisterByRegisterLocal(RegisterInfoInner r);
+
     List<Device> getExamItemDevice(String examItemCode);
     /**
      * @Description: 根据examItemCode返回DeviceList
@@ -81,6 +91,10 @@ public interface RegInfoService {
      * @Return:
      **/
     int countCheckListByFlag(String flag);
+
+
+    int countCheckListByFlagLocal(String flag);
+
     /**
      * @Description: 根据检查号修改登记信息的flag
      * @Author: Shalldid
@@ -95,4 +109,18 @@ public interface RegInfoService {
      * @Return:
      **/
     List<WrittedTab> getWrittededListByFlag(String flag, int currIndex, int pageSize);
+
+    List<VerifiedTab> getVerifiedListByFlag(String flag, int currIndex, int pageSize);
+
+    List<WrittedTab> getWrittededListByFlagLocal(String flag, int currIndex, int pageSize,HttpSession httpSession);
+
+    List<VerifiedTab> getVerifiedListByFlagLocal(String flag, int currIndex, int pageSize,HttpSession httpSession);
+    
+    int getCountByCheckNum(String checknum);
+
+    int delete(String checknum);
+
+    int updateRegStatusByChecknumLocal(String status, String checknum);
+
+    RegisterInfoInner getRegInfoByCheckNumLocalModify(String checknum);
 }

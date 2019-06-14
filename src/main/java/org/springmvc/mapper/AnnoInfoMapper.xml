@@ -7,10 +7,13 @@
     <result column="study_instance_uid" property="studyInstanceUid" jdbcType="VARCHAR" />
     <result column="series_instance_uid" property="seriesInstanceUid" jdbcType="VARCHAR" />
     <result column="sop_instance_uid" property="sopInstanceUid" jdbcType="VARCHAR" />
-    <result column="x1_left" property="x1Left" jdbcType="DOUBLE" />
-    <result column="y1_left" property="y1Left" jdbcType="DOUBLE" />
-    <result column="x2_right" property="x2Right" jdbcType="DOUBLE" />
-    <result column="y2_right" property="y2Right" jdbcType="DOUBLE" />
+    <result column="x1_left" property="x1Left" jdbcType="INTEGER" />
+    <result column="y1_left" property="y1Left" jdbcType="INTEGER" />
+    <result column="x2_right" property="x2Right" jdbcType="INTEGER" />
+    <result column="y2_right" property="y2Right" jdbcType="INTEGER" />
+    <result column="width" property="width" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="depth" property="depth" jdbcType="INTEGER" />
     <result column="ueser_id" property="ueserId" jdbcType="NCHAR" />
     <result column="volume" property="volume" jdbcType="DOUBLE" />
     <result column="diameter" property="diameter" jdbcType="DOUBLE" />
@@ -20,7 +23,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     anno_id, patient_id, study_instance_uid, series_instance_uid, sop_instance_uid, x1_left, 
-    y1_left, x2_right, y2_right, ueser_id, volume, diameter, form, part, density
+    y1_left, x2_right, y2_right, width, height, depth, ueser_id, volume, diameter, form, 
+    part, density
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -36,11 +40,13 @@
     insert into anno_anno_info (anno_id, patient_id, study_instance_uid, 
       series_instance_uid, sop_instance_uid, x1_left, 
       y1_left, x2_right, y2_right, 
+      width, height, depth, 
       ueser_id, volume, diameter, 
       form, part, density)
     values (#{annoId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{studyInstanceUid,jdbcType=VARCHAR}, 
-      #{seriesInstanceUid,jdbcType=VARCHAR}, #{sopInstanceUid,jdbcType=VARCHAR}, #{x1Left,jdbcType=DOUBLE}, 
-      #{y1Left,jdbcType=DOUBLE}, #{x2Right,jdbcType=DOUBLE}, #{y2Right,jdbcType=DOUBLE}, 
+      #{seriesInstanceUid,jdbcType=VARCHAR}, #{sopInstanceUid,jdbcType=VARCHAR}, #{x1Left,jdbcType=INTEGER}, 
+      #{y1Left,jdbcType=INTEGER}, #{x2Right,jdbcType=INTEGER}, #{y2Right,jdbcType=INTEGER}, 
+      #{width,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{depth,jdbcType=INTEGER}, 
       #{ueserId,jdbcType=NCHAR}, #{volume,jdbcType=DOUBLE}, #{diameter,jdbcType=DOUBLE}, 
       #{form,jdbcType=NCHAR}, #{part,jdbcType=NCHAR}, #{density,jdbcType=NCHAR})
   </insert>
@@ -73,6 +79,15 @@
       </if>
       <if test="y2Right != null" >
         y2_right,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="depth != null" >
+        depth,
       </if>
       <if test="ueserId != null" >
         ueser_id,
@@ -110,16 +125,25 @@
         #{sopInstanceUid,jdbcType=VARCHAR},
       </if>
       <if test="x1Left != null" >
-        #{x1Left,jdbcType=DOUBLE},
+        #{x1Left,jdbcType=INTEGER},
       </if>
       <if test="y1Left != null" >
-        #{y1Left,jdbcType=DOUBLE},
+        #{y1Left,jdbcType=INTEGER},
       </if>
       <if test="x2Right != null" >
-        #{x2Right,jdbcType=DOUBLE},
+        #{x2Right,jdbcType=INTEGER},
       </if>
       <if test="y2Right != null" >
-        #{y2Right,jdbcType=DOUBLE},
+        #{y2Right,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="depth != null" >
+        #{depth,jdbcType=INTEGER},
       </if>
       <if test="ueserId != null" >
         #{ueserId,jdbcType=NCHAR},
@@ -157,16 +181,25 @@
         sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR},
       </if>
       <if test="x1Left != null" >
-        x1_left = #{x1Left,jdbcType=DOUBLE},
+        x1_left = #{x1Left,jdbcType=INTEGER},
       </if>
       <if test="y1Left != null" >
-        y1_left = #{y1Left,jdbcType=DOUBLE},
+        y1_left = #{y1Left,jdbcType=INTEGER},
       </if>
       <if test="x2Right != null" >
-        x2_right = #{x2Right,jdbcType=DOUBLE},
+        x2_right = #{x2Right,jdbcType=INTEGER},
       </if>
       <if test="y2Right != null" >
-        y2_right = #{y2Right,jdbcType=DOUBLE},
+        y2_right = #{y2Right,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="depth != null" >
+        depth = #{depth,jdbcType=INTEGER},
       </if>
       <if test="ueserId != null" >
         ueser_id = #{ueserId,jdbcType=NCHAR},
@@ -195,10 +228,13 @@
       study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
       series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR},
       sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR},
-      x1_left = #{x1Left,jdbcType=DOUBLE},
-      y1_left = #{y1Left,jdbcType=DOUBLE},
-      x2_right = #{x2Right,jdbcType=DOUBLE},
-      y2_right = #{y2Right,jdbcType=DOUBLE},
+      x1_left = #{x1Left,jdbcType=INTEGER},
+      y1_left = #{y1Left,jdbcType=INTEGER},
+      x2_right = #{x2Right,jdbcType=INTEGER},
+      y2_right = #{y2Right,jdbcType=INTEGER},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      depth = #{depth,jdbcType=INTEGER},
       ueser_id = #{ueserId,jdbcType=NCHAR},
       volume = #{volume,jdbcType=DOUBLE},
       diameter = #{diameter,jdbcType=DOUBLE},
@@ -207,7 +243,6 @@
       density = #{density,jdbcType=NCHAR}
     where anno_id = #{annoId,jdbcType=VARCHAR}
   </update>
-
   <delete id="deleteAnnoInfoBySOPUid" parameterType="java.lang.String">
         delete from anno_anno_info
         where sop_instance_uid = #{sopUid , jdbcType = VARCHAR}

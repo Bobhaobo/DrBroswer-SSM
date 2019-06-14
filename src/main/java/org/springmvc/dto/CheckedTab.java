@@ -92,4 +92,18 @@ public class CheckedTab {
         this.examItemName = examItemName;
         this.checkDate = checkDate;
     }
+
+    @Override
+    public String toString() {
+        return "CheckedTab{" +
+                "checkNum='" + checkNum + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", patName='" + patName + '\'' +
+                ", patGender='" + patGender + '\'' +
+                ", patient_Age='" + patient_Age + '\'' +
+                ", examItemName='" + examItemName + '\'' +
+                ", checkDate='" + checkDate + '\'' +
+                ", hosName='" + hosName + '\'' +
+                '}';
+    }
 }

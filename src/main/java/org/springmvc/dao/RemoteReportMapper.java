@@ -19,11 +19,27 @@ public interface RemoteReportMapper {
 
     int updateByPrimaryKey(RemoteReport record);
 
+    int updateByPrimaryKeyAdd(RemoteReport record);
+
     RemoteReport selectBycheckNum(String checknum);
+
+    RemoteReport selectBycheckNumAdd(String checknum);
 
     List<RemoteReport> getTodayReportListByPagination(@Param("dateStart") Date datestart, @Param("dateEnd") Date dateend,
                                                       @Param("currIndex") int currIndex, @Param("pageSize") int pageSize,
                                                       @Param("hos") String hos);
 
     List<RemoteReport> getReportListByCondition(@Param("currIndex") int currIndex, @Param("pageSize") int pageSize, @Param("condition") String contidtion);
+
+    RemoteReport selectByPrimaryKeyAdd(String id);
+
+    int deleteById(@Param("id") String id);
+
+    int updateById(String id);
+
+    int updateRemarkById(@Param("id") String id,@Param("remarks") String remarks);
+
+    RemoteReport selectByPrimaryKeyAddSecond(String id);
+
+    int insertAdd(RemoteReport report);
 }

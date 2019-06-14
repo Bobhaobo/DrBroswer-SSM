@@ -88,4 +88,19 @@ public class ArrangedTab {
     public void setCheckHosId(String checkHosId) {
         this.checkHosId = checkHosId;
     }
+
+    @Override
+    public String toString() {
+        return "ArrangedTab{" +
+                "check_number='" + check_number + '\'' +
+                ", patient_Name='" + patient_Name + '\'' +
+                ", patient_Sex='" + patient_Sex + '\'' +
+                ", patient_Age='" + patient_Age + '\'' +
+                ", modality='" + modality + '\'' +
+                ", checkHos='" + checkHos + '\'' +
+                ", arranged_Date='" + arranged_Date + '\'' +
+                ", recordId='" + recordId + '\'' +
+                ", checkHosId='" + checkHosId + '\'' +
+                '}';
+    }
 }

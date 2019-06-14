@@ -21,6 +21,23 @@
     from anno_image
     where sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="getCountByAnnoFlag" resultType="java.lang.Integer" >
+    select count (*)
+    from anno_image
+    where anno_flag = #{anno_flag,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllByAnnoFlag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from anno_image
+    where anno_flag = #{anno_flag,jdbcType=VARCHAR}
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from anno_image
     where sop_instance_uid = #{sopInstanceUid,jdbcType=VARCHAR}

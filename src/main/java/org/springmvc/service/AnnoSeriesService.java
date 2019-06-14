@@ -1,6 +1,7 @@
 package org.springmvc.service;
 
 import org.springframework.stereotype.Service;
+import org.springmvc.pojo.AnnoSeries;
 
 public interface AnnoSeriesService {
 
@@ -12,5 +13,7 @@ public interface AnnoSeriesService {
      * @param studyInstanceUid
      * @return
      */
-    int insertOrUpdateSeries(String seriesInstanceUid, String patientId, String studyInstanceUid);
+    int insertOrUpdateSeries(String seriesInstanceUid, String patientId, String studyInstanceUid,String seriesAnnoInfo);
+
+    AnnoSeries getById(String seriesInstanceUid);
 }

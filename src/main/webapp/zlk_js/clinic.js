@@ -9,13 +9,13 @@ $(function(){
             // alert("lalala");
             var pro=null;
             pro = eval("("+data+")");
-            // alert(data);
+             alert(data);
             // alert("@@@@@@@@");
             document.getElementById("idCard").innerHTML=(pro.idcard);
             document.getElementById("patName").innerHTML=(pro.patname);
             document.getElementById("patGender").innerHTML=(pro.patgender);
             document.getElementById("entity1").innerHTML=(pro.entity);
-            document.getElementById("patBrithdate").innerHTML=(pro.patbrithdate);
+            document.getElementById("patBrithdate").innerHTML=(pro.patbirthdate);
             document.getElementById("address").innerHTML=(pro.address);
             document.getElementById("yibaoId").innerHTML=(pro.yibaoid);
             document.getElementById("telephone").innerHTML=(pro.telephone);

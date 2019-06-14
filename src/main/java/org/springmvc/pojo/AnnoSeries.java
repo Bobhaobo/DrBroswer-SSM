@@ -11,6 +11,16 @@ public class AnnoSeries {
 
     private Date seriesDate;
 
+    private String seriesAnnoInfo;
+
+    public String getSeriesAnnoInfo() {
+        return seriesAnnoInfo;
+    }
+
+    public void setSeriesAnnoInfo(String seriesAnnoInfo) {
+        this.seriesAnnoInfo = seriesAnnoInfo;
+    }
+
     public String getSeriesInstanceUid() {
         return seriesInstanceUid;
     }
@@ -50,6 +60,7 @@ public class AnnoSeries {
                 ", patientId='" + patientId + '\'' +
                 ", studyInstanceUid='" + studyInstanceUid + '\'' +
                 ", seriesDate=" + seriesDate +
+                ", seriesAnnoInfo='" + seriesAnnoInfo + '\'' +
                 '}';
     }
 }

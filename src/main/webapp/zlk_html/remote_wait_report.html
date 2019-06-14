@@ -1,10 +1,12 @@
 <script type="text/javascript">
-    function checkReport_Operation(value,data) {
+    function checkReport_Operation3(value,data) {
+
         if(data.check_number == "没有数据！"){
             var html = null;
         }else{
-            var html = '<button type="button" class="btn-blue" onclick="dialog_report(\''+ data.checkNum + '\',\'' + data.patName + '\',\'' +data.patGender
-                + '\',\'' + data.patient_Age + '\',\'' + data.imagePath + '\',\'' + data.hosName_m+'\');">填写报告</button>';
+            // var html = '<button type="button" class="btn-blue" onclick="dialog_report3(\''+ data.checkNum + '\',\'' + data.patName + '\',\'' +data.patGender
+            //     + '\',\'' + data.patient_Age + '\',\'' + data.imagePath + '\',\'' + data.hosName_m+'\');">填写报告</button>';
+            var html = '<button type="button" class="btn-blue" onclick="dialog_report3(\''+ data.id +'\',\''+data.patName+'\',\''+data.patGender+'\',\''+data.patient_Age+'\',\''+data.checkNum+'\',\''+data.imagePath+'\',\''+data.hosName+'\');">填写报告</button>';
         }
         return html;
     }
@@ -12,18 +14,24 @@
         if(data.check_number == "没有数据！"){
             var html = null;
         }else{
-            var html = '<a href="DrViewerBoot://' + data.imagePath + '">查看图像</button>';
+            //var html = '<a href="DrViewerBoot://' + data.imagePath + '">查看图像</button>';
+            var html = '<a href="../test3_html/anno.html?url='+ data.imagePath.replace(/\\/g,"@") +'" target="_blank">查看图像</button>';
         }
         return html;
     }
-    function dialog_report(checkNum, patName, patGender, patAge, imagePath, hosName) {
+    function dialog_report3(id, patName, patGender, patAge, checkNum,imagePath,hosName) {
         var timenow = new Date().getTime();
+        alert("123");
         BJUI.dialog({
             id:'writeReport'+timenow,
             width: 1220,
             height: 900,
-            url: 'zlk_html/remote_write_report.jsp?checknum=' + checkNum + "&patName=" + patName + "&patGender=" + patGender
-                + "&patAge=" + patAge + "&imagePath=" + imagePath + "&hosName=" + hosName,
+            url: 'zlk_html/remote_write_report.jsp?id=' + id
+            + '&patName='+ patName + '&patGender=' + patGender
+            + '&patAge=' + patAge + '&checknum=' + checkNum
+            + '&imagePath=' + imagePath+'&hosName='+hosName,
+                // 'checknum=' + checkNum + "&patName=" + patName + "&patGender=" + patGender
+                // + "&patAge=" + patAge + "&imagePath=" + imagePath + "&hosName=" + hosName,
             title:'填写报告'
         });
     }
@@ -49,7 +57,7 @@
             <th rowspan="2" align="center" data-options="{name:'checkNum',align:'center',width:170,menu:false}">检查号</th>
             <th colspan="3" align="center">患者信息</th>
             <th colspan="3" align="center">检查信息</th>
-            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation}">查看详情</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation3}">查看详情</th>
             <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:viewReport_Operation}">图像</th>
         </tr>
         <tr>

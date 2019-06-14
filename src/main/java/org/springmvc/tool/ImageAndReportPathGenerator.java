@@ -55,8 +55,9 @@ public class ImageAndReportPathGenerator {
         if("1".equals(remoteImageUseSMB)){
             url.append("smb:");
         }
-        url.append(remoteImagePath + orderSource + "\\DICOM\\"+ startDate.substring(0,4) + "-" + startDate.substring(4, 6) + "\\" + startDate.substring(6,8) + "\\"
+        url.append(remoteImagePath + orderSource + "\\DICOM\\"+ startDate.substring(0,4) + "-" + startDate.substring(4,6) + "\\" + startDate.substring(6,8) + "\\"
                 + Id);
+        System.out.println("startDate"+startDate);
         return url.toString();
     }
     /**

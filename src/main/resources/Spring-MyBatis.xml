@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                         http://www.springframework.org/schema/context
@@ -57,6 +58,22 @@
 
     </bean>
 
+
+    <bean id="dataSource_junior" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${driver}" />
+        <property name="url" value="${urljunior}" />
+        <property name="username" value="${usernamejunior}" />
+        <property name="password" value="${passwordjunior}" />
+        <property name="initialSize" value="${initialSize}"></property>
+        <property name="maxActive" value="${maxActive}"></property>
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <property name="minIdle" value="${minIdle}"></property>
+        <property name="maxWait" value="${maxWait}"></property>
+    </bean>
+
+
+
     <!-- 3:配置sqlSessionFactory对象-->
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -72,6 +89,13 @@
         <property name="typeAliasesPackage" value="org.springmvc.pojo_inner"></property>
     </bean>
 
+    <bean id="sqlSessionFactory_junior" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_junior"></property>
+        <property name="mapperLocations" value="classpath:org/springmvc/mapper_junior/*.xml"></property>
+        <property name="typeAliasesPackage" value="org.springmvc.pojo_junior"></property>
+    </bean>
+
+
     <!-- 4:配置扫描DAO包，动态实现DAO接口，注入到Spring容器-->
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -83,6 +107,13 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_inner" />
         <property name="basePackage" value="org.springmvc.dao_inner" />
     </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_junior" />
+        <property name="basePackage" value="org.springmvc.dao_junior" />
+    </bean>
+
+
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -93,6 +124,13 @@
             class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource_inner" />
     </bean>
+
+
+    <bean id="transactionManager_junior"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_junior" />
+    </bean>
+
 
     <!--图像加报告配置文件-->
     <bean id="imagePath" class="org.springframework.beans.factory.config.PropertiesFactoryBean">

@@ -2,6 +2,7 @@ package org.springmvc.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springmvc.pojo.DicomWorkList;
+import org.springmvc.pojo_inner.DicomWorkListInner;
 
 public interface DicomWorkListLocalMapper {
 
@@ -20,4 +21,6 @@ public interface DicomWorkListLocalMapper {
     String getAccessionN(@Param("modality") String modality, @Param("param") String param);
 
     DicomWorkList selectByPatid(String patid);
+
+    String getAccessionNLocal(@Param("modality") String modality, @Param("param") String param);
 }

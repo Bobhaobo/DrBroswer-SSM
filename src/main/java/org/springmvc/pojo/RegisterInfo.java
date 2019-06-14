@@ -200,7 +200,25 @@ public class RegisterInfo {
     }
 
     @Override
-    public String toString(){
-        return "checkNum : " + checknum;
+    public String toString() {
+        return "RegisterInfo{" +
+                "checknum='" + checknum + '\'' +
+                ", recordid='" + recordid + '\'' +
+                ", regtime=" + regtime +
+                ", clinicid='" + clinicid + '\'' +
+                ", patientid='" + patientid + '\'' +
+                ", bedno='" + bedno + '\'' +
+                ", examitemcode='" + examitemcode + '\'' +
+                ", flag='" + flag + '\'' +
+                ", deptname='" + deptname + '\'' +
+                ", examitemname='" + examitemname + '\'' +
+                ", ifusingflag=" + ifusingflag +
+                ", cardno='" + cardno + '\'' +
+                ", jcbw='" + jcbw + '\'' +
+                ", sjmd='" + sjmd + '\'' +
+                ", sqdbh='" + sqdbh + '\'' +
+                ", deptid='" + deptid + '\'' +
+                ", idcard='" + idcard + '\'' +
+                '}';
     }
 }

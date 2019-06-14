@@ -28,6 +28,12 @@ public interface UserMapper {
 
     List<User> selectAllUser1();
 
+    User selectUserByUserName(String name);
+
+    User queryByName(String name);
+
+    List<User> selectUserByDept(String dept);
+
 //    List<String> selectAllAuth();
 
 //    List<String> selectAuthNameByAuthCode1(List<String> authCode1);

@@ -44,7 +44,7 @@
     delete from dicom_worklist
     where AccessionN = #{accessionn,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="org.springmvc.pojo_inner.DicomWorkListInner" >
+  <insert id="insert" parameterType="org.springmvc.pojo.DicomWorkList" >
     insert into dicom_worklist (AccessionN, PatientID, PatientNam, 
       PatientBir, PatientSex, MedicalAle, 
       ContrastAl, StudyInsta, ReqPhysici, 

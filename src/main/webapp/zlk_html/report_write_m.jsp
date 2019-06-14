@@ -31,7 +31,7 @@
                 <div class="zhuyuanhao">住院号：<input id="clinicId" type="text" size="10" /></div>
                 <div class="chuanghao">床号：<input id="bedNo" type="text" size="10" /></div>
                 <div class="jcbw">检查部位：<input id="jcbw" type="text" size="15" /></div>
-                <div class="yinoryangxing">阴/阳性：<select id="sfyangxing" data-toggle="selectpicker" data-width="100"><option value="yin">阴</option><option value="yang">阳</option></select></div>
+                <div class="yinoryangxing">阴/阳性：<select id="sfyangxing" data-toggle="selectpicker" data-width="100"><option value="阴">阴</option><option value="阳">阳</option></select></div>
             </div>
         </div>
         <hr width="750" align="center">
@@ -57,7 +57,6 @@
                                 dataType:"html",
                                 async:false,
                                 success:function(data){
-                                    alert(data);
                                     var pro=null;
                                     pro = eval("("+data+")");
                                     $("#examDesc_text_p").html(pro.examdesc);

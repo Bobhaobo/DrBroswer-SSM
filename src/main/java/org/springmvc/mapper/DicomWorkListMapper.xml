@@ -339,4 +339,10 @@
     from dicom_worklist_transit
     where PatientID = #{patid,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByPatidLocal" resultType="org.springmvc.pojo.DicomWorkList" >
+    select *
+    from dicom_worklist
+    where PatientID = #{patid,jdbcType=VARCHAR}
+  </select>
 </mapper>

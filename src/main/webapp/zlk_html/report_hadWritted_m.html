@@ -1,9 +1,17 @@
 <script type="text/javascript">
-    function checkReport_Operation(value,data) {
+    function checkReport_Operation1(value,data) {
         if(data.check_number == "没有数据！"){
             var html = null;
         }else{
-            var html = '<button type="button" class="btn-blue" onclick="dialog_report(\''+ data.bgCode +'\',\''+data.patName+'\',\''+data.patGender+'\',\''+data.patient_Age+'\',\''+data.checkNum+'\',\''+data.imagePath+'\');">修改报告</button>';
+            var html = '<button type="button" class="btn-blue" onclick="dialog_report1(\''+ data.bgCode +'\',\''+data.patName+'\',\''+data.patGender+'\',\''+data.patient_Age+'\',\''+data.checkNum+'\',\''+data.imagePath+'\');">审核报告</button>';
+        }
+        return html;
+    }
+    function report_back(value,data) {
+        if(data.check_number == "没有数据！"){
+            var html = null;
+        }else{
+            var html = '<button type="button" class="btn-blue" onclick="back_report_hadchecked(\''+ data.checkNum +'\');">报告回退</button>';
         }
         return html;
     }
@@ -15,17 +23,33 @@
         }
         return html;
     }
-    function dialog_report(bgCode,patName,patGender,patAge,checknum,imagePath) {
+    function dialog_report1(bgCode,patName,patGender,patAge,checknum,imagePath) {
         var timenow = new Date().getTime();
         BJUI.dialog({
-            id:'modify_report' + timenow,
+            id: 'modify_report' + timenow,
             width: 1220,
             height: 900,
             url: 'zlk_html/report_modify_m.jsp?bgCode=' + bgCode
-                + '&patName='+ patName + '&patGender=' + patGender
+                + '&patName=' + patName + '&patGender=' + patGender
                 + '&patAge=' + patAge + '&checknum=' + checknum
                 + '&imagePath=' + imagePath,
-            title:'修改报告'
+            title: '报告审核'
+        });
+    }
+        function back_report_hadchecked(checknum){
+        alert("123");
+        alert(checknum);
+            $.ajax({
+                type:"post",
+                url:'report/backToWriteReport?checkNum='+checknum,
+                dataType: "html",
+                async:false,
+                success:function(data) {
+                    if(data=="1")
+                        BJUI.alertmsg("退回成功");
+                    else
+                        BJUI.alertmsg("退回失败");
+                }
         });
     }
 </script>
@@ -52,8 +76,9 @@
             <th colspan="3" align="center">患者信息</th>
             <th colspan="2" align="center">检查信息</th>
             <th colspan="2" align="center">报告信息</th>
-            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation}">查看详情</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:checkReport_Operation1}">查看详情</th>
             <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:viewReport_Operation}">图像</th>
+            <th rowspan="2" align="center" data-options="{align:'center',width:100,menu:false,render:report_back}">报告</th>
         </tr>
         <tr>
             <th align="center" data-options="{name:'patName',align:'center',width:100,menu:false}">姓名</th>

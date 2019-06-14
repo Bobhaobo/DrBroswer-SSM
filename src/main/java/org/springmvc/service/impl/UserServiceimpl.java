@@ -57,6 +57,27 @@ public class UserServiceimpl implements UserService {
         return user;
     }
 
+    @Override
+    public User ifExsitUserByName(String name) {
+        User user;  //定义一个User
+        if(name != null){
+            try{
+                user = userMapper.queryByName(name);     //查询用户是否存在
+//                logger.info("user: [" + user.getUsername() + "] login this system");
+            }catch (Exception e){
+//                logger.error("login error info：" + e.getMessage() + ">>>>>>"
+//                        + "login user: " + username);
+                user = null;
+            }
+        }else{
+//            logger.error("login error info: " + "username or password is null");
+            user = null;
+        }
+        System.out.println(user);
+        return user;
+    }
+
+
     /**
      *@Description: 根据用户所属科室id查询用户属于上级或者下级医院
      *@Author: Shalldid
@@ -137,6 +158,9 @@ public class UserServiceimpl implements UserService {
     public List<User> getAll(){
         return userMapper.selectAllUser1();
     }
+
+    @Override
+    public  User getUserByUserName(String name){return  userMapper.selectUserByUserName(name);}
 
 //    @Override
 //    public List<String> getAllAuth(){return userMapper.selectAllAuth();}

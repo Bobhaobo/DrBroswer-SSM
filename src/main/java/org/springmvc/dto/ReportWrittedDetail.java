@@ -88,4 +88,18 @@ public class ReportWrittedDetail {
         this.examDesc = examDesc;
         this.examDiagnosis = examDiagnosis;
     }
+
+    @Override
+    public String toString() {
+        return "ReportWrittedDetail{" +
+                "hosName='" + hosName + '\'' +
+                ", deptName='" + deptName + '\'' +
+                ", clinicId='" + clinicId + '\'' +
+                ", bedNo='" + bedNo + '\'' +
+                ", jcbw='" + jcbw + '\'' +
+                ", sfyangxing='" + sfyangxing + '\'' +
+                ", examDesc='" + examDesc + '\'' +
+                ", examDiagnosis='" + examDiagnosis + '\'' +
+                '}';
+    }
 }

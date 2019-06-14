@@ -25,4 +25,16 @@ public class ClinicServiceimpl implements ClinicService {
 
     @Override
     public List<Clinic> getAllInfo1(String idcard){return clinicMapper.selectAllInfo(idcard);}
+
+    @Override
+    public List<Clinic> getAllInfoByPatname(String patname){return clinicMapper.selectAllInfoBypatname(patname);}
+
+    @Override
+    public List<Clinic> getAllInfoByPatientid(String patientid){return clinicMapper.selectAllInfoBypatientid(patientid);}
+
+    @Override
+    public List<Clinic> getAllInfoByUpdateTime(String updatetime){return clinicMapper.selectAllInfoByUpdateTime(updatetime);}
+
+    @Override
+    public List<Clinic> getAllInfoByentity(String entity){return clinicMapper.selectAllInfoByentity(entity);}
 }

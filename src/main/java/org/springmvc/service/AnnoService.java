@@ -19,14 +19,14 @@ public interface AnnoService {
      * @param y2Right
      * @return
      */
-  int insertAnnoInfo(String annoId, String patientId, String studyInstanceUid, String seriesInstanceUid, String sopInstanceUid, Float x1Left, Float y1Left, Float x2Right, Float y2Right);
+  int insertAnnoInfo(String annoId, String patientId, String studyInstanceUid, String seriesInstanceUid, String sopInstanceUid, Integer x1Left, Integer y1Left, Integer x2Right, Integer y2RightInteger ,Integer width,Integer height,Integer depth);
 
   /**
      * @Description 根据ajax传过来的字符串数组返回一个包含标注框坐标信息的二维数组
      * @param array
      * @return
      */
-  float[][] getCoordinateInfo(String[] array);
+  int[][] getCoordinateInfo(String[] array);
 
   /**
    * @Description 根据sopUid删除标注

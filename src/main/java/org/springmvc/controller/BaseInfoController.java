@@ -512,10 +512,14 @@ public class BaseInfoController {
     {
         int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
         int pageSize = p.getPageSize();
+        System.out.println(pageSize);
         boolean ifFirst = (p.getPageCurrent() == 1);
         int totalRow = clinicService.account();
         boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
+        System.out.println("123");
+        System.out.println((totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1));
         int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+        System.out.println("321");
         List<Clinic> clinics =new ArrayList<Clinic>();
         System.out.println("######################");
         clinics=clinicService.getAll();
@@ -533,21 +537,466 @@ public class BaseInfoController {
     }
 
 
+    @RequestMapping(value = "/getClinicInfo2")
+    @ResponseBody
+    public String getClinicInfo2(Pagination p,
+                                 @RequestParam ("idcard") String idcard,
+                                 @RequestParam("patname123") String patname,
+                                 @RequestParam("patientid123") String patientid,
+                                 @RequestParam("updatetime123") String updatetime,
+                                 @RequestParam("entity123") String entity)throws ParseException
+    {
+        System.out.println("%%%%%%%%%%");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        System.out.println(idcard);
+        System.out.println(patname);
+        System.out.println(patientid);
+        System.out.println(updatetime);
+        if(idcard!=null &&  !("".equals(idcard))) {
+            System.out.println("lalala");
+            int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
+            int pageSize = p.getPageSize();
+            boolean ifFirst = (p.getPageCurrent() == 1);
+            int totalRow = clinicService.account();
+            boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
+            int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+            System.out.println(totalPage);
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics = clinicService.getAllInfo1(idcard);
+            System.out.println(clinics);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            PaginationResult<ClinicDto> paginationResult = new PaginationResult<ClinicDto>();
+            paginationResult.setFirstPage(ifFirst);
+            paginationResult.setLastPage(ifLast);
+            paginationResult.setList(clinicDtoList);
+            paginationResult.setPageNumber(p.getPageCurrent());
+            paginationResult.setTotalRow(totalRow);
+            paginationResult.setTotalPage(totalPage);
+            paginationResult.setPageSize(pageSize);
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(paginationResult));
+            return JSON.toJSONString(paginationResult);
+        }else if(patname!=null &&  !("".equals(patname))){
+            System.out.println("hahaha");
+            int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
+            int pageSize = p.getPageSize();
+            boolean ifFirst = (p.getPageCurrent() == 1);
+            int totalRow = clinicService.account();
+            boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
+            int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics = clinicService.getAllInfoByPatname(patname);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println(clinicDtoList);
+            PaginationResult<ClinicDto> paginationResult = new PaginationResult<ClinicDto>();
+            paginationResult.setFirstPage(ifFirst);
+            paginationResult.setLastPage(ifLast);
+            paginationResult.setList(clinicDtoList);
+            paginationResult.setPageNumber(p.getPageCurrent());
+            paginationResult.setTotalRow(totalRow);
+            paginationResult.setTotalPage(totalPage);
+            paginationResult.setPageSize(pageSize);
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(paginationResult));
+            return JSON.toJSONString(paginationResult);
+        }else if(patientid!=null && !("".equals(patientid))){
+            System.out.println("!@##$%%^^^^&");
+            int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
+            int pageSize = p.getPageSize();
+            boolean ifFirst = (p.getPageCurrent() == 1);
+            int totalRow = clinicService.account();
+            boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
+            int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics=clinicService.getAllInfoByPatientid(patientid);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            PaginationResult<ClinicDto> paginationResult = new PaginationResult<ClinicDto>();
+            paginationResult.setFirstPage(ifFirst);
+            paginationResult.setLastPage(ifLast);
+            paginationResult.setList(clinicDtoList);
+            paginationResult.setPageNumber(p.getPageCurrent());
+            paginationResult.setTotalRow(totalRow);
+            paginationResult.setTotalPage(totalPage);
+            paginationResult.setPageSize(pageSize);
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(paginationResult));
+            return JSON.toJSONString(paginationResult);
+        }else if(updatetime!=null && !("".equals(updatetime))){
+            int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
+            int pageSize = p.getPageSize();
+            boolean ifFirst = (p.getPageCurrent() == 1);
+            int totalRow = clinicService.account();
+            boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
+            System.out.println("123");
+            int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+            System.out.println("123");
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics=clinicService.getAllInfoByUpdateTime(updatetime);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            PaginationResult<ClinicDto> paginationResult = new PaginationResult<ClinicDto>();
+            paginationResult.setFirstPage(ifFirst);
+            paginationResult.setLastPage(ifLast);
+            paginationResult.setList(clinicDtoList);
+            paginationResult.setPageNumber(p.getPageCurrent());
+            paginationResult.setTotalRow(totalRow);
+            paginationResult.setTotalPage(totalPage);
+            paginationResult.setPageSize(pageSize);
+            System.out.println("###################");
+            System.out.println("s");
+            System.out.println(JSON.toJSONString(paginationResult));
+            return JSON.toJSONString(paginationResult);
+        }else if(entity!=null && !("".equals(entity))){
+            System.out.println("lalala");
+            System.out.println(entity);
+            int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
+            int pageSize = p.getPageSize();
+            boolean ifFirst = (p.getPageCurrent() == 1);
+            int totalRow = clinicService.account();
+            boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
+            int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics=clinicService.getAllInfoByentity(entity);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println(clinicDtoList);
+            PaginationResult<ClinicDto> paginationResult = new PaginationResult<ClinicDto>();
+            paginationResult.setFirstPage(ifFirst);
+            paginationResult.setLastPage(ifLast);
+            paginationResult.setList(clinicDtoList);
+            paginationResult.setPageNumber(p.getPageCurrent());
+            paginationResult.setTotalRow(totalRow);
+            paginationResult.setTotalPage(totalPage);
+            paginationResult.setPageSize(pageSize);
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(paginationResult));
+            return JSON.toJSONString(paginationResult);
+        }
+        else{
+            return JSON.toJSONString(0);
+        }
+    }
+
+    @RequestMapping(value = "/getClinicInfo3", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getClinicInfo3(Pagination p,
+                                 @RequestParam ("idcard") String idcard,
+                                 @RequestParam("patname123") String patname,
+                                 @RequestParam("patientid123") String patientid,
+                                 @RequestParam("updatetime123") String updatetime,
+                                 @RequestParam("entity123") String entity)throws ParseException
+    {
+        System.out.println("%%%%%%%%%%");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        System.out.println(idcard);
+        System.out.println(patname);
+        System.out.println(patientid);
+        System.out.println(updatetime);
+        if(idcard!=null &&  !("".equals(idcard))) {
+            System.out.println("lalala");
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics = clinicService.getAllInfo1(idcard);
+            System.out.println(clinics);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(clinicDtoList));
+            return JSON.toJSONString(clinicDtoList);
+        }else if(patname!=null &&  !("".equals(patname))){
+            System.out.println("hahaha");
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics = clinicService.getAllInfoByPatname(patname);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println(clinicDtoList);
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(clinicDtoList));
+            return JSON.toJSONString(clinicDtoList);
+        }else if(patientid!=null && !("".equals(patientid))){
+            System.out.println("!@##$%%^^^^&");
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics=clinicService.getAllInfoByPatientid(patientid);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(clinicDtoList));
+            return JSON.toJSONString(clinicDtoList);
+        }else if(updatetime!=null && !("".equals(updatetime))){
+            System.out.println("123");
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics=clinicService.getAllInfoByUpdateTime(updatetime);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println("###################");
+            System.out.println("s");
+            System.out.println(JSON.toJSONString(clinicDtoList));
+            return JSON.toJSONString(clinicDtoList);
+        }else if(entity!=null && !("".equals(entity))){
+            System.out.println("lalala");
+            System.out.println(entity);
+            List<Clinic> clinics = new ArrayList<Clinic>();
+            clinics=clinicService.getAllInfoByentity(entity);
+            List<ClinicDto> clinicDtoList=new ArrayList<ClinicDto>();
+            for(int i=0;i< clinics.size();i++){
+                ClinicDto c=new ClinicDto();
+                c.setAddress(clinics.get(i).getAddress());
+                c.setAge(clinics.get(i).getAge());
+                c.setClinicdoc(clinics.get(i).getClinicdoc());
+                c.setEntity(clinics.get(i).getEntity());
+                c.setFamilyhis(clinics.get(i).getFamilyhis());
+                c.setIdcard(clinics.get(i).getIdcard());
+                c.setMainsuit(clinics.get(i).getMainsuit());
+                c.setMaritalhis(clinics.get(i).getMaritalhis());
+                c.setPastillnesshis(clinics.get(i).getPastillnesshis());
+                c.setPatbirthdate(sdf.format(clinics.get(i).getPatbirthdate()));
+                c.setPatgender(clinics.get(i).getPatgender());
+                c.setPatientid(clinics.get(i).getPatientid());
+                c.setPatname(clinics.get(i).getPatname());
+                c.setPersonalhis(clinics.get(i).getPersonalhis());
+                c.setPresentillnesshis(clinics.get(i).getPresentillnesshis());
+                c.setSpecialitycheck(clinics.get(i).getSpecialitycheck());
+                c.setTelephone(clinics.get(i).getTelephone());
+                c.setTentativediagnosis(clinics.get(i).getTentativediagnosis());
+                c.setUpdatetime(sdf.format(clinics.get(i).getUpdatetime()));
+                c.setYibaoid(clinics.get(i).getYibaoid());
+                clinicDtoList.add(c);
+            }
+            System.out.println(clinicDtoList);
+            System.out.println("###################");
+            System.out.println(JSON.toJSONString(clinicDtoList));
+            return JSON.toJSONString(clinicDtoList);
+        }
+        else{
+            return JSON.toJSONString(0);
+        }
+    }
+
     @RequestMapping(value = "/getClinicInfo1")
     @ResponseBody
     public String getClinicInfo1(Pagination p,
-                                 @RequestParam ("idcard") String idcard)throws ParseException
-    {
+                                 @RequestParam ("idcard") String idcard
+                               )throws ParseException {
 //        System.out.println("%%%%%%%%%%");
-//        System.out.println(idcard);
+        System.out.println(idcard);
+        System.out.println("lalala");
         int currIndex = (p.getPageCurrent() - 1) * p.getPageSize();
         int pageSize = p.getPageSize();
         boolean ifFirst = (p.getPageCurrent() == 1);
         int totalRow = clinicService.account();
         boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;
         int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
-        List<Clinic> clinics=new ArrayList<Clinic>();
-        clinics=clinicService.getAllInfo1(idcard);
+        List<Clinic> clinics = new ArrayList<Clinic>();
+        clinics = clinicService.getAllInfo1(idcard);
         System.out.println(clinics);
         PaginationResult<Clinic> paginationResult = new PaginationResult<Clinic>();
         paginationResult.setFirstPage(ifFirst);
@@ -557,8 +1006,8 @@ public class BaseInfoController {
         paginationResult.setTotalRow(totalRow);
         paginationResult.setTotalPage(totalPage);
         paginationResult.setPageSize(pageSize);
-//        System.out.println("###################");
-//        System.out.println(JSON.toJSONString(paginationResult));
+        System.out.println("###################");
+        System.out.println(JSON.toJSONString(paginationResult));
         return JSON.toJSONString(paginationResult);
     }
 }

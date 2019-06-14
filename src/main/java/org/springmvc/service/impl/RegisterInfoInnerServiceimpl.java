@@ -3,8 +3,12 @@ package org.springmvc.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springmvc.dao_inner.RegisterInfoInnerMapper;
+import org.springmvc.pojo_inner.DicomWorkListInner;
 import org.springmvc.pojo_inner.RegisterInfoInner;
 import org.springmvc.service.RegisterInfoInnerService;
+import org.springmvc.tool.DataSourceContextHolder;
+
+import java.util.List;
 
 @Service
 public class RegisterInfoInnerServiceimpl implements RegisterInfoInnerService {
@@ -21,4 +25,5 @@ public class RegisterInfoInnerServiceimpl implements RegisterInfoInnerService {
     public int saveNewRegisterInfo(RegisterInfoInner registerInfoInner){
         return registerInfoInnerMapper.insert(registerInfoInner);
     }
+
 }

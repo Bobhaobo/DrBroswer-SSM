@@ -1,6 +1,7 @@
 package org.springmvc.dao;
 
 //import org.springmvc.dto.PatientDto;
+import org.apache.ibatis.annotations.Param;
 import org.springmvc.pojo.Patient;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface PatientMapper {
 
     int selectCount();
 
-    List<Patient> selectByPrimaryKey1 (String idcard);
+//    List<Patient> selectByPrimaryKey1 (String idcard);
+
+    List<Patient> selectAllocateSearch(@Param("name") String name,@Param("sex") String sex,@Param("age") String age);
 }

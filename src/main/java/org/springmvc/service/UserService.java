@@ -18,6 +18,11 @@ public interface UserService {
      * @return: 状态，是否存在用户
      * */
     User ifExsitUser(String username, String password);
+
+
+    User ifExsitUserByName(String name);
+
+
     /**
      *@Description: 查询用户等级，属于上级医院或者下级医院
      *@Author: Shalldid
@@ -52,6 +57,15 @@ public interface UserService {
 
     List<User> getAll();
 
+
+    /**
+     * @Description: 通过用户姓名查找用户id
+     * @Author: Shalldid
+     * @Date: Created in 15:51 2018-05-29
+     * @Return:
+     **/
+
+    User getUserByUserName(String name);
 //    List<String> getAllAuth();
 //    List<String> getAuthNameByAuthCode1(List<String> authCode1);
 }

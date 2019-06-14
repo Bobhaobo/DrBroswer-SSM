@@ -20,4 +20,12 @@ public class SelectPicker {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        return "SelectPicker{" +
+                "value='" + value + '\'' +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }

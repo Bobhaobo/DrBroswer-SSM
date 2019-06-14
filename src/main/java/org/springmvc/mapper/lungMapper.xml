@@ -16,10 +16,12 @@
     <result column="reportDate" property="reportdate" jdbcType="TIMESTAMP" />
     <result column="imageView" property="imageview" jdbcType="VARCHAR" />
     <result column="imageSuggestion" property="imagesuggestion" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="entity" property="entity" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     patientid, patName, patGender, age, examDoc, imageClass, checkPart, scanMethod, scanWay, 
-    clinicdiagnosis, checkDate, reportDate, imageView, imageSuggestion
+    clinicdiagnosis, checkDate, reportDate, imageView, imageSuggestion,idcard,entity
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -28,12 +30,42 @@
     where patientid = #{patientid,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectLungbyPatid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectLungbyIdcard" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lung_check
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLungbyPatname" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lung_check
+    where patName = #{patname,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectLungByEntity" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lung_check
+    where entity = #{entity,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLungByCheckDate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lung_check
+    where convert(char(10),checkDate,120) = #{checkdate,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLungByPatid" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from lung_check
     where patientid = #{patientid,jdbcType=VARCHAR}
   </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from lung_check

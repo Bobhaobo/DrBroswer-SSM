@@ -188,4 +188,10 @@ public class HisInfoServiceimpl implements HisInfoService {
         }
         return todayReportTabs;
     }
+
+    @Override
+    public int delete(String checknum){return hisInfoMapper.deleteByCheckNum(checknum);}
+
+    @Override
+    public int getCountByCheckNum(String checknum){return hisInfoMapper.selectCountByCheckNum(checknum);}
 }

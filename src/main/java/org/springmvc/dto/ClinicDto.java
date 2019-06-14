@@ -1,46 +1,49 @@
 package org.springmvc.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class ClinicDto {
+    @JSONField(ordinal = 6)
     private String idcard;
-
+    @JSONField(ordinal = 4)
     private String yibaoid;
-
+    @JSONField(ordinal = 1)
     private String patname;
-
+    @JSONField(ordinal = 3)
     private Integer age;
-
+    @JSONField(ordinal = 2)
     private String patgender;
-
+    @JSONField(ordinal = 12)
     private String clinicdoc;
-
+    @JSONField(ordinal = 8)
     private String patbirthdate;
-
+    @JSONField(ordinal = 9)
     private String telephone;
-
+    @JSONField(ordinal = 10)
     private String address;
-
+    @JSONField(ordinal = 11)
     private String updatetime;
-
+    @JSONField(ordinal = 7)
     private String entity;
-
+    @JSONField(ordinal = 13)
     private String mainsuit;
-
+    @JSONField(ordinal = 14)
     private String personalhis;
-
+    @JSONField(ordinal = 15)
     private String maritalhis;
-
+    @JSONField(ordinal = 16)
     private String familyhis;
-
+    @JSONField(ordinal = 17)
     private String pastillnesshis;
-
+    @JSONField(ordinal = 18)
     private String presentillnesshis;
-
+    @JSONField(ordinal = 19)
     private String specialitycheck;
-
+    @JSONField(ordinal = 20)
     private String tentativediagnosis;
-
+    @JSONField(ordinal = 5)
     private String patientid;
 
     public String getPatientid() {

@@ -52,6 +52,7 @@
     <result column="StudyID" property="studyid" jdbcType="VARCHAR" />
     <result column="district" property="district" jdbcType="VARCHAR" />
     <result column="nowOperator" property="nowoperator" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     CheckNum, RecordID, RegisterTime, OperatorCode, PayFlag, PayCount, PatTypeCode, ClinicID, 
@@ -59,7 +60,7 @@
     Telephone, PatRoomCode, BedNo, ExamItemCode, Flag, DeptCode, NewPatient, Age, PatRoomName, 
     DeptName, ExamItemName, AgeType, PhotoDate, MakerCode, MakerName, ExamNameCode, ExamNameName, 
     DevCode, DevName, IfUsingFlag, IsDicomFlag, cardno, jcbw, jclb, sjmd, jcsf, lczd, 
-    sqdbh, isRegist, xuhao, isPrint, StudyID, district, nowOperator
+    sqdbh, isRegist, xuhao, isPrint, StudyID, district, nowOperator,updatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -67,10 +68,62 @@
     from register_info
     where CheckNum = #{checknum,jdbcType=VARCHAR}
   </select>
+
+  <select id="countCheckListByFlag" resultType="java.lang.Integer">
+    select count(*)
+    from register_info
+    where Flag = #{flag,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectByPrimaryKeyLocal" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from register_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKeyLocalModify" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from register_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="getAllInfoByFlag" resultType="org.springmvc.pojo_inner.RegisterInfoInner" >
+    select
+    <include refid="Base_Column_List" />
+    from register_info
+    where Flag = #{flag,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from register_info
     where CheckNum = #{checknum,jdbcType=VARCHAR}
   </delete>
+
+  <select id="getCheckedListByFlag" resultType="org.springmvc.pojo_inner.RegisterInfoInner">
+    select top ${pageSize} *
+    from register_info
+    where
+      checkNum not in (
+      select top ${currIndex} checkNum
+      from register_info
+      where flag = #{flag,jdbcType=VARCHAR}
+      order by RegisterTime
+      )
+      and Flag = #{flag,jdbcType=VARCHAR}
+    order by RegisterTime
+  </select>
+
+
+  <select id="getCountByFlag" resultType="java.lang.Integer"  >
+   select count(*)
+   from register_info
+    where Flag = #{flag,jdbcType=VARCHAR}
+  </select>
+
   <insert id="insert" parameterType="org.springmvc.pojo_inner.RegisterInfoInner" >
     insert into register_info (CheckNum, RecordID, RegisterTime, 
       OperatorCode, PayFlag, PayCount, 
@@ -88,7 +141,7 @@
       jclb, sjmd, jcsf, lczd, 
       sqdbh, isRegist, xuhao, 
       isPrint, StudyID, district, 
-      nowOperator)
+      nowOperator,updatetime)
     values (#{checknum,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR}, #{registertime,jdbcType=TIMESTAMP}, 
       #{operatorcode,jdbcType=VARCHAR}, #{payflag,jdbcType=BIT}, #{paycount,jdbcType=NUMERIC}, 
       #{pattypecode,jdbcType=INTEGER}, #{clinicid,jdbcType=VARCHAR}, #{patientid,jdbcType=VARCHAR}, 
@@ -105,7 +158,7 @@
       #{jclb,jdbcType=VARCHAR}, #{sjmd,jdbcType=VARCHAR}, #{jcsf,jdbcType=VARCHAR}, #{lczd,jdbcType=VARCHAR}, 
       #{sqdbh,jdbcType=VARCHAR}, #{isregist,jdbcType=VARCHAR}, #{xuhao,jdbcType=VARCHAR}, 
       #{isprint,jdbcType=VARCHAR}, #{studyid,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
-      #{nowoperator,jdbcType=VARCHAR})
+      #{nowoperator,jdbcType=VARCHAR},#{updatetime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="org.springmvc.pojo_inner.RegisterInfoInner" >
     insert into register_info
@@ -260,6 +313,9 @@
       <if test="nowoperator != null" >
         nowOperator,
       </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="checknum != null" >
@@ -411,6 +467,9 @@
       </if>
       <if test="nowoperator != null" >
         #{nowoperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -564,6 +623,9 @@
       <if test="nowoperator != null" >
         nowOperator = #{nowoperator,jdbcType=VARCHAR},
       </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
     </set>
     where CheckNum = #{checknum,jdbcType=VARCHAR}
   </update>
@@ -617,15 +679,80 @@
       isPrint = #{isprint,jdbcType=VARCHAR},
       StudyID = #{studyid,jdbcType=VARCHAR},
       district = #{district,jdbcType=VARCHAR},
-      nowOperator = #{nowoperator,jdbcType=VARCHAR}
+      nowOperator = #{nowoperator,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=DATE}
     where CheckNum = #{checknum,jdbcType=VARCHAR}
   </update>
+
+  <update id="updateByPrimaryKeyLocal" parameterType="org.springmvc.pojo_inner.RegisterInfoInner" >
+    update register_info
+    set RecordID = #{recordid,jdbcType=VARCHAR},
+      RegisterTime = #{registertime,jdbcType=TIMESTAMP},
+      OperatorCode = #{operatorcode,jdbcType=VARCHAR},
+      PayFlag = #{payflag,jdbcType=BIT},
+      PayCount = #{paycount,jdbcType=NUMERIC},
+      PatTypeCode = #{pattypecode,jdbcType=INTEGER},
+      ClinicID = #{clinicid,jdbcType=VARCHAR},
+      PatientID = #{patientid,jdbcType=VARCHAR},
+      PatName = #{patname,jdbcType=VARCHAR},
+      PatNamePY = #{patnamepy,jdbcType=VARCHAR},
+      PatGender = #{patgender,jdbcType=VARCHAR},
+      PatBirthdate = #{patbirthdate,jdbcType=TIMESTAMP},
+      Address = #{address,jdbcType=VARCHAR},
+      YiBaoID = #{yibaoid,jdbcType=VARCHAR},
+      IdentityID = #{identityid,jdbcType=VARCHAR},
+      Telephone = #{telephone,jdbcType=VARCHAR},
+      PatRoomCode = #{patroomcode,jdbcType=VARCHAR},
+      BedNo = #{bedno,jdbcType=VARCHAR},
+      ExamItemCode = #{examitemcode,jdbcType=VARCHAR},
+      Flag = #{flag,jdbcType=VARCHAR},
+      DeptCode = #{deptcode,jdbcType=VARCHAR},
+      NewPatient = #{newpatient,jdbcType=BIT},
+      Age = #{age,jdbcType=NUMERIC},
+      PatRoomName = #{patroomname,jdbcType=VARCHAR},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      ExamItemName = #{examitemname,jdbcType=VARCHAR},
+      AgeType = #{agetype,jdbcType=VARCHAR},
+      PhotoDate = #{photodate,jdbcType=TIMESTAMP},
+      MakerCode = #{makercode,jdbcType=VARCHAR},
+      MakerName = #{makername,jdbcType=VARCHAR},
+      ExamNameCode = #{examnamecode,jdbcType=VARCHAR},
+      ExamNameName = #{examnamename,jdbcType=VARCHAR},
+      DevCode = #{devcode,jdbcType=VARCHAR},
+      DevName = #{devname,jdbcType=VARCHAR},
+      IfUsingFlag = #{ifusingflag,jdbcType=BIT},
+      IsDicomFlag = #{isdicomflag,jdbcType=VARCHAR},
+      cardno = #{cardno,jdbcType=VARCHAR},
+      jcbw = #{jcbw,jdbcType=VARCHAR},
+      jclb = #{jclb,jdbcType=VARCHAR},
+      sjmd = #{sjmd,jdbcType=VARCHAR},
+      jcsf = #{jcsf,jdbcType=VARCHAR},
+      lczd = #{lczd,jdbcType=VARCHAR},
+      sqdbh = #{sqdbh,jdbcType=VARCHAR},
+      isRegist = #{isregist,jdbcType=VARCHAR},
+      xuhao = #{xuhao,jdbcType=VARCHAR},
+      isPrint = #{isprint,jdbcType=VARCHAR},
+      StudyID = #{studyid,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      nowOperator = #{nowoperator,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=DATE}
+    where CheckNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+
+
   <select id="getCheckNum" resultType="java.lang.String">
     select max(CheckNum)
     from register_info
     where ExamItemName = #{modality}
       and CheckNum like #{param}
   </select>
+
+  <update id="updateRegStatusByChecknum">
+    update register_info
+    set Flag = #{status,jdbcType=VARCHAR}
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </update>
+
 
   <select id="getPatientID" resultType="java.lang.String">
     select max(PatientID)

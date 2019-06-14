@@ -82,6 +82,9 @@
 .redoIcon {
    background-image: url(../images/Icons/Redo.png);
 }
+.loadAnnoIcon {
+   background-image: url(../images/Icons/LoadAnno.png);
+}
 
 .selectAllTextIcon {
    background-image: url(../images/Icons/SelectAllText.png);
@@ -120,9 +123,17 @@
 }
 
 .zoomIcon {
-   background-image: url(../images/Icons/ZoomMode.png);
+   background-image: url(../images/Icons/Zoom.png);
 }
-
+.playIcon {
+   background-image: url(../images/Icons/Play.png);
+}
+.stopIcon {
+   background-image: url(../images/Icons/Stop.png);
+}
+.LevelsIcon {
+   background-image: url(../images/Icons/Levels.png);
+}
 .zoomToIcon {
    background-image: url(../images/Icons/ZoomToMode.png);
 }
@@ -133,6 +144,30 @@
 
 .autoPanIcon {
    background-image: url(../images/Icons/AutoPanMode.png);
+}
+.invertIcon {
+   background-image: url(../images/Icons/Invert.png);
+}
+.exportImgIcon{
+   background-image: url(../images/Icons/ExportImage.png);
+}
+.scrollLeftIcon{
+   background-image: url(../images/Icons/ScrollLeft.png);
+}
+.scrollRightIcon{
+   background-image: url(../images/Icons/ScrollRight.png);
+}
+.hflipIcon {
+   background-image: url(../images/Icons/Hflip.png);
+}
+.vflipIcon {
+   background-image: url(../images/Icons/Vflip.png);
+}
+.ctrIcon {
+   background-image: url(../images/Icons/CTR.png);
+}
+.arrowAnnotateIcon {
+   background-image: url(../images/Icons/ArrowAnnotate.png);
 }
 
 .inertiaScrollIcon {

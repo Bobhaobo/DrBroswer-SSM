@@ -19,6 +19,7 @@ function UrlExists (url) {
 let webWorkerUrl = getBlobUrl('cornerstoneWADOImageLoaderWebWorker.min.js');
 let codecsUrl = getBlobUrl('cornerstoneWADOImageLoaderCodecs.js');
 
+
 if (UrlExists('../AnnoURLjs/cornerstoneWADOImageLoaderWebWorker.min.js')) {
   webWorkerUrl = '../AnnoURLjs/cornerstoneWADOImageLoaderWebWorker.min.js';
 }

@@ -82,7 +82,7 @@ public class OrderTableServiceimpl implements OrderTableService {
      **/
     public List<ReservationTab> getOrderTabByStatusAndPagination(int currIndex, int pageSize){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        List<OrderTable> orderTables = orderTableMapper.getOrderTableByStatus("0", pageSize, currIndex);  //查询
+        List<OrderTable> orderTables = orderTableMapper.getOrderTableByStatus("0", pageSize, currIndex);  //查询,未安排的状态是0
         List<ReservationTab> list = new ArrayList<ReservationTab>();
         Patient patient;
         for(OrderTable o : orderTables){
@@ -149,13 +149,19 @@ public class OrderTableServiceimpl implements OrderTableService {
             a.setCheckHos(hospitalMapper.getHosNameByHosId("H0001"));   //以下两处需做修改，目前只有一家上级医院，写死了
             a.setCheckHosId("H0001");
             r = registerInfoMapper.selectByPrimaryKey(o.getChecknum());
+//            System.out.println(r);
             a.setModality(r.getExamitemname());
             a.setRecordId(r.getRecordid());
             p = patientMapper.selectByPrimaryKey(r.getIdcard());
+//            System.out.println(o);
+//            System.out.println(a);
             a.setPatient_Age(p.getAge() + p.getAgetype());
+//            System.out.println(a.getPatient_Age());
+//            System.out.println("bbb");
             a.setPatient_Name(p.getPatname());
             a.setPatient_Sex(p.getPatgender());
             list.add(a);
+            System.out.println(a);
         }
         return list;
     }

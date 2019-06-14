@@ -30,6 +30,9 @@
     from reg_info
     where checkNum = #{checknum,jdbcType=VARCHAR}
   </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from reg_info
     where checkNum = #{checknum,jdbcType=VARCHAR}
@@ -286,4 +289,21 @@
     from reg_info
     where flag = #{flag,jdbcType=VARCHAR}
   </select>
+
+  <!--<select id="updateFlagByChecknum" resultType="java.lang.String">-->
+    <!--update reg_info-->
+    <!--set flag="已审核报告"-->
+    <!--where checkNum = #{checknum,jdbcType=VARCHAR}-->
+  <!--</select>-->
+
+  <select id="selectCountByCheckNum" resultType="java.lang.Integer">
+    select count(*)
+    from reg_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByCheckNum" parameterType="java.lang.String" >
+    delete from reg_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </delete>
 </mapper>

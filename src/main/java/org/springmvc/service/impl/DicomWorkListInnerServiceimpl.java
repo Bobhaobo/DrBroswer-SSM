@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springmvc.dao_inner.DicomWorkListInnerMapper;
 import org.springmvc.pojo_inner.DicomWorkListInner;
 import org.springmvc.service.DicomWorkListInnerService;
+import org.springmvc.tool.DataSourceContextHolder;
+
+import java.util.List;
 
 @Service
 public class DicomWorkListInnerServiceimpl implements DicomWorkListInnerService {
@@ -21,4 +24,6 @@ public class DicomWorkListInnerServiceimpl implements DicomWorkListInnerService 
     public int saveNewDicomWorkList(DicomWorkListInner dicomWorkListInner){
         return dicomWorkListInnerMapper.insert(dicomWorkListInner);
     }
+
+
 }

@@ -46,8 +46,11 @@ public class PatientServiceimpl implements PatientService {
         Date pat_birthday = sdf.parse(birthday);
         String[] ageAndType = birthGenerator.getAgeAndType(pat_birthday, new Date());
         Patient patient = new Patient(pat_id_card, pat_name, pat_gender, pat_address, pat_soicalId, pat_phone, Integer.valueOf(ageAndType[0]), ageAndType[1]);   //初始化Patient
+        System.out.println(patient);
+        System.out.println("123321123321");
         try {
             patient.setPatbrithdate(pat_birthday);
+            System.out.println(patient);
             //System.out.println(birthGenerator.getBirth(pat_age,pat_agetype));
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,6 +58,7 @@ public class PatientServiceimpl implements PatientService {
         patient.setPatnamepy(chineseConvert.convert(pat_name));
         int status; //更新状态
         Patient patient_db = patientMapper.selectByPrimaryKey(patient.getIdcard()); //先查询数据库内有无此病人信息
+        System.out.println(patient_db);
         if(patient_db != null){
             patient.setUpdatetime(new Date());
             //System.out.println("patient_db != null");
@@ -100,6 +104,9 @@ public class PatientServiceimpl implements PatientService {
     public int account(){return patientMapper.selectCount();}
 
 
+//    @Override
+//    public List<Patient> getPatByIdcard1(String idcard){return  patientMapper.selectByPrimaryKey1(idcard);}
+
     @Override
-    public List<Patient> getPatByIdcard1(String idcard){return  patientMapper.selectByPrimaryKey1(idcard);}
+    public  List<Patient> getRemoteRegisterAllocate(String name, String sex, String age){return patientMapper.selectAllocateSearch(name,sex,age);}
 }

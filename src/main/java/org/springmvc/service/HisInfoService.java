@@ -21,4 +21,8 @@ public interface HisInfoService {
 
     List<TodayReportTab> getTodaReportListByCondition(int currIndex, int pageSize, String modality, String pat_type, String dateBegin, String dateEnd,
                                                       String name, String id, String number, String clinic_id) throws ParseException;
+
+    int delete(String checknum);
+
+    int getCountByCheckNum(String checknum);
 }

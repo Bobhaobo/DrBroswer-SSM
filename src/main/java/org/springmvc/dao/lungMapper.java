@@ -1,5 +1,6 @@
 package org.springmvc.dao;
 
+import org.springmvc.dto.lungDto;
 import org.springmvc.pojo.lung;
 
 import javax.xml.ws.Service;
@@ -18,5 +19,13 @@ public interface lungMapper {
 
     int updateByPrimaryKey(lung record);
 
-    List<lung> selectLungbyPatid(String patid);
+    lung selectLungbyIdcard(String idcard);
+
+    List<lung> selectLungbyPatname(String patname);
+
+    lung selectLungByPatid(String patientid);
+
+    List<lung> selectLungByCheckDate(String checkdate);
+
+    List<lung> selectLungByEntity(String entity);
 }

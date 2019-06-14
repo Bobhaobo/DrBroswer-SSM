@@ -3,7 +3,7 @@
        // alert("1111111111");
         $.ajax({
             type:"post",
-            url:"lung/getLungInfo?numberll="+ $("#ID3").val(),
+            url:"lung/getLungInfo?idcard122="+ $("#IDcard1").val(),
             dataType: "html",
             async:false,
             success:function(data){
@@ -11,22 +11,26 @@
                 var pro=null;
                 // pro=JSON.parse(data);
                 pro=eval("("+data+")");
-                $("#pat_name").val(pro.list[0].patname);//赋值
-                alert(pro.list[0].patname);
-                $("#age36").val(pro.list[0].age);
-                $("#sex123").val(pro.list[0].patgender);
-                $("#ID1").val(pro.list[0].patientid);
-                $("#examDoc61").val(pro.list[0].examdoc);
-                $("#imageclass1").val(pro.list[0].imageclass);
-                $("#checkpart1").val(pro.list[0].checkpart);
-                $("#scanmethod1").val(pro.list[0].scanmethod);
-                $("#scanway1").val(pro.list[0].scanway);
-                $("#clinicdiagnosis1").val(pro.list[0].clinicdiagnosis);
-                $("#checkDate1").val(pro.list[0].checkdate);
-                $("#reportDate1").val(pro.list[0].reportdate);
+                alert(pro.lungDto.age);
+                // $("#pat_name").val(pro.list[0].patname);//赋值
+                $("#pat_name").val(pro.lungDto.patname);
+                alert(pro.lungDto.patname);
+                $("#age36").val(pro.lungDto.age);
+                $("#sex123").val(pro.lungDto.patgender);
+                $("#ID1").val(pro.lungDto.patientid);
+                $("#examDoc61").val(pro.lungDto.examdoc);
+                $("#imageclass1").val(pro.lungDto.imageclass);
+                $("#checkpart1").val(pro.lungDto.checkpart);
+                $("#scanmethod1").val(pro.lungDto.scanmethod);
+                $("#scanway1").val(pro.lungDto.scanway);
+                $("#clinicdiagnosis1").val(pro.lungDto.clinicdiagnosis);
+                $("#checkDate1").val(pro.lungDto.checkdate);
+                $("#reportDate1").val(pro.lungDto.reportdate);
+                $("#IDcard2").val(pro.lungDto.idcard);
+                $("#entity12").val(pro.lungDto.entity);
                 // alert("$$$");
-                document.getElementById("imageView").innerHTML=(pro.list[0].imageview);
-                document.getElementById("imageSuggestion").innerHTML=(pro.list[0].imagesuggestion);
+                document.getElementById("imageView").innerHTML=(pro.lungDto.imageview);
+                document.getElementById("imageSuggestion").innerHTML=(pro.lungDto.imagesuggestion);
                 // alert($("#pat_name").val());    //取值
                 // alert("lalala");
                  document.getElementById("myimage").src=(pro.base64Url);
@@ -53,6 +57,14 @@
                 <label class="row-label">病人ID：</label>
                 <div class="row-input">
                     <input type="text" name="ID3" id="ID3" class="ID" size="20">
+                </div>
+                <label class="row-label">身份证号：</label>
+                <div class="row-input">
+                    <input type="text" name="ID3" id="IDcard1" class="ID" size="20">
+                </div>
+                <label class="row-label">病种：</label>
+                <div class="row-input">
+                    <input type="text" name="entity11" id="entity11"  size="20">
                 </div>
                 <label class="row-label">检查部门：</label>
                 <div class="row-input">
@@ -111,6 +123,14 @@
                     <label class="row-label">病人ID：</label>
                     <div class="row-input">
                         <input type="text" name="ID" id="ID1" class="ID" size="20">
+                    </div>
+                    <label class="row-label">身份证号：</label>
+                    <div class="row-input">
+                        <input type="text" name="ID3" id="IDcard2" class="ID" size="20">
+                    </div>
+                    <label class="row-label">病种：</label>
+                    <div class="row-input">
+                        <input type="text" name="entity12" id="entity12"  size="20">
                     </div>
                     <label class="row-label">检查部门：</label>
                     <div class="row-input" >

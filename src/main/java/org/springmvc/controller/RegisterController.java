@@ -67,7 +67,6 @@ public class RegisterController {
                                @RequestParam("sqks") String sqks, @RequestParam("bedroom") String bedroom,
                                @RequestParam("bedNo") String bedNo, @RequestParam("sjmd") String sjmd,
                                @RequestParam("card_num") String card_num, Model model, HttpSession httpSession) throws ParseException {
-
         int status_pat = patientService.insertOrUpdatePat(pat_name,pat_id_card,pat_gender,brithday,pat_address,pat_soicalId,
                 pat_phone); //插入病人信息
         String check_num = regInfoService.insertNewRegInfo(clinicID,bedNo,check_type,card_num,jcbw,sjmd,sqdbh,sqks,
@@ -124,6 +123,7 @@ public class RegisterController {
     @ResponseBody
     public String loadCheckItemByHosId(@PathVariable("hosId") String hosId){
 
+        System.out.println("sdasd");
         List<ExamItem> examItems = hospitalService.getExamItemByHosId(hosId);
         List<SelectPicker> list = new ArrayList<SelectPicker>();
         //ExamItemInfo examItemInfo = new ExamItemInfo();   //不能在外面新建对象，具体参考ArrayList的add过程

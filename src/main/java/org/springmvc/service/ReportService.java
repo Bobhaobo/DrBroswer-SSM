@@ -9,4 +9,12 @@ public interface ReportService {
     Report getReportByBgCode(String bgCode); //通过BgCode加载报告
 
     int updateReportByReport(Report r); //通过report更新report
+
+    int updateReportStatusByChecknum(String status, String checknum);
+
+    int delete(String checknum);
+
+    int getCountByCheckNum(String checknum);
+
+    int updateReportByReportAdd(Report report);
 }

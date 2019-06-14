@@ -62,4 +62,16 @@ public class OrderTable {
     public void setOrdersource(String ordersource) {
         this.ordersource = ordersource == null ? null : ordersource.trim();
     }
+
+    @Override
+    public String toString() {
+        return "OrderTable{" +
+                "id='" + id + '\'' +
+                ", checknum='" + checknum + '\'' +
+                ", arrangestatus='" + arrangestatus + '\'' +
+                ", adddate=" + adddate +
+                ", orderdate=" + orderdate +
+                ", ordersource='" + ordersource + '\'' +
+                '}';
+    }
 }

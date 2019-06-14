@@ -3,6 +3,7 @@ package org.springmvc.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springmvc.dao.lungMapper;
+import org.springmvc.dto.lungDto;
 import org.springmvc.pojo.lung;
 import org.springmvc.service.LungService;
 
@@ -15,7 +16,19 @@ public class LungServiceimpl implements LungService{
     private lungMapper lungMapper;
 
     @Override
-    public List<lung> getPatInfo(String patid){
-        return lungMapper.selectLungbyPatid(patid);
+    public lung getPatInfo(String idcard){
+        return lungMapper.selectLungbyIdcard(idcard);
     }
+
+    @Override
+    public List<lung> getPatInfo1(String patname){return lungMapper.selectLungbyPatname(patname);}
+
+    @Override
+    public lung getPatInfoByPatid(String patientid){return lungMapper.selectLungByPatid(patientid);}
+
+    @Override
+    public List<lung> getPatInfoByCheckdate(String checkdate){return lungMapper.selectLungByCheckDate(checkdate);}
+
+    @Override
+    public List<lung> getPatInfoByentity(String entity){return lungMapper.selectLungByEntity(entity);}
 }

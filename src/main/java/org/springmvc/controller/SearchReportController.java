@@ -57,6 +57,7 @@ public class SearchReportController {
         int pageSize  = p.getPageSize();
         boolean ifFirst = (p.getPageCurrent() == 1);    //如果当前页为1则是第一页
         int totalRow = hisInfoService.countReportToday(userService.getHosIdOfUser(u.getDept())); //得到今日出报告的总数量；
+        System.out.println(totalRow);
         boolean ifLast = ((currIndex + pageSize) <= totalRow) ? true : false;   //当前数据index加上pageSize是否小于等于总数量，若是则为最后一页
         int totalPage = (totalRow % pageSize) == 0 ? (totalRow / pageSize) : ((totalRow / pageSize) + 1);
         try {

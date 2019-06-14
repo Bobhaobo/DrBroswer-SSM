@@ -24,6 +24,75 @@
     from remote_register
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="getRemoteByCheckNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from remote_register
+    where checknum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="getAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from remote_register
+    where 1=1
+  </select>
+
+  <select id="selectAllocateSearchById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from remote_register
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectRemoteAllocateByFlag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from remote_register
+    where flag = #{flag,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from remote_register
+    where id = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllocateSearch" resultType="org.springmvc.dto.RemoteAllocateDto" parameterType="hashmap">
+    select   rr.checknum,rr.pattype,rr.modality,pl.patName,pl.patGender,pl.age,pl.ageType,rr.flag from remote_register rr
+    inner join pat_list pl on rr.idcard=pl.idcard
+    <where>
+      <if test="checknum!=''">
+       and  rr.checknum=#{checknum,jdbcType=VARCHAR}
+      </if>
+      <if test="modality != ''">
+        and rr.modality=#{modality,jdbcType=VARCHAR}
+      </if>
+      <if test="pattype != ''">
+        and rr.pattype=#{pattype,jdbcType=VARCHAR}
+      </if>
+      <if test="name!=''">
+        and pl.patName=#{name,jdbcType=VARCHAR}
+      </if>
+      <if test="sex != ''">
+        and pl.patGender=#{sex,jdbcType=VARCHAR}
+      </if>
+      <if test="age != ''">
+        and pl.age=#{age,jdbcType=VARCHAR}
+      </if>
+
+    </where>
+
+  </select>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from remote_register
     where id = #{id,jdbcType=VARCHAR}
@@ -188,4 +257,11 @@
     set flag = #{flag,jdbcType=VARCHAR}
     where checknum = #{checknum,jdbcType=VARCHAR}
   </update>
+
+  <update id="updateFlagById">
+    update remote_register
+    set flag = #{flag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
 </mapper>

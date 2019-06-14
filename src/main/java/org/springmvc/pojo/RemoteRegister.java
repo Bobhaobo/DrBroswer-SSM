@@ -112,4 +112,21 @@ public class RemoteRegister {
     public void setStudydate(Date studydate) {
         this.studydate = studydate;
     }
+
+    @Override
+    public String toString() {
+        return "RemoteRegister{" +
+                "id='" + id + '\'' +
+                ", checknum='" + checknum + '\'' +
+                ", tagpatientid='" + tagpatientid + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", flag='" + flag + '\'' +
+                ", remotehos='" + remotehos + '\'' +
+                ", regdate=" + regdate +
+                ", pattype='" + pattype + '\'' +
+                ", modality='" + modality + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", studydate=" + studydate +
+                '}';
+    }
 }

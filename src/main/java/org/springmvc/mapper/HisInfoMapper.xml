@@ -254,4 +254,16 @@
       and ${condition}
     order by reportDate desc
   </select>
+
+  <delete id="deleteByCheckNum" parameterType="java.lang.String" >
+    delete from his_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectCountByCheckNum" resultType="java.lang.Integer" >
+    select count (*)
+    from his_info
+    where checkNum = #{checknum,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

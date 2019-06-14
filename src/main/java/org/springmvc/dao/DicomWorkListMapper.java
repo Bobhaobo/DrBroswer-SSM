@@ -19,4 +19,6 @@ public interface DicomWorkListMapper {
     String getAccessionN(@Param("modality") String modality, @Param("param") String param);
 
     DicomWorkList selectByPatid(String patid);
+
+    DicomWorkList selectByPatidLocal(String patid);
 }

@@ -6,6 +6,7 @@ $(function(){
         dataType:"html",
         async:false,
         success:function(data){
+            alert(data);
             var pro=null;
             pro = eval("("+data+")");
             $("#hosName").text(pro.hosName);
@@ -17,6 +18,7 @@ $(function(){
             $("#examDesc").val(pro.examDesc);
             $("#examDiagnosis").val(pro.examDiagnosis);
             $("#imagePath").attr("href","DrViewerBoot://" + pro.imagePath);
+            $("#suggestion_text_p").text(pro.suggestion);
         }
     });
 });
@@ -24,18 +26,18 @@ $(function(){
 $("#modifyReport").click(function(){
     BJUI.ajax('doajax',{
         url:"remote/modifyReport?examDesc=" + $("#examDesc").val()
-        + "&examDiagnosis=" + $("#examDiagnosis").val()
-        + "&bgCode="+ $("#bgCode").val()
-        + "&pat_checknum=" + $("#pat_checknum").val()
-        + "&deptName=" + $("#deptName").val()
-        + "&clinicId=" + $("#clinicId").val()
-        + "&bedNo=" + $("#bedNo").val()
-        + "&jcbw=" + $("#jcbw").val()
-        + "&sfyangxing=" + $("#sfyangxing").val()
-        + "&hosName=" + $("#hosName").text()
-        + "&pat_name=" + $("#pat_name").val()
-        + "&pat_gender=" + $("#pat_gender").val()
-        + "&pat_age=" + $("#pat_age").val(),
+            + "&examDiagnosis=" + $("#examDiagnosis").val()
+            + "&bgCode="+ $("#bgCode").val()
+            + "&pat_checknum=" + $("#pat_checknum").val()
+            + "&deptName=" + $("#deptName").val()
+            + "&clinicId=" + $("#clinicId").val()
+            + "&bedNo=" + $("#bedNo").val()
+            + "&jcbw=" + $("#jcbw").val()
+            + "&sfyangxing=" + $("#sfyangxing").val()
+            + "&hosName=" + $("#hosName").text()
+            + "&pat_name=" + $("#pat_name").val()
+            + "&pat_gender=" + $("#pat_gender").val()
+            + "&pat_age=" + $("#pat_age").val(),
         okalert:false,
         loadingmask:true,
         callback: function(data) {
@@ -47,6 +49,38 @@ $("#modifyReport").click(function(){
         }
     });
 });
+
+$("#save").click(function(){
+    BJUI.ajax('doajax',{
+        url:"remote/save?examDesc=" + $("#examDesc").val()
+            + "&examDiagnosis=" + $("#examDiagnosis").val()
+            + "&bgCode="+ $("#bgCode").val()
+            + "&pat_checknum=" + $("#pat_checknum").val()
+            + "&deptName=" + $("#deptName").val()
+            + "&clinicId=" + $("#clinicId").val()
+            + "&bedNo=" + $("#bedNo").val()
+            + "&jcbw=" + $("#jcbw").val()
+            + "&sfyangxing=" + $("#sfyangxing").val()
+            + "&hosName=" + $("#hosName").text()
+            + "&pat_name=" + $("#pat_name").val()
+            + "&pat_gender=" + $("#pat_gender").val()
+            + "&pat_age=" + $("#pat_age").val()
+        +"&suggestion="+$("#suggestion_text_p").val(),
+        okalert:false,
+        loadingmask:true,
+        callback: function(data) {
+            if(data == 1){
+                BJUI.alertmsg('ok', '提交成功！');
+            }else{
+                BJUI.alertmsg('error','未操作成功！请重新尝试！');
+            }
+        }
+    });
+});
+
+
+
+
 $("#qingkong").click(function(){
     $("#examDesc").val("");
     $("#examDiagnosis").val("");

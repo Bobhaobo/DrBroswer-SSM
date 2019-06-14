@@ -57,3 +57,42 @@ button {
 .viewportContainer{
    border: 1px solid #3c5d80;
 }
+
+
+/*下边是关于按钮拉框按钮的样式*/
+.in_tab_box{border:1px solid #ccc;box-shadow:1px 1px 5px #ddd;background:#fff;padding:5px;display:none;position:absolute}
+.itb_con{width:100%;height:100%;overflow:hidden;font-size:18px;position:relative;-webkit-transition:all .1s linear;-moz-transition:all .1s linear}
+.itb_picker_unlight{background:url(../images/veryhuo-unhighlighted.png) repeat}
+.itb_picker_unlight,.itb_picker_light{position:absolute;top:0;left:0;-webkit-transition:all .1s linear;-moz-transition:all .1s linear}
+.itb_picker_light{background:url(../images/veryhuo-highlighted.png) repeat}
+.itb_picker_status{text-align:center;color:#333;font:10pt/1.7 arial}
+
+/*这是箭头标注按钮的样式*/
+
+/* prevents selection when left click dragging */
+.disable-selection {
+   -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;
+}
+/* prevents cursor from changing to the i bar on the overlays*/
+.noIbar {
+   cursor:default;
+}
+.annotationDialog, .relabelDialog {
+   z-index: 1000;
+   position: absolute;
+   margin: 0px;
+   left: 40%;
+   top: 40%;
+   width: 300px;
+   border: 1px black solid;
+   border-radius: 5px;
+}
+.annotationTextInputOptions {
+   padding: 5px 0px;
+}
+.annotationTextInput {
+   margin-left: 5px;
+}
+.annotationDialogConfirm {
+   float: right;
+}

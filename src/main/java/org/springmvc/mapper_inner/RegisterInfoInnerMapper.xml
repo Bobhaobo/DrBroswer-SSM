@@ -67,6 +67,8 @@
     from register_info
     where CheckNum = #{checknum,jdbcType=VARCHAR}
   </select>
+
+
   <select id="selectByClinicId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

@@ -10,7 +10,7 @@
 }
 
 .headerToolbarDiv {
-   overflow: auto !important;;
+   overflow: auto !important;
    left: 0px;
    right: 0px;
 }
@@ -93,4 +93,37 @@ button[disabled] {
    .toolbarBtnText {
       display: none; /* hide header toolbar buttons text(if used) on small display */
    }
+}
+
+/*加上tag信息弹窗的样式*/
+.modal-dialog1 {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}
+
+.modal-content1 {
+   /*overflow-y: scroll; */
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   width: 100%;
+}
+
+.modal-body1 {
+   overflow-y: scroll;
+   position: absolute;
+   top: 55px;
+   bottom: 65px;
+   width: 100%;
+}
+
+.modal-header1 .close {margin-right: 15px;}
+
+.modal-footer1 {
+   position: absolute;
+   width: 100%;
+   bottom: 0;
 }

@@ -3,12 +3,11 @@ package org.springmvc.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springmvc.dao.*;
+import org.springmvc.dto.RemoteAllocateDto;
+import org.springmvc.dto.RemoteVerifiedReportTab;
 import org.springmvc.dto.RemoteWaitForReportTab;
 import org.springmvc.dto.RemoteWrittedReportTab;
-import org.springmvc.pojo.Patient;
-import org.springmvc.pojo.RemoteRegister;
-import org.springmvc.pojo.RemoteReport;
-import org.springmvc.pojo.User;
+import org.springmvc.pojo.*;
 import org.springmvc.service.RemoteRegisterService;
 import org.springmvc.service.UserService;
 import org.springmvc.tool.ImageAndReportPathGenerator;
@@ -34,6 +33,10 @@ public class RemoteRegisterServiceimpl implements RemoteRegisterService {
     private UserService userService;
     @Autowired
     private RemoteReportMapper remoteReportMapper;
+
+    @Autowired
+    private TemporaryReportMapper temporaryReportMapper;
+
     /**
      * @Description: 插入一条新的登记表
      * @Author: Shalldid
@@ -54,7 +57,7 @@ public class RemoteRegisterServiceimpl implements RemoteRegisterService {
     public List<RemoteWaitForReportTab> getWaitForReprotByFlag(int currIndex, int pageSize, HttpSession httpSession){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        List<RemoteRegister> l = remoteRegisterMapper.getRemoteRegisterPageByFlag("已上传图像", currIndex, pageSize);
+        List<RemoteRegister> l = remoteRegisterMapper.getRemoteRegisterPageByFlag("已分配", currIndex, pageSize);
         List<RemoteWaitForReportTab> remoteWaitForReportTabs = new ArrayList<RemoteWaitForReportTab>();
         Patient p;
         User u = (User) httpSession.getAttribute("user");
@@ -101,6 +104,20 @@ public class RemoteRegisterServiceimpl implements RemoteRegisterService {
     public int updateFlagByCheckNum(String flag, String checkNum){
         return remoteRegisterMapper.updateFlagByChecknum(flag,checkNum);
     }
+
+    /**
+     * @Description: 报告回退时更新状态
+     * @Author: Shalldid
+     * @Date: Created in 16:35 2018-05-10
+     * @Return:
+     **/
+    @Override
+    public int updateFlagById(String flag, String id){
+        System.out.println(flag);
+        return remoteRegisterMapper.updateFlagById(flag,id);
+    }
+
+
     /**
      * @Description: 加载已写报告
      * @Author: Shalldid
@@ -136,4 +153,115 @@ public class RemoteRegisterServiceimpl implements RemoteRegisterService {
         }
         return remoteWrittedReportTabs;
     }
+
+
+    @Override
+    public List<RemoteWrittedReportTab> getBackWaitForReprotByFlag(int currIndex, int pageSize, HttpSession httpSession){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        List<RemoteRegister> l = remoteRegisterMapper.getRemoteRegisterPageByFlag("已分配", currIndex, pageSize);
+        List<RemoteWrittedReportTab> remoteWrittedReportTabs = new ArrayList<RemoteWrittedReportTab>();
+        Patient p ;
+        User u = (User) httpSession.getAttribute("user");
+        RemoteReport remoteReport;
+        TemporaryReport temporaryReport;
+        try{
+            for (RemoteRegister remoteRegister : l){
+                p = patientMapper.selectByPrimaryKey(remoteRegister.getIdcard());
+                RemoteWrittedReportTab remoteWrittedReportTab = new RemoteWrittedReportTab();
+                remoteWrittedReportTab.setCheckNum(remoteRegister.getChecknum());
+                System.out.println(remoteRegister.getChecknum());
+                remoteReport = remoteReportMapper.selectBycheckNum(remoteRegister.getChecknum());
+                temporaryReport=temporaryReportMapper.selectBycheckNum(remoteRegister.getChecknum());
+//                remoteWrittedReportTab.setDocName(userService.getUserByUserId(remoteReport.getDoccode()).getName());
+                remoteWrittedReportTab.setExamItemName(remoteRegister.getModality());
+                remoteWrittedReportTab.setHosName(hospitalMapper.getHosNameByHosId(remoteRegister.getRemotehos()));
+//                System.out.println(temporaryReport);
+//                System.out.println(remoteRegister);
+                if(temporaryReport==null){
+                    remoteWrittedReportTab.setImagePath(imageAndReportPathGenerator.getRemoteImagePath(remoteRegister.getTagpatientid(), simpleDateFormat.format(remoteRegister.getStudydate()), remoteRegister.getRemotehos()));
+//                    remoteWrittedReportTab.setPatGender(remoteReport.getPatsex());
+//                    remoteWrittedReportTab.setPatient_Age(remoteReport.getPatage());
+//                    remoteWrittedReportTab.setPatName(remoteReport.getPatname());
+//                    remoteWrittedReportTab.setRegisterDate(sdf.format(remoteRegister.getRegdate()));
+                    remoteWrittedReportTab.setId("");
+                    remoteWrittedReportTab.setPatGender(p.getPatgender());
+                    remoteWrittedReportTab.setPatient_Age(p.getAge() + p.getAgetype());
+                    remoteWrittedReportTab.setPatName(p.getPatname());
+                    remoteWrittedReportTab.setRegisterDate(sdf.format(remoteRegister.getRegdate()));
+
+//                remoteWrittedReportTab.setReportDate(sdf.format(remoteReport.getReporttime()));
+                    remoteWrittedReportTabs.add(remoteWrittedReportTab);
+                }else {
+                    remoteWrittedReportTab.setId(temporaryReport.getRemoteReportId());//
+                    remoteWrittedReportTab.setImagePath(imageAndReportPathGenerator.getRemoteImagePath(remoteRegister.getTagpatientid(), simpleDateFormat.format(remoteRegister.getStudydate()), remoteRegister.getRemotehos()));
+                    System.out.println(remoteReport);
+                    remoteWrittedReportTab.setPatGender(remoteReport.getPatsex());
+                    remoteWrittedReportTab.setPatient_Age(remoteReport.getPatage());
+                    remoteWrittedReportTab.setPatName(remoteReport.getPatname());
+                    remoteWrittedReportTab.setRegisterDate(sdf.format(remoteRegister.getRegdate()));
+//                remoteWrittedReportTab.setReportDate(sdf.format(remoteReport.getReporttime()));
+                    remoteWrittedReportTabs.add(remoteWrittedReportTab);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return remoteWrittedReportTabs;
+    }
+
+    /**
+     * @Description: 加载已审核报告
+     * @Author: Shalldid
+     * @Date: Created in 16:52 2018-05-10
+     * @Return:
+     **/
+    @Override
+    public List<RemoteVerifiedReportTab> getVerifiedReportByFlag(int currIndex, int pageSize, HttpSession httpSession){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        List<RemoteRegister> l = remoteRegisterMapper.getRemoteRegisterPageByFlag("已审核报告", currIndex, pageSize);
+        List<RemoteVerifiedReportTab> remoteVerifiedReportTabs = new ArrayList<RemoteVerifiedReportTab>();
+        RemoteReport remoteReport;
+        try{
+            for (RemoteRegister remoteRegister : l){
+                RemoteVerifiedReportTab remoteVerifiedReportTab = new RemoteVerifiedReportTab();
+                remoteVerifiedReportTab.setCheckNum(remoteRegister.getChecknum());
+                remoteReport = remoteReportMapper.selectBycheckNum(remoteRegister.getChecknum());
+                remoteVerifiedReportTab.setDocName(userService.getUserByUserId(remoteReport.getDoccode()).getName());
+                remoteVerifiedReportTab.setExamItemName(remoteRegister.getModality());
+                remoteVerifiedReportTab.setHosName(hospitalMapper.getHosNameByHosId(remoteRegister.getRemotehos()));
+                remoteVerifiedReportTab.setId(remoteReport.getId());
+                remoteVerifiedReportTab.setImagePath(imageAndReportPathGenerator.getRemoteImagePath(remoteRegister.getTagpatientid(),simpleDateFormat.format(remoteRegister.getStudydate()),remoteRegister.getRemotehos()));
+                remoteVerifiedReportTab.setPatGender(remoteReport.getPatsex());
+                remoteVerifiedReportTab.setPatient_Age(remoteReport.getPatage());
+                remoteVerifiedReportTab.setPatName(remoteReport.getPatname());
+                remoteVerifiedReportTab.setRegisterDate(sdf.format(remoteRegister.getRegdate()));
+                remoteVerifiedReportTab.setReportDate(sdf.format(remoteReport.getReporttime()));
+
+                remoteVerifiedReportTab.setVerifyDate(sdf.format(remoteReportMapper.selectBycheckNumAdd(remoteRegister.getChecknum()).getVerifieddate()));
+                remoteVerifiedReportTab.setVerifyDocName(userService.getUserByUserId(remoteReportMapper.selectBycheckNumAdd(remoteRegister.getChecknum()).getVerifieddoccode()).getName());
+
+
+                remoteVerifiedReportTabs.add(remoteVerifiedReportTab);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return remoteVerifiedReportTabs;
+    }
+
+//    @Override
+//    public   List<RemoteAllocateDto> getsearchResults(String name){return remoteRegisterMapper.selectByName(name);}
+
+    @Override
+    public List<RemoteAllocateDto> getRmoteRegister(String checknum, String modality, String pattype,String name,String sex,String age){
+            return remoteRegisterMapper.selectAllocateSearch(checknum, modality, pattype,name,sex,age);
+    }
+
+    @Override
+    public  RemoteRegister getRemoteRegisterById(String id){return remoteRegisterMapper.selectAllocateSearchById(id);}
+
+    @Override
+    public List<RemoteRegister> getRemoteAllocateByFlag(String flag){return remoteRegisterMapper.selectRemoteAllocateByFlag(flag);}
 }

@@ -41,4 +41,19 @@ public class ReportServiceimpl implements ReportService {
     public int updateReportByReport(Report r){
         return reportMapper.updateByPrimaryKey(r);
     }
+
+
+    @Override
+    public int updateReportByReportAdd(Report r){
+        return reportMapper.updateByPrimaryKeyAdd(r);
+    }
+
+   @Override
+    public  int updateReportStatusByChecknum(String status, String checknum){return reportMapper.updateReportStatusByChecknum(status, checknum);}
+
+    @Override
+    public  int delete(String checknum){return reportMapper.deleteByCheckNum(checknum);}
+
+    @Override
+    public int getCountByCheckNum(String checknum){return reportMapper.selectCountByCheckNum(checknum);}
 }

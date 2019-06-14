@@ -30,4 +30,8 @@ public interface HisInfoMapper {
 
     List<HisInfo> getReportListByCondition(@Param("currIndex") int currIndex, @Param("pageSize") int pageSize,
                                            @Param("condition") String condition);
+
+    int deleteByCheckNum(String checknum);
+
+    int selectCountByCheckNum(String checknum);
 }

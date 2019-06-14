@@ -21,11 +21,12 @@
     <result column="presentIllnessHis" jdbcType="VARCHAR" property="presentillnesshis" />
     <result column="specialityCheck" jdbcType="VARCHAR" property="specialitycheck" />
     <result column="tentativeDiagnosis" jdbcType="VARCHAR" property="tentativediagnosis" />
+    <result column="patientid" jdbcType="VARCHAR" property="patientid" />
   </resultMap>
   <sql id="Base_Column_List">
     idcard, yiBaoID, patName, age, patGender, patBirthDate, telephone, address, updatetime, entity,clinicDoc,
     mainSuit, personalHis, maritalHis, familyHis, pastIllnessHis, presentIllnessHis, 
-    specialityCheck, tentativeDiagnosis
+    specialityCheck, tentativeDiagnosis,patientid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -33,6 +34,36 @@
     from clinic
     where idcard = #{idcard,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="selectAllInfoBypatientid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clinic
+    where patientid = #{patientid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllInfoByentity" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clinic
+    where entity = #{entity,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllInfoByUpdateTime" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clinic
+    where convert(char(10),updatetime,120) = #{updatetime,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllInfoBypatname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clinic
+    where patName = #{patname,jdbcType=VARCHAR}
+  </select>
+
 
   <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

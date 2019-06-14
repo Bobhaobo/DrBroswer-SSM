@@ -47,6 +47,26 @@ public class Report {
 
     private String sfyangxing;
 
+    private String verifydoccode;
+
+    private Date verifydate;
+
+    public Date getVerifydate() {
+        return verifydate;
+    }
+
+    public void setVerifydate(Date verifydate) {
+        this.verifydate = verifydate;
+    }
+
+    public String getVerifydoccode() {
+        return verifydoccode;
+    }
+
+    public void setVerifydoccode(String verifydoccode) {
+        this.verifydoccode = verifydoccode;
+    }
+
     public String getReportcode() {
         return reportcode;
     }
@@ -253,6 +273,59 @@ public class Report {
         this.cardno = cardno;
         this.jcbw = jcbw;
         this.sfyangxing = sfyangxing;
+    }
+
+    public Report(String reportcode, String recordid, String checknum, String clinicid, String patientid, String idcard, String bedno, Date reporttime, String flag, String examdesc, String examdiagnosis, String doccode, String examitemcode, String examitemname, Integer pattypecode, String deptname, String deptid, Boolean ifusingflag, String reportImagePath, String cardno, String jcbw, String sfyangxing, String verifydoccode) {
+        this.reportcode = reportcode;
+        this.recordid = recordid;
+        this.checknum = checknum;
+        this.clinicid = clinicid;
+        this.patientid = patientid;
+        this.idcard = idcard;
+        this.bedno = bedno;
+        this.reporttime = reporttime;
+        this.flag = flag;
+        this.examdesc = examdesc;
+        this.examdiagnosis = examdiagnosis;
+        this.doccode = doccode;
+        this.examitemcode = examitemcode;
+        this.examitemname = examitemname;
+        this.pattypecode = pattypecode;
+        this.deptname = deptname;
+        this.deptid = deptid;
+        this.ifusingflag = ifusingflag;
+        this.reportImagePath = reportImagePath;
+        this.cardno = cardno;
+        this.jcbw = jcbw;
+        this.sfyangxing = sfyangxing;
+        this.verifydoccode = verifydoccode;
+    }
+
+    public Report(String reportcode, String recordid, String checknum, String clinicid, String patientid, String idcard, String bedno, Date reporttime, String flag, String examdesc, String examdiagnosis, String doccode, String examitemcode, String examitemname, Integer pattypecode, String deptname, String deptid, Boolean ifusingflag, String reportImagePath, String cardno, String jcbw, String sfyangxing, String verifydoccode, Date verifydate) {
+        this.reportcode = reportcode;
+        this.recordid = recordid;
+        this.checknum = checknum;
+        this.clinicid = clinicid;
+        this.patientid = patientid;
+        this.idcard = idcard;
+        this.bedno = bedno;
+        this.reporttime = reporttime;
+        this.flag = flag;
+        this.examdesc = examdesc;
+        this.examdiagnosis = examdiagnosis;
+        this.doccode = doccode;
+        this.examitemcode = examitemcode;
+        this.examitemname = examitemname;
+        this.pattypecode = pattypecode;
+        this.deptname = deptname;
+        this.deptid = deptid;
+        this.ifusingflag = ifusingflag;
+        this.reportImagePath = reportImagePath;
+        this.cardno = cardno;
+        this.jcbw = jcbw;
+        this.sfyangxing = sfyangxing;
+        this.verifydoccode = verifydoccode;
+        this.verifydate = verifydate;
     }
 
     @Override

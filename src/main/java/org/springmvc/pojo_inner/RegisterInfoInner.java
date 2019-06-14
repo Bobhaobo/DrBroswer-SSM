@@ -104,6 +104,19 @@ public class RegisterInfoInner {
 
     private String nowoperator;
 
+    private Date updatetime;
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+
+//        System.out.println("setUpdatetime");
+
+        this.updatetime = updatetime;
+    }
+
     public String getChecknum() {
         return checknum;
     }
@@ -502,5 +515,62 @@ public class RegisterInfoInner {
 
     public void setNowoperator(String nowoperator) {
         this.nowoperator = nowoperator == null ? null : nowoperator.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "RegisterInfoInner{" +
+                "checknum='" + checknum + '\'' +
+                ", recordid='" + recordid + '\'' +
+                ", registertime=" + registertime +
+                ", operatorcode='" + operatorcode + '\'' +
+                ", payflag=" + payflag +
+                ", paycount=" + paycount +
+                ", pattypecode=" + pattypecode +
+                ", clinicid='" + clinicid + '\'' +
+                ", patientid='" + patientid + '\'' +
+                ", patname='" + patname + '\'' +
+                ", patnamepy='" + patnamepy + '\'' +
+                ", patgender='" + patgender + '\'' +
+                ", patbirthdate=" + patbirthdate +
+                ", address='" + address + '\'' +
+                ", yibaoid='" + yibaoid + '\'' +
+                ", identityid='" + identityid + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", patroomcode='" + patroomcode + '\'' +
+                ", bedno='" + bedno + '\'' +
+                ", examitemcode='" + examitemcode + '\'' +
+                ", flag='" + flag + '\'' +
+                ", deptcode='" + deptcode + '\'' +
+                ", newpatient=" + newpatient +
+                ", age=" + age +
+                ", patroomname='" + patroomname + '\'' +
+                ", deptname='" + deptname + '\'' +
+                ", examitemname='" + examitemname + '\'' +
+                ", agetype='" + agetype + '\'' +
+                ", photodate=" + photodate +
+                ", makercode='" + makercode + '\'' +
+                ", makername='" + makername + '\'' +
+                ", examnamecode='" + examnamecode + '\'' +
+                ", examnamename='" + examnamename + '\'' +
+                ", devcode='" + devcode + '\'' +
+                ", devname='" + devname + '\'' +
+                ", ifusingflag=" + ifusingflag +
+                ", isdicomflag='" + isdicomflag + '\'' +
+                ", cardno='" + cardno + '\'' +
+                ", jcbw='" + jcbw + '\'' +
+                ", jclb='" + jclb + '\'' +
+                ", sjmd='" + sjmd + '\'' +
+                ", jcsf='" + jcsf + '\'' +
+                ", lczd='" + lczd + '\'' +
+                ", sqdbh='" + sqdbh + '\'' +
+                ", isregist='" + isregist + '\'' +
+                ", xuhao='" + xuhao + '\'' +
+                ", isprint='" + isprint + '\'' +
+                ", studyid='" + studyid + '\'' +
+                ", district='" + district + '\'' +
+                ", nowoperator='" + nowoperator + '\'' +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }

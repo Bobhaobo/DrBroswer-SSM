@@ -42,6 +42,13 @@
   <!--</select>-->
 
 
+  <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List1" />
+    from identify
+    where username=#{name,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from identify
     where username = #{username,jdbcType=VARCHAR}
@@ -160,6 +167,21 @@
       from identify
     where username=#{username} and password=#{password}
   </select>
+
+
+  <select id="queryByName" resultType="org.springmvc.pojo.User">
+    select <include refid="Base_Column_List" />
+    from identify
+    where username=#{name}
+  </select>
+
+  <select id="selectUserByDept" resultType="org.springmvc.pojo.User">
+    select <include refid="Base_Column_List" />
+    from identify
+    where dept=#{dept}
+  </select>
+
+
   <select id="queryByUserId" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from identify

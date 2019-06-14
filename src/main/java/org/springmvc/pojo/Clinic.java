@@ -41,6 +41,15 @@ public class Clinic {
 
     private String tentativediagnosis;
 
+    private String patientid;
+
+    public String getPatientid() {
+        return patientid;
+    }
+
+    public void setPatientid(String patientid) {
+        this.patientid = patientid;
+    }
 
     public String getClinicdoc() {
         return clinicdoc;
@@ -219,8 +228,30 @@ public class Clinic {
         this.tentativediagnosis = tentativediagnosis;
     }
 
-    public Clinic() {}
+    public Clinic(String idcard, String yibaoid, String patname, Integer age, String patgender, Date patbirthdate, String telephone, String address, Date updatetime, String entity, String clinicdoc, String mainsuit, String personalhis, String maritalhis, String familyhis, String pastillnesshis, String presentillnesshis, String specialitycheck, String tentativediagnosis, String patientid) {
+        this.idcard = idcard;
+        this.yibaoid = yibaoid;
+        this.patname = patname;
+        this.age = age;
+        this.patgender = patgender;
+        this.patbirthdate = patbirthdate;
+        this.telephone = telephone;
+        this.address = address;
+        this.updatetime = updatetime;
+        this.entity = entity;
+        this.clinicdoc = clinicdoc;
+        this.mainsuit = mainsuit;
+        this.personalhis = personalhis;
+        this.maritalhis = maritalhis;
+        this.familyhis = familyhis;
+        this.pastillnesshis = pastillnesshis;
+        this.presentillnesshis = presentillnesshis;
+        this.specialitycheck = specialitycheck;
+        this.tentativediagnosis = tentativediagnosis;
+        this.patientid = patientid;
+    }
 
+    public Clinic() {}
 
     @Override
     public String toString() {
@@ -244,7 +275,7 @@ public class Clinic {
                 ", presentillnesshis='" + presentillnesshis + '\'' +
                 ", specialitycheck='" + specialitycheck + '\'' +
                 ", tentativediagnosis='" + tentativediagnosis + '\'' +
+                ", patientid='" + patientid + '\'' +
                 '}';
     }
-
 }

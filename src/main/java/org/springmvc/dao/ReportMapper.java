@@ -19,4 +19,14 @@ public interface ReportMapper {
     int updateByPrimaryKey(Report record);
 
     String getReportCode(@Param("param") String param);
+
+    int updateReportStatusByChecknum(@Param("status") String status, @Param("checknum") String checknum);
+
+    int deleteByCheckNum(String checknum);
+
+    int selectCountByCheckNum(String checknum);
+
+    int updateByPrimaryKeyAdd(Report record);
+
+    Report selectByCheckNumAdd(String checknum);
 }

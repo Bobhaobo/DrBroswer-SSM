@@ -6,9 +6,10 @@
     <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
     <result column="study_instance_uid" property="studyInstanceUid" jdbcType="VARCHAR" />
     <result column="series_date" property="seriesDate" jdbcType="DATE" />
+    <result column="series_anno_info" property="seriesAnnoInfo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    series_instance_uid, patient_id, study_instance_uid, series_date
+    series_instance_uid, patient_id, study_instance_uid, series_date ,series_anno_info
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="org.springmvc.pojo.AnnoSeries" >
     insert into anno_series (series_instance_uid, patient_id, study_instance_uid, 
-      series_date)
+      series_date,series_anno_info)
     values (#{seriesInstanceUid,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{studyInstanceUid,jdbcType=VARCHAR}, 
-      #{seriesDate,jdbcType=DATE})
+      #{seriesDate,jdbcType=DATE},#{seriesAnnoInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.springmvc.pojo.AnnoSeries" >
     insert into anno_series
@@ -41,6 +42,9 @@
       <if test="seriesDate != null" >
         series_date,
       </if>
+      <if test="seriesAnnoInfo != null" >
+        series_anno_info,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="seriesInstanceUid != null" >
@@ -54,6 +58,9 @@
       </if>
       <if test="seriesDate != null" >
         #{seriesDate,jdbcType=DATE},
+      </if>
+      <if test="seriesAnnoInfo != null" >
+        #{seriesAnnoInfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="seriesDate != null" >
         series_date = #{seriesDate,jdbcType=DATE},
       </if>
+      <if test="seriesAnnoInfo != null" >
+        #{seriesAnnoInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR}
   </update>
@@ -76,7 +86,8 @@
     update anno_series
     set patient_id = #{patientId,jdbcType=VARCHAR},
       study_instance_uid = #{studyInstanceUid,jdbcType=VARCHAR},
-      series_date = #{seriesDate,jdbcType=DATE}
+      series_date = #{seriesDate,jdbcType=DATE},
+      series_anno_info = #{seriesAnnoInfo,jdbcType=VARCHAR}
     where series_instance_uid = #{seriesInstanceUid,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -3,10 +3,12 @@ package org.springmvc.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springmvc.dao.RemoteReportMapper;
+import org.springmvc.dao.TemporaryReportMapper;
 import org.springmvc.dao.UserMapper;
 import org.springmvc.dto.RemoteSearchReportTab;
 import org.springmvc.pojo.HisInfo;
 import org.springmvc.pojo.RemoteReport;
+import org.springmvc.pojo.TemporaryReport;
 import org.springmvc.pojo.User;
 import org.springmvc.service.RemoteReportService;
 import org.springmvc.service.UserService;
@@ -27,6 +29,9 @@ public class RemoteReportServiceimpl implements RemoteReportService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TemporaryReportMapper temporaryReportMapper;
     /**
      * @Description: 插入新的报告
      * @Author: Shalldid
@@ -37,6 +42,10 @@ public class RemoteReportServiceimpl implements RemoteReportService {
     public int insertNewReport(RemoteReport remoteReport){
         return remoteReportMapper.insert(remoteReport);
     }
+
+
+    @Override
+    public  int insertNewReportToTemporaryReport(TemporaryReport temporaryReport){return temporaryReportMapper.insert(temporaryReport);}
     /**
      * @Description: 根据检查号加载报告
      * @Author: Shalldid
@@ -57,6 +66,33 @@ public class RemoteReportServiceimpl implements RemoteReportService {
     public RemoteReport getReportById(String id){
         return remoteReportMapper.selectByPrimaryKey(id);
     }
+
+
+
+    @Override
+    public RemoteReport getReportByIdAdd(String id){
+        return remoteReportMapper.selectByPrimaryKeyAdd(id);
+    }
+
+
+
+    @Override
+    public  TemporaryReport getTemporaryReportById(String id){return temporaryReportMapper.selectByPrimaryKey(id);}
+
+    /**
+     * @Description: 报告回退时删除报告
+     * @Author: Shalldid
+     * @Date: Created in 16:56 2018-05-14
+     * @Return:
+     **/
+
+    @Override
+    public int deleteReportById(String id){return remoteReportMapper.deleteById(id);}
+
+
+    @Override
+    public int updateReportById(String id){return remoteReportMapper.updateById(id);}
+
     /**
      * @Description: 更新报告
      * @Author: Shalldid
@@ -67,6 +103,10 @@ public class RemoteReportServiceimpl implements RemoteReportService {
     public int updateReport(RemoteReport remoteReport){
         return remoteReportMapper.updateByPrimaryKey(remoteReport);
     }
+
+
+    @Override
+    public int updateReportAdd(RemoteReport remoteReport){return remoteReportMapper.updateByPrimaryKeyAdd(remoteReport);}
     /**
      * @Description: 加载当天报告
      * @Author: Shalldid

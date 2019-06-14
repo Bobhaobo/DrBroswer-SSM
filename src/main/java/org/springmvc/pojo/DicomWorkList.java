@@ -284,7 +284,33 @@ public class DicomWorkList {
     }
 
     @Override
-    public String toString(){
-        return "PatID: " + patientid + "CheckDevice: " + scheduleda;
+    public String toString() {
+        return "DicomWorkList{" +
+                "accessionn='" + accessionn + '\'' +
+                ", patientid='" + patientid + '\'' +
+                ", patientnam='" + patientnam + '\'' +
+                ", patientbir='" + patientbir + '\'' +
+                ", patientsex='" + patientsex + '\'' +
+                ", medicalale='" + medicalale + '\'' +
+                ", contrastal='" + contrastal + '\'' +
+                ", studyinsta='" + studyinsta + '\'' +
+                ", reqphysici='" + reqphysici + '\'' +
+                ", reqprocdes='" + reqprocdes + '\'' +
+                ", modality='" + modality + '\'' +
+                ", reqcontras='" + reqcontras + '\'' +
+                ", scheduleda='" + scheduleda + '\'' +
+                ", startdate='" + startdate + '\'' +
+                ", starttime='" + starttime + '\'' +
+                ", perfphysic='" + perfphysic + '\'' +
+                ", schedpsdes='" + schedpsdes + '\'' +
+                ", schedpsid='" + schedpsid + '\'' +
+                ", schedstati='" + schedstati + '\'' +
+                ", schedpsloc='" + schedpsloc + '\'' +
+                ", premedicat='" + premedicat + '\'' +
+                ", schedpscom='" + schedpscom + '\'' +
+                ", reqprocid='" + reqprocid + '\'' +
+                ", reqprocpri='" + reqprocpri + '\'' +
+                ", studyid='" + studyid + '\'' +
+                '}';
     }
 }

@@ -22,4 +22,12 @@ public interface ClinicMapper {
     int getAccount();
 
     List<Clinic> selectAllInfo(String idcard);
+
+    List<Clinic> selectAllInfoBypatname(String patname);
+
+    List<Clinic> selectAllInfoBypatientid(String patientid);
+
+    List<Clinic> selectAllInfoByUpdateTime(String updatetime);
+
+    List<Clinic> selectAllInfoByentity(String entity);
 }
